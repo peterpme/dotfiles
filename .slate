@@ -1,0 +1,84 @@
+config nudgePercentOf screenSize
+config resizePercentOf screenSize
+config windowHintsTopLeftX (windowSizeX/2)-(windowHintsWidth/2)
+config windowHintsTopLeftY (windowSizeY/2)-(windowHintsHeight/2)
+#set ignore hidden windows to false
+config windowHintsIgnoreHiddenWindows false
+# monitors will be ordered from left to right by X coordinate. When false it follows OSX internal ordering
+config orderScreensLeftToRight true
+config keyboardLayout "qwerty"
+# focus all windows touched by the activated layout
+config layoutFocusOnActivate true
+# show icons for hints
+config windowHintsShowIcons true
+
+alias laptop	1920x1200
+alias cinema24	1920x1200
+alias cinema27	2560x1440
+
+default oneScreen resolutions:${laptop}
+default twoScreen resolutions:${laptop};${cinema24}
+default twoScreenAlt resolutions:${laptop};${cinema27}
+
+# Position aliases
+alias full move screenOriginX;screenOriginY screenSizeX;screenSizeY
+alias leftHalf move screenOriginX;screenOriginY screenSizeX/2;screenSizeY
+alias leftThird move screenOriginX;screenOriginY screenSizeX/3;screenSizeY
+alias rightHalf move screenOriginX+screenSizeX/2;screenOriginY screenSizeX/2;screenSizeY
+alias rightThird move screenOriginX+screenSizeX/3+screenSizeX/3;screenOriginY screenSizeX/3; screenSizeY
+alias middleThird move screenOriginX+screenSizeX/3;screenOriginY screenSizeX/3;screenSizeY
+alias topHalf move screenOriginX;screenOriginY screenSizeX;screenSizeY/2
+alias bottomHalf move screenOriginX;screenOriginY+screenSizeY/2 screenSizeX;screenSizeY/2
+alias topLeft corner top-left resize:screenSizeX/2;screenSizeY/2
+alias topRight corner top-right resize:screenSizeX/2;screenSizeY/2
+alias bottomLeft corner bottom-left resize:screenSizeX/2;screenSizeY/2
+alias bottomRight corner bottom-right resize:screenSizeX/2;screenSizeY/2
+
+# 1 monitor layout
+# layout oneScreen 'Spotify' move ${full}
+# layout oneScreen 'Google Chrome' move ${leftHalf}
+# layout oneScreen 'iTerm' move ${rightHalf}
+# layout oneScreen 'Slack' move ${rightHalf}
+# layout oneScreen 'Sunrise Calendar' throw 1 resize
+
+layout twoScreen 'Google Chrome' ${full} 0
+layout twoScreen 'Google Chrome Canary' ${leftHalf} 1
+layout twoScreen 'Slack' ${full} 0
+layout twoScreen 'Sublime Text' ${rightHalf} 1
+layout twoScreen 'Mailbox (Beta)' ${full} 0
+layout twoScreen 'iTerm' ${bottomRight} 1
+
+# Bindings
+# bind g:ctrl;alt move ${centered}
+bind o:ctrl;alt ${full}
+bind h:ctrl;alt ${leftHalf}
+bind j:ctrl;alt ${bottomHalf}
+bind k:ctrl;alt ${topHalf}
+bind l:ctrl;alt ${rightHalf}
+bind u:ctrl;alt ${topLeft}
+bind i:ctrl;alt ${topRight}
+bind n:ctrl;alt ${bottomLeft}
+bind m:ctrl;alt ${bottomRight}
+bind =:ctrl;alt push up
+bind -:ctrl;alt push down
+bind [:ctrl;alt push left
+bind ]:ctrl;alt push right
+
+bind t:ctrl;alt focus 'iTerm'
+bind c:ctrl;alt focus 'Google Chrome'
+bind a:ctrl;alt focus 'Sublime Text'
+bind e:ctrl;alt focus 'Slack'
+
+bind 1:ctrl;alt throw 0
+bind 2:ctrl;alt throw 1
+
+bind ;:ctrl;alt throw previous
+# show window hints using the expressed letters
+bind /:ctrl;alt hint QWERTASDFG
+# relaunch slate
+bind 5:ctrl;alt relaunch
+
+bind right:ctrl;alt resize +10% +0
+bind left:ctrl;alt  resize -10% +0
+bind up:ctrl;alt    resize +0 -10%
+bind down:ctrl;alt  resize +0 +10%

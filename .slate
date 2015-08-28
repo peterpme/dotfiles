@@ -68,6 +68,7 @@ bind t:ctrl;alt focus 'iTerm'
 bind c:ctrl;alt focus 'Google Chrome'
 bind a:ctrl;alt focus 'Sublime Text'
 bind e:ctrl;alt focus 'Slack'
+bind s:ctrl;alt focus 'iOS Simulator'
 
 bind 1:ctrl;alt throw 0
 bind 2:ctrl;alt throw 1

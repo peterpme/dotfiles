@@ -23,3 +23,4 @@ alias dir="echo 'fuck windows'"
 export WORKON_HOME=~/.envs
 source /usr/local/bin/virtualenvwrapper.sh
 ulimit -n 2560
+export KEYTIMEOUT=1

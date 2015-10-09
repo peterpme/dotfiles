@@ -42,4 +42,3 @@ let g:used_javascript_libs = 'react,flux,underscore'
 let g:js_indent_flat_switch=1
 let g:syntastic_html_tidy_exec = 'tidy'
 set noswapfile
-

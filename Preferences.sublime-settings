@@ -1,0 +1,68 @@
+{
+	"auto_complete_selector": "source - comment, meta.tag - punctuation.definition.tag.begin",
+	"binary_file_patterns":
+	[
+		"node_modules/*",
+		"bower_components/*"
+	],
+	"bold_folder_labels": true,
+	"close_windows_when_empty": true,
+	"detect_slow_plugins": false,
+	"fade_fold_buttons": false,
+	"file_exclude_patterns":
+	[
+		"*.DS_store",
+		"*.cur",
+		"*.eot",
+		"*.gem",
+		"*.gz",
+		"*.jar",
+		"*.log",
+		"*.pdf",
+		"*.psd",
+		"*.sassc",
+		"*.scssc",
+		"*.ttf",
+		"*.woff",
+		"*.sublime-project",
+		"*.sublime-workspace",
+		"*.xap",
+		"*.zip"
+	],
+	"folder_exclude_patterns":
+	[
+		".cache",
+		".sass-cache",
+		".git",
+		".idea",
+		"nbproject",
+		".hg",
+		".bin"
+	],
+	"font_face": "Menlo",
+	"font_size": 16,
+	"freesia_large_tabs": true,
+	"highlight_line": true,
+	"highlight_modified_tabs": true,
+	"ignored_packages":
+	[
+		"Markdown Extended",
+		"Vintage"
+	],
+	"line_padding_bottom": 1.2,
+	"line_padding_top": 1.2,
+	"remember_open_files": false,
+	"scroll_past_end": false,
+	"show_tab_close_buttons": true,
+	"spacegray_tabs_large": true,
+	"tab_size": 2,
+	"theme": "Freesia.sublime-theme",
+	"translate_tabs_to_spaces": true,
+	"tree_animation_enabled": false,
+	"trim_trailing_white_space_on_save": true,
+	"use_simple_full_screen": true,
+	"use_tab_stops": true,
+	"vintage_start_in_command_mode": true,
+	"word_separators": "./\\()\"':,.;<>~!@#$%^&*|+=[]{}`~?",
+	"word_wrap": false
+}

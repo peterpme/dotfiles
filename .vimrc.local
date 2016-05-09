@@ -42,3 +42,6 @@ let g:used_javascript_libs = 'react,flux,underscore'
 let g:js_indent_flat_switch=1
 let g:syntastic_html_tidy_exec = 'tidy'
 set noswapfile
+
+autocmd BufNewFile,BufRead *.es6 let b:jsx_ext_found = 1
+autocmd BufNewFile,BufRead *.es6 set filetype=javascript.jsx

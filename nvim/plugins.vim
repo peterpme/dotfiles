@@ -1,0 +1,97 @@
+call plug#begin('~/.vim/plugged')
+
+
+" General enhancements
+Plug 'austintaylor/vim-indentobject'
+Plug 'junegunn/vim-easy-align'
+" Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'mhinz/vim-startify'
+Plug 'https://github.com/wesQ3/vim-windowswap'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
+Plug 'nathanaelkane/vim-indent-guides', {'on': ['IndentGuidesToggle', 'IndentGuidesEnable']}
+Plug 'Raimondi/delimitMate'
+Plug 'briandoll/change-inside-surroundings.vim'
+Plug 'chrisbra/NrrwRgn'
+Plug 'chriskempson/base16-vim'
+
+
+" Text
+Plug 'https://github.com/wellle/targets.vim'
+Plug 'https://github.com/reedes/vim-textobj-sentence'
+Plug 'coderifous/textobj-word-column.vim'
+Plug 'kana/vim-textobj-datetime'
+Plug 'kana/vim-textobj-entire'
+Plug 'kana/vim-textobj-function'
+Plug 'kana/vim-textobj-user'
+Plug 'lucapette/vim-textobj-underscore'
+Plug 'vim-scripts/argtextobj.vim'
+
+Plug 'itchyny/lightline.vim'
+Plug 'https://github.com/dahu/bisectly', { 'on': 'Bisectly'}
+Plug 'https://github.com/ryanoasis/vim-devicons'
+
+
+" Build tools
+Plug 'https://github.com/benekastah/neomake', {'commit':'271503d', 'on': ['Neomake']}
+
+
+" Find & replace, etc
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'rking/ag.vim'
+Plug 'junegunn/vim-fnr' | Plug 'junegunn/vim-pseudocl' " find & replace
+Plug 'vim-scripts/greplace.vim'
+Plug 'https://github.com/simnalamburt/vim-mundo'
+Plug 'https://github.com/tpope/vim-abolish' " AWESOME case-sensitive replace
+Plug 'vim-scripts/matchit.zip'
+
+
+" Handlebars / Mustache
+Plug 'juvenn/mustache.vim'
+Plug 'nono/vim-handlebars'
+
+" Git
+Plug 'junegunn/vim-github-dashboard', { 'on': ['GHDashboard', 'GHActivity'] }
+Plug 'https://github.com/rhysd/committia.vim', { 'for': ['gitcommit']}
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-git'
+Plug 'airblade/vim-gitgutter'
+
+" Javascript
+Plug 'https://github.com/michalliu/jsruntime.vim',  { 'for': ['javascript', 'js']}
+Plug 'https://github.com/othree/javascript-libraries-syntax.vim', { 'for': 'javascript' }
+Plug 'thinca/vim-textobj-function-javascript',    { 'for': ['javascript', 'js']}
+Plug '1995eaton/vim-better-javascript-completion', { 'for': 'javascript' }
+Plug 'https://github.com/michalliu/jsoncodecs.vim', { 'for': ['json']}
+Plug 'othree/es.next.syntax.vim', { 'for': 'javascript' }
+Plug 'othree/jsdoc-syntax.vim', { 'for': 'javascript' }
+Plug 'jason0x43/vim-js-indent', { 'for': 'javascript' }
+Plug 'othree/yajs.vim', { 'for': 'javascript' }
+Plug 'mxw/vim-jsx', { 'for': 'javascript' }
+Plug 'elzr/vim-json'
+Plug 'moll/vim-node'
+Plug 'sheerun/vim-polyglot'
+
+" HTML
+Plug 'tpope/vim-ragtag'
+Plug 'AndrewRadev/splitjoin.vim'
+Plug 'skwp/vim-html-escape', {'for': ['html']}
+
+
+" Lua
+Plug 'https://github.com/xolox/vim-lua-ftplugin', {'for': ['lua']}
+
+
+" Perl
+Plug 'https://github.com/c9s/perlomni.vim', {'for': ['pl', 'perl', 'p6', 'pm']}
+
+call plug#end()
+
+"augroup load_us
+"    autocmd!
+   "autocmd InsertEnter * call plug#load('ultisnips', 'AutoTag')
+   ""             \| autocmd! load_us
+" augroup END

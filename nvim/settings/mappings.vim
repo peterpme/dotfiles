@@ -7,6 +7,7 @@ noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
 noremap <leader>l :Align
 nnoremap <leader>a :Ag<space>
+nnoremap <leader>[ :MundoToggle<CR>
 nnoremap <leader>d :NERDTreeToggle<CR>
 nnoremap <leader>f :NERDTreeFind<CR>
 nnoremap <leader>t :FZF<CR>
@@ -19,3 +20,6 @@ noremap <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo '
 cnoremap w!! %!sudo tee > /dev/null %
 
 inoremap jj <ESC>
+
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)

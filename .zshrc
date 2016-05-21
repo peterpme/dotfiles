@@ -60,3 +60,8 @@ alias zln='zmv -L'
  fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+
+# tabtab source for yo package
+# uninstall by removing these lines or running `tabtab uninstall yo`
+[[ -f /Users/peter/.nvm/versions/node/v6.0.0/lib/node_modules/yo/node_modules/tabtab/.completions/yo.zsh ]] && . /Users/peter/.nvm/versions/node/v6.0.0/lib/node_modules/yo/node_modules/tabtab/.completions/yo.zsh

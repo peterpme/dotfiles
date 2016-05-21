@@ -37,6 +37,11 @@ set nowb
 set nobackup
 set noswapfile
 
+
+" Enable persistent undo so that undo history persists across vim sessions
+set undofile
+set undodir=~/.vim/undo
+
 set nowrap
 set linebreak
 

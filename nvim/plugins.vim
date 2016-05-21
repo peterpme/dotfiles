@@ -54,7 +54,8 @@ Plug 'juvenn/mustache.vim'
 Plug 'nono/vim-handlebars'
 
 " Git
-Plug 'junegunn/vim-github-dashboard', { 'on': ['GHDashboard', 'GHActivity'] }
+" Plug 'junegunn/vim-github-dashboard', { 'on': ['GHDashboard', 'GHActivity'] }
+" https://github.com/junegunn/vim-github-dashboard
 Plug 'https://github.com/rhysd/committia.vim', { 'for': ['gitcommit']}
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-git'

@@ -1,8 +1,10 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =6
-let g:netrw_dirhist_1='/Users/peter/Sites/wayv_react_native'
-let g:netrw_dirhist_2='/Users/peter/Sites/ansible-configs/reboot'
-let g:netrw_dirhist_3='/Users/peter/Sites/plw-consulting/ansible-config'
-let g:netrw_dirhist_4='/Users/peter/Sites/plw-consulting/ansible-config/playbooks'
-let g:netrw_dirhist_5='/Users/peter/.hammerspoon'
-let g:netrw_dirhist_6='/Users/peter/Sites/8-hospitality-group/barn-and-company/.git'
+let g:netrw_dirhist_cnt =8
+let g:netrw_dirhist_1='/Users/peter/Sites/fwd-ent-group/.git'
+let g:netrw_dirhist_2='/Users/peter/Sites/apperson-labs/iaqualink-infinity/.git'
+let g:netrw_dirhist_3='/Users/peter/Sites/sideway/sideway-backup/api/lib'
+let g:netrw_dirhist_4='/Users/peter/Sites/plw-consulting/north-branch-builders/docs'
+let g:netrw_dirhist_5='/Users/peter/Sites/eat-purely/react-native-driver-app/EPDriverApp/buck-out'
+let g:netrw_dirhist_6='/Users/peter/Sites/eat-purely/react-native-driver-app/EPDriverApp/node_modules/react-native-gcm-android'
+let g:netrw_dirhist_7='/Users/peter/dotfiles/nvim/settings'
+let g:netrw_dirhist_8='/Users/peter/Sites/apperson-labs/backup-joey-client'

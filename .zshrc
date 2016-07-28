@@ -10,7 +10,7 @@ HELPDIR=/usr/local/share/zsh/help
 
 alias vi="nvim"
 alias vim="nvim"
-alias tmn="tmux new-session -s" 
+alias tmn="tmux new-session -s"
 alias tma="tmux attach -t"
 alias tml="tmux ls"
 alias tmk="tmux kill-session -t"
@@ -61,7 +61,13 @@ alias zln='zmv -L'
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-
 # tabtab source for yo package
 # uninstall by removing these lines or running `tabtab uninstall yo`
-[[ -f /Users/peter/.nvm/versions/node/v6.0.0/lib/node_modules/yo/node_modules/tabtab/.completions/yo.zsh ]] && . /Users/peter/.nvm/versions/node/v6.0.0/lib/node_modules/yo/node_modules/tabtab/.completions/yo.zsh
+[[ -f /Users/peter/.nvm/versions/node/v6.2.0/lib/node_modules/yo/node_modules/tabtab/.completions/yo.zsh ]] && . /Users/peter/.nvm/versions/node/v6.0.0/lib/node_modules/yo/node_modules/tabtab/.completions/yo.zsh
+
+export ANDROID_HOME=~/Library/Android/sdk
+export PATH="/Users/peter/Library/Android/sdk/tools:/Users/peter/Library/Android/sdk/platform-tools:${PATH}"
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+eval "$(hub alias -s)"

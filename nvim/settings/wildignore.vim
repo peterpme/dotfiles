@@ -1,6 +1,9 @@
 set suffixes=~,.aux,.bak,.bkp,.dvi,.hi,.o,.pdf,.gz,.idx,.log,.ps,.swp,.tar,.ilg,.bbl,.toc,.ind
+set wildmenu                                                 " show a navigable menu for tab completion
 set wildcharm=<Tab>
 set wildmode=list:longest
+" set wildmode=longest,list,full
+set wildignore+=log/**,node_modules/**,target/**,tmp/**,*.rbc
 set wildignore+=*.egg,*.egg-info
 set wildignore+=*.gem
 set wildignore+=*.gem

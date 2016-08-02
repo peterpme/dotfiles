@@ -1,14 +1,9 @@
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-
 set nocompatible
 
 syntax on
 syntax enable
 filetype plugin indent on
 
-let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-
-colorscheme sharkbites
 set autoindent
 set autoread                                                 " reload files when changed on disk, i.e. via `git checkout`
 set backspace=2                                              " Fix broken backspace in some setups
@@ -30,9 +25,6 @@ set showcmd
 set smartcase                                                " case-sensitive search if any caps
 set softtabstop=2                                            " insert mode tab and backspace use 2 spaces
 set tabstop=4                                                " actual tabs occupy 8 characters
-set wildignore=log/**,node_modules/**,target/**,tmp/**,*.rbc
-set wildmenu                                                 " show a navigable menu for tab completion
-set wildmode=longest,list,full
 set lazyredraw
 set synmaxcol=200
 set updatetime=250

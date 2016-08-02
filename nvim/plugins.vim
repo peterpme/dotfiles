@@ -64,21 +64,14 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-git'
 Plug 'airblade/vim-gitgutter'
 
+
 " Javascript
-Plug 'https://github.com/michalliu/jsruntime.vim',  { 'for': ['javascript', 'js']}
-Plug 'https://github.com/othree/javascript-libraries-syntax.vim', { 'for': 'javascript' }
-Plug 'thinca/vim-textobj-function-javascript',    { 'for': ['javascript', 'js']}
-Plug '1995eaton/vim-better-javascript-completion', { 'for': 'javascript' }
-Plug 'https://github.com/michalliu/jsoncodecs.vim', { 'for': ['json']}
-Plug 'othree/es.next.syntax.vim', { 'for': 'javascript' }
-Plug 'othree/jsdoc-syntax.vim', { 'for': 'javascript' }
-Plug 'jason0x43/vim-js-indent', { 'for': 'javascript' }
-Plug 'othree/yajs.vim', { 'for': 'javascript' }
-Plug 'mxw/vim-jsx', { 'for': 'javascript' }
-Plug 'elzr/vim-json'
+Plug 'https://github.com/othree/javascript-libraries-syntax.vim', { 'for': [ 'javascript', 'js', 'javascript.jsx' ]}
+Plug 'thinca/vim-textobj-function-javascript',    { 'for': [ 'javascript', 'js', 'javascript.jsx' ]}
+Plug '1995eaton/vim-better-javascript-completion', { 'for': [ 'javascript', 'js', 'javascript.jsx' ]}
 Plug 'moll/vim-node'
 Plug 'sheerun/vim-polyglot'
-Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
+
 
 " HTML
 Plug 'tpope/vim-ragtag'

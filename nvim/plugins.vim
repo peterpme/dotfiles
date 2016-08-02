@@ -1,6 +1,5 @@
 call plug#begin('~/.vim/bundle')
 
-
 " General enhancements
 Plug 'austintaylor/vim-indentobject'
 Plug 'junegunn/vim-easy-align'
@@ -17,6 +16,8 @@ Plug 'briandoll/change-inside-surroundings.vim'
 Plug 'chrisbra/NrrwRgn'
 Plug 'chriskempson/base16-vim'
 
+" Themes
+Plug 'https://github.com/kenwheeler/glow-in-the-dark-gucci-shark-bites-vim'
 
 " Text
 Plug 'https://github.com/wellle/targets.vim'
@@ -91,8 +92,6 @@ Plug 'https://github.com/xolox/vim-lua-ftplugin', {'for': ['lua']}
 " Perl
 Plug 'https://github.com/c9s/perlomni.vim', {'for': ['pl', 'perl', 'p6', 'pm']}
 
-" Themes
-Plug 'kenwheeler/glow-in-the-dark-gucci-shark-bites-vim'
 
 call plug#end()
 

@@ -6,6 +6,9 @@ syntax on
 syntax enable
 filetype plugin indent on
 
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+
+colorscheme sharkbites
 set autoindent
 set autoread                                                 " reload files when changed on disk, i.e. via `git checkout`
 set backspace=2                                              " Fix broken backspace in some setups
@@ -36,7 +39,7 @@ set updatetime=250
 set nowb
 set nobackup
 set noswapfile
-
+set background=dark
 
 " Enable persistent undo so that undo history persists across vim sessions
 set undofile

@@ -1,4 +1,4 @@
-call plug#begin('~/.vim/plugged')
+call plug#begin('~/.vim/bundle')
 
 
 " General enhancements
@@ -29,6 +29,7 @@ Plug 'kana/vim-textobj-user'
 Plug 'lucapette/vim-textobj-underscore'
 Plug 'vim-scripts/argtextobj.vim'
 
+" Powerline, airline, etc
 Plug 'itchyny/lightline.vim'
 Plug 'https://github.com/dahu/bisectly', { 'on': 'Bisectly'}
 Plug 'https://github.com/ryanoasis/vim-devicons'
@@ -75,6 +76,7 @@ Plug 'mxw/vim-jsx', { 'for': 'javascript' }
 Plug 'elzr/vim-json'
 Plug 'moll/vim-node'
 Plug 'sheerun/vim-polyglot'
+Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 
 " HTML
 Plug 'tpope/vim-ragtag'
@@ -88,6 +90,9 @@ Plug 'https://github.com/xolox/vim-lua-ftplugin', {'for': ['lua']}
 
 " Perl
 Plug 'https://github.com/c9s/perlomni.vim', {'for': ['pl', 'perl', 'p6', 'pm']}
+
+" Themes
+Plug 'kenwheeler/glow-in-the-dark-gucci-shark-bites-vim'
 
 call plug#end()
 

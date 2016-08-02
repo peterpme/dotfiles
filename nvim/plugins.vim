@@ -18,6 +18,7 @@ Plug 'chriskempson/base16-vim'
 
 " Themes
 Plug 'https://github.com/kenwheeler/glow-in-the-dark-gucci-shark-bites-vim'
+Plug 'https://github.com/flazz/vim-colorschemes'
 
 " Text
 Plug 'https://github.com/wellle/targets.vim'

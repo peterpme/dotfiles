@@ -22,7 +22,8 @@ brew_base_packages = [
   'rbenv',
   'ruby-build',
   'tree',
-  'zsh'
+  'zsh',
+  'fzf'
 ]
 
 brew_cask_packages = [

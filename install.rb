@@ -1,4 +1,7 @@
 #!/bin/ruby
+#
+# TAKE A LOOK AT PAUL IRISH
+# https://github.com/paulirish/dotfiles
 
 github_packages = [
   'https://github.com/square/maximum-awesome.git'

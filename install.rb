@@ -10,6 +10,7 @@ install_scripts = [
 ]
 
 brew_base_packages = [
+  'mas',
   'caskroom/cask/brew-cask',
   'httpie',
   'ack',

@@ -71,3 +71,5 @@ export PATH="/Users/peter/Library/Android/sdk/tools:/Users/peter/Library/Android
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 eval "$(hub alias -s)"
+
+export PATH="$HOME/.yarn/bin:$PATH"

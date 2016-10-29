@@ -86,6 +86,8 @@ Plug 'https://github.com/xolox/vim-lua-ftplugin', {'for': ['lua']}
 " Perl
 Plug 'https://github.com/c9s/perlomni.vim', {'for': ['pl', 'perl', 'p6', 'pm']}
 
+" Wakatime
+Plug 'git://github.com/wakatime/vim-wakatime.git'
 
 call plug#end()
 

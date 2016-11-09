@@ -21,7 +21,7 @@ brew install findutils
 # Install GNU `sed`, overwriting the built-in `sed`.
 brew install gnu-sed --with-default-names
 
-brew install zssh zsh-completion
+brew install zsh zsh-completions
 brew install docker docker-machine
 
 # Switch to using brew-installed zsh as default shell
@@ -46,7 +46,7 @@ brew install homebrew/dupes/grep
 # Install other useful binaries.
 
 # Github
-brew install gh
+brew install hub
 
 # Silver Searcher
 brew install the_silver_searcher
@@ -60,7 +60,7 @@ brew install pigz
 
 # monitor progress through pipeline
 brew install pv
-brew install rename
+# brew install rename
 
 # file path picker
 brew install fpp

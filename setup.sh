@@ -2,8 +2,6 @@
 echo "do not run this script in one go. hit ctrl-c NOW"
 read -n 1
 
-curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.32.1/install.sh | bash
-
 ##############################################################################################################
 ### XCode Command Line Tools
 #      thx https://github.com/alrra/dotfiles/blob/ff123ca9b9b/os/os_x/installs/install_xcode.sh
@@ -56,3 +54,31 @@ export PATH=$HOME/.homebrew/bin:$HOME/.homebrew/sbin:$PATH
 
 ### end of homebrew
 ##############################################################################################################
+
+# node version manager
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.32.1/install.sh | bash
+
+# github.com/thebitguru/play-button-itunes-patch
+# disable itunes opening on media keys
+git clone https://github.com/thebitguru/play-button-itunes-patch ~/code/play-button-itunes-patch
+
+# github.com/rupa/z   - oh how i love you
+git clone https://github.com/rupa/z.git ~/code/z
+# consider reusing your current .z file if possible. it's painful to rebuild :)
+# z is hooked up in .zshrc
+
+# Type `git open` to open the GitHub page or website for a repository.
+npm install -g git-open
+
+# fancy listing of recent branches
+npm install -g git-recent
+
+# sexy git diffs
+npm install -g diff-so-fancy
+
+# trash as the safe `rm` alternative
+npm install --global trash-cli
+
+# github.com/jamiew/git-friendly
+# the `push` command which copies the github compare URL to my clipboard is heaven
+bash < <( curl https://raw.github.com/jamiew/git-friendly/master/install.sh)

@@ -63,7 +63,7 @@ curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.32.1/install.sh | b
 git clone https://github.com/thebitguru/play-button-itunes-patch ~/code/play-button-itunes-patch
 
 # github.com/rupa/z   - oh how i love you
-git clone https://github.com/rupa/z.git ~/code/z
+git clone https://github.com/rupa/z.git ~/dotfiles/z
 # consider reusing your current .z file if possible. it's painful to rebuild :)
 # z is hooked up in .zshrc
 

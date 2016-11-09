@@ -2,9 +2,6 @@
 
 # Install command-line tools using Homebrew.
 
-
-# Install command-line tools using Homebrew.
-
 # Make sure we’re using the latest Homebrew.
 brew update
 
@@ -25,7 +22,6 @@ brew install findutils
 brew install gnu-sed --with-default-names
 
 brew install zssh zsh-completion
-brew cask install virtualbox
 brew install docker docker-machine
 
 # Switch to using brew-installed zsh as default shell
@@ -48,8 +44,12 @@ brew install homebrew/dupes/grep
 #brew install woff2
 
 # Install other useful binaries.
+
+# Github
+brew install gh
+
 # Silver Searcher
-brew install ag
+brew install the_silver_searcher
 
 brew install git
 brew install imagemagick --with-webp
@@ -77,6 +77,11 @@ brew install webkit2png
 
 # very good but slow compression
 brew install zopfli
+
+# colored logcat
+brew install pidcat
+
+brew install terminal-notifier
 
 # Remove outdated versions from the cellar.
 brew cleanup

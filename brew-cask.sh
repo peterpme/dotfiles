@@ -13,6 +13,7 @@ brew cask install iterm2
 brew cask install atom
 brew cask install imagealpha
 brew cask install imageoptim
+brew cask install sketch
 
 # browsers
 brew cask install google-chrome

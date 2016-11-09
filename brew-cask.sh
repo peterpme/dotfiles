@@ -2,11 +2,12 @@ brew update
 brew install caskroom/cask/brew-cask
 brew tap caskroom/versions
 
-# daily 
+# daily
 brew cask install dropbox
-brew cask install gyazo
+# brew cask install gyazo
 brew cask install 1password
 brew cask install flux
+brew cask install alfred
 
 # dev
 brew cask install iterm2

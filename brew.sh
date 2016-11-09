@@ -24,6 +24,9 @@ brew install gnu-sed --with-default-names
 brew install zsh zsh-completions
 brew install docker docker-machine
 
+#Neovim
+brew install neovim/neovim/neovim
+
 # Switch to using brew-installed zsh as default shell
 if ! fgrep -q '/usr/local/bin/zsh' /etc/shells; then
   echo '/usr/local/bin/zsh' | sudo tee -a /etc/shells;

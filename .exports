@@ -40,3 +40,6 @@ fi
 
 typeset -gU cdpath fpath mailpath manpath path
 typeset -gUT INFOPATH infopath
+
+# Brew lives under ~/.homebrew instead of /usr/local
+export PATH=$HOME/.homebrew/bin:$HOME/.homebrew/sbin:$PATH

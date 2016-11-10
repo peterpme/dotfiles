@@ -38,12 +38,11 @@ Plug 'https://github.com/ryanoasis/vim-devicons'
 
 
 " Build tools
-Plug 'https://github.com/benekastah/neomake', {'commit':'271503d', 'on': ['Neomake']}
+Plug 'https://github.com/neomake/neomake', { 'on': ['Neomake'] }
 
 
 " Find & replace, etc
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
 Plug 'rking/ag.vim'
 Plug 'junegunn/vim-fnr' | Plug 'junegunn/vim-pseudocl' " find & replace
 Plug 'vim-scripts/greplace.vim'
@@ -67,10 +66,22 @@ Plug 'airblade/vim-gitgutter'
 
 " Javascript
 Plug 'https://github.com/othree/javascript-libraries-syntax.vim', { 'for': [ 'javascript', 'js', 'javascript.jsx' ]}
-Plug 'thinca/vim-textobj-function-javascript',    { 'for': [ 'javascript', 'js', 'javascript.jsx' ]}
-Plug '1995eaton/vim-better-javascript-completion', { 'for': [ 'javascript', 'js', 'javascript.jsx' ]}
-Plug 'moll/vim-node'
-Plug 'sheerun/vim-polyglot'
+" Plug 'thinca/vim-textobj-function-javascript',    { 'for': [ 'javascript', 'js', 'javascript.jsx' ]}
+" Plug '1995eaton/vim-better-javascript-completion', { 'for': [ 'javascript', 'js', 'javascript.jsx' ]}
+
+Plug 'moll/vim-node', { 'for': [ 'javascript', 'js', 'javascript.jsx' ]}
+Plug 'othree/yajs.vim', { 'for': [ 'javascript', 'js', 'javascript.jsx' ]}
+Plug 'othree/es.next.syntax.vim', { 'for': [ 'javascript', 'js', 'javascript.jsx' ]}
+Plug 'mxw/vim-jsx', { 'for': [ 'javascript', 'js', 'javascript.jsx' ]}
+
+" Javascript Tools
+Plug 'flowtype/vim-flow', { 'for': ['javascript', 'js', 'javascript.jsx' ]}
+
+" SCSS and CSS syntax highlighting
+if v:version < 704
+  Plug 'JulesWang/css.vim'
+endif
+Plug 'cakebaker/scss-syntax.vim'
 
 
 " HTML
@@ -80,7 +91,8 @@ Plug 'skwp/vim-html-escape', {'for': ['html']}
 
 
 " Lua
-Plug 'https://github.com/xolox/vim-lua-ftplugin', {'for': ['lua']}
+Plug 'https://github.com/xolox/vim-lua-ftplugin.git', {'for': ['lua']}
+Plug 'https://github.com/xolox/vim-misc.git', {'for': ['lua']}
 
 
 " Perl

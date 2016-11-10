@@ -22,6 +22,7 @@ Plug 'https://github.com/rhysd/vim-color-shiny-white'
 Plug 'crusoexia/vim-monokai'
 Plug 'mhartington/oceanic-next'
 Plug 'jacoborus/tender'
+Plug 'morhetz/gruvbox'
 
 " Text
 Plug 'https://github.com/wellle/targets.vim'

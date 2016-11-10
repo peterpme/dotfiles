@@ -9,7 +9,13 @@ syntax on
 syntax enable
 filetype plugin indent on
 
-colorscheme shiny-white
+let g:gruvbox_italic=1
+let g:gruvbox_bold=1
+let g:gruvbox_termcolors=1
+let g:gruvbox_contrast_dark='hard'
+" colorscheme shiny-white
+colorscheme gruvbox
+set background=dark
 
 set autoindent
 set autoread                                                 " reload files when changed on disk, i.e. via `git checkout`

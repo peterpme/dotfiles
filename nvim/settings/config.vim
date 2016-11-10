@@ -1,10 +1,14 @@
-let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-
 set nocompatible
+
+set termguicolors
+set background=dark
 
 syntax on
 syntax enable
 filetype plugin indent on
+
+colorscheme shiny-white
+set t_Co=256
 
 set autoindent
 set autoread                                                 " reload files when changed on disk, i.e. via `git checkout`
@@ -33,7 +37,6 @@ set updatetime=250
 set nowb
 set nobackup
 set noswapfile
-set background=dark
 
 " Enable persistent undo so that undo history persists across vim sessions
 set undofile
@@ -47,6 +50,11 @@ if executable('ag')
   " Use Ag over Grep
   set grepprg=ag\ --nogroup\ --nocolor
 endif
+
+" force javascript syntax
+autocmd BufRead *.js set filetype=javascript
+autocmd BufRead *.es6 set filetype=javascript
+autocmd BufRead *.jsx set filetype=javascript
 
 " fdoc is yaml
 autocmd BufRead,BufNewFile *.fdoc set filetype=yaml

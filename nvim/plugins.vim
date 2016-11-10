@@ -18,7 +18,8 @@ Plug 'chriskempson/base16-vim'
 
 " Themes
 Plug 'https://github.com/kenwheeler/glow-in-the-dark-gucci-shark-bites-vim'
-Plug 'https://github.com/flazz/vim-colorschemes'
+Plug 'https://github.com/rhysd/vim-color-shiny-white'
+Plug 'crusoexia/vim-monokai'
 
 " Text
 Plug 'https://github.com/wellle/targets.vim'
@@ -69,10 +70,11 @@ Plug 'https://github.com/othree/javascript-libraries-syntax.vim', { 'for': [ 'ja
 " Plug 'thinca/vim-textobj-function-javascript',    { 'for': [ 'javascript', 'js', 'javascript.jsx' ]}
 " Plug '1995eaton/vim-better-javascript-completion', { 'for': [ 'javascript', 'js', 'javascript.jsx' ]}
 
-Plug 'moll/vim-node', { 'for': [ 'javascript', 'js', 'javascript.jsx' ]}
-Plug 'othree/yajs.vim', { 'for': [ 'javascript', 'js', 'javascript.jsx' ]}
-Plug 'othree/es.next.syntax.vim', { 'for': [ 'javascript', 'js', 'javascript.jsx' ]}
-Plug 'mxw/vim-jsx', { 'for': [ 'javascript', 'js', 'javascript.jsx' ]}
+Plug 'gavocanov/vim-js-indent', { 'for': 'javascript' } " JavaScript indent support
+Plug 'moll/vim-node', { 'for': [ 'javascript', 'js', 'jsx' ]}
+Plug 'othree/yajs.vim', { 'for': [ 'javascript', 'js', 'jsx' ]}
+Plug 'othree/es.next.syntax.vim', { 'for': [ 'javascript', 'js', 'jsx' ]}
+Plug 'mxw/vim-jsx', { 'for': [ 'javascript', 'js', 'jsx' ]}
 
 " Javascript Tools
 Plug 'flowtype/vim-flow', { 'for': ['javascript', 'js', 'javascript.jsx' ]}

@@ -1,14 +1,15 @@
 set nocompatible
 
-set termguicolors
-set background=dark
+" for vim 8 / neovim 0.1.5
+if (has("termguicolors"))
+ set termguicolors
+endif
 
 syntax on
 syntax enable
 filetype plugin indent on
 
 colorscheme shiny-white
-set t_Co=256
 
 set autoindent
 set autoread                                                 " reload files when changed on disk, i.e. via `git checkout`

@@ -20,6 +20,8 @@ Plug 'chriskempson/base16-vim'
 Plug 'https://github.com/kenwheeler/glow-in-the-dark-gucci-shark-bites-vim'
 Plug 'https://github.com/rhysd/vim-color-shiny-white'
 Plug 'crusoexia/vim-monokai'
+Plug 'mhartington/oceanic-next'
+Plug 'jacoborus/tender'
 
 " Text
 Plug 'https://github.com/wellle/targets.vim'

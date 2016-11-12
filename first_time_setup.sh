@@ -82,3 +82,8 @@ npm install --global trash-cli
 # github.com/jamiew/git-friendly
 # the `push` command which copies the github compare URL to my clipboard is heaven
 bash < <( curl https://raw.github.com/jamiew/git-friendly/master/install.sh)
+
+########
+
+# Disable Gatekeeper (unidentified developer)
+sudo spctl --master-disable

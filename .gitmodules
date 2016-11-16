@@ -6,4 +6,4 @@
 	url = git@github.com:rupa/z.git
 [submodule "prezto"]
 	path = prezto
-	url = git@github.com:sorin-ionescu/prezto.git
+	url = git@github.com:peterpme/prezto.git

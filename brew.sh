@@ -8,6 +8,8 @@ brew update
 # Upgrade any already-installed formulae.
 brew upgrade
 
+brew install zsh zsh-completions
+
 # Install GNU core utilities (those that come with macOS are outdated).
 # Don’t forget to add `$(brew --prefix coreutils)/libexec/gnubin` to `$PATH`.
 brew install coreutils
@@ -21,16 +23,15 @@ brew install findutils
 # Install GNU `sed`, overwriting the built-in `sed`.
 brew install gnu-sed --with-default-names
 
-brew install zsh zsh-completions
 brew install docker docker-machine
 
 #Neovim
 brew install neovim/neovim/neovim
 
 # Switch to using brew-installed zsh as default shell
-if ! fgrep -q '/usr/local/bin/zsh' /etc/shells; then
-  echo '/usr/local/bin/zsh' | sudo tee -a /etc/shells;
-  chsh -s /usr/local/bin/zsh;
+if ! fgrep -q '/Users/peter/.homebrew/bin/zsh' /etc/shells; then
+  echo '/Users/peter/.homebrew/bin/zsh' | sudo tee -a /etc/shells;
+  chsh -s /Users/peter/.homebrew/bin/zsh;
 fi;
 
 # Install `wget` with IRI support.
@@ -38,7 +39,7 @@ brew install wget --with-iri
 
 # Install more recent versions of some macOS tools.
 brew install homebrew/dupes/grep
-# brew install homebrew/dupes/openssh
+brew install homebrew/dupes/openssh
 
 # Install font tools.
 #brew tap bramstein/webfonttools

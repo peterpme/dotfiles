@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-brew install zsh
-
 # Install command-line tools using Homebrew.
 
 # Make sure we’re using the latest Homebrew.
@@ -9,6 +7,8 @@ brew update
 
 # Upgrade any already-installed formulae.
 brew upgrade
+
+brew install zsh zsh-completions
 
 # Install GNU core utilities (those that come with macOS are outdated).
 # Don’t forget to add `$(brew --prefix coreutils)/libexec/gnubin` to `$PATH`.
@@ -23,7 +23,6 @@ brew install findutils
 # Install GNU `sed`, overwriting the built-in `sed`.
 brew install gnu-sed --with-default-names
 
-brew install zsh zsh-completions
 brew install docker docker-machine
 
 #Neovim

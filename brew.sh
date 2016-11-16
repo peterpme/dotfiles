@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+brew install zsh
+
 # Install command-line tools using Homebrew.
 
 # Make sure we’re using the latest Homebrew.

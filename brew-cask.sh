@@ -9,6 +9,7 @@ brew cask install 1password
 brew cask install flux
 brew cask install alfred
 brew cask install hammerspoon
+brew cask install spotify
 
 # dev
 brew cask install iterm2

@@ -41,6 +41,9 @@ brew install wget --with-iri
 brew install homebrew/dupes/grep
 brew install homebrew/dupes/openssh
 
+# Heroku toolbelt
+brew install heroku-toolbelt
+
 # Install font tools.
 #brew tap bramstein/webfonttools
 #brew install sfnt2woff

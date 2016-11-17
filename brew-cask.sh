@@ -28,3 +28,7 @@ brew cask install vlc
 brew cask install licecap
 brew cask install virtualbox
 brew cask install slack
+
+# Fonts!
+brew tap caskroom/fonts
+brew cask install font-fira-code

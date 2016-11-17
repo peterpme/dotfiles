@@ -8,6 +8,7 @@ brew cask install dropbox
 brew cask install 1password
 brew cask install flux
 brew cask install alfred
+brew cask install hammerspoon
 
 # dev
 brew cask install iterm2

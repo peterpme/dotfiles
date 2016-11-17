@@ -27,3 +27,4 @@ brew cask install firefoxnightly
 brew cask install vlc
 brew cask install licecap
 brew cask install virtualbox
+brew cask install slack

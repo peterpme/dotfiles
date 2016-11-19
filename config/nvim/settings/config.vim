@@ -91,18 +91,15 @@ vnoremap p "_dP
 
 
 " use homebrew python
-" let g:python_host_prog = '/usr/local/bin/python'
-let g:python3_host_prog = '/usr/local/bin/python3'
+let g:python3_host_prog = '/Users/peter/.homebrew/bin/python3'
+let g:python_host_prog = '/Users/peter/.homebrew/bin/python'
 
-let g:python_host_prog = '/usr/bin/python'
-" let g:python_host_prog = '/System/Library/Frameworks/Python.framework/Versions/2.7/bin/python'
- 
 let g:python_host_skip_check = 1
 let g:python3_host_skip_check = 1
 
 " marks 80th column
 if (exists('+colorcolumn'))
-    set colorcolumn=80
+    set colorcolumn=120
     highlight ColorColumn ctermbg=9
 endif
 " }}}

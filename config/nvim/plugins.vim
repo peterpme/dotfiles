@@ -40,10 +40,10 @@ Plug 'itchyny/lightline.vim'
 Plug 'https://github.com/dahu/bisectly', { 'on': 'Bisectly'}
 Plug 'https://github.com/ryanoasis/vim-devicons'
 
-
 " Build tools
-Plug 'https://github.com/neomake/neomake', { 'on': ['Neomake'] }
-
+if has('nvim')
+  Plug 'neomake/neomake', { 'on': ['Neomake'] }
+endif
 
 " Find & replace, etc
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -59,6 +59,7 @@ Plug 'vim-scripts/matchit.zip'
 Plug 'juvenn/mustache.vim'
 Plug 'nono/vim-handlebars'
 
+
 " Git
 " Plug 'junegunn/vim-github-dashboard', { 'on': ['GHDashboard', 'GHActivity'] }
 " https://github.com/junegunn/vim-github-dashboard
@@ -69,9 +70,9 @@ Plug 'airblade/vim-gitgutter'
 
 
 " Javascript
-Plug 'https://github.com/othree/javascript-libraries-syntax.vim', { 'for': [ 'javascript', 'js', 'javascript.jsx' ]}
-" Plug 'thinca/vim-textobj-function-javascript',    { 'for': [ 'javascript', 'js', 'javascript.jsx' ]}
-" Plug '1995eaton/vim-better-javascript-completion', { 'for': [ 'javascript', 'js', 'javascript.jsx' ]}
+Plug 'https://github.com/othree/javascript-libraries-syntax.vim', { 'for': [ 'javascript', 'js', 'jsx' ]}
+Plug 'thinca/vim-textobj-function-javascript',    { 'for': [ 'javascript', 'js', 'jsx' ]}
+Plug '1995eaton/vim-better-javascript-completion', { 'for': [ 'javascript', 'js', 'jsx' ]}
 
 Plug 'gavocanov/vim-js-indent', { 'for': 'javascript' } " JavaScript indent support
 Plug 'moll/vim-node', { 'for': [ 'javascript', 'js', 'jsx' ]}
@@ -79,8 +80,10 @@ Plug 'othree/yajs.vim', { 'for': [ 'javascript', 'js', 'jsx' ]}
 Plug 'othree/es.next.syntax.vim', { 'for': [ 'javascript', 'js', 'jsx' ]}
 Plug 'mxw/vim-jsx', { 'for': [ 'javascript', 'js', 'jsx' ]}
 
+
 " Javascript Tools
-Plug 'flowtype/vim-flow', { 'for': ['javascript', 'js', 'javascript.jsx' ]}
+Plug 'flowtype/vim-flow', { 'for': ['javascript', 'js', 'jsx' ]}
+
 
 " SCSS and CSS syntax highlighting
 if v:version < 704

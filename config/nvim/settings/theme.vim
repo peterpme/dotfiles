@@ -11,4 +11,3 @@ let g:javascript_plugin_jsdoc = 1
 
 " https://github.com/othree/javascript-libraries-syntax.vim
 let g:used_javascript_libs = 'underscore,react,flux,chai'
-

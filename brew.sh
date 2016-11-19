@@ -18,8 +18,7 @@ brew install coreutils
 brew install moreutils
 
 # Install GNU `find`, `locate`, `updatedb`, and `xargs`, `g`-prefixed.
-brew install findutils
-
+brew install findutils 
 # Install GNU `sed`, overwriting the built-in `sed`.
 brew install gnu-sed --with-default-names
 
@@ -69,8 +68,6 @@ brew install pigz
 brew install pv
 # brew install rename
 
-# file path picker
-brew install fpp
 
 # install ssh keys remotely
 brew install ssh-copy-id
@@ -92,3 +89,15 @@ brew install terminal-notifier
 
 # Remove outdated versions from the cellar.
 brew cleanup
+
+
+## Brought To You By Facebook
+
+# file path picker
+brew install fpp
+
+# Flow type
+brew install flow
+
+# Yarn package manager to replace npm
+brew install yarn

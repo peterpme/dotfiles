@@ -87,3 +87,6 @@ bash < <( curl https://raw.github.com/jamiew/git-friendly/master/install.sh)
 
 # Disable Gatekeeper (unidentified developer)
 sudo spctl --master-disable
+
+# Neovim has an issue with ctrl + h escape key (READ THIS)
+# https://github.com/neovim/neovim/issues/2048#issuecomment-98307896

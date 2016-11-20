@@ -3,7 +3,6 @@ call plug#begin('~/.vim/bundle')
 " General enhancements
 Plug 'austintaylor/vim-indentobject'
 Plug 'junegunn/vim-easy-align'
-" Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'mhinz/vim-startify'
 Plug 'https://github.com/wesQ3/vim-windowswap'
@@ -15,6 +14,7 @@ Plug 'Raimondi/delimitMate'
 Plug 'briandoll/change-inside-surroundings.vim'
 Plug 'chrisbra/NrrwRgn'
 Plug 'chriskempson/base16-vim'
+Plug 'git://github.com/tpope/vim-commentary.git' " comments gcc / gcgc
 
 " Themes
 Plug 'https://github.com/kenwheeler/glow-in-the-dark-gucci-shark-bites-vim'

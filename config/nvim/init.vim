@@ -14,7 +14,7 @@ if filereadable(expand("~/.config/nvim/settings/wildignore.vim"))
   source ~/.config/nvim/settings/wildignore.vim
 endif
 
-if filereadable(expand("~/.config/nvim/settings/theme.vim"))
-  source ~/.config/nvim/settings/theme.vim
+if filereadable(expand("~/.config/nvim/settings/javascript.vim"))
+  source ~/.config/nvim/settings/javascript.vim
 endif
 

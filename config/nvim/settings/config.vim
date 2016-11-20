@@ -63,6 +63,9 @@ autocmd BufRead *.js set filetype=javascript
 autocmd BufRead *.es6 set filetype=javascript
 autocmd BufRead *.jsx set filetype=javascript
 
+" vim-commentary, adjust commentstring to support other libs
+autocmd FileType apache setlocal commentstring=#\ %s<Paste>
+
 " fdoc is yaml
 autocmd BufRead,BufNewFile *.fdoc set filetype=yaml
 " md is markdown

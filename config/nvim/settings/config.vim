@@ -76,9 +76,6 @@ autocmd VimResized * :wincmd =
 
 " Enable basic mouse behavior such as resizing buffers.
 set mouse=a
-if exists('$TMUX')  " Support resizing in tmux
-  set ttymouse=xterm2
-endif
 
 " Fix Cursor in TMUX
 if exists('$TMUX')

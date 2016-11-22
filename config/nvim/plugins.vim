@@ -41,9 +41,9 @@ Plug 'https://github.com/dahu/bisectly', { 'on': 'Bisectly'}
 Plug 'https://github.com/ryanoasis/vim-devicons'
 
 " Build tools
-if has('nvim')
-  Plug 'neomake/neomake', { 'on': ['Neomake'] }
-endif
+" if has('nvim')
+"   Plug 'neomake/neomake', { 'on': ['Neomake'] }
+" endif
 
 " Find & replace, etc
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }

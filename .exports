@@ -48,3 +48,6 @@ export PATH=$HOME/.homebrew/bin:$HOME/.homebrew/sbin:$PATH
 
 # Add `~/bin` to the `$PATH`
 export PATH="$HOME/bin:$PATH";
+
+# Yarn
+export PATH="$PATH:`yarn global bin`"

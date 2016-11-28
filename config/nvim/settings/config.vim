@@ -29,7 +29,7 @@ set ignorecase                                               " case-insensitive 
 set incsearch                                                " search as you type
 set laststatus=2                                             " always show statusline
 set list                                                     " show trailing whitespace
-set listchars=space:•,tab:▸\ ,trail:▫
+set listchars=space:·,tab:▸\ ,trail:▫,extends:>,precedes:<,nbsp:+,eol:
 set number                                                   " show line numbers
 set ruler                                                    " show where you are
 set scrolloff=3                                              " show context above/below cursorline
@@ -44,6 +44,10 @@ set updatetime=250
 set nowb
 set nobackup
 set noswapfile
+
+" highlight all tabs and trailing whitespace characters.
+highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
+match ExtraWhitespace /\s\+$\|\t/
 
 " Enable persistent undo so that undo history persists across vim sessions
 set undofile

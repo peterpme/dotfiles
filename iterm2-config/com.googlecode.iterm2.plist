@@ -12,6 +12,8 @@
 	<integer>0</integer>
 	<key>AppleSmoothFixedFontsSizeThreshold</key>
 	<integer>1</integer>
+	<key>AutoHideTmuxClientSession</key>
+	<true/>
 	<key>Custom Color Presets</key>
 	<dict>
 		<key>Argonaut</key>
@@ -1088,14 +1090,21 @@
 	</data>
 	<key>NSTableView Supports v2 KeyBingingTable</key>
 	<true/>
+	<key>NSToolbar Configuration com.apple.NSColorPanel</key>
+	<dict>
+		<key>TB Is Shown</key>
+		<integer>1</integer>
+	</dict>
 	<key>NSWindow Frame NSFontPanel</key>
 	<string>271 80 445 393 0 0 1440 900 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>530 494 620 392 0 0 1680 1050 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>642 542 796 473 0 0 1680 1050 </string>
+	<string>51 56 796 473 0 0 1680 1050 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>841 25 834 1025 0 0 1680 1050 </string>
+	<string>841 12 836 514 0 0 1680 1050 </string>
+	<key>NSWindow Frame iTerm Window 1</key>
+	<string>197 -17 652 478 0 0 1680 1050 </string>
 	<key>NeverWarnAboutShortLivedSessions_FEFC2665-93E0-4327-9201-330BB1EC6A32</key>
 	<true/>
 	<key>NeverWarnAboutShortLivedSessions_FEFC2665-93E0-4327-9201-330BB1EC6A32_selection</key>
@@ -1844,10 +1853,16 @@
 	<integer>0</integer>
 	<key>NoSyncInstallationId</key>
 	<string>E2162C0D-0271-4DD5-A8FD-16AF83EE8D27</string>
+	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
+	<true/>
+	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
+	<integer>0</integer>
 	<key>NoSyncPermissionToShowTip</key>
 	<false/>
 	<key>NoSyncTimeOfFirstLaunchOfVersionWithTip</key>
 	<real>500359107.88489902</real>
+	<key>OpenTmuxWindowsIn</key>
+	<integer>0</integer>
 	<key>PMPrintingExpandedStateForPrint2</key>
 	<false/>
 	<key>PasteTabToStringTabStopSize</key>
@@ -1902,7 +1917,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2016-11-27T15:05:54Z</date>
+	<date>2016-11-29T02:07:18Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>ShowBookmarkName</key>

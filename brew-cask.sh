@@ -17,6 +17,7 @@ brew cask install atom
 brew cask install imagealpha
 brew cask install imageoptim
 brew cask install sketch
+brew cask install google-cloud-sdk
 
 # browsers
 brew cask install google-chrome

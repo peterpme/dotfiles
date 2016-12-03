@@ -37,7 +37,7 @@ brew install wget --with-iri
 
 # Install more recent versions of some macOS tools.
 brew install homebrew/dupes/grep
-brew install homebrew/dupes/openssh
+# brew install homebrew/dupes/openssh
 
 # Heroku toolbelt
 brew install heroku-toolbelt

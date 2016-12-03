@@ -45,6 +45,9 @@ git submodule update --recursive --remote
 echo 'Install Z'
 git clone https://github.com/rupa/z.git ~/dotfiles/z
 
+echo 'SSh-ADD -A'
+curl -o ~/Library/LaunchAgents/ssh.add.a.plist https://raw.githubusercontent.com/jirsbek/SSH-keys-in-macOS-Sierra-keychain/master/ssh.add.a.plist
+
 # Git Config
 echo 'Git Config'
 ./scripts/git_config.sh

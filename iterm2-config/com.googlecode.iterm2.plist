@@ -225,6 +225,8 @@
 	<string>25B74A4B-1D28-49FD-A1C9-F233063F8EA0</string>
 	<key>LoadPrefsFromCustomFolder</key>
 	<true/>
+	<key>MaxVertically</key>
+	<false/>
 	<key>NSFontPanelAttributes</key>
 	<string>1, 4</string>
 	<key>NSNavLastRootDirectory</key>
@@ -265,9 +267,9 @@
 	<key>NSWindow Frame NSFontPanel</key>
 	<string>283 380 445 490 0 0 1680 1027 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>663 386 770 381 0 0 1680 1050 </string>
+	<string>663 294 796 473 0 0 1680 1050 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 8 1674 1019 0 0 1680 1027 </string>
+	<string>841 15 834 1035 0 0 1680 1050 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>

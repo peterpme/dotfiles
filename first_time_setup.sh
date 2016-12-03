@@ -34,6 +34,9 @@ echo 'macOS Setup'
 echo 'Dock Setup'
 ./scripts/dock_setup.sh
 
+echo 'Setup SSH'
+./scripts/ssh_setup.sh
+
 echo 'Pull in All Submodules'
 git submodule update --recursive --remote
 
@@ -76,3 +79,4 @@ echo 'Symlink Setup'
 
 echo 'Symlink prezto dotfiles'
 ./scripts/symlink_prezto_dotfiles.sh
+

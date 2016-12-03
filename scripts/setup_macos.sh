@@ -149,6 +149,13 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
     OpenWith -bool true \
     Privileges -bool true
 
+# Password after Screensaver
+defaults write com.apple.screensaver askForPassword -bool true
+
+# Set screensaver and add password delay
+defaults -currentHost write com.apple.screensaver idleTime -int 120
+defaults write com.apple.screensaver askForPasswordDelay   -int 60
+
 # Don’t animate opening applications from the Dock
 defaults write com.apple.dock launchanim -bool false
 
@@ -166,6 +173,9 @@ defaults write com.apple.dock autohide -bool true
 
 # Make Dock icons of hidden applications translucent
 defaults write com.apple.dock showhidden -bool true
+
+# Disable Dashboard
+defaults write com.apple.dashboard enabled-state -int 1
 
 # Privacy: don’t send search queries to Apple
 defaults write com.apple.Safari UniversalSearchEnabled -bool false

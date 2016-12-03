@@ -28,7 +28,8 @@ main() {
           --remove 'Mail' \
           &>/dev/null
 
-      killall Dock
+      killall cfprefsd &>/dev/null
+      killall -HUP Dock &>/dev/null
 
   else
     echo 'ERROR: dockutil not found'

@@ -29,12 +29,6 @@ brew install docker docker-machine
 #Neovim
 brew install neovim/neovim/neovim
 
-# Switch to using brew-installed zsh as default shell
-if ! fgrep -q '/Users/peter/.homebrew/bin/zsh' /etc/shells; then
-  echo '/Users/peter/.homebrew/bin/zsh' | sudo tee -a /etc/shells;
-  chsh -s /Users/peter/.homebrew/bin/zsh;
-fi;
-
 # Install `wget` with IRI support.
 brew install wget --with-iri
 

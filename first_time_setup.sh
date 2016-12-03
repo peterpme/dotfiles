@@ -18,14 +18,8 @@ export PATH=$HOME/.homebrew/bin:$HOME/.homebrew/sbin:$PATH
 # Disable Gatekeeper (unidentified developer)
 sudo spctl --master-disable
 
-echo 'macOS Setup'
-./scripts/macos_setup.sh
-
 echo 'Install Node Version Manager and set global default to node 7'
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.32.1/install.sh | NODE_VERSION=7 bash
-
-echo 'Dock Setup'
-./scripts/dock_setup.sh
 
 # install brew packages
 echo 'Install Homebrew packages'
@@ -33,6 +27,15 @@ echo 'Install Homebrew packages'
 
 echo 'Install Homebrew Cask packages'
 ./scripts/brew_cask_install.sh
+
+echo 'macOS Setup'
+./scripts/macos_setup.sh
+
+echo 'Dock Setup'
+./scripts/dock_setup.sh
+
+echo 'Pull in All Submodules'
+git submodule update --recursive --remote
 
 # Z
 # github.com/rupa/z

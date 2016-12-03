@@ -64,3 +64,12 @@ ZSHPATH=$(brew --prefix)/bin/zsh
 sudo bash -c 'echo $(brew --prefix)/bin/zsh >> /etc/shells'
 chsh -s $ZSHPATH
 echo zsh --version
+
+echo 'Symlink Setup'
+./scripts/symlink_general_files.sh
+
+# echo 'Symlink Nvim Dotfiles'
+# ./scripts/symlink_nvim_dotfiles.sh
+
+echo 'Symlink prezto dotfiles'
+./scripts/symlink_prezto_dotfiles.sh

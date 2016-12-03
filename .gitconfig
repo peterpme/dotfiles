@@ -1,0 +1,82 @@
+[core]
+	excludesfile = ~/.gitignore
+	attributesfile = ~/.gitattributes
+
+[pager]
+	# insanely beautiful diffs ==> npm install -g diff-so-fancy
+	diff = diff-so-fancy | less --tabs=4 -RFX
+	show = diff-so-fancy | less --tabs=4 -RFX
+
+[interactive]
+	diffFilter = "diff-so-fancy"
+
+# so much color
+[color]
+	ui = always
+[color "diff"]
+	meta = yellow bold
+	commit = green bold
+	frag = magenta bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = "red bold 52"
+	newNormal = "green bold"
+	newHighlight = "green bold 22"
+[color "branch"]
+	current = yellow reverse
+	local = yellow
+	remote = green
+[color "status"]
+	added = yellow
+	changed = green
+	untracked = cyan
+
+# git mergetool
+[merge]
+	tool = opendiff
+
+# rewrites of repo paths
+[url "git@github.com:"]
+	insteadOf = "https://github.com/"
+	pushInsteadOf = "github:"
+	pushInsteadOf = "git://github.com/"
+	pushInsteadOf = "https://github.com/"
+
+[url "git://github.com/"]
+	insteadOf = "github:"
+
+[url "git@gist.github.com:"]
+	insteadOf = "gst:"
+	pushInsteadOf = "gist:"
+	pushInsteadOf = "git://gist.github.com/"
+	
+[url "git://gist.github.com/"]
+	insteadOf = "gist:"
+
+# correct typos
+[help]
+	autocorrect = 1
+
+# push easily. http://stackoverflow.com/a/23918418/89484
+[push]
+	default = current
+
+# use separate file for username / github token / etc
+[include]
+  path = ~/.gitconfig.local
+
+#[init]
+#	templatedir = ~/.git_template
+
+[filter "lfs"]
+	clean = git-lfs clean %f
+	smudge = git-lfs smudge %f
+	required = true
+
+[fetch]
+	prune = true
+[diff]
+	compactionHeuristic = true

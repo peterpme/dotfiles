@@ -22,7 +22,7 @@ echo 'macOS Setup'
 ./scripts/macos_setup.sh
 
 echo 'Install Node Version Manager and set global default to node 7'
-curl -o- https://github.com/creationix/nvm/blob/master/install.sh | NODE_VERSION=7 bash
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.32.1/install.sh | NODE_VERSION=7 bash
 
 echo 'Dock Setup'
 ./scripts/dock_setup.sh

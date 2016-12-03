@@ -26,6 +26,9 @@ brew install gnu-sed --with-default-names
 
 brew install docker docker-machine
 
+# Dock Utility
+brew install dockutil
+
 #Neovim
 brew install neovim/neovim/neovim
 

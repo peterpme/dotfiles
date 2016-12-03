@@ -6,19 +6,24 @@
   read -n 1
 
 # Agree to Xcode & Download Tools
+echo 'Agree to Xcode & Download'
 ./scripts/xcode_devtools.sh
 
 # Homebrew
 # alternative to /usr/local to avoid sudo and lock down /usr/local
+echo 'Install Homebrew and set PATH for Bash'
 mkdir $HOME/.homebrew && curl -L https://github.com/mxcl/homebrew/tarball/master | tar xz --strip 1 -C $HOME/.homebrew
 export PATH=$HOME/.homebrew/bin:$HOME/.homebrew/sbin:$PATH
 
 # install brew packages
+echo 'Install Homebrew packages'
 ./scripts/brew_install.sh
+echo 'Install Homebrew Cask packages'
 ./scripts/brew_cask_install.sh
 
 # Z
 # github.com/rupa/z
+echo 'Install Z'
 git clone https://github.com/rupa/z.git ~/dotfiles/z
 
 # Disable Gatekeeper (unidentified developer)
@@ -36,6 +41,7 @@ sudo spctl --master-disable
 # Type [104;5u for Esc+
 
 # Change Shell to ZSH
+echo 'Switch shell to ZSH'
 ZSHPATH=$(brew --prefix)/bin/zsh
 sudo bash -c 'echo $(brew --prefix)/bin/zsh >> /etc/shells'
 chsh -s $ZSHPATH

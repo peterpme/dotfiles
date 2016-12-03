@@ -65,8 +65,8 @@
 	default = current
 
 # use separate file for username / github token / etc
-[include]
-  path = ~/.gitconfig.local
+#[include]
+# path = ~/.gitconfig.local
 
 #[init]
 #	templatedir = ~/.git_template

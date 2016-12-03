@@ -15,9 +15,22 @@ echo 'Install Homebrew and set PATH for Bash'
 mkdir $HOME/.homebrew && curl -L https://github.com/mxcl/homebrew/tarball/master | tar xz --strip 1 -C $HOME/.homebrew
 export PATH=$HOME/.homebrew/bin:$HOME/.homebrew/sbin:$PATH
 
+# Disable Gatekeeper (unidentified developer)
+sudo spctl --master-disable
+
+echo 'macOS Setup'
+./scripts/macos_setup.sh
+
+echo 'Install Node Version Manager and set global default to node 7'
+curl -o- https://github.com/creationix/nvm/blob/master/install.sh | NODE_VERSION=7 bash
+
+echo 'Dock Setup'
+./scripts/dock_setup.sh
+
 # install brew packages
 echo 'Install Homebrew packages'
 ./scripts/brew_install.sh
+
 echo 'Install Homebrew Cask packages'
 ./scripts/brew_cask_install.sh
 
@@ -26,8 +39,13 @@ echo 'Install Homebrew Cask packages'
 echo 'Install Z'
 git clone https://github.com/rupa/z.git ~/dotfiles/z
 
-# Disable Gatekeeper (unidentified developer)
-sudo spctl --master-disable
+# Git Config
+echo 'Git Config'
+./scripts/git_config.sh
+
+# Install Global Npm Modules
+./scripts/global_node_modules.sh
+
 
 # Neovim has an issue with ctrl + h escape key (READ THIS)
 # https://github.com/neovim/neovim/issues/2048#issuecomment-98307896

@@ -10,6 +10,7 @@ brew cask install flux
 brew cask install alfred
 brew cask install hammerspoon
 brew cask install spotify
+brew cask install evernote
 
 # dev
 brew cask install iterm2

@@ -80,11 +80,6 @@ Plug 'othree/yajs.vim', { 'for': [ 'javascript', 'js', 'jsx' ]}
 Plug 'othree/es.next.syntax.vim', { 'for': [ 'javascript', 'js', 'jsx' ]}
 Plug 'mxw/vim-jsx', { 'for': [ 'javascript', 'js', 'jsx' ]}
 
-
-" Javascript Tools
-Plug 'flowtype/vim-flow', { 'for': ['javascript', 'js', 'jsx' ]}
-
-
 " SCSS and CSS syntax highlighting
 if v:version < 704
   Plug 'JulesWang/css.vim'

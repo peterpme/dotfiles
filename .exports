@@ -51,3 +51,8 @@ export PATH="$HOME/bin:$PATH";
 
 # Yarn
 export PATH="$PATH:`yarn global bin`"
+
+# Android Studio
+export ANDROID_HOME=~/Library/Android/sdk
+export PATH=${PATH}:${ANDROID_HOME}/tools
+export PATH=${PATH}:${ANDROID_HOME}/platform-tools

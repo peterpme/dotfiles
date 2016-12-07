@@ -24,7 +24,8 @@ brew install findutils
 # Install GNU `sed`, overwriting the built-in `sed`.
 brew install gnu-sed --with-default-names
 
-brew install docker docker-machine
+# Docker related
+brew install docker docker-machine docker-compose
 
 # Dock Utility
 brew install dockutil

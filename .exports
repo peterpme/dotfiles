@@ -56,3 +56,11 @@ export PATH="$PATH:`yarn global bin`"
 export ANDROID_HOME=~/Library/Android/sdk
 export PATH=${PATH}:${ANDROID_HOME}/tools
 export PATH=${PATH}:${ANDROID_HOME}/platform-tools
+
+# Postgresql App
+export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin
+
+export WORKON_HOME=$HOME/.virtualenvs
+export PROJECT_HOME=$HOME/Devel
+eval "$(rbenv init -)"
+export NPM_TOKEN="$(cat ~/.npmrc | awk -F'=' '{print $2}')"

@@ -43,14 +43,8 @@ fi
 typeset -gU cdpath fpath mailpath manpath path
 typeset -gUT INFOPATH infopath
 
-# Brew lives under ~/.homebrew instead of /usr/local
-export PATH=$HOME/.homebrew/bin:$HOME/.homebrew/sbin:$PATH
-
 # Add `~/bin` to the `$PATH`
 export PATH="$HOME/bin:$PATH";
-
-# Yarn
-export PATH="$PATH:`yarn global bin`"
 
 # Android Studio
 export ANDROID_HOME=~/Library/Android/sdk
@@ -58,9 +52,8 @@ export PATH=${PATH}:${ANDROID_HOME}/tools
 export PATH=${PATH}:${ANDROID_HOME}/platform-tools
 
 # Postgresql App
-export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/latest/bin
+export PATH=${PATH}:/Applications/Postgres.app/Contents/Versions/latest/bin
 
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/Devel
-eval "$(rbenv init -)"
 export NPM_TOKEN="$(cat ~/.npmrc | awk -F'=' '{print $2}')"

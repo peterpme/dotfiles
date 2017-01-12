@@ -9,10 +9,9 @@ echo 'Agree to Xcode & Download'
 ./scripts/xcode_devtools.sh
 
 # Homebrew
-# alternative to /usr/local to avoid sudo and lock down /usr/local
-echo 'Install Homebrew and set PATH for Bash'
-mkdir $HOME/.homebrew && curl -L https://github.com/mxcl/homebrew/tarball/master | tar xz --strip 1 -C $HOME/.homebrew
-export PATH=$HOME/.homebrew/bin:$HOME/.homebrew/sbin:$PATH
+
+echo 'Install Homebrew'
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
 # Disable Gatekeeper (unidentified developer)
 sudo spctl --master-disable

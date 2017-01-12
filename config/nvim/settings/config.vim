@@ -12,8 +12,8 @@ filetype plugin indent on
 let g:gruvbox_italic=1
 let g:gruvbox_bold=1
 let g:gruvbox_termcolors=1
-let g:gruvbox_contrast_dark='hard'
-" colorscheme shiny-white
+let g:gruvbox_contrast_dark='medium'
+let g:gruvbox_contrast_light='medium'
 colorscheme gruvbox
 set background=dark
 

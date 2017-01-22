@@ -14,7 +14,8 @@ let g:gruvbox_bold=1
 let g:gruvbox_termcolors=1
 let g:gruvbox_contrast_dark='medium'
 let g:gruvbox_contrast_light='medium'
-colorscheme gruvbox
+" colorscheme gruvbox
+colorscheme OceanicNext
 set background=dark
 
 set autoindent

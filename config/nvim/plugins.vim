@@ -90,6 +90,8 @@ Plug 'moll/vim-node', { 'for': [ 'javascript', 'js', 'jsx' ]} "Toolkit - no synt
 " Plug 'mxw/vim-jsx', { 'for': [ 'javascript', 'js', 'jsx' ]}
 
 Plug 'chemzqm/vim-jsx-improve', { 'for': [ 'javascript', 'js', 'jsx' ]} "Toolkit - no syntax highlighting https://github.com/moll/vim-node
+
+
 " SCSS and CSS syntax highlighting
 if v:version < 704
   Plug 'JulesWang/css.vim'

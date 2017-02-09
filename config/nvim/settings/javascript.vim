@@ -1,5 +1,4 @@
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-" syntax region javascriptLineComment start="^\s*//" end="\n" contains=@Spell,javascriptCommentTodo
 
 " enable syntax highlighting for .js files too instead of just .jsx
 let g:jsx_ext_required = 0

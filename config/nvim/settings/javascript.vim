@@ -11,3 +11,7 @@ let g:jsx_ext_required = 0
 
 " https://github.com/othree/javascript-libraries-syntax.vim
 let g:used_javascript_libs = 'underscore,react,flux,chai'
+let g:ale_linters = {
+\   'javascript': ['eslint'],
+\}
+let g:ale_sign_column_always = 1

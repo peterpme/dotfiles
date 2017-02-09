@@ -12,10 +12,10 @@ filetype plugin indent on
 let g:gruvbox_italic=1
 let g:gruvbox_bold=1
 let g:gruvbox_termcolors=1
-let g:gruvbox_contrast_dark='medium'
+let g:gruvbox_contrast_dark='hard'
 let g:gruvbox_contrast_light='medium'
-" colorscheme gruvbox
-colorscheme OceanicNext
+colorscheme gruvbox
+" colorscheme monokai
 set background=dark
 
 set autoindent

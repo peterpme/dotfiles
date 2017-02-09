@@ -15,14 +15,18 @@ Plug 'briandoll/change-inside-surroundings.vim'
 Plug 'chrisbra/NrrwRgn'
 Plug 'chriskempson/base16-vim'
 Plug 'git://github.com/tpope/vim-commentary.git' " comments gcc / gcgc
+Plug 'w0rp/ale'
+
 
 " Themes
 " Plug 'https://github.com/kenwheeler/glow-in-the-dark-gucci-shark-bites-vim'
 " Plug 'https://github.com/rhysd/vim-color-shiny-white'
-" Plug 'crusoexia/vim-monokai'
-Plug 'mhartington/oceanic-next'
+Plug 'crusoexia/vim-monokai'
+" Plug 'mhartington/oceanic-next'
 " Plug 'jacoborus/tender'
 Plug 'morhetz/gruvbox'
+" Plug 'alessandroyorba/monrovia'
+
 
 " Text
 Plug 'https://github.com/wellle/targets.vim'
@@ -35,10 +39,12 @@ Plug 'kana/vim-textobj-user'
 Plug 'lucapette/vim-textobj-underscore'
 Plug 'vim-scripts/argtextobj.vim'
 
+
 " Powerline, airline, etc
 Plug 'itchyny/lightline.vim'
 Plug 'https://github.com/dahu/bisectly', { 'on': 'Bisectly'}
 Plug 'https://github.com/ryanoasis/vim-devicons'
+
 
 " Build tools
 " if has('nvim')

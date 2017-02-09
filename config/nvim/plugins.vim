@@ -80,12 +80,16 @@ Plug 'https://github.com/othree/javascript-libraries-syntax.vim', { 'for': [ 'ja
 Plug 'thinca/vim-textobj-function-javascript',    { 'for': [ 'javascript', 'js', 'jsx' ]}
 Plug '1995eaton/vim-better-javascript-completion', { 'for': [ 'javascript', 'js', 'jsx' ]}
 
-Plug 'gavocanov/vim-js-indent', { 'for': 'javascript' } " JavaScript indent support
-Plug 'moll/vim-node', { 'for': [ 'javascript', 'js', 'jsx' ]}
-Plug 'othree/yajs.vim', { 'for': [ 'javascript', 'js', 'jsx' ]}
-Plug 'othree/es.next.syntax.vim', { 'for': [ 'javascript', 'js', 'jsx' ]}
-Plug 'mxw/vim-jsx', { 'for': [ 'javascript', 'js', 'jsx' ]}
+Plug 'gavocanov/vim-js-indent', { 'for': [ 'javascript', 'js', 'jsx' ]} " Indent SUpport
+Plug 'moll/vim-node', { 'for': [ 'javascript', 'js', 'jsx' ]} "Toolkit - no syntax highlighting https://github.com/moll/vim-node
 
+" Plug 'othree/yajs.vim', { 'for': [ 'javascript', 'js', 'jsx' ]}
+" Plug 'othree/es.next.syntax.vim', { 'for': [ 'javascript', 'js', 'jsx' ]}
+
+" Plug 'pangloss/vim-javascript', { 'for': [ 'javascript', 'js', 'jsx' ]} "Base syntax highlighter
+" Plug 'mxw/vim-jsx', { 'for': [ 'javascript', 'js', 'jsx' ]}
+
+Plug 'chemzqm/vim-jsx-improve', { 'for': [ 'javascript', 'js', 'jsx' ]} "Toolkit - no syntax highlighting https://github.com/moll/vim-node
 " SCSS and CSS syntax highlighting
 if v:version < 704
   Plug 'JulesWang/css.vim'

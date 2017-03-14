@@ -3,6 +3,8 @@ local hotkey = require "hs.hotkey"
 local alert = require "hs.alert"
 local Grid = require 'grid'
 
+require "wifi_control"
+
 local mashGeneral = {
   'cmd',
   'ctrl'
@@ -13,7 +15,8 @@ local mashApps = {
   'ctrl'
 }
 
-hs.window.animationDuration = 0     -- Disable window animations (janky for iTerm)
+-- Disable window animations (janky for iTerm)
+hs.window.animationDuration = 0
 
 -- Hammerspoon repl
 hs.hotkey.bind(mashGeneral, 'C', hs.openConsole)

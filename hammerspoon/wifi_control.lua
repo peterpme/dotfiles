@@ -1,21 +1,32 @@
 local alert = require "hs.alert"
 
-WiFiControl = {}
+local workWifi = "MakeOffices 5Ghz"
+local officeWifi = "STEVE'S PLACE"
+local homeWifi = "NETFLIX & CHILL"
 
-function WiFiControl.status()
-  output = io.popen("networksetup -getairportpower en0", "r")
-  result = output:read()
-  return result:find(": On") and "on" or "off"
-end
+local taskManagerUrl = "https://basecamp.com"
+local defaultBrowser = "Safari"
 
-function WiFiControl.toggle()
-  if WiFiControl.status() == "on" then
-    alert.show("Wi-Fi: Off")
-    os.execute("networksetup -setairportpower en0 off")
-  else
-    alert.show("Wi-Fi: On")
-    os.execute("networksetup -setairportpower en0 on")
+hs.wifi.watcher.new(function ()
+  local currentWifi = hs.wifi.currentNetwork()
+  if not currentWifi then return end
+
+  local note = hs.notify.new({
+    title="Connected to WiFi", 
+    informativeText="Now connected to " .. currentWifi
+  }):send()
+
+  hs.timer.doAfter(3, function ()
+    note:withdraw()
+    note = nil
+  end)
+
+  if currentWifi == officeWifi then
+    hs.timer.doAfter(3, function ()
+      hs.execute("open " .. taskManagerUrl)
+      hs.notify.new(function () 
+        hs.application.launchOrFocus(defaultBrowser)
+      end, {title="Check tasks for the day"}):send()
+    end)
   end
-end
-
-return WiFiControl
+end):start()

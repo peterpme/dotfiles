@@ -116,6 +116,9 @@ Plug 'https://github.com/c9s/perlomni.vim', {'for': ['pl', 'perl', 'p6', 'pm']}
 " Wakatime
 Plug 'git://github.com/wakatime/vim-wakatime.git'
 
+" ReasonML
+Plug 'reasonml/vim-reason-loader'
+
 call plug#end()
 
 "augroup load_us

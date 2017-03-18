@@ -1,4 +1,5 @@
 set nocompatible
+set shell=/bin/sh
 
 " for vim 8 / neovim 0.1.5
 if (has("termguicolors"))

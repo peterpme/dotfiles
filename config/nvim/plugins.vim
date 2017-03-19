@@ -1,34 +1,65 @@
 call plug#begin('~/.vim/bundle')
 
-" General enhancements
+" *************************
+" General Enhancements
+" *************************
+
+" Alignment
 Plug 'austintaylor/vim-indentobject'
+
+" Align anything using `ga` command
 Plug 'junegunn/vim-easy-align'
+
+" Toggles a sidebar!
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+
+" Fancy start screen. Lets you open empty buffers, multiple files, etc
 Plug 'mhinz/vim-startify'
+
+" Snap windows without ruining your layout using ,ww
 Plug 'https://github.com/wesQ3/vim-windowswap'
+
+" Remaps . in a way that plugins can use it too!
 Plug 'tpope/vim-repeat'
+
+" Easily delete, change and add surroundings in pairs
 Plug 'tpope/vim-surround'
+
+"Bracket maps
 Plug 'tpope/vim-unimpaired'
+
+" Indent Guides
 Plug 'nathanaelkane/vim-indent-guides', {'on': ['IndentGuidesToggle', 'IndentGuidesEnable']}
+
+" Automatic closing of quotes, parenthesis, brackets, etc
 Plug 'Raimondi/delimitMate'
+
+" Change inside surroundings
 Plug 'briandoll/change-inside-surroundings.vim'
+
+" focus region, NR will open selected part in new split window
 Plug 'chrisbra/NrrwRgn'
-Plug 'chriskempson/base16-vim'
-Plug 'git://github.com/tpope/vim-commentary.git' " comments gcc / gcgc
+
+" Comments using gcc / gcgc
+Plug 'git://github.com/tpope/vim-commentary.git'
+
+" Async linting
 Plug 'w0rp/ale'
 
 
+" *************************
 " Themes
-" Plug 'https://github.com/kenwheeler/glow-in-the-dark-gucci-shark-bites-vim'
-" Plug 'https://github.com/rhysd/vim-color-shiny-white'
-Plug 'crusoexia/vim-monokai'
-" Plug 'mhartington/oceanic-next'
-" Plug 'jacoborus/tender'
+" *************************
+
+" Plug 'chriskempson/base16-vim'
+" Plug 'crusoexia/vim-monokai'
 Plug 'morhetz/gruvbox'
-" Plug 'alessandroyorba/monrovia'
 
 
-" Text
+" *************************
+" Text-Related
+" *************************
+
 Plug 'https://github.com/wellle/targets.vim'
 Plug 'https://github.com/reedes/vim-textobj-sentence'
 Plug 'coderifous/textobj-word-column.vim'
@@ -45,11 +76,6 @@ Plug 'itchyny/lightline.vim'
 Plug 'https://github.com/dahu/bisectly', { 'on': 'Bisectly'}
 Plug 'https://github.com/ryanoasis/vim-devicons'
 
-
-" Build tools
-" if has('nvim')
-"   Plug 'neomake/neomake', { 'on': ['Neomake'] }
-" endif
 
 " Find & replace, etc
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }

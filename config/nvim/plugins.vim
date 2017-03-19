@@ -10,6 +10,13 @@ call plug#begin('~/.vim/bundle')
 " Dark-powered Async completion (needs python3)
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
+" Add flow to deoplete
+Plug 'wokalski/autocomplete-flow'
+
+" function argument completion
+Plug 'Shougo/neosnippet'
+Plug 'Shougo/neosnippet-snippets'
+
 " Wakatime
 Plug 'git://github.com/wakatime/vim-wakatime.git'
 

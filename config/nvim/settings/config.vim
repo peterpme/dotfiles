@@ -2,6 +2,7 @@ set nocompatible
 set shell=/bin/sh
 
 let g:deoplete#enable_at_startup = 1
+let g:neosnippet#enable_completed_snippet = 1
 
 " for vim 8 / neovim 0.1.5
 if (has("termguicolors"))

@@ -13,7 +13,7 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 " Add flow to deoplete
 Plug 'wokalski/autocomplete-flow'
 
-" function argument completion
+" Function argument completion for Deoplete
 Plug 'Shougo/neosnippet'
 Plug 'Shougo/neosnippet-snippets'
 
@@ -21,7 +21,7 @@ Plug 'Shougo/neosnippet-snippets'
 Plug 'git://github.com/wakatime/vim-wakatime.git'
 
 " Binary Search Tool
-Plug 'https://github.com/dahu/bisectly', { 'on': 'Bisectly'}
+" Plug 'https://github.com/dahu/bisectly', { 'on': 'Bisectly'}
 
 " Bottom bar with all settings
 Plug 'itchyny/lightline.vim'

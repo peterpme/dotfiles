@@ -7,6 +7,9 @@ call plug#begin('~/.vim/bundle')
 " Adds icons to stuff like NERDTREE, Airline, etc
 " Plug 'https://github.com/ryanoasis/vim-devicons'
 
+" Binary Search Tool
+" Plug 'https://github.com/dahu/bisectly', { 'on': 'Bisectly'}
+
 " Dark-powered Async completion (needs python3)
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
@@ -19,9 +22,6 @@ Plug 'Shougo/neosnippet-snippets'
 
 " Wakatime
 Plug 'git://github.com/wakatime/vim-wakatime.git'
-
-" Binary Search Tool
-" Plug 'https://github.com/dahu/bisectly', { 'on': 'Bisectly'}
 
 " Bottom bar with all settings
 Plug 'itchyny/lightline.vim'
@@ -77,14 +77,12 @@ Plug 'tpope/vim-git'
 Plug 'airblade/vim-gitgutter'
 
 
-
 " *************************
 " Themes
 " *************************
 
-" Plug 'chriskempson/base16-vim'
-" Plug 'crusoexia/vim-monokai'
 Plug 'morhetz/gruvbox'
+Plug 'mhartington/oceanic-next'
 
 
 " *************************
@@ -128,7 +126,7 @@ Plug 'https://github.com/othree/javascript-libraries-syntax.vim', { 'for': [ 'ja
 Plug 'thinca/vim-textobj-function-javascript',    { 'for': [ 'javascript', 'js', 'jsx' ]}
 Plug '1995eaton/vim-better-javascript-completion', { 'for': [ 'javascript', 'js', 'jsx' ]}
 
-" Indent SUpport
+" Indentation
 Plug 'gavocanov/vim-js-indent', { 'for': [ 'javascript', 'js', 'jsx' ]}
 
 " Toolkit - no syntax highlighting https://github.com/moll/vim-node

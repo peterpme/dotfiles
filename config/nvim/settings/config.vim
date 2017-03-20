@@ -13,14 +13,14 @@ syntax on
 syntax enable
 filetype plugin indent on
 
-let g:gruvbox_italic=1
-let g:gruvbox_bold=1
-let g:gruvbox_termcolors=1
-let g:gruvbox_contrast_dark='hard'
-let g:gruvbox_contrast_light='medium'
-colorscheme gruvbox
-" colorscheme monokai
+" let g:gruvbox_italic=1
+" let g:gruvbox_bold=1
+" let g:gruvbox_termcolors=1
+" let g:gruvbox_contrast_dark='hard'
+" let g:gruvbox_contrast_light='medium'
+" colorscheme gruvbox
 set background=dark
+colorscheme OceanicNext
 
 set autoindent
 set autoread                                                 " reload files when changed on disk, i.e. via `git checkout`

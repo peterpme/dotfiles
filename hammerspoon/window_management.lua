@@ -6,6 +6,13 @@ local keys = require "keys"
 
 window.animationDuration = 0
 
+function screenWatcher()
+    print(table.show(hs.screen.allScreens(), "allScreens"))
+    newNumberOfScreens = #hs.screen.allScreens()
+end
+
+screen.watcher.new(screenWatcher):start()
+
 function alertCannotManipulateWindow()
   alert.show("Can't move window")
 end

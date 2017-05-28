@@ -15,6 +15,28 @@ local mashApps = {
   'ctrl'
 }
 
+local screenKeys = {
+  'cmd',
+  'ctrl',
+  'shift'
+}
+
+for screenIndex = 1, 3 do
+  hs.hotkey.bind(screenKeys, tostring(screenIndex), function()
+    local win = hs.window.focusedWindow()
+    local screen = hs.screen.allScreens()[screenIndex]
+
+    win:moveToScreen(screen)
+    win:setFrame(screen:frame())
+  end)
+end
+
+hs.hotkey.bind(mashGeneral, "S", function()
+  for i, screen in ipairs(hs.screen.allScreens()) do
+    hs.alert("Screen " .. i, {}, screen)
+  end
+end)
+
 -- Disable window animations (janky for iTerm)
 hs.window.animationDuration = 0
 

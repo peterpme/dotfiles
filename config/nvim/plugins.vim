@@ -159,6 +159,6 @@ Plug 'https://github.com/xolox/vim-misc.git', {'for': ['lua']}
 Plug 'https://github.com/c9s/perlomni.vim', {'for': ['pl', 'perl', 'p6', 'pm']}
 
 " ReasonML
-Plug 'reasonml/vim-reason-loader'
+Plug 'reasonml-editor/vim-reason'
 
 call plug#end()

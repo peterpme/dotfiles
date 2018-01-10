@@ -9,6 +9,7 @@ call plug#begin('~/.vim/bundle')
 
 " Binary Search Tool
 " Plug 'https://github.com/dahu/bisectly', { 'on': 'Bisectly'}
+"
 
 " Dark-powered Async completion (needs python3)
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -19,6 +20,9 @@ Plug 'wokalski/autocomplete-flow'
 " Function argument completion for Deoplete
 Plug 'Shougo/neosnippet'
 Plug 'Shougo/neosnippet-snippets'
+
+" Neoformat for stuff like Prettier
+Plug 'sbdchd/neoformat'
 
 " Wakatime
 Plug 'git://github.com/wakatime/vim-wakatime.git'
@@ -82,7 +86,7 @@ Plug 'airblade/vim-gitgutter'
 " *************************
 
 Plug 'morhetz/gruvbox'
-Plug 'mhartington/oceanic-next'
+" Plug 'mhartington/oceanic-next'
 
 
 " *************************
@@ -125,20 +129,15 @@ Plug 'nono/vim-handlebars'
 Plug 'https://github.com/othree/javascript-libraries-syntax.vim', { 'for': [ 'javascript', 'js', 'jsx' ]}
 Plug 'thinca/vim-textobj-function-javascript',    { 'for': [ 'javascript', 'js', 'jsx' ]}
 Plug '1995eaton/vim-better-javascript-completion', { 'for': [ 'javascript', 'js', 'jsx' ]}
-
-" Indentation
+Plug 'chemzqm/vim-jsx-improve', { 'for': [ 'javascript', 'js', 'jsx' ]}
 Plug 'gavocanov/vim-js-indent', { 'for': [ 'javascript', 'js', 'jsx' ]}
+Plug 'leafgarland/typescript-vim'
+
+" Graphql
+Plug 'jparise/vim-graphql'
 
 " Toolkit - no syntax highlighting https://github.com/moll/vim-node
 Plug 'moll/vim-node', { 'for': [ 'javascript', 'js', 'jsx' ]} 
-
-Plug 'chemzqm/vim-jsx-improve', { 'for': [ 'javascript', 'js', 'jsx' ]}
-
-" Plug 'othree/yajs.vim', { 'for': [ 'javascript', 'js', 'jsx' ]}
-" Plug 'othree/es.next.syntax.vim', { 'for': [ 'javascript', 'js', 'jsx' ]}
-
-" Plug 'pangloss/vim-javascript', { 'for': [ 'javascript', 'js', 'jsx' ]} "Base syntax highlighter
-" Plug 'mxw/vim-jsx', { 'for': [ 'javascript', 'js', 'jsx' ]}
 
 " SCSS and CSS syntax highlighting
 if v:version < 704
@@ -160,5 +159,12 @@ Plug 'https://github.com/c9s/perlomni.vim', {'for': ['pl', 'perl', 'p6', 'pm']}
 
 " ReasonML
 Plug 'reasonml-editor/vim-reason'
+
+" *************************
+" Misc
+" *************************
+
+"Language Client
+Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
 
 call plug#end()

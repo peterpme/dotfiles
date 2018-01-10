@@ -1,7 +1,13 @@
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-" autocmd FileType javascript set formatprg=prettier\ --stdin
-" autocmd BufWritePre *.js :normal gggqG
-" autocmd BufWritePre *.js exe "normal! gggqG\<C-o>\<C-o>"
+
+" Run on save
+autocmd BufWritePre *.js Neoformat
+
+" Pass in prettier arguments
+autocmd FileType javascript setlocal formatprg=prettier\ --stdin\ --single-quote\ --trailing-comma\ none
+
+" Use formatprg when available
+let g:neoformat_try_formatprg = 1
 
 " enable syntax highlighting for .js files too instead of just .jsx
 let g:jsx_ext_required = 0

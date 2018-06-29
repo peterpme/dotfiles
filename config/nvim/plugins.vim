@@ -115,7 +115,7 @@ Plug 'junegunn/vim-fnr' | Plug 'junegunn/vim-pseudocl' " find & replace
 Plug 'vim-scripts/greplace.vim'
 Plug 'https://github.com/simnalamburt/vim-mundo'
 Plug 'https://github.com/tpope/vim-abolish' " AWESOME case-sensitive replace
-Plug 'vim-scripts/matchit.zip'
+Plug 'andymass/vim-matchup'
 
 " *************************
 " Language-Related

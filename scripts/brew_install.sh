@@ -87,12 +87,6 @@ brew install pidcat
 
 brew install terminal-notifier
 
-# Remove outdated versions from the cellar.
-brew cleanup
-
-
-## Brought To You By Facebook
-
 # file path picker
 brew install fpp
 
@@ -100,4 +94,7 @@ brew install fpp
 brew install flow
 
 # Yarn package manager to replace npm
-brew install yarn
+brew install yarn --without-node
+
+# Remove outdated versions from the cellar.
+brew cleanup

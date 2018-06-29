@@ -1,6 +1,5 @@
 brew update
-brew install caskroom/cask/brew-cask
-brew tap caskroom/versions
+brew tap homebrew/cask
 
 # daily
 brew cask install dropbox

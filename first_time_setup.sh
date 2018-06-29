@@ -17,7 +17,7 @@ echo 'Install Homebrew'
 sudo spctl --master-disable
 
 echo 'Install Node Version Manager and set global default to node 7'
-curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.32.1/install.sh | NODE_VERSION=7 bash
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | NODE_VERSION=7 bash
 
 # install brew packages
 echo 'Install Homebrew packages'

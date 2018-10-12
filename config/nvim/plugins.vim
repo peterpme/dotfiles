@@ -11,8 +11,20 @@ call plug#begin('~/.vim/bundle')
 " Plug 'https://github.com/dahu/bisectly', { 'on': 'Bisectly'}
 "
 
-" Dark-powered Async completion (needs python3)
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" for neovim
+if has('nvim')
+  " Dark-powered Async completion (needs python3)
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" for vim 8 with python
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+  " the path to python3 is obtained through executing `:echo exepath('python3')` in vim
+  let g:python3_host_prog = "/usr/local/bin/python3"
+endif
+
+Plug 'Yggdroot/indentLine'
 
 " Add flow to deoplete
 Plug 'wokalski/autocomplete-flow'
@@ -84,10 +96,10 @@ Plug 'airblade/vim-gitgutter'
 " *************************
 " Themes
 " *************************
-
-Plug 'morhetz/gruvbox'
+Plug 'ayu-theme/ayu-vim'
+Plug 'drewtempelmeyer/palenight.vim'
+" Plug 'morhetz/gruvbox'
 " Plug 'mhartington/oceanic-next'
-
 
 " *************************
 " Text-Related
@@ -137,7 +149,7 @@ Plug 'leafgarland/typescript-vim'
 Plug 'jparise/vim-graphql'
 
 " Toolkit - no syntax highlighting https://github.com/moll/vim-node
-Plug 'moll/vim-node', { 'for': [ 'javascript', 'js', 'jsx' ]} 
+Plug 'moll/vim-node', { 'for': [ 'javascript', 'js', 'jsx' ]}
 
 " SCSS and CSS syntax highlighting
 if v:version < 704
@@ -148,7 +160,7 @@ Plug 'cakebaker/scss-syntax.vim'
 " HTML
 Plug 'tpope/vim-ragtag'
 Plug 'AndrewRadev/splitjoin.vim'
-Plug 'skwp/vim-html-escape', {'for': ['html']}
+Plug 'skwp/vim-html-escape'
 
 " Lua
 Plug 'https://github.com/xolox/vim-lua-ftplugin.git', {'for': ['lua']}
@@ -157,14 +169,13 @@ Plug 'https://github.com/xolox/vim-misc.git', {'for': ['lua']}
 " Perl
 Plug 'https://github.com/c9s/perlomni.vim', {'for': ['pl', 'perl', 'p6', 'pm']}
 
-" ReasonML
-Plug 'reasonml-editor/vim-reason'
+" ReasonML https://github.com/reasonml-editor/vim-reason-plus
+Plug 'reasonml-editor/vim-reason-plus'
 
-" *************************
-" Misc
-" *************************
-
-"Language Client
-Plug 'autozimu/LanguageClient-neovim', { 'do': ':UpdateRemotePlugins' }
+"Language Client https://github.com/autozimu/LanguageClient-neovim#quick-start
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
 
 call plug#end()

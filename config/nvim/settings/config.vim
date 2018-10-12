@@ -1,6 +1,7 @@
 set nocompatible
 set shell=/bin/sh
 
+" enable autocomplete
 let g:deoplete#enable_at_startup = 1
 let g:neosnippet#enable_completed_snippet = 1
 
@@ -13,14 +14,8 @@ syntax on
 syntax enable
 filetype plugin indent on
 
-let g:gruvbox_italic=1
-let g:gruvbox_bold=1
-let g:gruvbox_termcolors=1
-let g:gruvbox_contrast_dark='hard'
-let g:gruvbox_contrast_light='medium'
-colorscheme gruvbox
-set background=dark
-" colorscheme OceanicNext
+let ayucolor="dark"
+colorscheme ayu
 
 set autoindent
 set autoread                                                 " reload files when changed on disk, i.e. via `git checkout`
@@ -115,15 +110,22 @@ endif
 "
 
 "https://github.com/reasonml-editor/vim-reason-plus
-set hidden
 let g:LanguageClient_serverCommands = {
-    \ 'reason': ['ocaml-language-server', '--stdio'],
-    \ 'ocaml': ['ocaml-language-server', '--stdio'],
+    \ 'reason': ['/usr/local/bin/reason-language-server.exe'],
     \ }
 
 " Automatically start language servers.
 let g:LanguageClient_autoStart = 1
 
-nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
-nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
+"gd Show type info (and short doc) of identifier under cursor.
+nnoremap <silent> gd :call LanguageClient_textDocument_definition()<cr>
+
+"gf Formats code in normal mode
+nnoremap <silent> gf :call LanguageClient_textDocument_formatting()<cr>
+
+"Show type info (and short doc) of identifier under cursor.
+nnoremap <silent> <cr> :call LanguageClient_textDocument_hover()<cr>
+
+" nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
+" nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
+" nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>

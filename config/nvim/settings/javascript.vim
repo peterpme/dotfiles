@@ -4,7 +4,7 @@ autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd BufWritePre *.js Neoformat
 
 " Pass in prettier arguments
-autocmd FileType javascript setlocal formatprg=prettier-standard
+" autocmd FileType javascript setlocal formatprg=prettier-standard
 
 " Use formatprg when available
 let g:neoformat_try_formatprg = 1

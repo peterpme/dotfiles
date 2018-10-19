@@ -11,6 +11,9 @@ call plug#begin('~/.vim/bundle')
 " Plug 'https://github.com/dahu/bisectly', { 'on': 'Bisectly'}
 "
 
+" Neoformat for stuff like Prettier
+Plug 'sbdchd/neoformat'
+
 " for neovim
 if has('nvim')
   " Dark-powered Async completion (needs python3)
@@ -20,21 +23,19 @@ else
   Plug 'Shougo/deoplete.nvim'
   Plug 'roxma/nvim-yarp'
   Plug 'roxma/vim-hug-neovim-rpc'
+
+" Add flow to deoplete
+  Plug 'wokalski/autocomplete-flow'
+
+  " Function argument completion for Deoplete
+  Plug 'Shougo/neosnippet'
+  Plug 'Shougo/neosnippet-snippets'
+
   " the path to python3 is obtained through executing `:echo exepath('python3')` in vim
   let g:python3_host_prog = "/usr/local/bin/python3"
 endif
 
 Plug 'Yggdroot/indentLine'
-
-" Add flow to deoplete
-Plug 'wokalski/autocomplete-flow'
-
-" Function argument completion for Deoplete
-Plug 'Shougo/neosnippet'
-Plug 'Shougo/neosnippet-snippets'
-
-" Neoformat for stuff like Prettier
-Plug 'sbdchd/neoformat'
 
 " Wakatime
 Plug 'git://github.com/wakatime/vim-wakatime.git'

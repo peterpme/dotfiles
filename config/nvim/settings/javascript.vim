@@ -1,10 +1,9 @@
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 
-" Run on save
-autocmd BufWritePre *.js Neoformat
-
-" Pass in prettier arguments
-" autocmd FileType javascript setlocal formatprg=prettier-standard
+augroup fmt
+  autocmd!
+  autocmd BufWritePre *.js undojoin | Neoformat
+augroup END
 
 " Use formatprg when available
 let g:neoformat_try_formatprg = 1
@@ -20,8 +19,3 @@ let g:javascript_plugin_jsdoc = 1
 
 " https://github.com/othree/javascript-libraries-syntax.vim
 let g:used_javascript_libs = 'underscore,react,flux,chai'
-
-let g:ale_sign_column_always = 1
-let g:ale_linters = {
-\   'javascript': ['eslint'],
-\}

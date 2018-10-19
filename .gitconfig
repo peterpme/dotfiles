@@ -2,38 +2,74 @@
 	excludesfile = ~/.gitignore
 	attributesfile = ~/.gitattributes
 	editor = vim
-
-[pager]
-	# insanely beautiful diffs ==> npm install -g diff-so-fancy
-	diff = diff-so-fancy | less --tabs=4 -RFX
-	show = diff-so-fancy | less --tabs=4 -RFX
+	pager = diff-so-fancy | less --tabs=2 -RFX
 
 [interactive]
-	diffFilter = "diff-so-fancy"
+  diffFilter = diff-highlight
 
 # so much color
 [color]
-	ui = true
-[color "diff"]
-	meta = yellow bold
-	commit = green bold
-	frag = magenta bold
-	old = red bold
-	new = green bold
-	whitespace = red reverse
-[color "diff-highlight"]
-	oldNormal = red bold
-	oldHighlight = "red bold 52"
-	newNormal = "green bold"
-	newHighlight = "green bold 22"
+  ui = true
+  branch = always
+  diff = always
+  grep = always
+  pager = true
+  showbranch = always
+  status = always
+  ui = always
+
 [color "branch"]
-	current = yellow reverse
-	local = yellow
-	remote = green
+  current = "white blue bold"
+  local = "white bold"
+  plain = "white"
+  remote  = "blue bold"
+
+[color "decorate"]
+  branch = "blue bold"
+  HEAD = "white bold ul"
+  remoteBranch = "blue"
+  stash = "yellow"
+  tag = "cyan bold"
+
+[color "diff"]
+  commit = "blue bold"
+  frag = "blue bold"
+  func = "white"
+  meta = "cyan"
+  new = "green"
+  old = "red"
+  plain = "white"
+  whitespace = "white reverse"
+
+[color "diff-highlight"]
+  oldNormal = "red bold"
+  oldHighlight = "white red bold"
+  newNormal = "green bold"
+  newHighlight = "white green bold"
+
+[color "grep"]
+  context = "white"
+  filename = "white dim ul"
+  function = "white"
+  linenumber = "white dim bold"
+  match = "blue bold"
+  selected = "white"
+  separator = "white dim"
+
+[color "interactive"]
+  error = "red bold"
+  header = "blue bold"
+  help = "white dim"
+  prompt = "cyan"
+
 [color "status"]
-	added = yellow
-	changed = green
-	untracked = cyan
+  added = "green bold"
+  changed = "yellow bold"
+  header = "white ul"
+  nobranch = "magenta bold ul"
+  unmerged = "blue ul"
+  untracked = "red bold"
+updated = "cyan bold"
 
 # git mergetool
 [merge]

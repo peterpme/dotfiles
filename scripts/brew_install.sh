@@ -96,6 +96,9 @@ brew install flow
 # Bat cat replacement https://github.com/sharkdp/bat
 brew install bat
 
+# Find replacement https://github.com/sharkdp/fd
+brew install fd
+
 # Yarn package manager to replace npm
 brew install yarn --without-node
 

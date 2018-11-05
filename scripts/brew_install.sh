@@ -93,6 +93,9 @@ brew install fpp
 # Flow type
 brew install flow
 
+# Bat cat replacement https://github.com/sharkdp/bat
+brew install bat
+
 # Yarn package manager to replace npm
 brew install yarn --without-node
 

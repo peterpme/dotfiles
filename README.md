@@ -2,6 +2,11 @@
 
 These are _my_ dotfiles for how _I_ like to do things.
 
+## New things I'm considering
+- [coc.vim](https://github.com/neoclide/coc.nvim)
+- [neoformat](https://github.com/sbdchd/neoformat)
+- [z.lua](https://github.com/skywind3000/z.lua)
+
 ## Getting Started
 
 ```zsh

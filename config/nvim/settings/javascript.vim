@@ -1,12 +1,5 @@
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-
-augroup fmt
-  autocmd!
-  autocmd BufWritePre *.js undojoin | Neoformat
-augroup END
-
-" Use formatprg when available
-let g:neoformat_try_formatprg = 1
+autocmd BufWritePre *.js Neoformat
 
 " enable syntax highlighting for .js files too instead of just .jsx
 let g:jsx_ext_required = 0

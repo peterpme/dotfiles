@@ -11,9 +11,6 @@ call plug#begin('~/.vim/bundle')
 " Plug 'https://github.com/dahu/bisectly', { 'on': 'Bisectly'}
 "
 
-" Neoformat for stuff like Prettier
-Plug 'sbdchd/neoformat'
-
 " for neovim
 if has('nvim')
   " Dark-powered Async completion (needs python3)

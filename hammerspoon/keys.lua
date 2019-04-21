@@ -33,7 +33,7 @@ Keys = {
   },
   ["triggers"] = {
     ["Activity Monitor"] = {{{"ctrl", "alt", "cmd"}, "A"}, {hyper, "5"}},
-    ["iTerm"] = {{{"ctrl"}, "1"}, {hyper, "S"}},
+    ["kitty"] = {{{"ctrl"}, "1"}, {hyper, "S"}},
     ["iTunes"] = {{{"alt"}, "1"}, {hyper, "pad+"}},
     ["Google Chrome"] = {{{"ctrl"}, "3"}, {hyper, "F"}},
     ["Vivaldi"] = {{{"ctrl"}, "4"}, {hyper, "G"}},

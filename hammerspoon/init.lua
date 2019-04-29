@@ -72,8 +72,8 @@ function showSlack()
 end
 
 -- App Shortcuts
-hs.hotkey.bind(mashApps, '1', function() hs.application.launchOrFocus('iTerm') end)
-hs.hotkey.bind(mashApps, '2', function() hs.application.launchOrFocus('Google Chrome') end)
+hs.hotkey.bind(mashApps, '1', function() hs.application.launchOrFocus('kitty') end)
+hs.hotkey.bind(mashApps, '2', function() hs.application.launchOrFocus('Firefox') end)
 hs.hotkey.bind(mashApps, '3', showSlack)
 hs.hotkey.bind(mashApps, '4', function() hs.application.launchOrFocus('Polymail') end)
 

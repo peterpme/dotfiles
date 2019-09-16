@@ -15,6 +15,9 @@ let g:used_javascript_libs = 'underscore,react,flux,chai'
 "be explicit about the tools that are running
 let g:ale_linters_explicit = 1
 
+" keep side gutter open https://github.com/dense-analysis/ale#5ii-how-can-i-keep-the-sign-gutter-open
+let g:ale_sign_column_always = 1
+
 " automatic imports from external modules https://github.com/dense-analysis/ale#2iii-completion
 let g:ale_completion_tsserver_autoimport = 1
 

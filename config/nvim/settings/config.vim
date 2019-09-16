@@ -5,6 +5,10 @@ set shell=/bin/sh
 let g:deoplete#enable_at_startup = 1
 let g:neosnippet#enable_completed_snippet = 1
 
+" indent line characters https://github.com/Yggdroot/indentLine
+" let g:indentLine_char_list = ['|', '¦', '┆', '┊']
+" let g:indentLine_color_term = 239
+
 " for vim 8 / neovim 0.1.5
 if (has("termguicolors"))
  set termguicolors
@@ -118,6 +122,22 @@ let g:LanguageClient_serverCommands = {
 let g:lightline = {
       \ 'colorscheme': 'ayu',
       \ }
+
+" let g:lightline.component_expand = {
+"       \  'linter_checking': 'lightline#ale#checking',
+"       \  'linter_warnings': 'lightline#ale#warnings',
+"       \  'linter_errors': 'lightline#ale#errors',
+"       \  'linter_ok': 'lightline#ale#ok',
+"       \ }
+
+" let g:lightline.component_type = {
+"       \     'linter_checking': 'left',
+"       \     'linter_warnings': 'warning',
+"       \     'linter_errors': 'error',
+"       \     'linter_ok': 'left',
+"       \ }
+
+" let g:lightline.active = { 'right': [[ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ]] }
 
 " Automatically start language servers.
 let g:LanguageClient_autoStart = 1

@@ -37,6 +37,9 @@ Plug 'git://github.com/wakatime/vim-wakatime.git'
 " Bottom bar with all settings
 Plug 'itchyny/lightline.vim'
 
+" ale + lightline support
+Plug 'maximbaz/lightline-ale'
+
 " Alignment
 Plug 'austintaylor/vim-indentobject'
 

@@ -7,6 +7,9 @@
 [interactive]
   diffFilter = diff-highlight
 
+[alias]
+    cleanup = "!git branch --merged | grep  -v '\\*\\|master\\|develop' | xargs -n 1 git branch -d"
+
 # so much color
 [color]
   ui = true
@@ -109,9 +112,10 @@ updated = "cyan bold"
 #	templatedir = ~/.git_template
 
 [filter "lfs"]
-	clean = git-lfs clean %f
-	smudge = git-lfs smudge %f
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
 	required = true
+	process = git-lfs filter-process
 
 [fetch]
 	prune = true

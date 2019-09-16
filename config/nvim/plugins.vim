@@ -27,9 +27,6 @@ else
   " Function argument completion for Deoplete
   Plug 'Shougo/neosnippet'
   Plug 'Shougo/neosnippet-snippets'
-
-  " the path to python3 is obtained through executing `:echo exepath('python3')` in vim
-  let g:python3_host_prog = "/usr/local/bin/python3"
 endif
 
 Plug 'Yggdroot/indentLine'
@@ -134,6 +131,10 @@ Plug 'andymass/vim-matchup'
 " Handlebars / Mustache
 Plug 'juvenn/mustache.vim'
 Plug 'nono/vim-handlebars'
+
+" Typescript
+Plug 'leafgarland/typescript-vim'
+Plug 'ianks/vim-tsx'
 
 " Javascript
 Plug 'https://github.com/othree/javascript-libraries-syntax.vim', { 'for': [ 'javascript', 'js', 'jsx' ]}

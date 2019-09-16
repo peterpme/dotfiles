@@ -111,8 +111,13 @@ endif
 
 "https://github.com/reasonml-editor/vim-reason-plus
 let g:LanguageClient_serverCommands = {
-    \ 'reason': ['/usr/local/bin/reason-language-server.exe'],
+    \ 'reason': ['/usr/local/bin/reason-language-server'],
     \ }
+
+"https://github.com/itchyny/lightline.vim
+let g:lightline = {
+      \ 'colorscheme': 'ayu',
+      \ }
 
 " Automatically start language servers.
 let g:LanguageClient_autoStart = 1

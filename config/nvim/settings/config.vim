@@ -20,6 +20,7 @@ filetype plugin indent on
 
 let ayucolor="dark"
 colorscheme ayu
+set background=dark
 
 set autoindent
 set autoread                                                 " reload files when changed on disk, i.e. via `git checkout`

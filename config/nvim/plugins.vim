@@ -14,22 +14,25 @@ call plug#begin('~/.vim/bundle')
 " for neovim
 if has('nvim')
   " Dark-powered Async completion (needs python3)
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 " for vim 8 with python
 else
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
+  " Plug 'Shougo/deoplete.nvim'
+  " Plug 'roxma/nvim-yarp'
+  " Plug 'roxma/vim-hug-neovim-rpc'
 
 " Add flow to deoplete
-  Plug 'wokalski/autocomplete-flow'
+  " Plug 'wokalski/autocomplete-flow'
 
   " Function argument completion for Deoplete
-  Plug 'Shougo/neosnippet'
-  Plug 'Shougo/neosnippet-snippets'
+  " Plug 'Shougo/neosnippet'
+  " Plug 'Shougo/neosnippet-snippets'
 endif
 
 Plug 'Yggdroot/indentLine'
+
+" tabnine
+Plug 'zxqfl/tabnine-vim'
 
 " Wakatime
 Plug 'git://github.com/wakatime/vim-wakatime.git'
@@ -145,7 +148,6 @@ Plug 'thinca/vim-textobj-function-javascript',    { 'for': [ 'javascript', 'js',
 Plug '1995eaton/vim-better-javascript-completion', { 'for': [ 'javascript', 'js', 'jsx' ]}
 Plug 'chemzqm/vim-jsx-improve', { 'for': [ 'javascript', 'js', 'jsx' ]}
 Plug 'gavocanov/vim-js-indent', { 'for': [ 'javascript', 'js', 'jsx' ]}
-Plug 'leafgarland/typescript-vim'
 
 " Graphql
 Plug 'jparise/vim-graphql'
@@ -169,15 +171,15 @@ Plug 'https://github.com/xolox/vim-lua-ftplugin.git', {'for': ['lua']}
 Plug 'https://github.com/xolox/vim-misc.git', {'for': ['lua']}
 
 " Perl
-Plug 'https://github.com/c9s/perlomni.vim', {'for': ['pl', 'perl', 'p6', 'pm']}
+" Plug 'https://github.com/c9s/perlomni.vim', {'for': ['pl', 'perl', 'p6', 'pm']}
 
 " ReasonML https://github.com/reasonml-editor/vim-reason-plus
 Plug 'reasonml-editor/vim-reason-plus'
 
 "Language Client https://github.com/autozimu/LanguageClient-neovim#quick-start
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
+" Plug 'autozimu/LanguageClient-neovim', {
+"     \ 'branch': 'next',
+"     \ 'do': 'bash install.sh',
+"     \ }
 
 call plug#end()

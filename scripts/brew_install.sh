@@ -20,7 +20,7 @@ brew install coreutils
 brew install moreutils
 
 # Install GNU `find`, `locate`, `updatedb`, and `xargs`, `g`-prefixed.
-brew install findutils 
+brew install findutils
 # Install GNU `sed`, overwriting the built-in `sed`.
 brew install gnu-sed --with-default-names
 
@@ -31,7 +31,7 @@ brew install docker docker-machine docker-compose
 brew install dockutil
 
 #Neovim
-brew install neovim/neovim/neovim
+brew install neovim
 
 # Install `wget` with IRI support.
 brew install wget --with-iri
@@ -58,7 +58,7 @@ brew install hub
 brew install the_silver_searcher
 
 brew install git
-brew install imagemagick --with-webp
+# brew install imagemagick --with-webp
 
 # faster archive operations
 # alias tar='tar --use-compress-program=pigz'
@@ -80,7 +80,7 @@ brew install vbindiff
 brew install webkit2png
 
 # very good but slow compression
-brew install zopfli
+# brew install zopfli
 
 # colored logcat
 brew install pidcat
@@ -91,7 +91,7 @@ brew install terminal-notifier
 brew install fpp
 
 # Flow type
-brew install flow
+# brew install flow
 
 # Bat cat replacement https://github.com/sharkdp/bat
 brew install bat
@@ -100,7 +100,7 @@ brew install bat
 brew install fd
 
 # Yarn package manager to replace npm
-brew install yarn --without-node
+brew install yarn --ignore-dependencies
 
 # Remove outdated versions from the cellar.
 brew cleanup

@@ -89,3 +89,6 @@ echo 'Symlink Setup'
 echo 'Symlink prezto dotfiles'
 ./scripts/symlink_prezto_dotfiles.sh
 
+# gitconfig
+ln -s ~/dotfiles/.gitconfig.local ~/.gitconfig.local
+

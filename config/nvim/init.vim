@@ -1,3 +1,6 @@
+" ensure vim-plug is installed and then load it
+call functions#PlugLoad()
+
 if filereadable(expand("~/.config/nvim/plugins.vim"))
   source ~/.config/nvim/plugins.vim
 endif

@@ -35,7 +35,7 @@ Plug 'Yggdroot/indentLine'
 Plug 'zxqfl/tabnine-vim'
 
 " Wakatime
-Plug 'git://github.com/wakatime/vim-wakatime.git'
+" Plug 'git://github.com/wakatime/vim-wakatime.git'
 
 " Bottom bar with all settings
 Plug 'itchyny/lightline.vim'

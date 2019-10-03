@@ -8,7 +8,15 @@
 echo 'Agree to Xcode & Download'
 ./scripts/xcode_devtools.sh
 
-# Homebrew
+# Git Friendly https://github.com/jamiew/git-
+curl -sS https://raw.githubusercontent.com/jamiew/git-friendly/master/install.sh | bash
+
+# vim plug https://github.com/junegunn/vim-plug#neovim
+touch ~/dotfiles/config/nvim/autoload/plug.vim
+curl -fLo ~/dotfiles/config/nvim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+# Homebrew https://brew.sh
 
 echo 'Install Homebrew'
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"

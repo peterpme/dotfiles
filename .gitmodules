@@ -1,9 +1,6 @@
-[submodule "iTerm2-Color-Schemes"]
-	path = iTerm2-Color-Schemes
-	url = git@github.com:mbadolato/iTerm2-Color-Schemes.git
-[submodule "z"]
-	path = z
-	url = git@github.com:rupa/z.git
 [submodule "prezto"]
 	path = prezto
 	url = git@github.com:peterpme/prezto.git
+[submodule "z"]
+	path = z
+	url = git@github.com:rupa/z.git

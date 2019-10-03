@@ -6,4 +6,3 @@ alias tma="tmux attach -t"
 alias tml="tmux ls"
 alias tmk="tmux kill-session -t"
 alias tmd="tmux detach -a"
-alias gpl='gpl() { gcm "$1" && gpc && hub pull-request -m "$1" -r dhruska | send_slack_donny };gpl'

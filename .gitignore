@@ -1,3 +1,11 @@
+# working files
+.vim/viminfo
+.vim/swaps/*
+.vim/undo
+
+# git credential file
+.gitconfig.local
+
 # Folder view configuration files
 .DS_Store
 Desktop.ini
@@ -27,4 +35,3 @@ node_modules
 config/heroku
 config/configstore
 alfred
-z

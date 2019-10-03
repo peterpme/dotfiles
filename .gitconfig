@@ -1,97 +1,51 @@
+[alias]
+    cleanup = "!git branch --merged | grep  -v '\\*\\|master\\|develop' | xargs -n 1 git branch -d"
+
 [core]
 	excludesfile = ~/.gitignore
 	attributesfile = ~/.gitattributes
 	editor = vim
-	pager = diff-so-fancy | less --tabs=2 -RFX
+  precomposeUnicode = true 
+
+[pager]
+  # insanely beautiful diffs ==> npm install -g diff-so-fancy
+  diff = diff-so-fancy | less --tabs=4 -RFX
+  show = diff-so-fancy | less --tabs=4 -RFX
 
 [interactive]
-  diffFilter = diff-highlight
-
-[alias]
-    cleanup = "!git branch --merged | grep  -v '\\*\\|master\\|develop' | xargs -n 1 git branch -d"
+  # disabled until github.com/so-fancy/diff-so-fancy/pull/172 is resolved :(
+  # diffFilter = "diff-so-fancy"
 
 # so much color
 [color]
-  ui = true
-  branch = always
-  diff = always
-  grep = always
-  pager = true
-  showbranch = always
-  status = always
-  ui = always
-
-[color "branch"]
-  current = "white blue bold"
-  local = "white bold"
-  plain = "white"
-  remote  = "blue bold"
-
-[color "decorate"]
-  branch = "blue bold"
-  HEAD = "white bold ul"
-  remoteBranch = "blue"
-  stash = "yellow"
-  tag = "cyan bold"
-
+  ui = auto
 [color "diff"]
-  commit = "blue bold"
-  frag = "blue bold"
-  func = "white"
-  meta = "cyan"
-  new = "green"
-  old = "red"
-  plain = "white"
-  whitespace = "white reverse"
-
+  meta = yellow bold
+  commit = green bold
+  frag = magenta bold
+  old = red bold
+  new = green bold
+  whitespace = red reverse
+    newMoved = cyan
+    oldMoved = blue
 [color "diff-highlight"]
-  oldNormal = "red bold"
-  oldHighlight = "white red bold"
+  oldNormal = red bold
+  oldHighlight = "red bold 52"
   newNormal = "green bold"
-  newHighlight = "white green bold"
-
-[color "grep"]
-  context = "white"
-  filename = "white dim ul"
-  function = "white"
-  linenumber = "white dim bold"
-  match = "blue bold"
-  selected = "white"
-  separator = "white dim"
-
-[color "interactive"]
-  error = "red bold"
-  header = "blue bold"
-  help = "white dim"
-  prompt = "cyan"
-
+  newHighlight = "green bold 22"
+[color "branch"]
+  current = yellow reverse
+  local = yellow
+  remote = green
 [color "status"]
-  added = "green bold"
-  changed = "yellow bold"
-  header = "white ul"
-  nobranch = "magenta bold ul"
-  unmerged = "blue ul"
-  untracked = "red bold"
-updated = "cyan bold"
+  added = yellow
+  changed = green
+  untracked = cyan
 
 # git mergetool
 [merge]
-	tool = opendiff
-
-# rewrites of repo paths
-[url "git@github.com:"]
-	insteadOf = "https://github.com/"
-	pushInsteadOf = "github:"
-	pushInsteadOf = "git://github.com/"
-	pushInsteadOf = "https://github.com/"
-
-[url "git://github.com/"]
-	insteadOf = "github:"
-
-[url "git@gist.github.com:"]
-	insteadOf = "gst:"
-	pushInsteadOf = "gist:"
-	pushInsteadOf = "git://gist.github.com/"
+  tool = opendiff
+  renameLimit = 0
 	
 [url "git://gist.github.com/"]
 	insteadOf = "gist:"
@@ -102,27 +56,30 @@ updated = "cyan bold"
 
 # push easily. http://stackoverflow.com/a/23918418/89484
 [push]
-	default = simple
+  default = current
+  followTags = true
 
 # use separate file for username / github token / etc
-#[include]
-# path = ~/.gitconfig.local
+[include]
+  path = ~/.gitconfig.local
 
 #[init]
 #	templatedir = ~/.git_template
 
 [filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	required = true
-	process = git-lfs filter-process
+  clean = git-lfs clean %f
+  smudge = git-lfs smudge %f
+  required = true
 
 [fetch]
-	prune = true
+  prune = true
 [diff]
-	compactionHeuristic = true
-[user]
-	name = Peter Piekarczyk
-	email = peterpiekarczyk@gmail.com
-[github]
-	user = peterpme
+    # Show blocks of moved text of at least 20 alphanumeric characters differently than adds/deletes
+    # https://blog.github.com/2018-04-05-git-217-released/
+    colorMoved = zebra
+[remote "origin"]
+  fetch = +refs/heads/*:refs/remotes/origin/*
+[stash]
+  showPatch = true
+[log]
+  date = relative

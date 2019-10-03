@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+if test ! "$( command -v brew )"; then
+    echo "Installing homebrew"
+    ruby -e "$( curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install )"
+fi
+
 # Install command-line tools using Homebrew.
 
 # Make sure we’re using the latest Homebrew.

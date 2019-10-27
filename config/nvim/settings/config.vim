@@ -18,10 +18,15 @@ syntax on
 syntax enable
 filetype plugin indent on
 
-let ayucolor="dark"
-colorscheme ayu
-set background=dark
+colorscheme base16-onedark
+" set background=dark
 
+set t_Co=256 " Explicitly tell vim that the terminal supports 256 colors
+
+if &term =~ '256color'
+  " disable background color erase
+  set t_ut=
+endif
 set autoindent
 set autoread                                                 " reload files when changed on disk, i.e. via `git checkout`
 set backspace=2                                              " Fix broken backspace in some setups

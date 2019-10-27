@@ -97,10 +97,8 @@ Plug 'airblade/vim-gitgutter'
 " *************************
 " Themes
 " *************************
-Plug 'ayu-theme/ayu-vim'
-Plug 'drewtempelmeyer/palenight.vim'
-" Plug 'morhetz/gruvbox'
-" Plug 'mhartington/oceanic-next'
+Plug 'chriskempson/base16-vim'
+Plug 'mike-hearn/base16-vim-lightline'
 
 " *************************
 " Text-Related

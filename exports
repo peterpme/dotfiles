@@ -28,3 +28,5 @@ export PATH=${PATH}:/Applications/Postgres.app/Contents/Versions/latest/bin
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/Devel
 export NPM_TOKEN="$(cat ~/.npmrc | awk -F'=' '{print $2}')"
+
+export RIPGREP_CONFIG_PATH="$HOME/.rgrc"

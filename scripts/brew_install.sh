@@ -62,6 +62,9 @@ brew install hub
 # Silver Searcher
 brew install the_silver_searcher
 
+# rip grep https://github.com/BurntSushi/ripgrep
+brew install ripgrep
+
 brew install git
 # brew install imagemagick --with-webp
 

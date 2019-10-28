@@ -9,7 +9,7 @@ let g:neosnippet#enable_completed_snippet = 1
 " let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 " let g:indentLine_color_term = 239
 
-" for vim 8 / neovim 0.1.5
+" enable 24 bit color support if supported
 if (has("termguicolors"))
  set termguicolors
 endif
@@ -18,15 +18,17 @@ syntax on
 syntax enable
 filetype plugin indent on
 
-colorscheme base16-onedark
-" set background=dark
-
 set t_Co=256 " Explicitly tell vim that the terminal supports 256 colors
 
 if &term =~ '256color'
   " disable background color erase
   set t_ut=
 endif
+
+" colorizer
+lua require'colorizer'.setup()
+
+set ttyfast " faster redrawing
 set autoindent
 set autoread                                                 " reload files when changed on disk, i.e. via `git checkout`
 set backspace=2                                              " Fix broken backspace in some setups
@@ -48,6 +50,7 @@ set shiftwidth=2                                             " normal mode inden
 set showcmd
 set smartcase                                                " case-sensitive search if any caps
 set softtabstop=2                                            " insert mode tab and backspace use 2 spaces
+set smarttab " tab respects 'tabstop', 'shiftwidth', and 'softtabstop'
 set tabstop=4                                                " actual tabs occupy 8 characters
 set lazyredraw
 set synmaxcol=200
@@ -104,6 +107,32 @@ endif
 " Don't copy the contents of an overwritten selection.
 vnoremap p "_dP
 
+" Don't change to directory when selecting a file
+let g:startify_files_number = 5
+let g:startify_change_to_dir = 0
+let g:startify_custom_header = [ ]
+let g:startify_relative_path = 1
+let g:startify_use_env = 1
+
+" Custom startup list, only show MRU from current directory/project
+let g:startify_lists = [
+\  { 'type': 'dir',       'header': [ 'Files '. getcwd() ] },
+\  { 'type': function('helpers#startify#listcommits'), 'header': [ 'Recent Commits' ] },
+\  { 'type': 'sessions',  'header': [ 'Sessions' ]       },
+\  { 'type': 'bookmarks', 'header': [ 'Bookmarks' ]      },
+\  { 'type': 'commands',  'header': [ 'Commands' ]       },
+\ ]
+
+let g:startify_commands = [
+\   { 'up': [ 'Update Plugins', ':PlugUpdate' ] },
+\   { 'ug': [ 'Upgrade Plugin Manager', ':PlugUpgrade' ] },
+\ ]
+
+let g:startify_bookmarks = [
+  \ { 'c': '~/.config/nvim/init.vim' },
+  \ { 'g': '~/.gitconfig' },
+  \ { 'z': '~/.zshrc' }
+\ ]
 
 " use homebrew python
 let g:python3_host_prog = '/usr/local/bin/python3'
@@ -127,24 +156,43 @@ let g:LanguageClient_serverCommands = {
 
 "https://github.com/itchyny/lightline.vim
 let g:lightline = {
-      \ 'colorscheme': 'ayu',
-      \ }
-
-" let g:lightline.component_expand = {
-"       \  'linter_checking': 'lightline#ale#checking',
-"       \  'linter_warnings': 'lightline#ale#warnings',
-"       \  'linter_errors': 'lightline#ale#errors',
-"       \  'linter_ok': 'lightline#ale#ok',
-"       \ }
-
-" let g:lightline.component_type = {
-"       \     'linter_checking': 'left',
-"       \     'linter_warnings': 'warning',
-"       \     'linter_errors': 'error',
-"       \     'linter_ok': 'left',
-"       \ }
-
-" let g:lightline.active = { 'right': [[ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ]] }
+    \   'colorscheme': 'onedark',
+    \   'active': {
+    \       'left': [ [ 'mode', 'paste' ],
+    \               [ 'gitbranch' ],
+    \               [ 'readonly', 'filetype', 'filename' ]],
+    \       'right': [ [ 'percent' ], [ 'lineinfo' ],
+    \               [ 'fileformat', 'fileencoding' ],
+    \               [ 'gitblame', 'currentfunction',  'cocstatus', 'linter_errors', 'linter_warnings' ]]
+    \   },
+    \   'component_expand': {
+    \   },
+    \   'component_type': {
+    \       'readonly': 'error',
+    \       'linter_warnings': 'warning',
+    \       'linter_errors': 'error'
+    \   },
+    \   'component_function': {
+    \       'fileencoding': 'helpers#lightline#fileEncoding',
+    \       'filename': 'helpers#lightline#fileName',
+    \       'fileformat': 'helpers#lightline#fileFormat',
+    \       'filetype': 'helpers#lightline#fileType',
+    \       'gitbranch': 'helpers#lightline#gitBranch',
+    \       'cocstatus': 'coc#status',
+    \       'currentfunction': 'helpers#lightline#currentFunction',
+    \       'gitblame': 'helpers#lightline#gitBlame'
+    \   },
+    \   'tabline': {
+    \       'left': [ [ 'tabs' ] ],
+    \       'right': [ [ 'close' ] ]
+    \   },
+    \   'tab': {
+    \       'active': [ 'filename', 'modified' ],
+    \       'inactive': [ 'filename', 'modified' ],
+    \   },
+    \   'separator': { 'left': '', 'right': '' },
+    \   'subseparator': { 'left': '', 'right': '' }
+\ }
 
 " Automatically start language servers.
 let g:LanguageClient_autoStart = 1
@@ -161,3 +209,43 @@ nnoremap <silent> <cr> :call LanguageClient_textDocument_hover()<cr>
 " nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
 " nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
 " nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
+"
+
+" FZF
+let g:fzf_layout = { 'down': '~25%' }
+
+if isdirectory(".git")
+    " if in a git project, use :GFiles
+    nmap <silent> <leader>t :GitFiles --cached --others --exclude-standard<cr>
+else
+    " otherwise, use :FZF
+    nmap <silent> <leader>t :FZF<cr>
+endif
+
+" https://github.com/nicknisi/dotfiles/blob/master/config/nvim/init.vim
+" Colorscheme and final setup {{{
+    " This call must happen after the plug#end() call to ensure
+    " that the colorschemes have been loaded
+    if filereadable(expand("~/.vimrc_background"))
+        let base16colorspace=256
+        source ~/.vimrc_background
+    else
+        let g:onedark_termcolors=256
+        let g:onedark_terminal_italics=1
+        colorscheme base16-horizon-dark
+    endif
+    syntax on
+    filetype plugin indent on
+    " make the highlighting of tabs and other non-text less annoying
+    highlight SpecialKey ctermfg=19 guifg=#333333
+    highlight NonText ctermfg=19 guifg=#333333
+
+    " make comments and HTML attributes italic
+    highlight Comment cterm=italic term=italic gui=italic
+    highlight htmlArg cterm=italic term=italic gui=italic
+    highlight xmlAttrib cterm=italic term=italic gui=italic
+    " highlight Type cterm=italic term=italic gui=italic
+    highlight Normal ctermbg=none
+" }}}
+
+" vim:set foldmethod=marker foldlevel=0

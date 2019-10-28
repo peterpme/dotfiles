@@ -20,6 +20,14 @@ inoremap jj <ESC>
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
+" inner-line
+xnoremap <silent> il :<c-u>normal! g_v^<cr>
+onoremap <silent> il :<c-u>normal! g_v^<cr>
+
+" around line
+vnoremap <silent> al :<c-u>normal! $v0<cr>
+onoremap <silent> al :<c-u>normal! $v0<cr>
+
 
 " neomake
 " nmap <Leader><Space>o :lopen<CR>      " open location window

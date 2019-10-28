@@ -20,6 +20,12 @@ let NERDTreeIgnore = ['\.DS_Store$', '\.pyc$', '\.javac']
 let g:NERDTreeShowHidden = 1
 let g:NERDTreeShowBookmarks = 1
 
+augroup nerdtree
+    autocmd!
+    autocmd FileType nerdtree setlocal nolist " turn off whitespace characters
+    autocmd FileType nerdtree setlocal nocursorline " turn off line highlighting for performance
+augroup END
+
 " NERDTree's File highlighting
 function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
     exec 'autocmd filetype nerdtree highlight ' . a:extension .' ctermbg='. a:bg .' ctermfg='. a:fg .' guibg='. a:guibg .' guifg='. a:guifg
@@ -45,3 +51,11 @@ call NERDTreeHighlightFile('py3', 'Magenta', 'none', '#ff00ff', '#151515')
 let NERDTreeMapChangeRoot = 'u'
 let NERDTreeMapUpdir = 'U'
 let NERDTreeMapUpdirKeepOpen = 'c'
+
+let g:WebDevIconsOS = 'Darwin'
+let g:WebDevIconsUnicodeDecorateFolderNodes = 1
+let g:DevIconsEnableFoldersOpenClose = 1
+let g:DevIconsEnableFolderExtensionPatternMatching = 1
+let NERDTreeDirArrowExpandable = "\u00a0" " make arrows invisible
+let NERDTreeDirArrowCollapsible = "\u00a0" " make arrows invisible
+let NERDTreeNodeDelimiter = "\u263a" " smiley face

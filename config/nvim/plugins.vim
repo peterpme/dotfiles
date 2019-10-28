@@ -4,9 +4,6 @@ call plug#begin('~/.vim/bundle')
 " General Enhancements
 " *************************
 
-" Adds icons to stuff like NERDTREE, Airline, etc
-" Plug 'https://github.com/ryanoasis/vim-devicons'
-
 " Binary Search Tool
 " Plug 'https://github.com/dahu/bisectly', { 'on': 'Bisectly'}
 "
@@ -31,6 +28,9 @@ endif
 
 Plug 'Yggdroot/indentLine'
 
+" https://github.com/norcalli/nvim-colorizer.lua/blob/master/README.md
+Plug 'norcalli/nvim-colorizer.lua'
+
 " tabnine
 Plug 'zxqfl/tabnine-vim'
 
@@ -49,8 +49,9 @@ Plug 'austintaylor/vim-indentobject'
 " Align anything using `ga` command
 Plug 'junegunn/vim-easy-align'
 
-" Toggles a sidebar!
+" NERDTREE sidebar
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
 " Fancy start screen. Lets you open empty buffers, multiple files, etc
 Plug 'mhinz/vim-startify'
@@ -85,6 +86,9 @@ Plug 'git://github.com/tpope/vim-commentary.git'
 " Async linting
 Plug 'w0rp/ale'
 
+" editorconfig support
+Plug 'editorconfig/editorconfig-vim'
+
 " Git
 " Plug 'junegunn/vim-github-dashboard', { 'on': ['GHDashboard', 'GHActivity'] }
 " https://github.com/junegunn/vim-github-dashboard
@@ -99,6 +103,7 @@ Plug 'airblade/vim-gitgutter'
 " *************************
 Plug 'chriskempson/base16-vim'
 Plug 'mike-hearn/base16-vim-lightline'
+" Plug 'joshdick/onedark.vim'
 
 " *************************
 " Text-Related
@@ -179,5 +184,9 @@ Plug 'reasonml-editor/vim-reason-plus'
 "     \ 'branch': 'next',
 "     \ 'do': 'bash install.sh',
 "     \ }
+
+" devicons https://github.com/ryanoasis/vim-devicons
+" always load as last one!
+Plug 'ryanoasis/vim-devicons'
 
 call plug#end()

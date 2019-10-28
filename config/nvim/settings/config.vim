@@ -25,6 +25,8 @@ if &term =~ '256color'
   set t_ut=
 endif
 
+set guifont=Iosevka\ Nerd\ Font:h16
+
 " colorizer
 lua require'colorizer'.setup()
 

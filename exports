@@ -29,4 +29,12 @@ export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/Devel
 export NPM_TOKEN="$(cat ~/.npmrc | awk -F'=' '{print $2}')"
 
+# rg config
 export RIPGREP_CONFIG_PATH="$HOME/.rgrc"
+
+# load term w italics support
+if [ -z "$TMUX" ]; then
+    export TERM=xterm-256color-italic
+else
+    export TERM=tmux-256color-italic
+fi

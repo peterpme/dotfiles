@@ -156,7 +156,7 @@ let g:LanguageClient_serverCommands = {
 
 "https://github.com/itchyny/lightline.vim
 let g:lightline = {
-    \   'colorscheme': 'onedark',
+    \   'colorscheme': 'base16_harmonic_dark',
     \   'active': {
     \       'left': [ [ 'mode', 'paste' ],
     \               [ 'gitbranch' ],

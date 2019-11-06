@@ -87,7 +87,7 @@ Plug 'git://github.com/tpope/vim-commentary.git'
 Plug 'w0rp/ale'
 
 " editorconfig support
-Plug 'editorconfig/editorconfig-vim'
+Plug 'sgur/vim-editorconfig'
 
 " Git
 " Plug 'junegunn/vim-github-dashboard', { 'on': ['GHDashboard', 'GHActivity'] }

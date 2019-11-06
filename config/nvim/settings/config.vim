@@ -131,6 +131,7 @@ let g:startify_commands = [
 \ ]
 
 let g:startify_bookmarks = [
+  \ { 'd': '~/dotfiles' },
   \ { 'c': '~/.config/nvim/init.vim' },
   \ { 'g': '~/.gitconfig' },
   \ { 'z': '~/.zshrc' }

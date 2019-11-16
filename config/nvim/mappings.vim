@@ -28,6 +28,15 @@ onoremap <silent> il :<c-u>normal! g_v^<cr>
 vnoremap <silent> al :<c-u>normal! $v0<cr>
 onoremap <silent> al :<c-u>normal! $v0<cr>
 
+"gd Show type info (and short doc) of identifier under cursor.
+nnoremap <silent> gd :call LanguageClient_textDocument_definition()<cr>
+"gf Formats code in normal mode
+nnoremap <silent> gf :call LanguageClient_textDocument_formatting()<cr>
+"Show type info (and short doc) of identifier under cursor.
+nnoremap <silent> <cr> :call LanguageClient_textDocument_hover()<cr>
+
+" Don't copy the contents of an overwritten selection.
+vnoremap p "_dP
 
 " neomake
 " nmap <Leader><Space>o :lopen<CR>      " open location window

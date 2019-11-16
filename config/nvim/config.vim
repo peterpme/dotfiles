@@ -2,12 +2,41 @@ set nocompatible
 set shell=/bin/sh
 
 " enable autocomplete
+" https://github.com/Shougo/deoplete.nvim
 let g:deoplete#enable_at_startup = 1
-let g:neosnippet#enable_completed_snippet = 1
+" let g:neosnippet#enable_completed_snippet = 1
 
-" indent line characters https://github.com/Yggdroot/indentLine
-" let g:indentLine_char_list = ['|', '¦', '┆', '┊']
-" let g:indentLine_color_term = 239
+" Automatically start language servers.
+let g:LanguageClient_autoStart = 1
+
+" https://neovim.io/doc/user/provider.html
+" [nvim] set node path for neovim
+let g:node_host_prog = '$HOME/npmbin/node_modules/.bin/neovim-node-host'
+
+" https://neovim.io/doc/user/provider.html
+" [nvim] disable ruby provider
+let g:loaded_ruby_provider = 0
+
+" https://neovim.io/doc/user/provider.html
+" [nvim] the path to python3 is obtained through executing `:echo exepath('python3')` in vim
+let g:python3_host_prog = "/usr/local/bin/python3"
+
+" https://neovim.io/doc/user/provider.html
+" [nvim] the path to python is obtained through executing `:echo exepath('python')` in vim
+let g:python_host_prog = '/usr/local/bin/python'
+
+" https://github.com/jaredly/reason-language-server#vim
+" [reason] reason language server
+let g:LanguageClient_serverCommands = {
+    \ 'reason': ['$HOME/dotfiles/bin/reason-language-server.exe']
+    \ }
+
+" https://github.com/tbodt/deoplete-tabnine
+" [tabnine]
+call deoplete#custom#var('tabnine', {
+    \ 'line_limit': 500,
+    \ 'max_num_results': 5,
+    \ })
 
 " enable 24 bit color support if supported
 if (has("termguicolors"))
@@ -18,18 +47,22 @@ syntax on
 syntax enable
 filetype plugin indent on
 
-set t_Co=256 " Explicitly tell vim that the terminal supports 256 colors
+" colorizer https://github.com/norcalli/nvim-colorizer.lua
+" lua require'colorizer'.setup()
 
 if &term =~ '256color'
   " disable background color erase
   set t_ut=
 endif
 
+" Marks 80th column
+if (exists('+colorcolumn'))
+    set colorcolumn=80
+    highlight ColorColumn ctermbg=9
+endif
+
+set t_Co=256 " Explicitly tell vim that the terminal supports 256 colors
 set guifont=Iosevka\ Nerd\ Font:h16
-
-" colorizer
-lua require'colorizer'.setup()
-
 set ttyfast " faster redrawing
 set autoindent
 set autoread                                                 " reload files when changed on disk, i.e. via `git checkout`
@@ -60,17 +93,15 @@ set updatetime=250
 set nowb
 set nobackup
 set noswapfile
+set mouse=a " Enable basic mouse behavior such as resizing buffers.
+set nowrap
+set linebreak
+set undofile " Enable persistent undo so that undo history persists across vim sessions
+set undodir=~/.vim/undo
 
 " highlight all tabs and trailing whitespace characters.
 highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
 match ExtraWhitespace /\s\+$\|\t/
-
-" Enable persistent undo so that undo history persists across vim sessions
-set undofile
-set undodir=~/.vim/undo
-
-set nowrap
-set linebreak
 
 " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
 if executable('ag')
@@ -94,9 +125,6 @@ autocmd BufRead,BufNewFile *.md set spell
 " automatically rebalance windows on vim resize
 autocmd VimResized * :wincmd =
 
-" Enable basic mouse behavior such as resizing buffers.
-set mouse=a
-
 " Fix Cursor in TMUX
 if exists('$TMUX')
   let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
@@ -105,9 +133,6 @@ else
   let &t_SI = "\<Esc>]50;CursorShape=1\x7"
   let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 endif
-
-" Don't copy the contents of an overwritten selection.
-vnoremap p "_dP
 
 " Don't change to directory when selecting a file
 let g:startify_files_number = 5
@@ -126,6 +151,7 @@ let g:startify_lists = [
 \ ]
 
 let g:startify_commands = [
+\   { 'uc': [ 'Clean Plugins', ':PlugClean' ] },
 \   { 'up': [ 'Update Plugins', ':PlugUpdate' ] },
 \   { 'ug': [ 'Upgrade Plugin Manager', ':PlugUpgrade' ] },
 \ ]
@@ -137,82 +163,10 @@ let g:startify_bookmarks = [
   \ { 'z': '~/.zshrc' }
 \ ]
 
-" use homebrew python
-let g:python3_host_prog = '/usr/local/bin/python3'
-let g:python_host_prog = '/usr/bin/python'
-
-let g:python_host_skip_check = 1
-let g:python3_host_skip_check = 1
-
-" marks 80th column
-if (exists('+colorcolumn'))
-    set colorcolumn=120
-    highlight ColorColumn ctermbg=9
-endif
-" }}}
-"
-
-"https://github.com/reasonml-editor/vim-reason-plus
-let g:LanguageClient_serverCommands = {
-    \ 'reason': ['/usr/local/bin/reason-language-server'],
-    \ }
-
 "https://github.com/itchyny/lightline.vim
 let g:lightline = {
-    \   'colorscheme': 'base16_harmonic_dark',
-    \   'active': {
-    \       'left': [ [ 'mode', 'paste' ],
-    \               [ 'gitbranch' ],
-    \               [ 'readonly', 'filetype', 'filename' ]],
-    \       'right': [ [ 'percent' ], [ 'lineinfo' ],
-    \               [ 'fileformat', 'fileencoding' ],
-    \               [ 'gitblame', 'currentfunction',  'cocstatus', 'linter_errors', 'linter_warnings' ]]
-    \   },
-    \   'component_expand': {
-    \   },
-    \   'component_type': {
-    \       'readonly': 'error',
-    \       'linter_warnings': 'warning',
-    \       'linter_errors': 'error'
-    \   },
-    \   'component_function': {
-    \       'fileencoding': 'helpers#lightline#fileEncoding',
-    \       'filename': 'helpers#lightline#fileName',
-    \       'fileformat': 'helpers#lightline#fileFormat',
-    \       'filetype': 'helpers#lightline#fileType',
-    \       'gitbranch': 'helpers#lightline#gitBranch',
-    \       'cocstatus': 'coc#status',
-    \       'currentfunction': 'helpers#lightline#currentFunction',
-    \       'gitblame': 'helpers#lightline#gitBlame'
-    \   },
-    \   'tabline': {
-    \       'left': [ [ 'tabs' ] ],
-    \       'right': [ [ 'close' ] ]
-    \   },
-    \   'tab': {
-    \       'active': [ 'filename', 'modified' ],
-    \       'inactive': [ 'filename', 'modified' ],
-    \   },
-    \   'separator': { 'left': '', 'right': '' },
-    \   'subseparator': { 'left': '', 'right': '' }
+  \ 'colorscheme': 'base16_harmonic_dark',
 \ }
-
-" Automatically start language servers.
-let g:LanguageClient_autoStart = 1
-
-"gd Show type info (and short doc) of identifier under cursor.
-nnoremap <silent> gd :call LanguageClient_textDocument_definition()<cr>
-
-"gf Formats code in normal mode
-nnoremap <silent> gf :call LanguageClient_textDocument_formatting()<cr>
-
-"Show type info (and short doc) of identifier under cursor.
-nnoremap <silent> <cr> :call LanguageClient_textDocument_hover()<cr>
-
-" nnoremap <silent> K :call LanguageClient_textDocument_hover()<CR>
-" nnoremap <silent> gd :call LanguageClient_textDocument_definition()<CR>
-" nnoremap <silent> <F2> :call LanguageClient_textDocument_rename()<CR>
-"
 
 " FZF
 let g:fzf_layout = { 'down': '~25%' }
@@ -252,3 +206,45 @@ endif
 " }}}
 
 " vim:set foldmethod=marker foldlevel=0
+"
+"
+" autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+
+" enable syntax highlighting for .js files too instead of just .jsx
+let g:jsx_ext_required = 0
+
+" flow syntax highlighting
+" let g:javascript_plugin_flow = 1
+
+" JSDoc syntax highlighting
+" let g:javascript_plugin_jsdoc = 1
+
+" https://github.com/othree/javascript-libraries-syntax.vim
+" let g:used_javascript_libs = 'underscore,react,flux,chai'
+
+" REMOVE ALE
+"be explicit about the tools that are running
+" let g:ale_linters_explicit = 1
+
+" keep side gutter open https://github.com/dense-analysis/ale#5ii-how-can-i-keep-the-sign-gutter-open
+" let g:ale_sign_column_always = 1
+
+" automatic imports from external modules https://github.com/dense-analysis/ale#2iii-completion
+" let g:ale_completion_tsserver_autoimport = 1
+
+" format on save
+" let g:ale_fix_on_save = 1
+
+" let g:ale_fixers = {
+" \   'html': ['prettier'],
+" \   'javascript': ['prettier'],
+" \   'typescript': ['prettier'],
+" \   'css': ['prettier'],
+" \}
+
+" let g:ale_linters = {
+" \   'html': ['eslint'],
+" \   'javascript': ['eslint'],
+" \   'typescript': ['tsserver', 'tslint'],
+" \}
+

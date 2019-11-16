@@ -4,27 +4,24 @@ call plug#begin('~/.vim/bundle')
 " General Enhancements
 " *************************
 
-" Binary Search Tool
-" Plug 'https://github.com/dahu/bisectly', { 'on': 'Bisectly'}
-"
-
-" for neovim
 if has('nvim')
-  " Dark-powered Async completion (needs python3)
-  " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 " for vim 8 with python
 else
-  " Plug 'Shougo/deoplete.nvim'
-  " Plug 'roxma/nvim-yarp'
-  " Plug 'roxma/vim-hug-neovim-rpc'
-
-" Add flow to deoplete
-  " Plug 'wokalski/autocomplete-flow'
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
 
   " Function argument completion for Deoplete
   " Plug 'Shougo/neosnippet'
   " Plug 'Shougo/neosnippet-snippets'
 endif
+
+"Language Client https://github.com/autozimu/LanguageClient-neovim#quick-start
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
 
 Plug 'Yggdroot/indentLine'
 
@@ -32,7 +29,8 @@ Plug 'Yggdroot/indentLine'
 Plug 'norcalli/nvim-colorizer.lua'
 
 " tabnine
-Plug 'zxqfl/tabnine-vim'
+" Plug 'zxqfl/tabnine-vim'
+Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' }
 
 " Wakatime
 " Plug 'git://github.com/wakatime/vim-wakatime.git'
@@ -42,6 +40,9 @@ Plug 'itchyny/lightline.vim'
 
 " ale + lightline support
 Plug 'maximbaz/lightline-ale'
+
+" Async linting ALE
+" Plug 'w0rp/ale'
 
 " Alignment
 Plug 'austintaylor/vim-indentobject'
@@ -83,9 +84,6 @@ Plug 'chrisbra/NrrwRgn'
 " Comments using gcc / gcgc
 Plug 'git://github.com/tpope/vim-commentary.git'
 
-" Async linting
-Plug 'w0rp/ale'
-
 " editorconfig support
 Plug 'sgur/vim-editorconfig'
 
@@ -96,7 +94,6 @@ Plug 'https://github.com/rhysd/committia.vim', { 'for': ['gitcommit']}
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-git'
 Plug 'airblade/vim-gitgutter'
-
 
 " *************************
 " Themes
@@ -137,6 +134,9 @@ Plug 'andymass/vim-matchup'
 " Language-Related
 " *************************
 
+" ReasonML https://github.com/reasonml-editor/vim-reason-plus
+Plug 'reasonml-editor/vim-reason-plus'
+
 " Handlebars / Mustache
 Plug 'juvenn/mustache.vim'
 Plug 'nono/vim-handlebars'
@@ -175,15 +175,6 @@ Plug 'https://github.com/xolox/vim-misc.git', {'for': ['lua']}
 
 " Perl
 " Plug 'https://github.com/c9s/perlomni.vim', {'for': ['pl', 'perl', 'p6', 'pm']}
-
-" ReasonML https://github.com/reasonml-editor/vim-reason-plus
-Plug 'reasonml-editor/vim-reason-plus'
-
-"Language Client https://github.com/autozimu/LanguageClient-neovim#quick-start
-" Plug 'autozimu/LanguageClient-neovim', {
-"     \ 'branch': 'next',
-"     \ 'do': 'bash install.sh',
-"     \ }
 
 " devicons https://github.com/ryanoasis/vim-devicons
 " always load as last one!

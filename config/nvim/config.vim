@@ -28,7 +28,7 @@ let g:python_host_prog = '/usr/local/bin/python'
 " https://github.com/jaredly/reason-language-server#vim
 " [reason] reason language server
 let g:LanguageClient_serverCommands = {
-    \ 'reason': ['$HOME/dotfiles/bin/reason-language-server.exe']
+    \ 'reason': ['/Users/peter/bin/reason-language-server']
     \ }
 
 " https://github.com/tbodt/deoplete-tabnine

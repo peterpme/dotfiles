@@ -6,6 +6,15 @@ call plug#begin('~/.vim/bundle')
 " *************************
 " General Enhancements
 " *************************
+if has('mouse')
+    set mouse=a
+endif
+
+if (has('nvim'))
+  " show results of substition as they're happening
+  " but don't open a split
+  set inccommand=nosplit
+endif
 
 if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -278,7 +287,7 @@ set guifont=Iosevka\ Nerd\ Font:h16
 set ttyfast " faster redrawing
 set conceallevel=0 "show quotes on json files"
 set autoindent
-set autoread                                                 " reload files when changed on disk, i.e. via `git checkout`
+set autoread " reload files when changed on disk, i.e. via `git checkout`
 set backspace=2                                              " Fix broken backspace in some setups
 set backupcopy=yes                                           " see :help crontab
 set clipboard=unnamed                                        " yank and paste with the system clipboard
@@ -306,7 +315,6 @@ set updatetime=250
 set nowb
 set nobackup
 set noswapfile
-set mouse=a " Enable basic mouse behavior such as resizing buffers.
 set nowrap
 set linebreak
 set undofile " Enable persistent undo so that undo history persists across vim sessions

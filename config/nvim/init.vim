@@ -115,7 +115,6 @@ Plug 'airblade/vim-gitgutter'
 " *************************
 Plug 'chriskempson/base16-vim'
 Plug 'mike-hearn/base16-vim-lightline'
-" Plug 'joshdick/onedark.vim'
 
 " *************************
 " Text-Related

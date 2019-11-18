@@ -103,12 +103,23 @@ Plug 'git://github.com/tpope/vim-commentary.git'
 Plug 'sgur/vim-editorconfig'
 
 " Git
-" Plug 'junegunn/vim-github-dashboard', { 'on': ['GHDashboard', 'GHActivity'] }
-" https://github.com/junegunn/vim-github-dashboard
-Plug 'https://github.com/rhysd/committia.vim', { 'for': ['gitcommit']}
-Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-git'
+Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
+
+nmap <silent> <leader>gs :Gstatus<cr>
+nmap <leader>ge :Gedit<cr>
+nmap <silent><leader>gr :Gread<cr>
+nmap <silent><leader>gb :Gblame<cr>
+
+" Hub extension for fugitive
+Plug 'tpope/vim-rhubarb'
+
+" Commit browser https://github.com/junegunn/gv.vim
+Plug 'junegunn/gv.vim'
+
+" Branch management https://github.com/sodapopcan/vim-twiggy
+Plug 'sodapopcan/vim-twiggy'
 
 " *************************
 " Themes

@@ -196,6 +196,7 @@ Plug 'andymass/vim-matchup'
 Plug 'prettier/vim-prettier', {
   \ 'do': 'yarn install',
   \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
+
 autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
 
 " disable quickfix pop up
@@ -307,8 +308,8 @@ let g:python_host_prog = '/usr/local/bin/python'
 " https://github.com/jaredly/reason-language-server#vim
 " [reason] reason language server
 let g:LanguageClient_serverCommands = {
-    \ 'reason': ['/Users/peter/bin/reason-language-server']
-    \ }
+  \ 'reason': ['/Users/peter/bin/reason-language-server']
+  \ }
 
 let g:loaded_matchit = 1 " Don't need it
 let g:loaded_gzip = 1 " Gzip is pointless

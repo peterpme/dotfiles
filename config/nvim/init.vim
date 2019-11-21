@@ -192,6 +192,23 @@ Plug 'andymass/vim-matchup'
 " Language-Related
 " *************************
 
+" Prettier https://github.com/prettier/vim-prettier
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'yarn install',
+  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
+autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
+
+" disable quickfix pop up
+let g:prettier#quickfix_enabled = 0
+
+" disable auto formatting
+let g:prettier#autoformat = 0
+
+" force async (vim 8+)
+" let g:prettier#exec_cmd_async = 1
+"
+let g:prettier#nvim_unstable_async=1
+
 " ReasonML https://github.com/reasonml-editor/vim-reason-plus
 Plug 'reasonml-editor/vim-reason-plus'
 

@@ -176,11 +176,14 @@ Plug 'kana/vim-textobj-user'
 Plug 'lucapette/vim-textobj-underscore'
 Plug 'vim-scripts/argtextobj.vim'
 
-" Find & replace, etc
+Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+" Find & replace, etc
 Plug 'rking/ag.vim'
-Plug 'junegunn/vim-fnr' | Plug 'junegunn/vim-pseudocl' " find & replace
+Plug 'junegunn/vim-pseudocl' " find & replace
+Plug 'junegunn/vim-fnr'
 Plug 'vim-scripts/greplace.vim'
+"READ MORE https://github.com/simnalamburt/vim-mundo
 Plug 'https://github.com/simnalamburt/vim-mundo'
 Plug 'https://github.com/tpope/vim-abolish' " AWESOME case-sensitive replace
 Plug 'andymass/vim-matchup'
@@ -379,8 +382,7 @@ endif
 let g:ackprg = 'rg --vimgrep --no-heading'
 let g:grepprg='rg --vimgrep'
 
-" TBD about this one
-let g:rg_find_command = 'rg --files --follow  -g "!{.config,etc,node_modules,.git,target}/*"'
+let g:rg_find_command = 'rg --files --follow  -g "!{.config,etc,node_modules,.git,target,.reast,.d,.cm}/*"'
 command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
 command! -bang -nargs=* Rg call fzf#vim#files('.', {'source': g:rg_find_command}, 0)
 

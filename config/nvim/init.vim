@@ -51,7 +51,7 @@ Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' }
 " Plug 'git://github.com/wakatime/vim-wakatime.git'
 
 " Async linting ALE
-Plug 'w0rp/ale'
+Plug 'dense-analysis/ale'
 
 " be explicit about whats running
 let g:ale_linters_explicit = 1
@@ -59,8 +59,8 @@ let g:ale_linters_explicit = 1
 " keep side gutter open https://github.com/dense-analysis/ale#5ii-how-can-i-keep-the-sign-gutter-open
 let g:ale_sign_column_always = 1
 
-" disable fix on save (prettier,refmt)
-let g:ale_fix_on_save = 0
+" enable fix on save (prettier,refmt)
+let g:ale_fix_on_save = 1
 
 " run the linter only on these
 let g:ale_linters = {
@@ -68,6 +68,10 @@ let g:ale_linters = {
   \ 'javascript': ['eslint'],
   \ 'typescript': ['tsserver', 'tslint'],
   \}
+
+let b:ale_fixers = {'javascript': ['prettier', 'eslint']}
+
+highlight ALEWarning ctermbg=DarkMagenta
 
 " Bottom bar with all settings
 Plug 'itchyny/lightline.vim'
@@ -207,24 +211,6 @@ Plug 'andymass/vim-matchup'
 " *************************
 " Language-Related
 " *************************
-
-" Prettier https://github.com/prettier/vim-prettier
-Plug 'prettier/vim-prettier', {
-  \ 'do': 'yarn install',
-  \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
-
-autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
-
-" disable quickfix pop up
-let g:prettier#quickfix_enabled = 0
-
-" disable auto formatting
-let g:prettier#autoformat = 0
-
-" force async (vim 8+)
-" let g:prettier#exec_cmd_async = 1
-"
-let g:prettier#nvim_unstable_async=1
 
 " ReasonML https://github.com/reasonml-editor/vim-reason-plus
 Plug 'reasonml-editor/vim-reason-plus'
@@ -477,7 +463,23 @@ let g:startify_bookmarks = [
 "https://github.com/itchyny/lightline.vim
 let g:lightline = {
   \ 'colorscheme': 'base16_harmonic_dark',
-\ }
+  \ }
+
+let g:lightline.component_expand = {
+  \  'linter_checking': 'lightline#ale#checking',
+  \  'linter_warnings': 'lightline#ale#warnings',
+  \  'linter_errors': 'lightline#ale#errors',
+  \  'linter_ok': 'lightline#ale#ok',
+  \ }
+
+let g:lightline.component_type = {
+  \ 'linter_checking': 'left',
+  \ 'linter_warnings': 'warning',
+  \  'linter_errors': 'error',
+  \  'linter_ok': 'left',
+  \ }
+
+let g:lightline.active = { 'right': [[ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ]] }
 
 " https://github.com/nicknisi/dotfiles/blob/master/config/nvim/init.vim
 " Colorscheme and final setup {{{

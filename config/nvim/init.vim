@@ -50,14 +50,30 @@ Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' }
 " Wakatime
 " Plug 'git://github.com/wakatime/vim-wakatime.git'
 
+" Async linting ALE
+Plug 'w0rp/ale'
+
+" be explicit about whats running
+let g:ale_linters_explicit = 1
+
+" keep side gutter open https://github.com/dense-analysis/ale#5ii-how-can-i-keep-the-sign-gutter-open
+let g:ale_sign_column_always = 1
+
+" disable fix on save (prettier,refmt)
+let g:ale_fix_on_save = 0
+
+" run the linter only on these
+let g:ale_linters = {
+  \ 'html': ['eslint'],
+  \ 'javascript': ['eslint'],
+  \ 'typescript': ['tsserver', 'tslint'],
+  \}
+
 " Bottom bar with all settings
 Plug 'itchyny/lightline.vim'
 
 " ale + lightline support
 Plug 'maximbaz/lightline-ale'
-
-" Async linting ALE
-" Plug 'w0rp/ale'
 
 " Alignment
 Plug 'austintaylor/vim-indentobject'
@@ -511,31 +527,6 @@ let g:jsx_ext_required = 0
 " https://github.com/othree/javascript-libraries-syntax.vim
 " let g:used_javascript_libs = 'underscore,react,flux,chai'
 
-" REMOVE ALE
-"be explicit about the tools that are running
-" let g:ale_linters_explicit = 1
-
-" keep side gutter open https://github.com/dense-analysis/ale#5ii-how-can-i-keep-the-sign-gutter-open
-" let g:ale_sign_column_always = 1
-
-" automatic imports from external modules https://github.com/dense-analysis/ale#2iii-completion
-" let g:ale_completion_tsserver_autoimport = 1
-
-" format on save
-" let g:ale_fix_on_save = 1
-
-" let g:ale_fixers = {
-" \   'html': ['prettier'],
-" \   'javascript': ['prettier'],
-" \   'typescript': ['prettier'],
-" \   'css': ['prettier'],
-" \}
-
-" let g:ale_linters = {
-" \   'html': ['eslint'],
-" \   'javascript': ['eslint'],
-" \   'typescript': ['tsserver', 'tslint'],
-" \}
 
 " keyboard shortcuts
 

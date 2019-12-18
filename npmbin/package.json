@@ -1,15 +1,21 @@
 {
   "dependencies": {
-    "bs-platform": "5.2.0",
     "diff-so-fancy": "^1.2.7",
+    "esy": "^0.5.8",
     "expo-cli": "^3.1.2",
     "git-delete-squashed": "^1.0.3",
     "git-open": "^2.1.0",
     "git-recent": "^1.1.1",
+    "gql-tools": "^0.0.15",
+    "graphql-cli": "^3.0.14",
     "neovim": "^4.5.0",
     "parcel-bundler": "^1.12.3",
     "react-native-cli": "^2.0.1",
     "serve": "^11.2.0",
-    "trash-cli": "^3.0.0"
+    "trash-cli": "^3.0.0",
+    "typescript-language-server": "^0.4.0",
+    "vscode-css-languageserver-bin": "^1.4.0",
+    "vscode-html-languageserver-bin": "^1.4.0",
+    "vscode-json-languageserver-bin": "^1.0.1"
   }
 }

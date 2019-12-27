@@ -137,6 +137,11 @@ if executable('html-languageserver')
  let g:LanguageClient_serverCommands.html = ['html-languageserver', '--stdio']
 endif
 
+" https://github.com/redhat-developer/yaml-language-server
+if executable('yaml-languageserver')
+ let g:LanguageClient_serverCommands.yaml = ['yaml-languageserver', '--stdio']
+endif
+
 " Automatically start language servers.
 let g:LanguageClient_autoStart = 1
 

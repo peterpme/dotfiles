@@ -16,6 +16,7 @@
     "typescript-language-server": "^0.4.0",
     "vscode-css-languageserver-bin": "^1.4.0",
     "vscode-html-languageserver-bin": "^1.4.0",
-    "vscode-json-languageserver-bin": "^1.0.1"
+    "vscode-json-languageserver-bin": "^1.0.1",
+    "yaml-language-server": "^0.6.1"
   }
 }

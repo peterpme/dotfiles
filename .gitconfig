@@ -5,7 +5,7 @@
 	excludesfile = ~/.gitignore
 	attributesfile = ~/.gitattributes
 	editor = vim
-  precomposeUnicode = true 
+  precomposeUnicode = true
 
 [pager]
   # insanely beautiful diffs ==> npm install -g diff-so-fancy
@@ -44,9 +44,20 @@
 
 # git mergetool
 [merge]
-  tool = opendiff
-  renameLimit = 0
-	
+  tool = vimdiff
+  conflictstyle = diff3
+[mergetool]
+  prompt = true
+[mergetool "vimdiff"]
+  cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+[difftool]
+  prompt = false
+[diff]
+  tool = vimdiff
+  # Show blocks of moved text of at least 20 alphanumeric characters differently than adds/deletes
+  # https://blog.github.com/2018-04-05-git-217-released/
+  colorMoved = zebra
+
 # rewrites of repo paths
 [url "git@github.com:"]
   insteadOf = "https://github.com/"
@@ -61,7 +72,7 @@
   insteadOf = "gst:"
   pushInsteadOf = "gist:"
   pushInsteadOf = "git://gist.github.com/"
-  
+
 [url "git://gist.github.com/"]
   insteadOf = "gist:"
 
@@ -88,10 +99,6 @@
 
 [fetch]
   prune = true
-[diff]
-    # Show blocks of moved text of at least 20 alphanumeric characters differently than adds/deletes
-    # https://blog.github.com/2018-04-05-git-217-released/
-    colorMoved = zebra
 [remote "origin"]
   fetch = +refs/heads/*:refs/remotes/origin/*
 [stash]

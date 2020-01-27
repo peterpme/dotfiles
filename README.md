@@ -18,3 +18,7 @@ These are _my_ dotfiles for how _I_ like to do things.
 ![Neovim](./screenshots/neovim.png)
 ![iTerm2](./screenshots/terminal.png)
 ![autocomplete](./screenshots/autocomplete.png)
+
+## Investigating
+- https://github.com/mhartington/nvim-typescript
+- https://github.com/HerringtonDarkholme/yats.vim

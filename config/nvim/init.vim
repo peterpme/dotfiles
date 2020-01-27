@@ -25,6 +25,10 @@ else " for vim 8 with python
   Plug 'roxma/nvim-yarp'
   Plug 'roxma/vim-hug-neovim-rpc'
 endif
+
+" https://github.com/mhartington/nvim-typescript
+" Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
+
 let g:deoplete#enable_at_startup = 1
 
 " disable default snippets
@@ -138,8 +142,8 @@ if executable('html-languageserver')
 endif
 
 " https://github.com/redhat-developer/yaml-language-server
-if executable('yaml-languageserver')
- let g:LanguageClient_serverCommands.yaml = ['yaml-languageserver', '--stdio']
+if executable('yaml-language-server')
+ let g:LanguageClient_serverCommands.yaml = ['yaml-language-server', '--stdio']
 endif
 
 " Automatically start language servers.
@@ -158,6 +162,9 @@ nnoremap <silent> <cr> :call LanguageClient_textDocument_hover()<cr>
 Plug 'dense-analysis/ale'
 
 " be explicit about whats running
+let g:ale_set_balloons = 1
+
+" be explicit about whats running
 let g:ale_linters_explicit = 1
 
 " keep side gutter open https://github.com/dense-analysis/ale#5ii-how-can-i-keep-the-sign-gutter-open
@@ -166,12 +173,16 @@ let g:ale_sign_column_always = 1
 " run the linter only on these
 let g:ale_linters = {
   \ 'html': ['eslint'],
+  \ 'css': ['eslint'],
+  \ 'json': ['eslint'],
   \ 'javascript': ['eslint'],
-  \ 'typescript': ['tsserver', 'tslint'],
+  \ 'typescript': ['eslint'],
   \}
 
-let b:ale_fixers = {
+let g:ale_fixers = {
   \ 'javascript': ['prettier', 'eslint'],
+  \ 'typescript': ['prettier', 'eslint'],
+  \ 'json': ['prettier', 'eslint'],
   \ 'css': ['prettier'],
   \}
 
@@ -406,6 +417,7 @@ Plug 'nono/vim-handlebars'
 " Typescript
 " https://github.com/leafgarland/typescript-vim
 Plug 'leafgarland/typescript-vim', { 'for': ['typescript'] }
+Plug 'HerringtonDarkholme/yats.vim'
 " Plug 'ianks/vim-tsx'
 
 let g:typescript_indent_disable = 1
@@ -636,6 +648,7 @@ let g:startify_commands = [
 let g:startify_bookmarks = [
   \ { 'd': '~/dotfiles' },
   \ { 'c': '~/.config/nvim/init.vim' },
+  \ { 'h': '/Volumes/config' },
   \ { 'g': '~/.gitconfig' },
   \ { 'z': '~/.zshrc' }
 \ ]

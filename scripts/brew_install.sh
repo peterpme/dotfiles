@@ -26,23 +26,24 @@ brew install moreutils
 
 # Install GNU `find`, `locate`, `updatedb`, and `xargs`, `g`-prefixed.
 brew install findutils
+
 # Install GNU `sed`, overwriting the built-in `sed`.
 brew install gnu-sed --with-default-names
 
 # Docker related
-brew install docker docker-machine docker-compose
+# brew install docker docker-machine docker-compose
 
-# Dock Utility
+# Dock Utility cli tool to control dock
 brew install dockutil
 
-#Neovim
+#Neovim vim replacement
 brew install neovim
 
 # Install `wget` with IRI support.
 brew install wget --with-iri
 
 # Install more recent versions of some macOS tools.
-brew install homebrew/dupes/grep
+# brew install homebrew/dupes/grep
 # brew install homebrew/dupes/openssh
 
 # Heroku toolbelt
@@ -60,9 +61,10 @@ brew install heroku-toolbelt
 brew install hub
 
 # Silver Searcher
-brew install the_silver_searcher
+# brew install the_silver_searcher
 
-# rip grep https://github.com/BurntSushi/ripgrep
+# Way faster than silver searcher with same api
+# ripgrep https://github.com/BurntSushi/ripgrep
 brew install ripgrep
 
 brew install git
@@ -75,7 +77,6 @@ brew install pigz
 # monitor progress through pipeline
 brew install pv
 # brew install rename
-
 
 # install ssh keys remotely
 brew install ssh-copy-id
@@ -106,6 +107,9 @@ brew install bat
 
 # Find replacement https://github.com/sharkdp/fd
 brew install fd
+
+# sed replacemnet https://github.com/chmln/sd
+brew install sd
 
 # Yarn package manager to replace npm
 brew install yarn --ignore-dependencies

@@ -223,16 +223,16 @@ Plug 'junegunn/vim-easy-align'
 
 " NERDTREE sidebar
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+" Plug 'Xuyuanp/nerdtree-git-plugin'
+" Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
 nnoremap <leader>d :NERDTreeToggle<CR>
 nnoremap <leader>f :NERDTreeFind<CR>
 nnoremap <leader>g :GitGutterToggle<CR>
 
-let NERDTreeDirArrowExpandable = "\u00a0" " make arrows invisible
-let NERDTreeDirArrowCollapsible = "\u00a0" " make arrows invisible
-let NERDTreeNodeDelimiter = "\u263a" " smiley face
+" let NERDTreeDirArrowExpandable = "\u00a0" " make arrows invisible
+" let NERDTreeDirArrowCollapsible = "\u00a0" " make arrows invisible
+" let NERDTreeNodeDelimiter = "\u263a" " smiley face
 
 augroup nerdtree
   autocmd!
@@ -242,18 +242,18 @@ augroup END
 
 let NERDTreeShowHidden=1
 
-let g:NERDTreeIndicatorMapCustom = {
-  \ "Modified"  : "✹",
-  \ "Staged"    : "✚",
-  \ "Untracked" : "✭",
-  \ "Renamed"   : "➜",
-  \ "Unmerged"  : "═",
-  \ "Deleted"   : "✖",
-  \ "Dirty"     : "✗",
-  \ "Clean"     : "✔︎",
-  \ 'Ignored'   : '☒',
-  \ "Unknown"   : "?"
-  \ }
+" let g:NERDTreeIndicatorMapCustom = {
+"   \ "Modified"  : "✹",
+"   \ "Staged"    : "✚",
+"   \ "Untracked" : "✭",
+"   \ "Renamed"   : "➜",
+"   \ "Unmerged"  : "═",
+"   \ "Deleted"   : "✖",
+"   \ "Dirty"     : "✗",
+"   \ "Clean"     : "✔︎",
+"   \ 'Ignored'   : '☒',
+"   \ "Unknown"   : "?"
+"   \ }
 
 " Fancy start screen. Lets you open empty buffers, multiple files, etc
 Plug 'mhinz/vim-startify'
@@ -456,7 +456,7 @@ Plug 'https://github.com/xolox/vim-misc.git', {'for': ['lua']}
 
 " devicons https://github.com/ryanoasis/vim-devicons
 " always load as last one!
-Plug 'ryanoasis/vim-devicons'
+" Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
 

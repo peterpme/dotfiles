@@ -23,9 +23,12 @@ main() {
           --remove 'Numbers' \
           --remove 'Pages' \
           --remove 'Keynote' \
-          --remove 'iTunes' \
           --remove 'iBooks' \
           --remove 'Mail' \
+          --remove 'Music' \
+          --remove 'Podcasts' \
+          --remove 'TV' \
+          --remove 'News' \
           &>/dev/null
 
       killall cfprefsd &>/dev/null

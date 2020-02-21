@@ -43,7 +43,7 @@ echo 'Agree to Xcode & Download'
 source scripts/xcode.sh
 
 echo 'Pull in All Submodules'
-git submodule update --recursive --remote
+git submodule update --recursive --remote --init
 
 # After the install, setup fzf
 echo -e "\\n\\nRunning fzf install script..."

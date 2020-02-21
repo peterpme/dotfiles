@@ -19,19 +19,13 @@ sudo spctl --master-disable
 # ====================================
 # ====================================
 
-# Agree to Xcode & Download Tools
-echo 'Agree to Xcode & Download'
-source scripts/xcode.sh
-
 # Git Config
 echo 'Git Config'
-source scripts/git.sh
+# source scripts/git.sh
 
 # gitconfig
 # ln -s ~/dotfiles/.gitconfig.local ~/.gitconfig.local
 
-echo 'Pull in All Submodules'
-git submodule update --recursive --remote
 
 echo -e "\\n\\nRunning on macOS"
 
@@ -43,6 +37,13 @@ fi
 
 # Install brew dependencies from Brewfile
 brew bundle
+
+# Agree to Xcode & Download Tools
+echo 'Agree to Xcode & Download'
+source scripts/xcode.sh
+
+echo 'Pull in All Submodules'
+git submodule update --recursive --remote
 
 # After the install, setup fzf
 echo -e "\\n\\nRunning fzf install script..."

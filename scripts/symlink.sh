@@ -2,6 +2,19 @@
 
 DOTFILES=$HOME/.dotfiles
 
+echo -e "\\nCreating symlinks"
+echo "=============================="
+linkables=$( find -H "$DOTFILES" -maxdepth 3 -name '*.symlink' )
+for file in $linkables ; do
+    target="$HOME/.$( basename "$file" '.symlink' )"
+    if [ -e "$target" ]; then
+        echo "~${target#$HOME} already exists... Skipping."
+    else
+        echo "Creating symlink for $file"
+        ln -s "$file" "$target"
+    fi
+done
+
 echo -e "\\n\\ninstalling to ~/.config"
 echo "=============================="
 if [ ! -d "$HOME/.config" ]; then
@@ -9,7 +22,7 @@ if [ ! -d "$HOME/.config" ]; then
     mkdir -p "$HOME/.config"
 fi
 
-config_files=$( find "$DOTFILES/config" -d 1 2>/dev/null )
+config_files=$( find "$DOTFILES/config" -maxdepth 1 2>/dev/null )
 for config in $config_files; do
     target="$HOME/.config/$( basename "$config" )"
     if [ -e "$target" ]; then

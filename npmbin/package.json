@@ -7,7 +7,6 @@
     "git-delete-squashed": "^1.0.3",
     "git-open": "^2.1.0",
     "git-recent": "^1.1.1",
-    "gql-tools": "^0.0.15",
     "graphql-cli": "^3.0.14",
     "neovim": "^4.5.0",
     "netlify-cli": "^2.31.0",

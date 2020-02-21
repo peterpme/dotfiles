@@ -1,10 +1,10 @@
 local alert = require "hs.alert"
+local application = require "hs.application"
 
-local workWifi = "MakeOffices 5Ghz"
+local workWifi = "draftbit"
 local officeWifi = "STEVE'S PLACE"
 local homeWifi = "NETFLIX & CHILL"
 
-local taskManagerUrl = "https://basecamp.com"
 local defaultBrowser = "Safari"
 
 hs.wifi.watcher.new(function ()
@@ -23,10 +23,9 @@ hs.wifi.watcher.new(function ()
 
   if currentWifi == workWifi then
     hs.timer.doAfter(3, function ()
-      hs.execute("open " .. taskManagerUrl)
       hs.notify.new(function ()
-        hs.application.launchOrFocus(defaultBrowser)
-      end, {title="Check tasks for the day"}):send()
+        application.launchOrFocus("Slack")
+      end, {title="Welcome back"}):send()
     end)
   end
 end):start()

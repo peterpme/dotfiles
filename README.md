@@ -22,3 +22,8 @@ These are _my_ dotfiles for how _I_ like to do things.
 ## Investigating
 - https://github.com/mhartington/nvim-typescript
 - https://github.com/HerringtonDarkholme/yats.vim
+
+
+- https://github.com/nicknisi/dotfiles
+- https://github.com/paulirish/dotfiles
+- https://github.com/mathiasbynens/dotfiles/blob/master/.macos

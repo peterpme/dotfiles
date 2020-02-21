@@ -73,7 +73,7 @@ echo 'MacOS Setup'
 source scripts/osx.sh
 
 echo 'Dock Setup'
-./scripts/dock_setup.sh
+./scripts/dock.sh
 
-echo "Done. Reload your terminal."
+echo "Done. Reload your terminal!"
 

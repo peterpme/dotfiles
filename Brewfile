@@ -29,7 +29,6 @@ brew "fd"
 
 # https://github.com/cli/cli
 brew "gh"
-brew "github/gh/gh"
 
 # https://github.com/tj/git-extras/blob/master/Commands.md#git-show-tree
 brew "git-extas"
@@ -94,7 +93,7 @@ brew "zsh-completions"
 cask "alfred"
 cask "discord"
 cask "kitty"
-cask "font-iosevka"
+cask "font-iosevka" # TODO problems here
 # cask "1password-cli"
 cask "flux"
 

@@ -2,6 +2,10 @@
 
 DOTFILES=$HOME/dotfiles
 
+# ======================================
+# zprezto setup
+# https://github.com/sorin-ionescu/prezto
+# ======================================
 setopt EXTENDED_GLOB
 echo 'Symlinking zprezto files'
 for rcfile in "${ZDOTDIR:-$HOME}"/dotfiles/prezto/runcoms/^README.md(.N); do
@@ -9,6 +13,9 @@ for rcfile in "${ZDOTDIR:-$HOME}"/dotfiles/prezto/runcoms/^README.md(.N); do
 	ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
 done
 
+# ======================================
+# symlinking all files that have .symlink
+# ======================================
 echo "symlinking .symlink files"
 for file in $(fd . $DOTFILES -a -d 3 -e symlink); do
 	echo "file" $file
@@ -22,6 +29,9 @@ for file in $(fd . $DOTFILES -a -d 3 -e symlink); do
 	fi
 done;
 
+# ======================================
+# creating ~/.config folder
+# ======================================
 echo -e "\\n\\ninstalling to ~/.config"
 echo "=============================="
 if [ ! -d "$HOME/.config" ]; then

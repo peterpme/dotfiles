@@ -7,6 +7,11 @@ These are _my_ dotfiles for how _I_ like to do things.
 - [neoformat](https://github.com/sbdchd/neoformat)
 - [z.lua](https://github.com/skywind3000/z.lua)
 
+## Paths and extra alias
+
+if you want to add paths and extra aliases, you can add them into `alias` and
+`path`. this is loaded by `~/.zshenv`
+
 ## Getting Started
 
 ```zsh

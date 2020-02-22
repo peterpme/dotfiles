@@ -10,15 +10,6 @@ read -n 1
 # Disable Gatekeeper (unidentified developer)
 sudo spctl --master-disable
 
-# Set up symlinks
-# source scripts/symlink.sh
-
-# echo 'Symlink Setup'
-# ./scripts/symlink_general_files.sh
-
-# ====================================
-# ====================================
-
 # Git Config
 echo 'Git Config'
 # source scripts/git.sh
@@ -67,8 +58,8 @@ if [[ "$SHELL" != "$zsh_path" ]]; then
     echo "default shell changed to $zsh_path"
 fi
 
-echo 'Symlink prezto dotfiles'
-source scripts/prezto.sh
+echo 'Symlink setup'
+source scripts/symlink.sh
 
 echo 'MacOS Setup'
 source scripts/osx.sh

@@ -515,8 +515,9 @@ let g:python3_host_prog = "/usr/local/bin/python3"
 
 " https://neovim.io/doc/user/provider.html
 " [nvim] the path to python is obtained through executing `:echo exepath('python')` in vim
-let g:python_host_prog = '/usr/local/bin/python'
-
+"
+" disable python2 since its been EOL
+let g:loaded_python_provider = 0
 
 let g:loaded_matchit = 1 " Don't need it
 let g:loaded_gzip = 1 " Gzip is pointless

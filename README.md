@@ -20,8 +20,9 @@ if you want to add paths and extra aliases, you can add them into `alias` and
 
 ```
 
+- zprezto repo - https://github.com/peterpme/prezto
+
 ![Neovim](./screenshots/neovim.png)
-![iTerm2](./screenshots/terminal.png)
 ![autocomplete](./screenshots/autocomplete.png)
 
 ## Investigating

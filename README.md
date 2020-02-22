@@ -42,6 +42,7 @@ if you want to add paths and extra aliases, you can add them into `alias` and
 
 
 ## TODO
+- look into cron jobs and cleanup scripts
 - copy over gitconfig correctly
 - update gitconfig !!!  look at nicknisi and paul irish< matiasj>
 - copy over sshconfig correctly

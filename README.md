@@ -28,8 +28,17 @@ These are _my_ dotfiles for how _I_ like to do things.
 - https://github.com/paulirish/dotfiles
 - https://github.com/mathiasbynens/dotfiles/blob/master/.macos
 - https://github.com/anishathalye/dotbot
+- https://github.com/caarlos0/dotfiles/blob/master/zsh/zshrc.symlink
 
 ## TODO
 - copy over gitconfig correctly
 - copy over sshconfig correctly
 - copy over npmrc correcetly
+- set caps to control in osx.sh settings
+- find and setup popular sublime confi
+- find and setup popular vscode config
+- set up vimbox
+- add macvim to brew cask
+- correctly setup iCloud for important files / folders / certs
+- look at AUTH SOCK stuff https://github.com/akashin/dotfiles/blob/master/zsh/zshrc.symlink#L52
+- look into why .npmrc needs to be EXPORTED

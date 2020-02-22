@@ -9,7 +9,6 @@ DOTFILES=$HOME/dotfiles
 setopt EXTENDED_GLOB
 echo 'Symlinking zprezto files'
 for rcfile in "${ZDOTDIR:-$HOME}"/dotfiles/prezto/runcoms/^README.md(.N); do
-	echo $rcfile
 	ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
 done
 
@@ -18,9 +17,7 @@ done
 # ======================================
 echo "symlinking .symlink files"
 for file in $(fd . $DOTFILES -a -d 3 -e symlink); do
-	echo "file" $file
 	target="$HOME/.$( basename "$file" '.symlink' )"
-	echo "target" $target
 	if [ -e "$target" ]; then
 		echo "~${target#$HOME} already exists... Skipping."
 	else
@@ -42,8 +39,6 @@ fi
 # Creating symlinks for ~/.config
 for config in $(fd . $DOTFILES/config -d 1 2>/dev/null); do
     target="$HOME/.config/$( basename "$config" )"
-    echo $config
-    echo $target
     if [ -e "$target" ]; then
         echo "~${target#$HOME} already exists... Skipping."
     else
@@ -52,6 +47,9 @@ for config in $(fd . $DOTFILES/config -d 1 2>/dev/null); do
     fi
 done
 
+# ======================================
+# creating ~/.vimrc, ~/.vim symlinks to use nvim
+# ======================================
 echo -e "\\n\\nCreating vim symlinks"
 echo "=============================="
 VIMFILES=( "$HOME/.vim:$DOTFILES/config/nvim"
@@ -67,3 +65,7 @@ for file in "${VIMFILES[@]}"; do
         ln -s "${VALUE}" "${KEY}"
     fi
 done
+
+echo -e "\\n\\nsymlinking hammerspoon config"
+echo "=============================="
+ln -s $DOTFILES/hammerspoon $HOME/.hammerspoon

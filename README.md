@@ -34,9 +34,15 @@ if you want to add paths and extra aliases, you can add them into `alias` and
 - https://github.com/mathiasbynens/dotfiles/blob/master/.macos
 - https://github.com/anishathalye/dotbot
 - https://github.com/caarlos0/dotfiles/blob/master/zsh/zshrc.symlink
+- https://github.com/webpro/dotfiles/tree/master/config/hammerspoon
+- https://github.com/bitprophet/dotfiles/tree/master/.hammerspoon
+- *** awesome hammerspoon &* https://github.com/ashfinal/awesome-hammerspoon
+- base16 black metal themes https://github.com/metalelf0/base16-black-metal-scheme
+
 
 ## TODO
 - copy over gitconfig correctly
+- update gitconfig !!!  look at nicknisi and paul irish< matiasj>
 - copy over sshconfig correctly
 - copy over npmrc correcetly
 - set caps to control in osx.sh settings

@@ -55,3 +55,4 @@ if you want to add paths and extra aliases, you can add them into `alias` and
 - correctly setup iCloud for important files / folders / certs
 - look at AUTH SOCK stuff https://github.com/akashin/dotfiles/blob/master/zsh/zshrc.symlink#L52
 - look into why .npmrc needs to be EXPORTED
+- heroku autocomplete

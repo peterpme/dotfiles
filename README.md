@@ -58,3 +58,13 @@ if you want to add paths and extra aliases, you can add them into `alias` and
 - heroku autocomplete
 - set up a cron job that checks for latest version of reason-language-server
   (and other bins to update them)
+
+
+## Vim and Neovim Setup
+
+[Neovim](https://neovim.io/) is a fork and drop-in replacement for vim. in most cases, you would not notice a difference between the two, other than Neovim allows plugins to run asynchronously so that they do not freeze the editor, which is the main reason I have switched over to it. Vim and Neovim both use Vimscript and most plugins will work in both (all of the plugins I use do work in both Vim and Neovim). For this reason, they share the same configuration files in this setup. Neovim uses the [XDG base directory specification](http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html) which means it won't look for a `.vimrc` in your home directory. Instead, its configuration looks like the following:
+
+|                         | Vim        | Neovim                    |
+|-------------------------|------------|---------------------------|
+| Main Configuration File  | `~/.vimrc` | `~/.config/nvim/init.vim` |
+| Configuration directory | `~/.vim`   | `~/.config/nvim`          |

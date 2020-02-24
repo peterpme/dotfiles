@@ -22,7 +22,7 @@
   # diffFilter = "diff-so-fancy"
   #
   # https://github.com/so-fancy/diff-so-fancy/issues/35#issuecomment-578188120
-  diffFilter = (echo && diff-so-fancy)
+  ; diffFilter = (echo && diff-so-fancy)
 
 # so much color
 [color]

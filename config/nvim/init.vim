@@ -53,7 +53,6 @@ Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' }
 "close deoplete scratch window automatically
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
-
 " *************************
 " Explicit filetypes
 " *************************

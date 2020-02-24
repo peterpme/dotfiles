@@ -130,5 +130,3 @@
 [log]
     date = relative
 
-[include]
-    path = $HOME/dotfiles/gitconfig.local

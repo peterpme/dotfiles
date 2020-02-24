@@ -1,107 +1,135 @@
+[user]
+    name = Peter Piekarczyk
+    email = peterpiekarczyk@gmail.com
+[github]
+    user = peterpme
 [alias]
-    cleanup = "!git branch --merged | grep  -v '\\*\\|master\\|develop' | xargs -n 1 git branch -d"
+    cleanup = "!git remote prune origin && git gc && git clean -df && git stash clear"
+
+    # Remove branches that have already been merged with master
+    # a.k.a. ‘delete merged’
+    dm = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
+
+    day = "!sh -c 'git log --reverse --no-merges --branches=* --date=local --after=\"yesterday 11:59PM\" --author=\"`git config --get user.name`\"'"
+
+    # find commits by source code
+    fc = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short -S$1; }; f"
+
+[apply]
+    # Detect whitespace errors when applying a patch
+    whitespace = fix
 
 [core]
-	excludesfile = ~/.gitignore
-	attributesfile = ~/.gitattributes
-	editor = vim
-  precomposeUnicode = true
+    excludesfile = ~/.gitignore
+    attributesfile = ~/.gitattributes
+    editor = vim
+
+    # Treat spaces before tabs and all kinds of trailing whitespace as an error
+    # [default] trailing-space: looks for spaces at the end of a line
+    # [default] space-before-tab: looks for spaces before tabs at the beginning of a line
+    whitespace = space-before-tab,-indent-with-non-tab,trailing-space
+
+    # Make `git rebase` safer on macOS
+    # More info: <http://www.git-tower.com/blog/make-git-rebase-safe-on-osx/>
+    trustctime = false
+
+    # Prevent showing files whose names contain non-ASCII symbols as unversioned.
+    # http://michael-kuehnel.de/git/2014/11/21/git-mac-osx-and-german-umlaute.html
+    precomposeUnicode = true
+
+    # Speed up commands involving untracked files such as `git status`.
+    # https://git-scm.com/docs/git-update-index#_untracked_cache
+    untrackedCache = true
 
 [pager]
-  # insanely beautiful diffs ==> npm install -g diff-so-fancy
-  diff = diff-so-fancy | less --tabs=4 -RFX
-  show = diff-so-fancy | less --tabs=4 -RFX
+    # insanely beautiful diffs ==> npm install -g diff-so-fancy
+    diff = diff-so-fancy | less --tabs=4 -RFX
+    show = diff-so-fancy | less --tabs=4 -RFX
 
-[interactive]
-  # disabled until github.com/so-fancy/diff-so-fancy/pull/172 is resolved :(
-  # diffFilter = "diff-so-fancy"
-
-# so much color
 [color]
-  ui = auto
+    ui = auto
+
 [color "diff"]
-  meta = yellow bold
-  commit = green bold
-  frag = magenta bold
-  old = red bold
-  new = green bold
-  whitespace = red reverse
+    meta = yellow bold
+    commit = green bold
+    frag = magenta bold
+    old = red bold
+    new = green bold
+    whitespace = red reverse
     newMoved = cyan
     oldMoved = blue
+
 [color "diff-highlight"]
-  oldNormal = red bold
-  oldHighlight = "red bold 52"
-  newNormal = "green bold"
-  newHighlight = "green bold 22"
+    oldNormal = red bold
+    oldHighlight = "red bold 52"
+    newNormal = "green bold"
+    newHighlight = "green bold 22"
+
 [color "branch"]
-  current = yellow reverse
-  local = yellow
-  remote = green
+    current = yellow reverse
+    local = yellow
+    remote = green
+
 [color "status"]
-  added = yellow
-  changed = green
-  untracked = cyan
+    added = yellow
+    changed = green
+    untracked = cyan
 
 # git mergetool
 [merge]
   tool = vimdiff
   conflictstyle = diff3
+
 [mergetool]
   prompt = true
+
 [mergetool "vimdiff"]
   cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+
 [difftool]
   prompt = false
+
 [diff]
   tool = vimdiff
   # Show blocks of moved text of at least 20 alphanumeric characters differently than adds/deletes
   # https://blog.github.com/2018-04-05-git-217-released/
   colorMoved = zebra
 
-# rewrites of repo paths
 [url "git@github.com:"]
-  insteadOf = "https://github.com/"
-  pushInsteadOf = "github:"
-  pushInsteadOf = "git://github.com/"
-  pushInsteadOf = "https://github.com/"
+    insteadOf = "gh:"
+    pushInsteadOf = "github:"
+    pushInsteadOf = "git://github.com/"
 
 [url "git://github.com/"]
-  insteadOf = "github:"
+    insteadOf = "github:"
 
 [url "git@gist.github.com:"]
-  insteadOf = "gst:"
-  pushInsteadOf = "gist:"
-  pushInsteadOf = "git://gist.github.com/"
+    insteadOf = "gst:"
+    pushInsteadOf = "gist:"
+    pushInsteadOf = "git://gist.github.com/"
 
 [url "git://gist.github.com/"]
-  insteadOf = "gist:"
+    insteadOf = "gist:"
 
 # correct typos
 [help]
-	autocorrect = 1
+    autocorrect = 1
 
 # push easily. http://stackoverflow.com/a/23918418/89484
 [push]
   default = current
   followTags = true
 
-# use separate file for username / github token / etc
-[include]
-  path = ~/.gitconfig.local
-
-#[init]
-#	templatedir = ~/.git_template
-
 [filter "lfs"]
-  clean = git-lfs clean %f
-  smudge = git-lfs smudge %f
-  required = true
+    clean = git-lfs clean %f
+    smudge = git-lfs smudge %f
+    required = true
 
 [fetch]
-  prune = true
-[remote "origin"]
-  fetch = +refs/heads/*:refs/remotes/origin/*
+    prune = true
+
 [stash]
-  showPatch = true
+    showPatch = true
+
 [log]
-  date = relative
+    date = relative

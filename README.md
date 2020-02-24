@@ -1,11 +1,8 @@
-# Peterpme Dotfiles
+# under construction ...
 
-These are _my_ dotfiles for how _I_ like to do things.
+# dotfiles
 
-## New things I'm considering
-- [coc.vim](https://github.com/neoclide/coc.nvim)
-- [neoformat](https://github.com/sbdchd/neoformat)
-- [z.lua](https://github.com/skywind3000/z.lua)
+The sickest dotfiles in the Midwest :fire:
 
 ## Paths and extra alias
 
@@ -16,7 +13,7 @@ if you want to add paths and extra aliases, you can add them into `alias` and
 
 ```zsh
 
-./first_time_setup.sh
+source first_time_setup.sh
 
 ```
 
@@ -28,7 +25,6 @@ if you want to add paths and extra aliases, you can add them into `alias` and
 ## Investigating
 - https://github.com/mhartington/nvim-typescript
 - https://github.com/HerringtonDarkholme/yats.vim
-
 
 - https://github.com/nicknisi/dotfiles
 - https://github.com/paulirish/dotfiles

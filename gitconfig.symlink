@@ -15,6 +15,9 @@
 [interactive]
   # disabled until github.com/so-fancy/diff-so-fancy/pull/172 is resolved :(
   # diffFilter = "diff-so-fancy"
+  #
+  # https://github.com/so-fancy/diff-so-fancy/issues/35#issuecomment-578188120
+  diffFilter = (echo && diff-so-fancy)
 
 # so much color
 [color]
@@ -58,21 +61,6 @@
   # https://blog.github.com/2018-04-05-git-217-released/
   colorMoved = zebra
 
-# rewrites of repo paths
-[url "git@github.com:"]
-  insteadOf = "https://github.com/"
-  pushInsteadOf = "github:"
-  pushInsteadOf = "git://github.com/"
-  pushInsteadOf = "https://github.com/"
-
-[url "git://github.com/"]
-  insteadOf = "github:"
-
-[url "git@gist.github.com:"]
-  insteadOf = "gst:"
-  pushInsteadOf = "gist:"
-  pushInsteadOf = "git://gist.github.com/"
-
 [url "git://gist.github.com/"]
   insteadOf = "gist:"
 
@@ -87,10 +75,7 @@
 
 # use separate file for username / github token / etc
 [include]
-  path = ~/.gitconfig.local
-
-#[init]
-#	templatedir = ~/.git_template
+  path = $HOME/dotfiles/gitconfig.local
 
 [filter "lfs"]
   clean = git-lfs clean %f
@@ -99,7 +84,10 @@
 
 [fetch]
   prune = true
+
 [stash]
   showPatch = true
+
 [log]
   date = relative
+

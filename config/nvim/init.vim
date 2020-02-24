@@ -684,7 +684,7 @@ let g:lightline.active = { 'right': [[ 'linter_checking', 'linter_errors', 'lint
     else
         let g:onedark_termcolors=256
         let g:onedark_terminal_italics=1
-        colorscheme base16-horizon-dark
+        colorscheme base16-black-metal-bathory
     endif
     syntax on
     filetype plugin indent on

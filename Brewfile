@@ -70,6 +70,9 @@ brew "shellcheck"
 brew "superfly/tap/flyctl"
 # sed replacemnet https://github.com/chmln/sd
 brew "sd"
+# copy ssh keys to servers
+# https://www.ssh.com/ssh/copy-id
+brew "ssh-copy-id"
 brew "tldr"
 brew "tmux"
 brew "trash"

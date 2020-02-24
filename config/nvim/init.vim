@@ -34,6 +34,7 @@ autocmd BufRead *.tsx set filetype=typescript
 autocmd BufRead *.ts set filetype=typescript
 autocmd BufRead *.re set filetype=reason
 autocmd BufRead *.rei set filetype=reason
+autocmd BufRead *.symlink set filetype=zsh
 autocmd BufRead,BufNewFile *.fdoc set filetype=yaml
 autocmd BufRead,BufNewFile *.md set filetype=markdown
 autocmd BufRead,BufNewFile *.md set spell

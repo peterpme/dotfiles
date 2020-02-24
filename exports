@@ -8,8 +8,8 @@ export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 # command -v gdircolors >/dev/null 2>&1 || alias gdircolors="dircolors"
 # eval "$(gdircolors -b ~/.dircolors)"
 
-typeset -gU cdpath fpath mailpath manpath path
-typeset -gUT INFOPATH infopath
+# typeset -gU cdpath fpath mailpath manpath path
+# typeset -gUT INFOPATH infopath
 
 # Add npmbin mode modules to `$PATH`
 export PATH="$HOME/npmbin/node_modules/.bin:$PATH"
@@ -18,9 +18,9 @@ export PATH="$HOME/npmbin/node_modules/.bin:$PATH"
 export PATH="$HOME/bin:$PATH"
 
 # Android Studio
-export ANDROID_HOME=~/Library/Android/sdk
-export PATH=${PATH}:${ANDROID_HOME}/tools
-export PATH=${PATH}:${ANDROID_HOME}/platform-tools
+# export ANDROID_HOME=~/Library/Android/sdk
+# export PATH=${PATH}:${ANDROID_HOME}/tools
+# export PATH=${PATH}:${ANDROID_HOME}/platform-tools
 
 # Postgresql App
 export PATH=${PATH}:/Applications/Postgres.app/Contents/Versions/latest/bin
@@ -33,7 +33,6 @@ export NPM_TOKEN="$(cat ~/.npmrc | awk -F'=' '{print $2}')"
 export RIPGREP_CONFIG_PATH="$HOME/.rgrc"
 
 # Setting ag as the default source for fzf
-# export FZF_DEFAULT_COMMAND='ag -g ""'
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --hidden'
 
 # To apply the command to CTRL-T as well

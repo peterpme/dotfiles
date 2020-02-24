@@ -1,91 +1,61 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 
-# copy paste this file in bit by bit.  don't run it.
-  echo "do not run this script in one go. hit ctrl-c NOW"
-  read -n 1
-
-# Agree to Xcode & Download Tools
-echo 'Agree to Xcode & Download'
-./scripts/xcode_devtools.sh
-
-# Git Friendly https://github.com/jamiew/git-
-curl -sS https://raw.githubusercontent.com/jamiew/git-friendly/master/install.sh | bash
-
-# vim plug https://github.com/junegunn/vim-plug#neovim
-touch ~/dotfiles/config/nvim/autoload/plug.vim
-curl -fLo ~/dotfiles/config/nvim/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-
-# Homebrew https://brew.sh
-
-echo 'Install Homebrew'
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+echo "Read through this file first. Hit ctrl+c now."
+read -n 1
 
 # Disable Gatekeeper (unidentified developer)
 sudo spctl --master-disable
 
-# install brew packages
-echo 'Install Homebrew packages'
-./scripts/brew_install.sh
+echo -e "\\n\\nRunning on macOS"
 
-echo 'Install Homebrew Cask packages'
-./scripts/brew_cask_install.sh
+# Install Homebrew
+if test ! "$( command -v brew )"; then
+    echo "Installing homebrew"
+    ruby -e "$( curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install )"
+fi
 
-echo 'macOS Setup'
-./scripts/macos_setup.sh
+# Install brew dependencies from Brewfile
+brew bundle
 
-echo 'Dock Setup'
-./scripts/dock_setup.sh
+# Removed outdates versions from cellar
+brew cleanup
 
-echo 'Setup SSH'
-./scripts/ssh_setup.sh
+# Agree to Xcode & Download Tools
+echo 'Agree to Xcode & Download'
+source scripts/xcode.sh
 
 echo 'Pull in All Submodules'
-git submodule update --recursive --remote
+git submodule update --recursive --remote --init
 
-# Z
-# github.com/rupa/z
-echo 'Install Z'
-git clone https://github.com/rupa/z.git ~/dotfiles/z
+# Install & setup fzf
+echo -e "\\n\\nRunning fzf install script..."
+echo "=============================="
+/usr/local/opt/fzf/install --all --no-bash --no-fish
 
-echo 'SSh-ADD -A'
-curl -o ~/Library/LaunchAgents/ssh.add.a.plist https://raw.githubusercontent.com/jirsbek/SSH-keys-in-macOS-Sierra-keychain/master/ssh.add.a.plist
+# Install neovim python libraries
+echo -e "\\n\\nRunning Neovim Python install"
+echo "=============================="
+pip3 install --user pynvim
 
-# Git Config
-echo 'Git Config'
-./scripts/git_config.sh
+# Change the default shell to zsh
+zsh_path="$( command -v zsh )"
+if ! grep "$zsh_path" /etc/shells; then
+    echo "adding $zsh_path to /etc/shells"
+    echo "$zsh_path" | sudo tee -a /etc/shells
+fi
 
-# Install Global Npm Modules
-./scripts/global_node_modules.sh
+if [[ "$SHELL" != "$zsh_path" ]]; then
+    chsh -s "$zsh_path"
+    echo "default shell changed to $zsh_path"
+fi
 
+echo 'Symlink setup'
+source scripts/symlink.sh
 
-# Neovim has an issue with ctrl + h escape key (READ THIS)
-# https://github.com/neovim/neovim/issues/2048#issuecomment-98307896
+echo 'MacOS Setup'
+source scripts/osx.sh
 
-###  Instructions:
+echo 'Dock Setup'
+./scripts/dock.sh
 
-# Edit -> Preferences -> Keys
-# Press +
-# Press Ctrl+h as Keyboard Shortcut
-# Choose Send Escape Sequence as Action
-# Type [104;5u for Esc+
-
-# Change Shell to ZSH
-echo 'Switch shell to ZSH'
-ZSHPATH=$(brew --prefix)/bin/zsh
-sudo bash -c 'echo $(brew --prefix)/bin/zsh >> /etc/shells'
-chsh -s $ZSHPATH
-echo zsh --version
-
-echo 'Symlink Setup'
-./scripts/symlink_general_files.sh
-
-# echo 'Symlink Nvim Dotfiles'
-# ./scripts/symlink_nvim_dotfiles.sh
-
-echo 'Symlink prezto dotfiles'
-./scripts/symlink_prezto_dotfiles.sh
-
-# gitconfig
-ln -s ~/dotfiles/.gitconfig.local ~/.gitconfig.local
-
+echo "Done. Reload your terminal!"

@@ -15,7 +15,6 @@ main() {
           --remove 'Messages' \
           --remove 'Contacts' \
           --remove 'Calendar' \
-          --remove 'Reminders'\
           --remove 'FaceTime' \
           --remove 'Feedback Assistant' \
           --remove 'Siri' \
@@ -23,9 +22,16 @@ main() {
           --remove 'Numbers' \
           --remove 'Pages' \
           --remove 'Keynote' \
-          --remove 'iTunes' \
           --remove 'iBooks' \
           --remove 'Mail' \
+          --remove 'Music' \
+          --remove 'Podcasts' \
+          --remove 'TV' \
+          --remove 'News' \
+          --add /Applications/kitty.app \
+          --add /Applications/Linear.app \
+          --add /Applications/Notion.app \
+          --add /Applications/Slack.app \
           &>/dev/null
 
       killall cfprefsd &>/dev/null

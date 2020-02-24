@@ -1,6 +1,36 @@
 call functions#PlugLoad()
 call plug#begin('~/.vim/bundle')
 
+" *************************
+" General
+" *************************
+
+" https://neovim.io/doc/user/provider.html
+" [nvim] set node path for neovim
+let g:node_host_prog = '$HOME/npmbin/node_modules/.bin/neovim-node-host'
+
+" https://neovim.io/doc/user/provider.html
+" [nvim] disable ruby provider
+let g:loaded_ruby_provider = 0
+
+" https://neovim.io/doc/user/provider.html
+" [nvim] the path to python3 is obtained through executing `:echo exepath('python3')` in vim
+let g:python3_host_prog = "/usr/local/bin/python3"
+
+" https://neovim.io/doc/user/provider.html
+" [nvim] the path to python is obtained through executing `:echo exepath('python')` in vim
+"
+" disable python2 since its been EOL
+let g:loaded_python_provider = 0
+
+let g:loaded_matchit = 1 " Don't need it
+let g:loaded_gzip = 1 " Gzip is pointless
+let g:loaded_zipPlugin = 1 " zip is also pointless
+let g:loaded_logipat = 1 " No logs
+let g:loaded_2html_plugin = 1 " Disable 2html
+let g:loaded_rrhelper = 1 " I don't use r
+let g:loaded_getscriptPlugin = 1 " Dont need it
+let g:loaded_tarPlugin = 1 " Nope
 
 " *************************
 " Autocomplete
@@ -149,24 +179,6 @@ Plug 'itchyny/lightline.vim'
 Plug 'maximbaz/lightline-ale'
 
 " *************************
-" NERDTREE - Tree explorer / sidebar
-" https://github.com/preservim/nerdtree
-" *************************
-Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
-
-nnoremap <leader>d :NERDTreeToggle<CR>
-nnoremap <leader>f :NERDTreeFind<CR>
-nnoremap <leader>g :GitGutterToggle<CR>
-
-augroup nerdtree
-  autocmd!
-  autocmd FileType nerdtree setlocal nolist " turn off whitespace characters
-  autocmd FileType nerdtree setlocal nocursorline " turn off line highlighting for performance
-augroup END
-
-let NERDTreeShowHidden=1
-
-" *************************
 " Startify - Fancy Vim Startup Screen
 " https://github.com/mhinz/vim-startify
 " *************************
@@ -201,6 +213,23 @@ let g:startify_bookmarks = [
   \ { 'g': '~/.gitconfig' },
   \ { 'z': '~/.zshrc' }
 \ ]
+
+" *************************
+" NERDTREE - Tree explorer / sidebar
+" https://github.com/preservim/nerdtree
+" *************************
+Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
+
+nnoremap <leader>d :NERDTreeToggle<CR>
+nnoremap <leader>f :NERDTreeFind<CR>
+
+augroup nerdtree
+  autocmd!
+  autocmd FileType nerdtree setlocal nolist " turn off whitespace characters
+  autocmd FileType nerdtree setlocal nocursorline " turn off line highlighting for performance
+augroup END
+
+let NERDTreeShowHidden=1
 
 " Snap windows without ruining your layout using ,ww
 Plug 'https://github.com/wesQ3/vim-windowswap'
@@ -388,39 +417,6 @@ Plug 'https://github.com/xolox/vim-misc.git', {'for': ['lua']}
 
 call plug#end()
 
-" For conceal markers.
-if has('conceal')
-  set conceallevel=2 concealcursor=niv
-endif
-
-" https://neovim.io/doc/user/provider.html
-" [nvim] set node path for neovim
-let g:node_host_prog = '$HOME/npmbin/node_modules/.bin/neovim-node-host'
-
-" https://neovim.io/doc/user/provider.html
-" [nvim] disable ruby provider
-let g:loaded_ruby_provider = 0
-
-" https://neovim.io/doc/user/provider.html
-" [nvim] the path to python3 is obtained through executing `:echo exepath('python3')` in vim
-let g:python3_host_prog = "/usr/local/bin/python3"
-
-" https://neovim.io/doc/user/provider.html
-" [nvim] the path to python is obtained through executing `:echo exepath('python')` in vim
-"
-" disable python2 since its been EOL
-let g:loaded_python_provider = 0
-
-let g:loaded_matchit = 1 " Don't need it
-let g:loaded_gzip = 1 " Gzip is pointless
-let g:loaded_zipPlugin = 1 " zip is also pointless
-let g:loaded_logipat = 1 " No logs
-let g:loaded_2html_plugin = 1 " Disable 2html
-let g:loaded_rrhelper = 1 " I don't use r
-let g:loaded_getscriptPlugin = 1 " Dont need it
-let g:loaded_tarPlugin = 1 " Nope
-
-
 " *************************
 " General Enhancements
 " *************************
@@ -471,6 +467,11 @@ filetype plugin indent on
 if (exists('+colorcolumn'))
     set colorcolumn=80
     highlight ColorColumn ctermbg=9
+endif
+
+" For conceal markers.
+if has('conceal')
+  set conceallevel=2 concealcursor=niv
 endif
 
 set t_Co=256 " Explicitly tell vim that the terminal supports 256 colors

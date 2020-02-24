@@ -16,8 +16,8 @@
     fc = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short -S$1; }; f"
 
 [apply]
-  # Detect whitespace errors when applying a patch
-  whitespace = fix
+    # Detect whitespace errors when applying a patch
+    whitespace = fix
 
 [core]
     excludesfile = ~/.gitignore
@@ -79,12 +79,16 @@
 [merge]
   tool = vimdiff
   conflictstyle = diff3
+
 [mergetool]
   prompt = true
+
 [mergetool "vimdiff"]
   cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+
 [difftool]
   prompt = false
+
 [diff]
   tool = vimdiff
   # Show blocks of moved text of at least 20 alphanumeric characters differently than adds/deletes

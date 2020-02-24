@@ -319,7 +319,7 @@ Plug 'mike-hearn/base16-vim-lightline'
 " *************************
 
 " Expands on commands like 'delete inside' by adding more targets
-Plug 'https://github.com/wellle/targets.vim'
+" Plug 'https://github.com/wellle/targets.vim'
 
 " Better job of detecting sentences
 Plug 'https://github.com/reedes/vim-textobj-sentence'

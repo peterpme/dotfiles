@@ -40,31 +40,9 @@ autocmd BufRead,BufNewFile *.md set spell
 
 
 " *************************
-" VIM LSP disabled bc its not supported by reason-language-server yet
-" *************************
-" Plug 'prabirshrestha/async.vim'
-" Plug 'prabirshrestha/vim-lsp'
-
-" if executable('reason-language-server')
-"   au User lsp_setup call lsp#register_server({
-"     \ 'name': 'reason-language-server',
-"     \ 'cmd': {server_info->[&shell, &shellcmdflag, 'reason-language-server']},
-"     \ 'whitelist': ['reason'],
-"     \ })
-" endif
-
-" let g:lsp_log_verbose = 1
-" let g:lsp_log_file = expand('~/vim-lsp.log')
-
-" " for asyncomplete.vim log
-" let g:asyncomplete_log_file = expand('~/asyncomplete.log')
-
-
-" *************************
 " LanguageClient
+" https://github.com/autozimu/LanguageClient-neovim#quick-start
 " *************************
-
-" Language Client https://github.com/autozimu/LanguageClient-neovim#quick-start
 Plug 'autozimu/LanguageClient-neovim', {
    \ 'branch': 'next',
    \ 'do': 'bash install.sh',
@@ -159,9 +137,6 @@ highlight ALEWarning ctermbg=DarkMagenta
 
 " https://github.com/Yggdroot/indentLine
 Plug 'Yggdroot/indentLine'
-
-" https://github.com/norcalli/nvim-colorizer.lua/blob/master/README.md
-" Plug 'norcalli/nvim-colorizer.lua'
 
 " Wakatime time tracking
 Plug 'git://github.com/wakatime/vim-wakatime.git'
@@ -323,11 +298,12 @@ Plug 'kana/vim-textobj-entire'
 Plug 'kana/vim-textobj-function'
 Plug 'kana/vim-textobj-user'
 Plug 'lucapette/vim-textobj-underscore'
-Plug 'vim-scripts/argtextobj.vim'
 
 " Mundo - Undo Search History as a Tree (:MundoToggle)
 "https://github.com/simnalamburt/vim-mundo
 Plug 'https://github.com/simnalamburt/vim-mundo'
+
+" https://github.com/andymass/vim-matchup
 Plug 'andymass/vim-matchup'
 
 " *************************
@@ -338,35 +314,13 @@ Plug 'andymass/vim-matchup'
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
 
-" Using floating windows of Neovim to start fzf
-if has('nvim')
-  let $FZF_DEFAULT_OPTS .= ' --border --margin=0,2'
-
-  function! FloatingFZF()
-    let width = float2nr(&columns * 0.9)
-    let height = float2nr(&lines * 0.6)
-    let opts = { 'relative': 'editor',
-               \ 'row': (&lines - height) / 2,
-               \ 'col': (&columns - width) / 2,
-               \ 'width': width,
-               \ 'height': height }
-
-    let win = nvim_open_win(nvim_create_buf(v:false, v:true), v:true, opts)
-    call setwinvar(win, '&winhighlight', 'NormalFloat:Normal')
-  endfunction
-
-  let g:fzf_layout = { 'window': 'call FloatingFZF()' }
-endif
+let g:fzf_layout = { 'down': '~25%' }
 
 " Enable per-command history
 " - History files will be stored in the specified directory
 " - When set, CTRL-N and CTRL-P will be bound to 'next-history' and
 "   'previous-history' instead of 'down' and 'up'.
 let g:fzf_history_dir = '~/.local/share/fzf-history'
-
-autocmd! FileType fzf
-autocmd  FileType fzf set laststatus=0 noshowmode noruler
-  \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 
 if isdirectory(".git")
     " if in a git project, use :GFiles
@@ -381,18 +335,11 @@ let g:ackprg = 'rg --vimgrep --no-heading'
 let g:grepprg='rg --vimgrep'
 
 let g:rg_find_command = 'rg --files --follow  -g "!{.config,etc,node_modules,.git,target,.reast,.d,.cm}/*"'
-" command! -bang -nargs=* Find call fzf#vim#grep(
-"  \ 'rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color always '
-"  \ .shellescape(<q-args>), 1, <bang>0)
 command! -bang -nargs=* Rg call fzf#vim#files('.', {'source': g:rg_find_command}, 0)
 
 command! -bang -nargs=* Find call fzf#vim#grep(
   \ 'rg --column --line-number --no-heading --follow --ignore-case --color=always '.<q-args>, 1,
   \ <bang>0 ? fzf#vim#with_preview('up:60%') : fzf#vim#with_preview('right:50%:hidden', '?'), <bang>0)
-" command! -bang -nargs=? -complete=dir Files
-"   \ call fzf#vim#files(<q-args>, fzf#vim#with_preview('right:50%', '?'), <bang>0)
-" command! -bang -nargs=? -complete=dir GitFiles
-"   \ call fzf#vim#gitfiles(<q-args>, fzf#vim#with_preview('right:50%', '?'), <bang>0)
 
 command! LS call fzf#run(fzf#wrap({'source': 'ls'}))
 
@@ -440,43 +387,6 @@ Plug 'https://github.com/xolox/vim-misc.git', {'for': ['lua']}
 
 call plug#end()
 
-" *************************
-" Snippets (deoplete needs to be under plug#end)
-" *************************
-
-" Enable snipMate compatibility feature.
-let g:neosnippet#enable_snipmate_compatibility = 1
-
-" Tell Neosnippet about the other snippets
-let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
-
-" https://github.com/Shougo/deoplete.nvim/blob/378feff8772d0e9f9ef2c94284947f3666576500/doc/deoplete.txt
-call deoplete#custom#option({
-\ 'prev_completion_mode': "mirror",
-\ })
-
-" https://github.com/tbodt/deoplete-tabnine
-" [tabnine]
-call deoplete#custom#var('tabnine', {
-    \ 'line_limit': 800,
-    \ 'max_num_results': 5,
-    \ })
-
-" Plugin key-mappings.
-" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-k>     <Plug>(neosnippet_expand_target)
-
-" SuperTab like snippets behavior.
-" Note: It must be "imap" and "smap".  It uses <Plug> mappings.
-"imap <expr><TAB>
-" \ pumvisible() ? "\<C-n>" :
-" \ neosnippet#expandable_or_jumpable() ?
-" \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-
 " For conceal markers.
 if has('conceal')
   set conceallevel=2 concealcursor=niv
@@ -509,12 +419,10 @@ let g:loaded_rrhelper = 1 " I don't use r
 let g:loaded_getscriptPlugin = 1 " Dont need it
 let g:loaded_tarPlugin = 1 " Nope
 
+
 " *************************
 " General Enhancements
 " *************************
-
-set hidden " Required for operations modifying multiple buffers like rename.
-set signcolumn=yes " sign columns
 
 " Normally `:set nocp` is not needed, because it is done automatically
 " when .vimrc is found.
@@ -542,10 +450,6 @@ if (has("termguicolors"))
  set termguicolors
 endif
 
-syntax on
-syntax enable
-filetype plugin indent on
-
 " colorizer https://github.com/norcalli/nvim-colorizer.lua
 " lua require'colorizer'.setup()
 
@@ -558,6 +462,9 @@ endif
 " https://www.reddit.com/r/vim/comments/24g8r8/italics_in_terminal_vim_and_tmux/
 set t_ZH=^[[3m
 set t_ZR=^[[23m
+syntax on
+syntax enable
+filetype plugin indent on
 
 " Marks 80th column
 if (exists('+colorcolumn'))
@@ -588,13 +495,14 @@ set incsearch   " search as you type
 set nolazyredraw "don't redraw while executing macros
 
 set magic " magic for regex"
+set hidden " Required for operations modifying multiple buffers like rename.
+set signcolumn=yes " sign columns
 
 " error bells
 set noerrorbells
 set visualbell
 set t_vb=
 set tm=500
-
 set laststatus=2                                             " always show statusline
 set list                                                     " show trailing whitespace
 set listchars=space:·,tab:▸\ ,trail:▫,extends:>,precedes:<,nbsp:+,eol:¬
@@ -629,9 +537,9 @@ autocmd BufWritePost .vimrc.local source %
 
 " *************************
 " Lightline
+" https://github.com/itchyny/lightline.vim
 " *************************
 
-"https://github.com/itchyny/lightline.vim
 let g:lightline = {
   \ 'colorscheme': 'base16_harmonic_dark',
   \ }
@@ -664,8 +572,7 @@ let g:lightline.active = { 'right': [[ 'linter_checking', 'linter_errors', 'lint
         let g:onedark_terminal_italics=1
         colorscheme base16-horizon-dark
     endif
-    syntax on
-    filetype plugin indent on
+
     " make the highlighting of tabs and other non-text less annoying
     highlight SpecialKey ctermfg=19 guifg=#333333
     highlight NonText ctermfg=19 guifg=#333333
@@ -677,6 +584,7 @@ let g:lightline.active = { 'right': [[ 'linter_checking', 'linter_errors', 'lint
     " highlight Type cterm=italic term=italic gui=italic
     highlight Normal ctermbg=none
 " }}}
+
 
 " *************************
 " Misc Keyboard Shortcuts

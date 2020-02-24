@@ -39,6 +39,7 @@ if you want to add paths and extra aliases, you can add them into `alias` and
 - https://github.com/bitprophet/dotfiles/tree/master/.hammerspoon
 - *** awesome hammerspoon &* https://github.com/ashfinal/awesome-hammerspoon
 - base16 black metal themes https://github.com/metalelf0/base16-black-metal-scheme
+- https://github.com/norcalli/nvim-colorizer.lua/blob/master/README.md
 
 
 ## TODO

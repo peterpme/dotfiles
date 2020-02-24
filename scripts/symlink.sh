@@ -68,4 +68,8 @@ done
 
 echo -e "\\n\\nsymlinking hammerspoon config"
 echo "=============================="
-ln -s $DOTFILES/hammerspoon $HOME/.hammerspoon
+
+if [ ! -d "$HOME/.hammerspoon" ]; then
+    echo "Creating ~/.config"
+    ln -s $DOTFILES/hammerspoon/ $HOME/.hammerspoon
+fi

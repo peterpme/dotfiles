@@ -1,5 +1,10 @@
 [alias]
-    cleanup = "!git branch --merged | grep  -v '\\*\\|master\\|develop' | xargs -n 1 git branch -d"
+    cleanup = "!git remote prune origin && git gc && git clean -df && git stash clear"
+    # delete merged branches
+    delete-merged-branches = "!f() { git checkout --quiet master && git branch --merged | grep --invert-match '\\*' | xargs -n 1 git branch --delete; git checkout --quiet @{-1}; }; f"
+
+    # show what I did today
+    day = "!sh -c 'git log --reverse --no-merges --branches=* --date=local --after=\"yesterday 11:59PM\" --author=\"`git config --get user.name`\"'"
 
 [core]
 	excludesfile = ~/.gitignore

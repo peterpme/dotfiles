@@ -1,3 +1,8 @@
+[user]
+    name = Peter Piekarczyk
+    email = peterpiekarczyk@gmail.com
+[github]
+    user = peterpme
 [alias]
     cleanup = "!git remote prune origin && git gc && git clean -df && git stash clear"
 

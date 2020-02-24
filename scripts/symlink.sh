@@ -70,6 +70,6 @@ echo -e "\\n\\nsymlinking hammerspoon config"
 echo "=============================="
 
 if [ ! -d "$HOME/.hammerspoon" ]; then
-    echo "Creating ~/.config"
+    echo "Symlinking hammerspoon.."
     ln -s $DOTFILES/hammerspoon/ $HOME/.hammerspoon
 fi

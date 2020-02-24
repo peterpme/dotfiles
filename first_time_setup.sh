@@ -17,6 +17,9 @@ fi
 # Install brew dependencies from Brewfile
 brew bundle
 
+# Removed outdates versions from cellar
+brew cleanup
+
 # Agree to Xcode & Download Tools
 echo 'Agree to Xcode & Download'
 source scripts/xcode.sh

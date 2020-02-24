@@ -1,22 +1,10 @@
 #!/usr/bin/env bash
 
-command_exists() {
-    type "$1" > /dev/null 2>&1
-}
-
 echo "Read through this file first. Hit ctrl+c now."
 read -n 1
 
 # Disable Gatekeeper (unidentified developer)
 sudo spctl --master-disable
-
-# Git Config
-echo 'Git Config'
-# source scripts/git.sh
-
-# gitconfig
-# ln -s ~/dotfiles/.gitconfig.local ~/.gitconfig.local
-
 
 echo -e "\\n\\nRunning on macOS"
 
@@ -36,12 +24,12 @@ source scripts/xcode.sh
 echo 'Pull in All Submodules'
 git submodule update --recursive --remote --init
 
-# After the install, setup fzf
+# Install & setup fzf
 echo -e "\\n\\nRunning fzf install script..."
 echo "=============================="
 /usr/local/opt/fzf/install --all --no-bash --no-fish
 
-# after the install, install neovim python libraries
+# Install neovim python libraries
 echo -e "\\n\\nRunning Neovim Python install"
 echo "=============================="
 pip3 install --user pynvim
@@ -68,4 +56,3 @@ echo 'Dock Setup'
 ./scripts/dock.sh
 
 echo "Done. Reload your terminal!"
-

@@ -56,3 +56,5 @@ if you want to add paths and extra aliases, you can add them into `alias` and
 - look at AUTH SOCK stuff https://github.com/akashin/dotfiles/blob/master/zsh/zshrc.symlink#L52
 - look into why .npmrc needs to be EXPORTED
 - heroku autocomplete
+- set up a cron job that checks for latest version of reason-language-server
+  (and other bins to update them)

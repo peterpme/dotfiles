@@ -44,7 +44,7 @@ echo "=============================="
 # after the install, install neovim python libraries
 echo -e "\\n\\nRunning Neovim Python install"
 echo "=============================="
-pip3 install pynvim
+pip3 install --user pynvim
 
 # Change the default shell to zsh
 zsh_path="$( command -v zsh )"

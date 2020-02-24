@@ -8800,7 +8800,7 @@ neo-async@^2.5.0, neo-async@^2.6.1:
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.1.tgz#ac27ada66167fa8849a6addd837f6b189ad2081c"
   integrity sha512-iyam8fBuCUpWeKPGpaNMetEocMt364qkCsfL9JuhjXX6dRnguRVOfk2GZaDpPjcOKiiXCPINZC1GczQ7iTq3Zw==
 
-neovim@4.8.0:
+neovim@^4.8.0:
   version "4.8.0"
   resolved "https://registry.yarnpkg.com/neovim/-/neovim-4.8.0.tgz#887f34f14d9249f7d0f7ca1d841f4169d8d89d67"
   integrity sha512-gGiVq/r9iIrp2XCdDXb3fBEW4e3H6zMLxgTGuG5e6MaxiLzLnUZj2ersr4r+Ij8qnbRFxCqCrOw5d7lyrGPcWg==

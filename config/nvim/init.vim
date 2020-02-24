@@ -1,21 +1,10 @@
-" *************************
-" VimPlug
-" *************************
 call functions#PlugLoad()
 call plug#begin('~/.vim/bundle')
 
-" *************************
-" General Enhancements
-" *************************
-if has('mouse')
-    set mouse=a
-endif
 
-if (has('nvim'))
-  " show results of substition as they're happening
-  " but don't open a split
-  set inccommand=nosplit
-endif
+" *************************
+" Autocomplete
+" *************************
 
 " https://github.com/Shougo/deoplete.nvim
 if has('nvim')
@@ -26,45 +15,17 @@ else " for vim 8 with python
   Plug 'roxma/vim-hug-neovim-rpc'
 endif
 
-" https://github.com/mhartington/nvim-typescript
-" Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
-
 let g:deoplete#enable_at_startup = 1
 
-" disable default snippets
-" let g:neosnippet#disable_runtime_snippets = 1
-
-Plug 'Shougo/neosnippet.vim'
-Plug 'Shougo/neosnippet-snippets'
-
-" Tabnine AutoComplete https://tabnine.com/
+" AutoComplete powered by machine learning https://tabnine.com/
 Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' }
-
-" omnifuncs
-augroup omnifuncs
-  autocmd!
-  " autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-  " autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-  autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-  " autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-  " autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-augroup end
 
 "close deoplete scratch window automatically
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
-" Normally `:set nocp` is not needed, because it is done automatically
-" when .vimrc is found.
-if &compatible
-  " `:set nocp` has many side effects. Therefore this should be done
-  " only when 'compatible' is set.
-  set nocompatible
-endif
-
-set shell=/usr/local/bin/zsh "set default shell to zsh
 
 " *************************
-" Language Server Related
+" Explicit filetypes
 " *************************
 autocmd BufRead *.js set filetype=javascript
 autocmd BufRead *.es6 set filetype=javascript
@@ -77,11 +38,9 @@ autocmd BufRead,BufNewFile *.fdoc set filetype=yaml
 autocmd BufRead,BufNewFile *.md set filetype=markdown
 autocmd BufRead,BufNewFile *.md set spell
 
-set hidden " Required for operations modifying multiple buffers like rename.
-set signcolumn=yes " sign columns
 
 " *************************
-" VIM LSP
+" VIM LSP disabled bc its not supported by reason-language-server yet
 " *************************
 " Plug 'prabirshrestha/async.vim'
 " Plug 'prabirshrestha/vim-lsp'
@@ -100,10 +59,11 @@ set signcolumn=yes " sign columns
 " " for asyncomplete.vim log
 " let g:asyncomplete_log_file = expand('~/asyncomplete.log')
 
+
 " *************************
 " LanguageClient
 " *************************
-"
+
 " Language Client https://github.com/autozimu/LanguageClient-neovim#quick-start
 Plug 'autozimu/LanguageClient-neovim', {
    \ 'branch': 'next',
@@ -158,7 +118,8 @@ nnoremap <silent> gf :call LanguageClient_textDocument_formatting()<cr>
 " Show type info (and short doc) of identifier under cursor.
 nnoremap <silent> <cr> :call LanguageClient_textDocument_hover()<cr>
 
-" Async linting ALE
+" Async Linting / Fixing using ALE
+" https://github.com/dense-analysis/ale
 Plug 'dense-analysis/ale'
 
 " be explicit about whats running
@@ -191,20 +152,16 @@ let g:ale_fix_on_save = 1
 
 highlight ALEWarning ctermbg=DarkMagenta
 
+
 " *************************
 " Other Fun Stuff
 " *************************
 
-" vim-commentary, adjust commentstring to support other libs
-autocmd FileType apache setlocal commentstring=#\ %s<Paste>
-
+" https://github.com/Yggdroot/indentLine
 Plug 'Yggdroot/indentLine'
 
 " https://github.com/norcalli/nvim-colorizer.lua/blob/master/README.md
-Plug 'norcalli/nvim-colorizer.lua'
-
-Plug 'elzr/vim-json', { 'for': 'json' }
-let g:vim_json_syntax_conceal = 0
+" Plug 'norcalli/nvim-colorizer.lua'
 
 " Wakatime time tracking
 Plug 'git://github.com/wakatime/vim-wakatime.git'
@@ -215,24 +172,15 @@ Plug 'itchyny/lightline.vim'
 " ale + lightline support
 Plug 'maximbaz/lightline-ale'
 
-" Alignment
-Plug 'austintaylor/vim-indentobject'
-
-" Align anything using `ga` command
-Plug 'junegunn/vim-easy-align'
-
-" NERDTREE sidebar
+" *************************
+" NERDTREE - Tree explorer / sidebar
+" https://github.com/preservim/nerdtree
+" *************************
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] }
-" Plug 'Xuyuanp/nerdtree-git-plugin'
-" Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
 nnoremap <leader>d :NERDTreeToggle<CR>
 nnoremap <leader>f :NERDTreeFind<CR>
 nnoremap <leader>g :GitGutterToggle<CR>
-
-" let NERDTreeDirArrowExpandable = "\u00a0" " make arrows invisible
-" let NERDTreeDirArrowCollapsible = "\u00a0" " make arrows invisible
-" let NERDTreeNodeDelimiter = "\u263a" " smiley face
 
 augroup nerdtree
   autocmd!
@@ -242,24 +190,48 @@ augroup END
 
 let NERDTreeShowHidden=1
 
-" let g:NERDTreeIndicatorMapCustom = {
-"   \ "Modified"  : "✹",
-"   \ "Staged"    : "✚",
-"   \ "Untracked" : "✭",
-"   \ "Renamed"   : "➜",
-"   \ "Unmerged"  : "═",
-"   \ "Deleted"   : "✖",
-"   \ "Dirty"     : "✗",
-"   \ "Clean"     : "✔︎",
-"   \ 'Ignored'   : '☒',
-"   \ "Unknown"   : "?"
-"   \ }
+" *************************
+" Startify - Fancy Vim Startup Screen
+" https://github.com/mhinz/vim-startify
+" *************************
 
-" Fancy start screen. Lets you open empty buffers, multiple files, etc
 Plug 'mhinz/vim-startify'
+" Don't change to directory when selecting a file
+let g:startify_files_number = 5
+let g:startify_change_to_dir = 0
+let g:startify_custom_header = [ ]
+let g:startify_relative_path = 1
+let g:startify_use_env = 1
+
+" Custom startup list, only show MRU from current directory/project
+let g:startify_lists = [
+\  { 'type': 'dir',       'header': [ 'Files '. getcwd() ] },
+\  { 'type': function('helpers#startify#listcommits'), 'header': [ 'Recent Commits' ] },
+\  { 'type': 'sessions',  'header': [ 'Sessions' ]       },
+\  { 'type': 'bookmarks', 'header': [ 'Bookmarks' ]      },
+\  { 'type': 'commands',  'header': [ 'Commands' ]       },
+\ ]
+
+let g:startify_commands = [
+\   { 'uc': [ 'Clean Plugins', ':PlugClean' ] },
+\   { 'up': [ 'Update Plugins', ':PlugUpdate' ] },
+\   { 'ug': [ 'Upgrade Plugin Manager', ':PlugUpgrade' ] },
+\ ]
+
+let g:startify_bookmarks = [
+  \ { 'd': '~/dotfiles' },
+  \ { 'c': '~/.config/nvim/init.vim' },
+  \ { 'h': '/Volumes/config' },
+  \ { 'g': '~/.gitconfig' },
+  \ { 'z': '~/.zshrc' }
+\ ]
 
 " Snap windows without ruining your layout using ,ww
 Plug 'https://github.com/wesQ3/vim-windowswap'
+
+" better terminal integration
+" substitute, search, and abbreviate multiple variants of a word
+Plug 'tpope/vim-abolish'
 
 " Remaps . in a way that plugins can use it too!
 Plug 'tpope/vim-repeat'
@@ -267,11 +239,20 @@ Plug 'tpope/vim-repeat'
 " Easily delete, change and add surroundings in pairs
 Plug 'tpope/vim-surround'
 
+" endings for html, xml, jsx, etc
+Plug 'tpope/vim-ragtag'
+
 "Bracket maps
 Plug 'tpope/vim-unimpaired'
 
 " Indent Guides
 Plug 'nathanaelkane/vim-indent-guides', {'on': ['IndentGuidesToggle', 'IndentGuidesEnable']}
+let g:indent_guides_enable_on_vim_startup = 1
+
+" Set custom colors for indent guides
+" let g:indent_guides_auto_colors = 0
+" autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  guibg=red   ctermbg=3
+" autocmd VimEnter,Colorscheme * :hi IndentGuidesEven guibg=green ctermbg=4
 
 " Automatic closing of quotes, parenthesis, brackets, etc
 Plug 'Raimondi/delimitMate'
@@ -286,7 +267,10 @@ Plug 'chrisbra/NrrwRgn'
 Plug 'git://github.com/tpope/vim-commentary.git'
 
 " editorconfig support
-Plug 'sgur/vim-editorconfig'
+Plug 'editorconfig/editorconfig-vim'
+
+" vim-commentary, adjust commentstring to support other libs
+autocmd FileType apache setlocal commentstring=#\ %s<Paste>
 
 " Git
 Plug 'tpope/vim-git'
@@ -294,7 +278,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 
 nmap <silent> <leader>gs :Gstatus<cr>
-nmap <leader>ge :Gedit<cr>
+nmap <leader>ge :Gedit<c:>
 nmap <silent><leader>gr :Gread<cr>
 nmap <silent><leader>gb :Gblame<cr>
 
@@ -317,11 +301,20 @@ Plug 'mike-hearn/base16-vim-lightline'
 " Text-Related
 " *************************
 
+" SOMETHING HERE IS BROKEN !!!
 " Expands on commands like 'delete inside' by adding more targets
-Plug 'https://github.com/wellle/targets.vim'
+" Plug 'https://github.com/wellle/targets.vim'
 
 " Better job of detecting sentences
-Plug 'https://github.com/reedes/vim-textobj-sentence'
+" https://github.com/reedes/vim-textobj-sentence
+" Plug 'https://github.com/reedes/vim-textobj-sentence'
+
+
+" augroup textobj_sentence
+  " autocmd!
+  " autocmd FileType markdown call textobj#sentence#init()
+  " autocmd FileType textile call textobj#sentence#init()
+" augroup END
 
 " Makes operating on columns super easy
 Plug 'coderifous/textobj-word-column.vim'
@@ -329,8 +322,17 @@ Plug 'kana/vim-textobj-datetime'
 Plug 'kana/vim-textobj-entire'
 Plug 'kana/vim-textobj-function'
 Plug 'kana/vim-textobj-user'
-" Plug 'lucapette/vim-textobj-underscore'
+Plug 'lucapette/vim-textobj-underscore'
 Plug 'vim-scripts/argtextobj.vim'
+
+" Mundo - Undo Search History as a Tree (:MundoToggle)
+"https://github.com/simnalamburt/vim-mundo
+Plug 'https://github.com/simnalamburt/vim-mundo'
+Plug 'andymass/vim-matchup'
+
+" *************************
+" Search, Find, Replace
+" *************************
 
 " FZF
 Plug '/usr/local/opt/fzf'
@@ -394,15 +396,6 @@ command! -bang -nargs=* Find call fzf#vim#grep(
 
 command! LS call fzf#run(fzf#wrap({'source': 'ls'}))
 
-" https://github.com/junegunn/vim-fnr
-Plug 'junegunn/vim-pseudocl'
-Plug 'junegunn/vim-fnr'
-Plug 'vim-scripts/greplace.vim'
-"READ MORE https://github.com/simnalamburt/vim-mundo
-Plug 'https://github.com/simnalamburt/vim-mundo'
-Plug 'https://github.com/tpope/vim-abolish' " AWESOME case-sensitive replace
-Plug 'andymass/vim-matchup'
-
 " *************************
 " Language-Related
 " *************************
@@ -415,35 +408,29 @@ Plug 'juvenn/mustache.vim'
 Plug 'nono/vim-handlebars'
 
 " Typescript
-" https://github.com/leafgarland/typescript-vim
-Plug 'leafgarland/typescript-vim', { 'for': ['typescript'] }
 Plug 'HerringtonDarkholme/yats.vim'
-" Plug 'ianks/vim-tsx'
-
-let g:typescript_indent_disable = 1
 
 " Javascript
-Plug 'https://github.com/othree/javascript-libraries-syntax.vim', { 'for': [ 'javascript', 'js', 'jsx' ]}
-Plug 'thinca/vim-textobj-function-javascript',    { 'for': [ 'javascript', 'js', 'jsx' ]}
-Plug '1995eaton/vim-better-javascript-completion', { 'for': [ 'javascript', 'js', 'jsx' ]}
-Plug 'chemzqm/vim-jsx-improve', { 'for': [ 'javascript', 'js', 'jsx' ]}
-Plug 'gavocanov/vim-js-indent', { 'for': [ 'javascript', 'js', 'jsx' ]}
+Plug 'yuezk/vim-js'
+Plug 'maxmellon/vim-jsx-pretty'
+
+" vim-javascript settings
+let g:vim_jsx_pretty_colorful_config = 1
+let g:vim_jsx_pretty_template_tags = ['html', 'javascript', 'jsx']
+
+" json
+Plug 'elzr/vim-json', { 'for': 'json' }
+let g:vim_json_syntax_conceal = 0
 
 " GraphQL
 Plug 'jparise/vim-graphql'
 
-" Toolkit - no syntax highlighting https://github.com/moll/vim-node
-" gf already does something else so disabled this for now ...
-" Plug 'moll/vim-node', { 'for': [ 'javascript', 'js', 'jsx' ]}
-
 " SCSS and CSS syntax highlighting
-if v:version < 704
-  Plug 'JulesWang/css.vim'
-endif
-Plug 'cakebaker/scss-syntax.vim'
+Plug 'hail2u/vim-css3-syntax', { 'for': 'css' }
+Plug 'cakebaker/scss-syntax.vim', { 'for': 'scss' }
+Plug 'stephenway/postcss.vim', { 'for': 'css' }
 
 " HTML
-Plug 'tpope/vim-ragtag'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'skwp/vim-html-escape'
 
@@ -451,18 +438,12 @@ Plug 'skwp/vim-html-escape'
 Plug 'https://github.com/xolox/vim-lua-ftplugin.git', {'for': ['lua']}
 Plug 'https://github.com/xolox/vim-misc.git', {'for': ['lua']}
 
-" Perl
-" Plug 'https://github.com/c9s/perlomni.vim', {'for': ['pl', 'perl', 'p6', 'pm']}
-
-" devicons https://github.com/ryanoasis/vim-devicons
-" always load as last one!
-" Plug 'ryanoasis/vim-devicons'
-
 call plug#end()
 
 " *************************
 " Snippets (deoplete needs to be under plug#end)
 " *************************
+
 " Enable snipMate compatibility feature.
 let g:neosnippet#enable_snipmate_compatibility = 1
 
@@ -527,6 +508,34 @@ let g:loaded_2html_plugin = 1 " Disable 2html
 let g:loaded_rrhelper = 1 " I don't use r
 let g:loaded_getscriptPlugin = 1 " Dont need it
 let g:loaded_tarPlugin = 1 " Nope
+
+" *************************
+" General Enhancements
+" *************************
+
+set hidden " Required for operations modifying multiple buffers like rename.
+set signcolumn=yes " sign columns
+
+" Normally `:set nocp` is not needed, because it is done automatically
+" when .vimrc is found.
+if &compatible
+  " `:set nocp` has many side effects. Therefore this should be done
+  " only when 'compatible' is set.
+  set nocompatible
+endif
+
+" set default shell to zsh
+set shell=/usr/local/bin/zsh
+
+if has('mouse')
+    set mouse=a
+endif
+
+if (has('nvim'))
+  " show results of substition as they're happening
+  " but don't open a split
+  set inccommand=nosplit
+endif
 
 " enable 24 bit color support if supported
 if (has("termguicolors"))
@@ -614,45 +623,13 @@ match ExtraWhitespace /\s\+$\|\t/
 
 " automatically rebalance windows on vim resize
 autocmd VimResized * :wincmd =
+autocmd VimResized * exe 'normal! \<c-w>='
+autocmd BufWritePost .vimrc,.vimrc.local,init.vim source %
+autocmd BufWritePost .vimrc.local source %
 
-" Fix Cursor in TMUX
-if exists('$TMUX')
-  let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-  let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
-else
-  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-endif
-
-" Don't change to directory when selecting a file
-let g:startify_files_number = 5
-let g:startify_change_to_dir = 0
-let g:startify_custom_header = [ ]
-let g:startify_relative_path = 1
-let g:startify_use_env = 1
-
-" Custom startup list, only show MRU from current directory/project
-let g:startify_lists = [
-\  { 'type': 'dir',       'header': [ 'Files '. getcwd() ] },
-\  { 'type': function('helpers#startify#listcommits'), 'header': [ 'Recent Commits' ] },
-\  { 'type': 'sessions',  'header': [ 'Sessions' ]       },
-\  { 'type': 'bookmarks', 'header': [ 'Bookmarks' ]      },
-\  { 'type': 'commands',  'header': [ 'Commands' ]       },
-\ ]
-
-let g:startify_commands = [
-\   { 'uc': [ 'Clean Plugins', ':PlugClean' ] },
-\   { 'up': [ 'Update Plugins', ':PlugUpdate' ] },
-\   { 'ug': [ 'Upgrade Plugin Manager', ':PlugUpgrade' ] },
-\ ]
-
-let g:startify_bookmarks = [
-  \ { 'd': '~/dotfiles' },
-  \ { 'c': '~/.config/nvim/init.vim' },
-  \ { 'h': '/Volumes/config' },
-  \ { 'g': '~/.gitconfig' },
-  \ { 'z': '~/.zshrc' }
-\ ]
+" *************************
+" Lightline
+" *************************
 
 "https://github.com/itchyny/lightline.vim
 let g:lightline = {
@@ -701,30 +678,20 @@ let g:lightline.active = { 'right': [[ 'linter_checking', 'linter_errors', 'lint
     highlight Normal ctermbg=none
 " }}}
 
-" enable syntax highlighting for .js files too instead of just .jsx
-let g:jsx_ext_required = 0
-
-" keyboard shortcuts
-
+" *************************
+" Misc Keyboard Shortcuts
+" *************************
 let mapleader = ','
 noremap <C-h> <C-w>h
 noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
-nnoremap <leader>a :Ag<space>
-
-nnoremap <leader>d :NERDTreeToggle<CR>
-nnoremap <leader>f :NERDTreeFind<CR>
-nnoremap <leader>t :FZF<CR>
-nnoremap <leader>g :GitGutterToggle<CR>
 
 " in case you forgot to sudo
 cnoremap w!! %!sudo tee > /dev/null %
 
+" map jj to exit vim (as well as esc)
 inoremap jj <ESC>
-
-xmap ga <Plug>(EasyAlign)
-nmap ga <Plug>(EasyAlign)
 
 " inner-line
 xnoremap <silent> il :<c-u>normal! g_v^<cr>
@@ -734,42 +701,5 @@ onoremap <silent> il :<c-u>normal! g_v^<cr>
 vnoremap <silent> al :<c-u>normal! $v0<cr>
 onoremap <silent> al :<c-u>normal! $v0<cr>
 
-
 " Don't copy the contents of an overwritten selection.
 vnoremap p "_dP
-
-set suffixes=~,.aux,.bak,.bkp,.dvi,.hi,.o,.pdf,.gz,.idx,.log,.ps,.swp,.tar,.ilg,.bbl,.toc,.ind
-set wildmenu   " show a navigable menu for tab completion
-set wildcharm=<Tab>
-set wildmode=list:longest
-set wildignore+=log/**,node_modules/**,target/**,tmp/**,*.rbc
-set wildignore+=*.egg,*.egg-info
-set wildignore+=*.gem
-set wildignore+=*.gem
-set wildignore+=*.javac
-set wildignore+=*.png,*.jpg,*.gif
-set wildignore+=*.png,*.jpg,*.gif
-set wildignore+=*.pyc
-set wildignore+=*.so,*.swp,*.zip,*/.Trash/**,*.pdf,*.dmg,*/Library/**,*/.rbenv/**
-set wildignore+=*/.nx/**,*.app
-set wildignore+=*DS_Store*
-set wildignore+=*sass-cache*
-set wildignore+=*vim/backups*
-set wildignore+=.coverage
-set wildignore+=.coverage/**
-set wildignore+=.env
-set wildignore+=.env-pypy
-set wildignore+=.env[0-9]+
-set wildignore+=.git,.gitkeep
-set wildignore+=.idea/**
-set wildignore+=.sass-cache/
-set wildignore+=.tmp
-set wildignore+=.tox/**
-set wildignore+=.vagrant/**
-set wildignore+=.webassets-cache/
-set wildignore+=__pycache__/
-set wildignore+=log/**
-set wildignore+=tmp/**
-set wildignore+=vendor/cache/**
-set wildignore+=vendor/rails/**
-set wildignore=*.o,*.obj,*~ "stuff to ignore when tab completing

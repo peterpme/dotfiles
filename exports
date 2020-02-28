@@ -12,10 +12,10 @@ export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 # typeset -gUT INFOPATH infopath
 
 # Add npmbin mode modules to `$PATH`
-export PATH="$HOME/npmbin/node_modules/.bin:$PATH"
+export PATH="$HOME/dotfiles/npmbin/node_modules/.bin:$PATH"
 
 # Add `~/bin` to the `$PATH`
-export PATH="$HOME/bin:$PATH"
+export PATH="$HOME/dotfiles/bin:$PATH"
 
 # Android Studio
 # export ANDROID_HOME=~/Library/Android/sdk

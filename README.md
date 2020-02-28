@@ -24,6 +24,12 @@ Create, split, save, move terminal tabs easily all within one window.
 [Fzf](https://github.com/junegunn/fzf)
 The fastest way to search for ANYTHING on your computer
 
+[Prezto](https://github.com/sorin-ionescu/prezto)
+An light-weight & sensible alternative to oh-my-zsh that actually works nicely
+
+[Powerline10k](https://github.com/romkatv/powerlevel10k)
+A Lightning fast, easy to set up theme for Zsh
+
 Optimized MacOS Configuration
 A series of one line commands that speed up and turn off the features that annoy
 developers the most!

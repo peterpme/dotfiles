@@ -10,7 +10,6 @@ call plug#begin('~/.vim/bundle')
 if has('mouse')
     set mouse=a
 endif
-
 if (has('nvim'))
   " show results of substition as they're happening
   " but don't open a split
@@ -81,25 +80,6 @@ autocmd BufRead,BufNewFile *.md set spell
 set hidden " Required for operations modifying multiple buffers like rename.
 set signcolumn=yes " sign columns
 
-" *************************
-" VIM LSP
-" *************************
-" Plug 'prabirshrestha/async.vim'
-" Plug 'prabirshrestha/vim-lsp'
-
-" if executable('reason-language-server')
-"   au User lsp_setup call lsp#register_server({
-"     \ 'name': 'reason-language-server',
-"     \ 'cmd': {server_info->[&shell, &shellcmdflag, 'reason-language-server']},
-"     \ 'whitelist': ['reason'],
-"     \ })
-" endif
-
-" let g:lsp_log_verbose = 1
-" let g:lsp_log_file = expand('~/vim-lsp.log')
-
-" " for asyncomplete.vim log
-" let g:asyncomplete_log_file = expand('~/asyncomplete.log')
 
 " *************************
 " LanguageClient
@@ -150,47 +130,54 @@ endif
 " Automatically start language servers.
 let g:LanguageClient_autoStart = 1
 
-" gd Show type info (and short doc) of identifier under cursor.
-nnoremap <silent> gd :call LanguageClient_textDocument_definition()<cr>
-
-" gf Formats code in normal mode
-nnoremap <silent> gf :call LanguageClient_textDocument_formatting()<cr>
-
-" Show type info (and short doc) of identifier under cursor.
-nnoremap <silent> <cr> :call LanguageClient_textDocument_hover()<cr>
+" LanguageServer bindings
+" nnoremap <silent> gh :call LanguageClient_textDocument_hover()<CR>
+" nnoremap <silent> K :call LanguageClient_textDocument_definition()<CR>
+" nnoremap <silent> gr :call LanguageClient_textDocument_references()<CR>
+" nnoremap <silent> gs :call LanguageClient_textDocument_documentSymbol()<CR>
+" nnoremap <silent> ga :call LanguageClient_textDocument_codeAction()<CR>
+" nnoremap <silent> <C-g><C-r> :call LanguageClient_textDocument_rename()<CR>
+" nnoremap <silent> gf :call LanguageClient#textDocument_formatting()<cr>
 
 " Async linting ALE
 Plug 'dense-analysis/ale'
 
-" be explicit about whats running
+nnoremap <silent> gf :ALEFix<CR>
+nnoremap <silent> gn :ALENext<CR>
+nnoremap <silent> gd :ALEGoToDefinition<CR>
+
+" highlight ALEWarning ctermbg=DarkMagenta
+
+let g:ale_reason_ls_executable = "reason-language-server"
+let g:ale_reasonml_refmt_executable = "./node_modules/.bin/bsrefmt"
+let g:ale_completion_enabled = 0
+let g:ale_fix_on_save = 1
 let g:ale_set_balloons = 1
-
-" be explicit about whats running
-let g:ale_linters_explicit = 1
-
-" keep side gutter open https://github.com/dense-analysis/ale#5ii-how-can-i-keep-the-sign-gutter-open
 let g:ale_sign_column_always = 1
+" let g:ale_keep_list_window_open = 1
+" let g:ale_lint_delay = 100
+" let g:hover_to_preview = 0
 
-" run the linter only on these
 let g:ale_linters = {
-  \ 'html': ['eslint'],
-  \ 'css': ['eslint'],
-  \ 'json': ['eslint'],
   \ 'javascript': ['eslint'],
-  \ 'typescript': ['eslint'],
+  \ 'reason': ['reason-language-server'],
+  \ 'typescript': ['tsserver'],
+  \}
+
+let g:ale_linters_ignore = {
+  \ 'typescript': ['tslint'],
+  \ 'reason': ['ols']
   \}
 
 let g:ale_fixers = {
-  \ 'javascript': ['prettier', 'eslint'],
+  \ 'html': ['prettier'],
+  \ 'javascript': ['prettier'],
+  \ 'reason': ['refmt'],
+  \ 'json': ['prettier', 'jq'],
+  \ 'markdown': ['prettier'],
   \ 'typescript': ['prettier', 'eslint'],
-  \ 'json': ['prettier', 'eslint'],
-  \ 'css': ['prettier'],
   \}
 
-" enable fix on save (prettier,refmt)
-let g:ale_fix_on_save = 1
-
-highlight ALEWarning ctermbg=DarkMagenta
 
 " *************************
 " Other Fun Stuff
@@ -322,16 +309,19 @@ Plug 'mike-hearn/base16-vim-lightline'
 " Plug 'https://github.com/wellle/targets.vim'
 
 " Better job of detecting sentences
-Plug 'https://github.com/reedes/vim-textobj-sentence'
-
-" Makes operating on columns super easy
-Plug 'coderifous/textobj-word-column.vim'
-Plug 'kana/vim-textobj-datetime'
-Plug 'kana/vim-textobj-entire'
-Plug 'kana/vim-textobj-function'
-Plug 'kana/vim-textobj-user'
-" Plug 'lucapette/vim-textobj-underscore'
+Plug 'reedes/vim-textobj-sentence'
 Plug 'vim-scripts/argtextobj.vim'
+Plug 'coderifous/textobj-word-column.vim'
+Plug 'kana/vim-textobj-user'
+Plug 'kana/vim-textobj-datetime'
+Plug 'kana/vim-textobj-function'
+Plug 'kana/vim-textobj-entire'      "ae/ie for entire file
+Plug 'kana/vim-textobj-indent'      "ai/ii for indent block
+Plug 'kana/vim-textobj-line'        "al/il for line
+Plug 'sgur/vim-textobj-parameter'   "a,/i, for argument/parameter
+Plug 'Julian/vim-textobj-variable-segment'    "av/iv for variable part
+Plug 'Chun-Yang/vim-textobj-chunk'  "ac/ic for json-ish chunk
+Plug 'whatyouhide/vim-textobj-xmlattr'  "ax/ix for xml attribute
 
 " FZF
 Plug '/usr/local/opt/fzf'
@@ -653,26 +643,44 @@ let g:startify_bookmarks = [
   \ { 'z': '~/.zshrc' }
 \ ]
 
-"https://github.com/itchyny/lightline.vim
 let g:lightline = {
-  \ 'colorscheme': 'base16_harmonic_dark',
-  \ }
-
-let g:lightline.component_expand = {
-  \  'linter_checking': 'lightline#ale#checking',
-  \  'linter_warnings': 'lightline#ale#warnings',
-  \  'linter_errors': 'lightline#ale#errors',
-  \  'linter_ok': 'lightline#ale#ok',
-  \ }
-
-let g:lightline.component_type = {
-  \ 'linter_checking': 'left',
-  \ 'linter_warnings': 'warning',
-  \  'linter_errors': 'error',
-  \  'linter_ok': 'left',
-  \ }
-
-let g:lightline.active = { 'right': [[ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ]] }
+            \   'colorscheme': 'base16_black_metal_bathory',
+            \   'active': {
+            \       'left': [ [ 'mode', 'paste' ],
+            \               [ 'gitbranch' ],
+            \               [ 'readonly', 'filetype', 'filename' ]],
+            \       'right': [ [ 'percent' ], [ 'lineinfo' ],
+            \               [ 'fileformat', 'fileencoding' ],
+            \               [ 'gitblame', 'currentfunction',  'cocstatus', 'linter_errors', 'linter_warnings' ]]
+            \   },
+            \   'component_expand': {
+            \   },
+            \   'component_type': {
+            \       'readonly': 'error',
+            \       'linter_warnings': 'warning',
+            \       'linter_errors': 'error'
+            \   },
+            \   'component_function': {
+            \       'fileencoding': 'helpers#lightline#fileEncoding',
+            \       'filename': 'helpers#lightline#fileName',
+            \       'fileformat': 'helpers#lightline#fileFormat',
+            \       'filetype': 'helpers#lightline#fileType',
+            \       'gitbranch': 'helpers#lightline#gitBranch',
+            \       'currentfunction': 'helpers#lightline#currentFunction',
+            \       'gitblame': 'helpers#lightline#gitBlame'
+            \   },
+            \   'tabline': {
+            \       'left': [ [ 'tabs' ] ],
+            \       'right': [ [ 'close' ] ]
+            \   },
+            \   'tab': {
+            \       'active': [ 'filename', 'modified' ],
+            \       'inactive': [ 'filename', 'modified' ],
+            \   },
+            \   'separator': { 'left': '', 'right': '' },
+            \   'subseparator': { 'left': '', 'right': '' }
+        \ }
+    " }}}
 
 " https://github.com/nicknisi/dotfiles/blob/master/config/nvim/init.vim
 " Colorscheme and final setup {{{

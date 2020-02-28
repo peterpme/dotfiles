@@ -21,6 +21,9 @@ A fast, GPU based terminal alternative to iTerm
 [Tmux](https://github.com/tmux/tmux/wiki)
 Create, split, save, move terminal tabs easily all within one window.
 
+[Fzf](https://github.com/junegunn/fzf)
+The fastest way to search for ANYTHING on your computer
+
 Optimized MacOS Configuration
 A series of one line commands that speed up and turn off the features that annoy
 developers the most!

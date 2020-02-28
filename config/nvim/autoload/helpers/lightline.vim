@@ -15,21 +15,21 @@ endfunction
 function! helpers#lightline#fileFormat()
     " only show the file format if it's not 'unix'
     let format = &fileformat == 'unix' ? '' : &fileformat
-    return winwidth(0) > 70 ? format . ' ' . WebDevIconsGetFileFormatSymbol() : ''
+    return winwidth(0) > 70 ? format : ''
 endfunction
 
 function! helpers#lightline#fileType()
-    return WebDevIconsGetFileTypeSymbol()
+    return ""
 endfunction
 
 function! helpers#lightline#gitBranch()
-    return "\uE725" . (exists('*fugitive#head') ? ' ' . fugitive#head() : '')
+    return "\uE725"
 endfunction
 
 function! helpers#lightline#currentFunction()
-    return get(b:, 'coc_current_function', '')
+    return ""
 endfunction
 
 function! helpers#lightline#gitBlame()
-    return winwidth(0) > 100 ? strpart(get(b:, 'coc_git_blame', ''), 0, 20) : ''
+    return ""
 endfunction

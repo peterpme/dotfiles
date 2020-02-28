@@ -106,6 +106,7 @@ cask "firefox"
 
 # chrome without the tracking
 cask "chromium"
+cask "chromium"
 cask "charles"
 cask "imageoptim"
 cask "licecap"
@@ -123,6 +124,30 @@ cask "sketch"
 cask "visual-studio-code"
 cask "vlc"
 cask "zoomus"
+cask "zeplin"
 
 mas "Xcode", id: 497799835
 mas "1Password", id: 443987910
+mas "NextDNS", id: 1464122853
+cask "charles"
+cask "imageoptim"
+cask "licecap"
+cask "linear"
+cask "macvim"
+cask "notion"
+cask "polymail"
+cask "postico"
+cask "postman"
+cask "postgres"
+cask "slack"
+cask "sublime-text"
+cask "spotify"
+cask "sketch"
+cask "visual-studio-code"
+cask "vlc"
+cask "zoomus"
+cask "zeplin"
+
+mas "Xcode", id: 497799835
+mas "1Password", id: 443987910
+mas "NextDNS", id: 1464122853

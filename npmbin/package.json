@@ -5,6 +5,7 @@
     "expo-cli": "3.13.1",
     "git-delete-squashed": "^1.0.3",
     "git-open": "^2.1.0",
+    "ndb": "^1.1.5",
     "neovim": "^4.8.0",
     "netlify-cli": "2.35.0",
     "typescript-language-server": "^0.4.0",

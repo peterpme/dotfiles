@@ -67,7 +67,8 @@ brew "schniz/tap/fnm"
 # https://github.com/koalaman/shellcheck
 brew "shellcheck"
 
-brew "superfly/tap/flyctl"
+# https://github.com/superfly/fly
+brew "superfly/brew/fly"
 
 # sed replacemnet https://github.com/chmln/sd
 brew "sd"

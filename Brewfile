@@ -30,12 +30,11 @@ brew "fd"
 # https://github.com/cli/cli
 brew "gh"
 
-# https://github.com/tj/git-extras/blob/master/Commands.md#git-show-tree
-brew "git-extas"
-brew "grep"
 brew "highlight"
 brew "hub"
+
 # https://github.com/ios-control/ios-deploy
+# brew "ios-deploy"
 brew "jq"
 
 # https://github.com/jesseduffield/lazydocker
@@ -50,14 +49,14 @@ brew "mas"
 # https://github.com/dylanaraps/neofetch
 brew "neofetch"
 brew "neovim"
-# https://github.com/variadico/noti
-# brew "noti"
 brew "python"
 
 # https://github.com/madler/pigz
 brew "pigz"
 
-brew "reattach-to-user-namespace"
+# https://github.com/ChrisJohnsen/tmux-MacOSX-pasteboard
+# no longer needed for tmux 2.6 but just in case
+# brew "reattach-to-user-namespace"
 
 # https://github.com/BurntSushi/ripgrep
 brew "ripgrep"
@@ -67,9 +66,12 @@ brew "schniz/tap/fnm"
 
 # https://github.com/koalaman/shellcheck
 brew "shellcheck"
+
 brew "superfly/tap/flyctl"
+
 # sed replacemnet https://github.com/chmln/sd
 brew "sd"
+
 # copy ssh keys to servers
 # https://www.ssh.com/ssh/copy-id
 brew "ssh-copy-id"
@@ -104,36 +106,17 @@ cask "flux"
 cask "hammerspoon"
 cask "firefox"
 
+cask "charles"
 # chrome without the tracking
 cask "chromium"
-cask "chromium"
-cask "charles"
+cask "cleanmymac"
 cask "imageoptim"
 cask "licecap"
-cask "linear"
+cask "little-snitch"
+cask "focus"
+cask "flux"
 cask "macvim"
-cask "notion"
-cask "polymail"
-cask "postico"
-cask "postman"
-cask "postgres"
-cask "slack"
-cask "sublime-text"
-cask "spotify"
-cask "sketch"
-cask "visual-studio-code"
-cask "vlc"
-cask "zoomus"
-cask "zeplin"
-
-mas "Xcode", id: 497799835
-mas "1Password", id: 443987910
-mas "NextDNS", id: 1464122853
-cask "charles"
-cask "imageoptim"
-cask "licecap"
-cask "linear"
-cask "macvim"
+cask "micro-snitch"
 cask "notion"
 cask "polymail"
 cask "postico"

@@ -22,6 +22,9 @@ call plug#begin('~/.config/nvim/plugged')
 
     set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
     set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+    set nobackup
+    set nowritebackup
+    set noswapfile
 
     if (has('nvim'))
         " show results of substition as they're happening

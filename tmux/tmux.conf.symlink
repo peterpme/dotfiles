@@ -5,48 +5,9 @@ unbind-key C-a
 # C-a for nested tmux sessions
 bind-key C-a send-prefix
 
-# Easy config reload
-bind-key R source-file ~/.tmux.conf \; display-message "tmux.conf reloaded."
-
-# make window/pane index start with 1
-set -g base-index 1
-setw -g pane-base-index 1
-
-# set vi mode for copy mode
-setw -g mode-keys vi
-
-# enable mouse support for switching panes/windows
-set -g mouse on
-
-# automatically renumber tmux windows
-set -g renumber-windows on
-
 # tmux 256 color support
 set -g default-terminal "xterm-kitty"
 set -as terminal-overrides ",xterm-kitty:RGB"
-
-# Rather than constraining window size to the maximum size of any client
-# connected to the *session*, constrain window size to the maximum size of any
-# client connected to *that window*. Much more reasonable.
-setw -g aggressive-resize on
-
-# https://github.com/neovim/neovim/wiki/FAQ
-# Set low escape time
-# http://superuser.com/a/252717/65504
-set -sg escape-time 0
-
-# refresh 'status-left' and 'status-right' more often
-set -g status-interval 5
-
-# focus events enabled for terminals that support them
-set -g focus-events on
-
-# tmux messages are displayed for 4 seconds
-set -g display-time 4000
-
-bind-key : command-prompt
-bind-key r refresh-client
-bind-key L clear-history
 
 # window/pane navigation
 bind-key space next-window
@@ -56,17 +17,8 @@ bind-key enter next-layout
 # use vim-like keys for splits and windows
 bind-key v split-window -h -c "#{pane_current_path}"
 bind-key s split-window -v -c "#{pane_current_path}"
-bind-key h select-pane -L
-bind-key j select-pane -D
-bind-key k select-pane -U
-bind-key l select-pane -R
 
 bind-key C-o rotate-window
-
-bind-key + select-layout main-horizontal
-bind-key = select-layout main-vertical
-set-window-option -g other-pane-height 25
-set-window-option -g other-pane-width 80
 
 bind-key a last-pane
 bind-key q display-panes
@@ -77,50 +29,13 @@ bind-key T previous-window
 bind-key [ copy-mode
 bind-key ] paste-buffer
 
-# copy and paste from tmux to macos, etc using pbcopy
-bind-key -T edit-mode-vi Up send-keys -X history-up
-bind-key -T edit-mode-vi Down send-keys -X history-down
-unbind-key -T copy-mode-vi Space     ;   bind-key -T copy-mode-vi v send-keys -X begin-selection
-unbind-key -T copy-mode-vi Enter     ;   bind-key -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "reattach-to-user-namespace pbcopy"
-unbind-key -T copy-mode-vi C-v       ;   bind-key -T copy-mode-vi C-v send-keys -X rectangle-toggle
-unbind-key -T copy-mode-vi [         ;   bind-key -T copy-mode-vi [ send-keys -X begin-selection
-unbind-key -T copy-mode-vi ]         ;   bind-key -T copy-mode-vi ] send-keys -X copy-selection
-
-# Set the time (ms) for which the indicators shown by the
-# display-panes command appear.
-set-window-option -g display-panes-time 1500
-
-# Set window notifications
-setw -g monitor-activity off
-set -g visual-activity off
-
-# Enable native Mac OS X copy/paste
-set-option -g default-command "/bin/bash -c 'which reattach-to-user-namespace >/dev/null && exec reattach-to-user-namespace $SHELL -l || exec $SHELL -l'"
-
-# Allow the arrow key to be used immediately after changing windows
-set-option -g repeat-time 0
-
-# Fix to allow mousewheel/trackpad scrolling in tmux 2.1
-bind-key -T root WheelUpPane if-shell -F -t = "#{alternate_on}" "send-keys -M" "select-pane -t =; copy-mode -e; send-keys -M"
-bind-key -T root WheelDownPane if-shell -F -t = "#{alternate_on}" "send-keys -M" "select-pane -t =; send-keys -M"
-
-# Disable assume-paste-time, so that iTerm2's "Send Hex Codes" feature works
-# with tmux 2.1. This is backwards-compatible with earlier versions of tmux,
-# AFAICT.
-set-option -g assume-paste-time 0
-
-# Destroy unattached terminals
-set-option -g destroy-unattached off
-
-set -g default-shell $SHELL
-set -g default-command "reattach-to-user-namespace -l ${SHELL} -l"
-
 source $HOME/dotfiles/tmux/base16.sh
 
 # List of plugins
-# set -g @plugin 'tmux-plugins/tpm'
-# set -g @plugin 'tmux-plugins/tmux-sensible'
-# set -g @plugin 'tmux-plugins/tmux-pain-control'
+set -g @plugin 'tmux-plugins/tpm'
+set -g @plugin 'tmux-plugins/tmux-sensible'
+set -g @plugin 'tmux-plugins/tmux-pain-control'
+set -g @plugin 'tmux-plugins/tmux-yank'
 
 # Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
-# run -b '~/.tmux/plugins/tpm/tpm'
+run -b '~/.tmux/plugins/tpm/tpm'

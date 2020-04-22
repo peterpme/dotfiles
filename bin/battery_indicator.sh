@@ -1,6 +1,5 @@
 #!/bin/bash
 # modified from http://ficate.com/blog/2012/10/15/battery-life-in-the-land-of-tmux/
-# modfied from https://github.com/nicknisi/dotfiles/blob/master/bin/battery_indicator.sh
 
 HEART='♥ '
 

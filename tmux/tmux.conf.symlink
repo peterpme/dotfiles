@@ -5,6 +5,13 @@ unbind-key C-a
 # C-a for nested tmux sessions
 bind-key C-a send-prefix
 
+# make window/pane index start with 1
+set -g base-index 1
+setw -g pane-base-index 1
+
+# automatically renumber tmux windows
+set -g renumber-windows on
+
 # tmux 256 color support
 set -g default-terminal "xterm-kitty"
 set -as terminal-overrides ",xterm-kitty:RGB"
@@ -17,14 +24,6 @@ bind-key enter next-layout
 # use vim-like keys for splits and windows
 bind-key v split-window -h -c "#{pane_current_path}"
 bind-key s split-window -v -c "#{pane_current_path}"
-
-bind-key C-o rotate-window
-
-bind-key a last-pane
-bind-key q display-panes
-bind-key c new-window
-bind-key t next-window
-bind-key T previous-window
 
 bind-key [ copy-mode
 bind-key ] paste-buffer

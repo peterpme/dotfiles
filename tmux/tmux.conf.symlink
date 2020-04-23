@@ -9,6 +9,9 @@ bind-key C-a send-prefix
 set -g base-index 1
 setw -g pane-base-index 1
 
+# Enable Mouse mode
+set-option -g mouse on
+
 # automatically renumber tmux windows
 set -g renumber-windows on
 
@@ -35,6 +38,7 @@ set -g @plugin 'tmux-plugins/tpm'
 set -g @plugin 'tmux-plugins/tmux-sensible'
 set -g @plugin 'tmux-plugins/tmux-pain-control'
 set -g @plugin 'tmux-plugins/tmux-yank'
+set -g @plugin 'nhdaly/tmux-better-mouse-mode'
 
 # Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
 run -b '~/.tmux/plugins/tpm/tpm'

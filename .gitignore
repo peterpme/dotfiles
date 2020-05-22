@@ -35,3 +35,17 @@ node_modules
 config/heroku
 config/configstore
 alfred
+
+npm-debug.log
+
+# nvim related
+config/nvim/spell
+config/nvim/shada
+config/nvim/plugged
+config/nvim/autoload/plug.vim
+vim/vim.symlink/spell/
+vim/vim.symlink/plugged/
+plug.vim.old
+
+# brewfile
+Brewfile.lock.json

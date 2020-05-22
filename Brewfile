@@ -99,9 +99,14 @@ brew "zsh-completions"
 cask "alfred"
 cask "discord"
 cask "kitty"
-cask "font-iosevka-nerd-font"
-# cask "1password-cli"
 cask "flux"
+
+# Fonts
+cask "font-fira-code"
+cask "font-fira-code-nerd-font"
+cask "font-jetbrains-mono"
+cask "font-iosevka"
+cask "font-iosevka-nerd-font"
 
 # MacOS Automation Tool https://www.hammerspoon.org/
 cask "hammerspoon"

@@ -25,6 +25,9 @@ tsx:*.tsx
 --type-add
 jsx:*.jsx
 
+--type-add
+ejs:*.ejs
+
 # ignore case
 --smart-case
 

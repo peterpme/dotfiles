@@ -1,18 +1,19 @@
 {
   "dependencies": {
     "diff-so-fancy": "^1.2.7",
-    "esy": "0.6.2",
-    "expo-cli": "3.16.1",
+    "esy": "0.6.4",
+    "expo-cli": "^3.21.8",
+    "gatsby-cli": "^2.12.29",
     "git-delete-squashed": "^1.0.3",
     "git-open": "^2.1.0",
     "ndb": "^1.1.5",
     "neovim": "^4.8.0",
-    "netlify-cli": "2.40.0",
+    "netlify-cli": "2.51.0",
     "rustywind": "^0.6.5",
     "typescript-language-server": "^0.4.0",
     "vscode-css-languageserver-bin": "^1.4.0",
     "vscode-html-languageserver-bin": "^1.4.0",
     "vscode-json-languageserver-bin": "^1.0.1",
-    "yaml-language-server": "0.7.2"
+    "yaml-language-server": "0.8.0"
   }
 }

@@ -514,6 +514,7 @@ call plug#begin('~/.config/nvim/plugged')
         Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 
         let g:coc_global_extensions = [
+        \ 'coc-yaml',
         \ 'coc-css',
         \ 'coc-json',
         \ 'coc-tsserver',
@@ -618,6 +619,9 @@ call plug#begin('~/.config/nvim/plugged')
 
         " mustache support
         Plug 'mustache/vim-mustache-handlebars'
+
+        "ejs support"
+        Plug 'nikvdp/ejs-syntax', { 'for': ['ejs']}
 
         " pug / jade support
         Plug 'digitaltoad/vim-pug', { 'for': ['jade', 'pug'] }

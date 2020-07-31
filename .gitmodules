@@ -7,3 +7,6 @@
 [submodule "hosts"]
 	path = hosts
 	url = git@github.com:StevenBlack/hosts.git
+[submodule "forgit"]
+	path = forgit
+	url = https://github.com/wfxr/forgit

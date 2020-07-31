@@ -448,6 +448,9 @@ call plug#begin('~/.config/nvim/plugged')
         if isdirectory(".git")
             " if in a git project, use :GFiles
             nmap <silent> <leader>t :GitFiles --cached --others --exclude-standard<cr>
+        " supports monorepo
+        elseif isdirectory("../.git")
+            nmap <silent> <leader>t :GitFiles --cached --others --exclude-standard<cr>
         else
             " otherwise, use :FZF
             nmap <silent> <leader>t :FZF<cr>

@@ -30,6 +30,13 @@ call plug#begin('~/.config/nvim/plugged')
         " show results of substition as they're happening
         " but don't open a split
         set inccommand=nosplit
+
+        " Disable ruby provider
+        let g:loaded_ruby_provider = 0
+        " Disable python2 provider
+        let g:loaded_python_provider = 0
+        " Set node host to npmbin
+        let g:node_host_prog = '$HOME/dotfiles/npmbin/node_modules/.bin/neovim-node-host'
     endif
 
     set backspace=indent,eol,start " make backspace behave in a sane manner

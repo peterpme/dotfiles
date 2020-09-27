@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "expo-cli": "^3.27.7",
+    "expo-cli": "^3.27.8",
     "gatsby-cli": "^2.12.99",
     "git-delete-squashed": "^1.0.3",
     "git-open": "^2.1.0",

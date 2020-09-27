@@ -24,6 +24,15 @@ brew cleanup
 echo 'Agree to Xcode & Download'
 source scripts/xcode.sh
 
+echo 'Symlink setup'
+source scripts/symlink.sh
+
+echo 'MacOS Setup'
+source scripts/osx.sh
+
+echo 'Dock Setup'
+source scripts/dock.sh
+
 echo 'Pull in All Submodules'
 git submodule update --recursive --remote --init
 
@@ -48,14 +57,5 @@ if [[ "$SHELL" != "$zsh_path" ]]; then
     chsh -s "$zsh_path"
     echo "default shell changed to $zsh_path"
 fi
-
-echo 'Symlink setup'
-source scripts/symlink.sh
-
-echo 'MacOS Setup'
-source scripts/osx.sh
-
-echo 'Dock Setup'
-source scripts/dock.sh
 
 echo "Done. Reload your terminal!"

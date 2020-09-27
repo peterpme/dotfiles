@@ -1,3 +1,11 @@
+## first time Setup
+
+- add nvim +PlugInstall to isntall plugs
+- reverse order in the file to install other shit frist
+- figure out broken brew things
+- install node via fnm after brew installing it
+- manually open hammerspoon and set open at login
+
 # under construction ...
 
 # :fire: dotfiles

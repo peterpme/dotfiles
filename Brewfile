@@ -93,12 +93,10 @@ brew "watchman"
 cask "wifispoof"
 brew "wget", args: ["with-iri"]
 brew "wifi-password"
-brew "yarn-completion"
 
 brew "youtube-dl"
 brew "z"
 brew "zsh"
-brew "zsh-completions"
 
 cask "alfred"
 cask "discord"

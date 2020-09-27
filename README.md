@@ -2,34 +2,34 @@
 
 ## Features
 
-[Homebrew](https://brew.sh)
+- [Homebrew](https://brew.sh)
 The Missing Package Manager for MacOS (or Linux)
 
-[Mac App Store CLI](https://github.com/mas-cli/mas)
+- [Mac App Store CLI](https://github.com/mas-cli/mas)
 A CLI for the Mac App Store. Installs all your favorite apps in just 1 line!
 
-[Hammerspoon](https://github.com/Hammerspoon/hammerspoon)
+- [Hammerspoon](https://github.com/Hammerspoon/hammerspoon)
 Staggeringly powerful MacOS desktop automation with Lua
 
-[Neovim](https://neovim.io/)
+- [Neovim](https://neovim.io/)
 A modern, ground up rewrite of Vim
 
-[Kitty](https://sw.kovidgoyal.net/kitty/)
+- [Kitty](https://sw.kovidgoyal.net/kitty/)
 A fast, GPU based terminal alternative to iTerm
 
-[Tmux](https://github.com/tmux/tmux/wiki)
+- [Tmux](https://github.com/tmux/tmux/wiki)
 Create, split, save, move terminal tabs easily all within one window.
 
-[Fzf](https://github.com/junegunn/fzf)
+- [Fzf](https://github.com/junegunn/fzf)
 The fastest way to search for ANYTHING on your computer
 
-[Forgit](https://github.com/wfxr/forgit)
+- [Forgit](https://github.com/wfxr/forgit)
 Use git interactively. Powered by fzf
 
-[Prezto](https://github.com/sorin-ionescu/prezto)
+- [Prezto](https://github.com/sorin-ionescu/prezto)
 A lightweight zsh configuration framework with sensible defaults. It's fast, too!
 
-[PowerLevel10k](https://github.com/romkatv/powerlevel10k)
+- [PowerLevel10k](https://github.com/romkatv/powerlevel10k)
 A zsh theme that emphasizes speed, flexibility and an out-of-the-box experience
 
 ## Paths and extra alias

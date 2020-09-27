@@ -54,4 +54,10 @@ if [[ "$SHELL" != "$zsh_path" ]]; then
     echo "default shell changed to $zsh_path"
 fi
 
+# Install neovim dependencies
+nvim +PlugInstall
+
+# Create ~/.ssh/control file for multiplexing
+mkdir -p ~/.ssh/control
+
 echo "Done. Reload your terminal!"

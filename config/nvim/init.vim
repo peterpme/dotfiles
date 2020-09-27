@@ -517,24 +517,24 @@ call plug#begin('~/.config/nvim/plugged')
         Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
         let g:coc_global_extensions = [
-        \ 'coc-yaml',
         \ 'coc-css',
-        \ 'coc-json',
-        \ 'coc-tsserver',
-        \ 'coc-git',
-        \ 'coc-eslint',
-        \ 'coc-tslint-plugin',
-        \ 'coc-pairs',
-        \ 'coc-sh',
-        \ 'coc-vimlsp',
-        \ 'coc-emmet',
-        \ 'coc-prettier',
-        \ 'coc-ultisnips',
-        \ 'coc-explorer',
         \ 'coc-diagnostic',
-        \ 'coc-tailwindcss',
+        \ 'coc-emmet',
+        \ 'coc-eslint',
+        \ 'coc-explorer',
+        \ 'coc-git',
+        \ 'coc-json',
+        \ 'coc-pairs',
+        \ 'coc-prettier',
         \ 'coc-reason',
-        \ 'coc-tabnine'
+        \ 'coc-sh',
+        \ 'coc-tabnine',
+        \ 'coc-tailwindcss',
+        \ 'coc-tslint-plugin',
+        \ 'coc-tsserver',
+        \ 'coc-ultisnips',
+        \ 'coc-vimlsp',
+        \ 'coc-yaml'
         \ ]
 
         autocmd CursorHold * silent call CocActionAsync('highlight')

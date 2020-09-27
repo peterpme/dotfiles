@@ -42,12 +42,15 @@
     untrackedCache = true
 
 [interactive]
-    diffFilter = delta --color-only --theme=base16
+    diffFilter = delta --color-only
 
 [pager]
     # https://github.com/dandavison/delta
-    diff = delta --theme=base16 | less --tabs=4 -RFX
-    show = delta --theme=base16 | less --tabs=4 -RFX
+    diff = delta | less --tabs=4 -RFX
+    show = delta | less --tabs=4 -RFX
+
+[delta]
+    side-by-side = true
 
 [color]
     ui = auto

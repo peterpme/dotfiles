@@ -30,7 +30,12 @@ brew "fd"
 # https://github.com/cli/cli
 brew "gh"
 
-brew "highlight"
+# https://github.com/dandavison/delta#installation
+brew "git-delta"
+
+# brew "highlight"
+
+# https://github.com/github/hub
 brew "hub"
 
 # https://github.com/ios-control/ios-deploy

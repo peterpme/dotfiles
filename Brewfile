@@ -93,7 +93,6 @@ brew "watchman"
 cask "wifispoof"
 brew "wget", args: ["with-iri"]
 brew "wifi-password"
-brew "yarn", args: ["ignore-dependencies"]
 brew "yarn-completion"
 
 brew "youtube-dl"

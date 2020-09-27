@@ -60,4 +60,7 @@ nvim +PlugInstall
 # Create ~/.ssh/control file for multiplexing
 mkdir -p ~/.ssh/control
 
+echo 'Install Yarn'
+curl -o- -L https://yarnpkg.com/install.sh | bash
+
 echo "Done. Reload your terminal!"

@@ -57,6 +57,7 @@ brew "neovim"
 brew "python"
 
 # https://github.com/madler/pigz
+# tar replacement (used inside prezto/archive)
 brew "pigz"
 
 # https://github.com/ChrisJohnsen/tmux-MacOSX-pasteboard

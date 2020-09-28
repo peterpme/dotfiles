@@ -55,12 +55,17 @@ if [[ "$SHELL" != "$zsh_path" ]]; then
 fi
 
 # Install neovim dependencies
+echo 'Install neovim dependencies'
 nvim +PlugInstall
 
 # Create ~/.ssh/control file for multiplexing
+echo 'Create .ssh/control file for multiplexing support'
 mkdir -p ~/.ssh/control
 
 echo 'Install Yarn'
 curl -o- -L https://yarnpkg.com/install.sh | bash
+
+echo 'Install tmux plugin manager'
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 echo "Done. Reload your terminal!"

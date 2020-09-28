@@ -105,9 +105,10 @@ cask "kitty"
 cask "flux"
 
 # Fonts
-cask "font-fira-code"
-cask "font-jetbrains-mono"
+# cask "font-fira-code"
+# cask "font-jetbrains-mono"
 cask "font-iosevka"
+cask "font-3270-nerd-font"
 
 # MacOS Automation Tool https://www.hammerspoon.org/
 cask "hammerspoon"

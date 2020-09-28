@@ -136,7 +136,7 @@ call plug#begin('~/.config/nvim/plugged')
         Plug 'itchyny/lightline.vim'
         Plug 'mike-hearn/base16-vim-lightline'
         let g:lightline = {
-            \   'colorscheme': 'base16_horizon_dark',
+            \   'colorscheme': 'base16_gruvbox_dark_hard',
             \   'active': {
             \       'left': [ [ 'mode', 'paste' ],
             \               [ 'gitbranch' ],
@@ -699,7 +699,7 @@ call plug#end()
     else
         let g:onedark_termcolors=16
         let g:onedark_terminal_italics=1
-        colorscheme base16-horizon-dark
+        colorscheme base16-gruvbox-dark-hard
     endif
     syntax on
     filetype plugin indent on

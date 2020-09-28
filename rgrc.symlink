@@ -5,7 +5,10 @@
 style:*.{css,sass,less,stylus}
 
 --type-add
-re:*.{re,rei,ml,mli}
+bs:*.{bs,gen}
+
+--type-add
+re:*.{res,re,rei,ml,mli}
 
 --type-add
 pug:*.{pug,jade}
@@ -17,7 +20,10 @@ tmpl:*.{html,hbs,pug}
 dts:*.d.ts
 
 --type-add
-spec:*.spec.{ts,tsx,js,jsx}
+spec:*.{spec,test}.{ts,tsx,js,jsx}
+
+--type-add
+test:*.{spec,test}.{ts,tsx,js,jsx}
 
 --type-add
 tsx:*.tsx

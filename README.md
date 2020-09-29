@@ -1,6 +1,6 @@
-# peterpme dotfiles
+# Peter's dotfiles
 
-## Features
+Dotfiles and automation that make my life easier. Take a peek!
 
 - [Homebrew](https://brew.sh)
 The Missing Package Manager for MacOS (or Linux)

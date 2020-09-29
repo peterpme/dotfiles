@@ -14,11 +14,15 @@ Staggeringly powerful MacOS desktop automation with Lua
 - [Neovim](https://neovim.io/)
 A modern, ground up rewrite of Vim
 
+![neovim](./screenshots/neovim.png)
+
 - [Kitty](https://sw.kovidgoyal.net/kitty/)
 A fast, GPU based terminal alternative to iTerm
 
 - [Tmux](https://github.com/tmux/tmux/wiki)
 Create, split, save, move terminal tabs easily all within one window.
+
+![tmux](./screenshots/tmux.png)
 
 - [Fzf](https://github.com/junegunn/fzf)
 The fastest way to search for ANYTHING on your computer
@@ -26,11 +30,15 @@ The fastest way to search for ANYTHING on your computer
 - [Forgit](https://github.com/wfxr/forgit)
 Use git interactively. Powered by fzf
 
+![forgit](./screenshots/forgit.png)
+
 - [Prezto](https://github.com/sorin-ionescu/prezto)
 A lightweight zsh configuration framework with sensible defaults. It's fast, too!
 
 - [PowerLevel10k](https://github.com/romkatv/powerlevel10k)
 A zsh theme that emphasizes speed, flexibility and an out-of-the-box experience
+
+![git diff](./screenshots/git-diff.png)
 
 ## Paths and extra alias
 
@@ -70,8 +78,6 @@ I've been working on my dotfiles for over 8 years. A lot of it is thanks to the 
 
 - zprezto repo - https://github.com/peterpme/prezto
 
-![Neovim](./screenshots/neovim.png)
-![autocomplete](./screenshots/autocomplete.png)
 
 ## Investigating
 

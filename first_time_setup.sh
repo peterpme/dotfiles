@@ -68,4 +68,7 @@ curl -o- -L https://yarnpkg.com/install.sh | bash
 echo 'Install tmux plugin manager'
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
+echo 'Install fzf options'
+$(brew --prefix)/opt/fzf/install
+
 echo "Done. Reload your terminal!"

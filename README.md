@@ -14,7 +14,6 @@ Staggeringly powerful MacOS desktop automation with Lua
 - [Neovim](https://neovim.io/)
 A modern, ground up rewrite of Vim
 
-![neovim](./screenshots/neovim.png)
 
 - [Kitty](https://sw.kovidgoyal.net/kitty/)
 A fast, GPU based terminal alternative to iTerm
@@ -22,7 +21,6 @@ A fast, GPU based terminal alternative to iTerm
 - [Tmux](https://github.com/tmux/tmux/wiki)
 Create, split, save, move terminal tabs easily all within one window.
 
-![tmux](./screenshots/tmux.png)
 
 - [Fzf](https://github.com/junegunn/fzf)
 The fastest way to search for ANYTHING on your computer
@@ -30,7 +28,6 @@ The fastest way to search for ANYTHING on your computer
 - [Forgit](https://github.com/wfxr/forgit)
 Use git interactively. Powered by fzf
 
-![forgit](./screenshots/forgit.png)
 
 - [Prezto](https://github.com/sorin-ionescu/prezto)
 A lightweight zsh configuration framework with sensible defaults. It's fast, too!
@@ -38,12 +35,15 @@ A lightweight zsh configuration framework with sensible defaults. It's fast, too
 - [PowerLevel10k](https://github.com/romkatv/powerlevel10k)
 A zsh theme that emphasizes speed, flexibility and an out-of-the-box experience
 
+## Screenshots
+
+![tmux](./screenshots/tmux.png)
+
+![neovim](./screenshots/neovim.png)
+
 ![git diff](./screenshots/git-diff.png)
 
-## Paths and extra alias
-
-if you want to add paths and extra aliases, you can add them into `alias` and
-`path`. this is loaded by `~/.zshenv`
+![forgit](./screenshots/forgit.png)
 
 ## Getting Started
 
@@ -74,10 +74,10 @@ I've been working on my dotfiles for over 8 years. A lot of it is thanks to the 
 - [Nick Nisi Dotfiles](https://github.com/nicknisi/dotfiles)
 - [Mathias Bynens Dotfiles](https://github.com/mathiasbynens/dotfiles)
 
-## TODO
+## Paths and extra alias
 
-- zprezto repo - https://github.com/peterpme/prezto
-
+if you want to add paths and extra aliases, you can add them into `alias` and
+`path`. this is loaded by `~/.zshenv`
 
 ## Investigating
 
@@ -97,7 +97,7 @@ I've been working on my dotfiles for over 8 years. A lot of it is thanks to the 
 - https://github.com/makovich/dotfiles/tree/master/dns dns stuff
 
 
-## first time Setup
+## TODO
 
 - add nvim +PlugInstall to isntall plugs
 - reverse order in the file to install other shit frist

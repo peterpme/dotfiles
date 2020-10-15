@@ -3,7 +3,6 @@ tap "homebrew/cask"
 tap "homebrew/core"
 tap "caskroom/cask"
 tap "homebrew/cask-fonts"
-tap "heroku/brew"
 
 # cat replacement https://github.com/sharkdp/bat
 brew "bat"
@@ -30,7 +29,7 @@ brew "gh"
 # https://github.com/dandavison/delta#installation
 brew "git-delta"
 
-brew "heroku"
+brew "heroku/brew/heroku"
 
 # https://github.com/github/hub
 brew "hub"

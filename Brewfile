@@ -14,9 +14,8 @@ brew "bat"
 brew "cloc"
 brew "curl"
 
-# https://github.com/so-fancy/diff-so-fancy
+# https://github.com/kcrawford/dockutil
 brew "dockutil"
-brew "diff-so-fancy"
 
 # ls replacement https://github.com/ogham/exa
 brew "exa"
@@ -32,8 +31,6 @@ brew "gh"
 
 # https://github.com/dandavison/delta#installation
 brew "git-delta"
-
-# brew "highlight"
 
 # https://github.com/github/hub
 brew "hub"
@@ -52,7 +49,6 @@ brew "lazygit"
 brew "mas"
 
 # https://github.com/dylanaraps/neofetch
-brew "neofetch"
 brew "neovim"
 brew "python"
 
@@ -99,30 +95,25 @@ brew "youtube-dl"
 brew "z"
 brew "zsh"
 
-cask "alfred"
-cask "discord"
-cask "kitty"
-cask "flux"
-
 # Fonts
-# cask "font-fira-code"
-# cask "font-jetbrains-mono"
 cask "font-iosevka"
 cask "font-3270-nerd-font"
 
-# MacOS Automation Tool https://www.hammerspoon.org/
-cask "hammerspoon"
-cask "firefox"
-
+cask "alfred"
 cask "charles"
 # chrome without the tracking
 cask "chromium"
 cask "cleanmymac"
-cask "imageoptim"
-cask "licecap"
-cask "little-snitch"
+cask "discord"
+cask "firefox"
 cask "focus"
 cask "flux"
+# MacOS Automation Tool https://www.hammerspoon.org/
+cask "hammerspoon"
+cask "imageoptim"
+cask "kitty"
+cask "licecap"
+cask "little-snitch"
 cask "macvim"
 cask "micro-snitch"
 cask "notion"
@@ -130,7 +121,6 @@ cask "polymail"
 cask "postico"
 cask "postman"
 cask "postgres"
-cask "slack"
 cask "sublime-text"
 cask "spotify"
 cask "sketch"
@@ -139,6 +129,8 @@ cask "vlc"
 cask "zoomus"
 cask "zeplin"
 
+mas "Fantastical", id: 975937182
+mas "Slack", id: 803453959
 mas "Xcode", id: 497799835
-mas "1Password", id: 443987910
+mas "1Password 7", id: 1333542190
 mas "NextDNS", id: 1464122853

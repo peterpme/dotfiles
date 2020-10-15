@@ -136,7 +136,7 @@ call plug#begin('~/.config/nvim/plugged')
         Plug 'itchyny/lightline.vim'
         Plug 'mike-hearn/base16-vim-lightline'
         let g:lightline = {
-            \   'colorscheme': 'base16_gruvbox_dark_hard',
+            \   'colorscheme': 'base16_seti',
             \   'active': {
             \       'left': [ [ 'mode', 'paste' ],
             \               [ 'gitbranch' ],
@@ -693,13 +693,13 @@ call plug#end()
 " Colorscheme and final setup {{{
     " This call must happen after the plug#end() call to ensure
     " that the colorschemes have been loaded
+    " https://github.com/chriskempson/base16-shell#base16-vim-users
     if filereadable(expand("~/.vimrc_background"))
         let base16colorspace=256
         source ~/.vimrc_background
     else
-        let g:onedark_termcolors=16
-        let g:onedark_terminal_italics=1
-        colorscheme base16-gruvbox-dark-hard
+        set background=dark
+        colorscheme base16-seti
     endif
     syntax on
     filetype plugin indent on

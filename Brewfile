@@ -1,7 +1,6 @@
 tap "homebrew/bundle"
 tap "homebrew/cask"
 tap "homebrew/core"
-tap "caskroom/cask"
 tap "homebrew/cask-fonts"
 
 # cat replacement https://github.com/sharkdp/bat
@@ -87,7 +86,7 @@ brew "watchman"
 
 # Spoof MAC Address
 cask "wifispoof"
-brew "wget", args: ["with-iri"]
+brew "wget"
 brew "wifi-password"
 
 brew "youtube-dl"

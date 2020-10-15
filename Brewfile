@@ -3,8 +3,6 @@ tap "homebrew/cask"
 tap "homebrew/core"
 tap "caskroom/cask"
 tap "homebrew/cask-fonts"
-tap "superfly/brew"
-tap "schniz/tap"
 tap "heroku/brew"
 
 # cat replacement https://github.com/sharkdp/bat
@@ -31,6 +29,8 @@ brew "gh"
 
 # https://github.com/dandavison/delta#installation
 brew "git-delta"
+
+brew "heroku"
 
 # https://github.com/github/hub
 brew "hub"
@@ -64,13 +64,13 @@ brew "pigz"
 brew "ripgrep"
 
 # fast node manager
-brew "schniz/tap/fnm"
+brew "Schniz/tap/fnm"
 
 # https://github.com/koalaman/shellcheck
 brew "shellcheck"
 
 # https://github.com/superfly/fly
-brew "superfly/brew/fly"
+brew "superfly/tap/flyctl"
 
 # sed replacemnet https://github.com/chmln/sd
 brew "sd"

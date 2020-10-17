@@ -31,7 +31,7 @@
     "explorer.keyMappings": {
         "<cr>": ["expandable?", "expandOrCollapse", "open"]
     },
-    "eslint.enable": false,
+    "eslint.enable": true,
     "diagnostic-languageserver.filetypes": {
         "sh": "shellcheck"
     },

@@ -73,3 +73,8 @@ if [ ! -d "$HOME/.hammerspoon" ]; then
     echo "Symlinking hammerspoon.."
     ln -s $DOTFILES/hammerspoon/ $HOME/.hammerspoon
 fi
+
+echo -e "\\n\\nsymlinking vscode"
+echo "=============================="
+rm -rf ~/Library/Application\ Support/Code/User
+ln -s ~/dotfiles/vscode/User ~/Library/Application\ Support/Code/User

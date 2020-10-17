@@ -347,6 +347,9 @@ call plug#begin('~/.config/nvim/plugged')
     " detect indent style (tabs vs. spaces)
     Plug 'tpope/vim-sleuth'
 
+    " auto pairs https://github.com/jiangmiao/auto-pairs
+    Plug 'jiangmiao/auto-pairs'
+
     " Startify: Fancy startup screen for vim {{{
         Plug 'mhinz/vim-startify'
 
@@ -526,18 +529,13 @@ call plug#begin('~/.config/nvim/plugged')
         let g:coc_global_extensions = [
         \ 'coc-css',
         \ 'coc-diagnostic',
-        \ 'coc-emmet',
         \ 'coc-eslint',
-        \ 'coc-explorer',
-        \ 'coc-git',
         \ 'coc-json',
         \ 'coc-pairs',
         \ 'coc-prettier',
         \ 'coc-reason',
-        \ 'coc-sh',
         \ 'coc-tabnine',
         \ 'coc-tailwindcss',
-        \ 'coc-tslint-plugin',
         \ 'coc-tsserver',
         \ 'coc-ultisnips',
         \ 'coc-vimlsp',
@@ -551,10 +549,10 @@ call plug#begin('~/.config/nvim/plugged')
         nmap <leader>f :CocCommand prettier.formatFile<cr>
 
         " coc-git
-        nmap [g <Plug>(coc-git-prevchunk)
-        nmap ]g <Plug>(coc-git-nextchunk)
-        nmap gs <Plug>(coc-git-chunkinfo)
-        nmap gu :CocCommand git.chunkUndo<cr>
+        " nmap [g <Plug>(coc-git-prevchunk)
+        " nmap ]g <Plug>(coc-git-nextchunk)
+        " nmap gs <Plug>(coc-git-chunkinfo)
+        " nmap gu :CocCommand git.chunkUndo<cr>
 
         nmap <silent> <leader>k :CocCommand explorer<cr>
 
@@ -642,23 +640,26 @@ call plug#begin('~/.config/nvim/plugged')
         " liquid support
         Plug 'tpope/vim-liquid'
     " }}}
-
-    " JavaScript {{{
-        Plug 'othree/yajs.vim', { 'for': [ 'javascript', 'javascript.jsx', 'html' ] }
-        " Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx', 'html'] }
-        Plug 'moll/vim-node', { 'for': 'javascript' }
-		" Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'], 'do': 'npm install' }
-		Plug 'MaxMEllon/vim-jsx-pretty'
-		let g:vim_jsx_pretty_highlight_close_tag = 1
+    "
+    " GraphQL {{{
+        Plug 'jparise/vim-graphql'
     " }}}
-
+    "
     " ReasonML {{{
         Plug 'reasonml-editor/vim-reason-plus'
     " }}}
 
+    " JavaScript {{{
+        Plug 'othree/yajs.vim'
+        Plug 'moll/vim-node'
+
+        Plug 'yuezk/vim-js'
+        Plug 'MaxMEllon/vim-jsx-pretty'
+    " }}}
+
     " TypeScript {{{
         Plug 'leafgarland/typescript-vim', { 'for': ['typescript', 'typescript.tsx'] }
-        " Plug 'Shougo/vimproc.vim', { 'do': 'make' } TODO what still needs this?
+        let g:typescript_indent_disable = 1
     " }}}
 
     " Styles {{{

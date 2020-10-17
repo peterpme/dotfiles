@@ -455,8 +455,8 @@ call plug#begin('~/.config/nvim/plugged')
         if isdirectory(".git")
             " if in a git project, use :GFiles
             nmap <silent> <leader>t :GitFiles --cached --others --exclude-standard<cr>
-        " supports monorepo
         elseif isdirectory("../.git")
+            " if in a git project, use :GFiles
             nmap <silent> <leader>t :GitFiles --cached --others --exclude-standard<cr>
         else
             " otherwise, use :FZF
@@ -628,7 +628,7 @@ call plug#begin('~/.config/nvim/plugged')
         Plug 'othree/html5.vim', { 'for': 'html' }
 
         " mustache support
-        Plug 'mustache/vim-mustache-handlebars'
+        Plug 'mustache/vim-mustache-handlebars', { 'for': 'hbs' }
 
         "ejs support"
         Plug 'nikvdp/ejs-syntax', { 'for': ['ejs']}
@@ -689,6 +689,9 @@ call plug#begin('~/.config/nvim/plugged')
 " }}}
 
 call plug#end()
+
+" Colorizer setup
+lua require'colorizer'.setup()
 
 " Colorscheme and final setup {{{
     " This call must happen after the plug#end() call to ensure

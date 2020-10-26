@@ -370,9 +370,9 @@ call plug#begin('~/.config/nvim/plugged')
         \ ]
 
         let g:startify_commands = [
-        \   { 'uc': [ 'Clean Plugins', ':PlugClean' ] },
         \   { 'up': [ 'Update Plugins', ':PlugUpdate' ] },
         \   { 'ug': [ 'Upgrade Plugin Manager', ':PlugUpgrade' ] },
+        \   { 'uc': [ 'Update CoC Plugins', ':CocUpdate' ] },
         \ ]
 
         let g:startify_bookmarks = [
@@ -388,8 +388,8 @@ call plug#begin('~/.config/nvim/plugged')
     " }}}
 
     " Close buffers but keep splits
-    Plug 'moll/vim-bbye'
-    nmap <leader>b :Bdelete<cr>
+    " Plug 'moll/vim-bbye'
+    " nmap <leader>b :Bdelete<cr>
 
     " Writing in vim {{{{
         Plug 'junegunn/goyo.vim'

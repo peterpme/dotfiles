@@ -649,6 +649,10 @@ call plug#begin('~/.config/nvim/plugged')
         Plug 'reasonml-editor/vim-reason-plus'
     " }}}
 
+    " ReScript {{{
+        Plug 'rescript-lang/vim-rescript'
+    " }}}
+
     " JavaScript {{{
         Plug 'othree/yajs.vim'
         Plug 'moll/vim-node'

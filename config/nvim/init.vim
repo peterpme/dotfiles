@@ -118,25 +118,24 @@ call plug#begin('~/.config/nvim/plugged')
     endif
 
     " enable 24 bit color support if supported
-    if (has("termguicolors"))
-        if (!(has("nvim")))
-            let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-            let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-        endif
-        set termguicolors
+    if exists('+termguicolors')
+      let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+      let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+      set termguicolors
     endif
 
     " highlight conflicts
     match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
-    " Load colorschemes
-    Plug 'chriskempson/base16-vim'
+    " Load colorschemes (theme)
+    " Plug 'chriskempson/base16-vim'
+    Plug 'pineapplegiant/spaceduck', { 'branch': 'main' }
 
     " LightLine {{{
         Plug 'itchyny/lightline.vim'
-        Plug 'mike-hearn/base16-vim-lightline'
+        " Plug 'mike-hearn/base16-vim-lightline'
         let g:lightline = {
-            \   'colorscheme': 'base16_seti',
+            \   'colorscheme': 'spaceduck',
             \   'active': {
             \       'left': [ [ 'mode', 'paste' ],
             \               [ 'gitbranch' ],
@@ -648,7 +647,7 @@ call plug#begin('~/.config/nvim/plugged')
     " ReasonML {{{
         Plug 'reasonml-editor/vim-reason-plus'
     " }}}
-
+    "
     " ReScript {{{
         Plug 'rescript-lang/vim-rescript'
     " }}}
@@ -706,8 +705,8 @@ lua require'colorizer'.setup()
         let base16colorspace=256
         source ~/.vimrc_background
     else
-        set background=dark
-        colorscheme base16-seti
+        " set background=dark
+        colorscheme spaceduck
     endif
     syntax on
     filetype plugin indent on

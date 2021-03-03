@@ -1,3 +1,4 @@
+# Press prefix + I (capital I) to fetch the plugins
 # use C-a, since it's on the home row and easier to hit than C-b
 set-option -g prefix C-a
 unbind-key C-a
@@ -30,8 +31,6 @@ bind-key s split-window -v -c "#{pane_current_path}"
 
 bind-key [ copy-mode
 bind-key ] paste-buffer
-
-# source $HOME/dotfiles/tmux/base16.sh
 
 # List of plugins
 set -g @plugin 'tmux-plugins/tpm'

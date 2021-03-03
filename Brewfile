@@ -6,6 +6,9 @@ tap "homebrew/cask-fonts"
 # cat replacement https://github.com/sharkdp/bat
 brew "bat"
 
+# https://github.com/chriswalz/bit#how-to-install
+brew "bit-git"
+
 # https://github.com/AlDanial/cloc
 brew "cloc"
 brew "curl"

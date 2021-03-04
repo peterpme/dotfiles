@@ -13,7 +13,7 @@
     "diagnostic.infoSign": "●",
     "diagnostic.hintSign": "○",
     "git.addGBlameToBufferVar": true,
-    "coc.preferences.formatOnSaveFiletypes": ["yaml", "typescript", "javascript", "javascript.jsx", "typescript.tsx", "typescriptreact", "javascriptreact", "reason"],
+    "coc.preferences.formatOnSaveFiletypes": ["yaml", "typescript", "javascript", "javascript.jsx", "typescript.tsx", "typescriptreact", "javascriptreact", "reason", "rescript"],
     "explorer.icon.enableNerdfont": true,
     "explorer.sources": [
         {"name": "buffer", "expand": true},

@@ -78,7 +78,7 @@ brew "sd"
 
 # copy ssh keys to servers
 # https://www.ssh.com/ssh/copy-id
-brew "ssh-copy-id"
+# brew "ssh-copy-id"
 brew "tldr"
 brew "tmux"
 brew "trash"
@@ -127,7 +127,7 @@ cask "spotify"
 cask "sketch"
 cask "visual-studio-code"
 cask "vlc"
-cask "zoomus"
+cask "zoom"
 cask "zeplin"
 
 mas "Fantastical", id: 975937182

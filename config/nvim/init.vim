@@ -129,13 +129,14 @@ call plug#begin('~/.config/nvim/plugged')
 
     " Load colorschemes (theme)
     " Plug 'chriskempson/base16-vim'
-    Plug 'pineapplegiant/spaceduck', { 'branch': 'main' }
+    " Plug 'pineapplegiant/spaceduck', { 'branch': 'main' }
+    Plug 'folke/tokyonight.nvim'
 
     " LightLine {{{
         Plug 'itchyny/lightline.vim'
         " Plug 'mike-hearn/base16-vim-lightline'
         let g:lightline = {
-            \   'colorscheme': 'spaceduck',
+            \   'colorscheme': 'tokyonight',
             \   'active': {
             \       'left': [ [ 'mode', 'paste' ],
             \               [ 'gitbranch' ],
@@ -312,6 +313,9 @@ call plug#begin('~/.config/nvim/plugged')
 " }}}
 
 " General Functionality {{{
+    " Treesitter https://github.com/nvim-treesitter/nvim-treesitter
+    Plug 'nvim-treesitter/nvim-treesitter', { 'branch': '0.5-compat', 'do': ':TSUpdate' }
+
     " better terminal integration
     " substitute, search, and abbreviate multiple variants of a word
     Plug 'tpope/vim-abolish'
@@ -694,20 +698,24 @@ call plug#begin('~/.config/nvim/plugged')
 
 call plug#end()
 
+" Treesitter modules and configuration.
+:lua << EOF
+
+    require'nvim-treesitter.configs'.setup {
+        highlight = { enable = true },
+        indent = { enabled = true }
+    }
+EOF
+
 " Colorizer setup
 lua require'colorizer'.setup()
 
 " Colorscheme and final setup {{{
-    " This call must happen after the plug#end() call to ensure
-    " that the colorschemes have been loaded
-    " https://github.com/chriskempson/base16-shell#base16-vim-users
-    " if filereadable(expand("~/.vimrc_background"))
-    "     let base16colorspace=256
-    "     source ~/.vimrc_background
-    " else
-        " set background=dark
-        colorscheme spaceduck
-    " endif
+    let g:tokyonight_style = "night"
+    let g:tokyonight_italic_functions = 1
+    let g:tokyonight_sidebars = [ "qf", "vista_kind", "terminal", "packer" ]
+    colorscheme tokyonight
+
     syntax on
     filetype plugin indent on
     " make the highlighting of tabs and other non-text less annoying

@@ -117,6 +117,8 @@
 # correct typos
 [help]
     autocorrect = 1
+[pull]
+    rebase = false
 
 # push easily. http://stackoverflow.com/a/23918418/89484
 [push]

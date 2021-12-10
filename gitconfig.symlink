@@ -141,3 +141,6 @@
 
 [log]
     date = relative
+[filter "gitignore"]
+	clean = "sed '/#gitignore$/d'"
+	smudge = cat

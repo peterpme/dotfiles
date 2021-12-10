@@ -2,7 +2,6 @@ local path = "http://homeassistant.local:8123"
 local turn_on = "/api/services/hue/hue_activate_scene"
 local turn_off = "/api/services/light/turn_off"
 
-local token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhNjU3OTNhZmM3Njg0YTRkYTJlY2Y2ZDU4ODZlMDI4YiIsImlhdCI6MTYzOTAwMjUwOSwiZXhwIjoxOTU0MzYyNTA5fQ.7SZKK8FFTaczdnHRm1s4qQoRYbC1bqEca8jNfE8BJpI" -- #gitignore
 
 local headers = {
    ["Authorization"] = "Bearer " .. token,

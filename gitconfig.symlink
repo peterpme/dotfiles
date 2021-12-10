@@ -1,5 +1,8 @@
+[user]
+    name = Peter Piekarczyk #gitignore
+    email = peter@draftbit.com #gitignore
 [github]
-    user = peterpme
+    user = peterpme #gitignore
 [alias]
     cleanup = "!git remote prune origin && git gc && git clean -df && git stash clear"
 
@@ -138,4 +141,3 @@
 
 [log]
     date = relative
-

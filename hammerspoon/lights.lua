@@ -14,7 +14,8 @@ sessionWatcher = nil
 local turn_on_path = path .. turn_on
 local turn_off_path = path .. turn_off
 
-local turn_on_payload = [[ {"group_name":"Desk lights", "scene_name":"Gamer"} ]]
+local day_payload = [[ {"group_name":"Desk lights", "scene_name":"Default"} ]]
+local night_payload = [[ {"group_name":"Desk lights", "scene_name":"Gamer"} ]]
 local turn_off_payload = [[ {"entity_id":"light.computer_backlight"} ]]
 
 function sessionChanged(eventType)
@@ -22,11 +23,11 @@ function sessionChanged(eventType)
    -- After 6pm before 7am
    if (hour > 18 or hour < 7) then
       if (eventType == hs.caffeinate.watcher.screensDidUnlock) then
-         hs.http.post(turn_on_path, turn_on_payload, headers)
+         hs.http.post(turn_on_path, day_payload, headers)
       end
    else
       if (eventType == hs.caffeinate.watcher.screensDidUnlock) then
-         hs.http.post(turn_on_path, turn_on_payload, headers)
+         hs.http.post(turn_on_path, night_payload, headers)
       end
    end
 

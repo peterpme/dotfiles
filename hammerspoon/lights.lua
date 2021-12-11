@@ -19,14 +19,14 @@ local turn_off_payload = [[ {"entity_id":"light.computer_backlight"} ]]
 
 function sessionChanged(eventType)
    hour = tonumber(os.date("%H"))
-   -- After 6pm before 7am
-   if (hour > 18 or hour < 7) then
+   -- After 5pm before 7am
+   if (hour > 17 or hour < 7) then
       if (eventType == hs.caffeinate.watcher.screensDidUnlock) then
-         hs.http.post(turn_on_path, day_payload, headers)
+         hs.http.post(turn_on_path, night_payload, headers)
       end
    else
       if (eventType == hs.caffeinate.watcher.screensDidUnlock) then
-         hs.http.post(turn_on_path, night_payload, headers)
+         hs.http.post(turn_on_path, day_payload, headers)
       end
    end
 

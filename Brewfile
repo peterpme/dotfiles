@@ -1,16 +1,15 @@
 tap "homebrew/bundle"
 tap "homebrew/cask"
 tap "homebrew/core"
-tap "homebrew/cask-fonts"
+# tap "homebrew/cask-fonts"
 
 # cat replacement https://github.com/sharkdp/bat
 brew "bat"
 
+# Bit: Modern Git CLI
 # https://github.com/chriswalz/bit#how-to-install
 brew "bit-git"
 
-# https://github.com/AlDanial/cloc
-brew "cloc"
 brew "curl"
 
 # https://github.com/kcrawford/dockutil
@@ -28,18 +27,12 @@ brew "fd"
 # https://github.com/cli/cli
 brew "gh"
 
-# https://github.com/dandavison/delta#installation
+# diff syntax highlighter https://github.com/dandavison/delta#installation
 brew "git-delta"
-
 brew "heroku/brew/heroku"
-
-# https://github.com/github/hub
-brew "hub"
-
-# https://github.com/ios-control/ios-deploy
-# brew "ios-deploy"
 brew "jq"
 
+# The lazier way to manage everything docker
 # https://github.com/jesseduffield/lazydocker
 brew "lazydocker"
 
@@ -49,17 +42,12 @@ brew "lazygit"
 # https://github.com/mas-cli/mas
 brew "mas"
 
-# https://github.com/dylanaraps/neofetch
 brew "neovim"
-brew "python"
+# brew "python"
 
 # https://github.com/madler/pigz
 # tar replacement (used inside prezto/archive)
 brew "pigz"
-
-# https://github.com/ChrisJohnsen/tmux-MacOSX-pasteboard
-# no longer needed for tmux 2.6 but just in case
-# brew "reattach-to-user-namespace"
 
 # https://github.com/BurntSushi/ripgrep
 brew "ripgrep"
@@ -76,15 +64,14 @@ brew "superfly/tap/flyctl"
 # sed replacemnet https://github.com/chmln/sd
 brew "sd"
 
-# copy ssh keys to servers
-# https://www.ssh.com/ssh/copy-id
-# brew "ssh-copy-id"
-brew "tldr"
+# Simplified and community-driven man pages
+# https://github.com/tldr-pages/tldr
+# brew "tldr" use global npm package
 brew "tmux"
 brew "trash"
 brew "tree"
 
-brew "vim"
+# brew "vim"
 brew "watchman"
 
 # Spoof MAC Address
@@ -93,42 +80,44 @@ brew "wget"
 brew "wifi-password"
 
 brew "youtube-dl"
-brew "z"
+
+# A smarter cd command
+# https://github.com/ajeetdsouza/zoxide
+brew "zoxide"
 brew "zsh"
 
 # Fonts
-cask "font-iosevka"
-cask "font-3270-nerd-font"
+# cask "font-iosevka"
+# cask "font-3270-nerd-font"
 
 cask "alfred"
+cask "brave"
 cask "charles"
-# chrome without the tracking
-cask "chromium"
-cask "cleanmymac"
+cask "chromium" # chrome without the tracking
+# cask "cleanmymac"
 cask "discord"
 cask "firefox"
-cask "focus"
+# cask "focus"
 cask "flux"
-# MacOS Automation Tool https://www.hammerspoon.org/
-cask "hammerspoon"
+cask "hammerspoon" # MacOS Automation https://www.hammerspoon.org/
 cask "imageoptim"
 cask "kitty"
 cask "licecap"
-cask "little-snitch"
-cask "macvim"
-cask "micro-snitch"
+# cask "little-snitch"
+# cask "macvim"
+# cask "micro-snitch"
 cask "notion"
 cask "polymail"
 cask "postico"
 cask "postman"
-cask "postgres"
+# cask "postgres"
 cask "sublime-text"
 cask "spotify"
-cask "sketch"
+# cask "sketch"
 cask "visual-studio-code"
-cask "vlc"
+# cask "vlc"
 cask "zoom"
-cask "zeplin"
+# cask "zeplin"
 
 mas "Fantastical", id: 975937182
 mas "Slack", id: 803453959

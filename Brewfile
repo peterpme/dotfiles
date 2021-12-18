@@ -16,7 +16,7 @@ if OS.mac?
   # cask "font-iosevka"
   # cask "font-3270-nerd-font"
 
-elseif OS.linux?
+elsif OS.linux?
   brew "xclip" # access to clipboard (similar to pbcopy/pbpaste)
 end
 

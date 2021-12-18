@@ -1,6 +1,7 @@
 if OS.mac?
   # Taps
   tap 'homebrew/cask'
+  tap 'superfly/tap/flyctl'
   # tap 'homebrew/cask-fonts'
 
   brew "trash" # rm, but faster since it goes in the trash

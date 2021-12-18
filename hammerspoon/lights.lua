@@ -8,6 +8,8 @@ local headers = {
    ["Content-Type"] = "application/json"
 }
 
+local token = ""
+
 sessionWatcher = nil
 
 local turn_on_path = path .. turn_on

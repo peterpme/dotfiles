@@ -1,4 +1,8 @@
 {
+  "description": "global npm bin",
+  "private": true,
+  "license": "MIT",
+  "postinstall": "yarn-deduplicate yarn.lock",
   "dependencies": {
     "expo-cli": "^4.7.3",
     "git-delete-squashed": "^1.0.3",
@@ -9,5 +13,8 @@
     "vscode-html-languageserver-bin": "^1.4.0",
     "vscode-json-languageserver-bin": "^1.0.1",
     "yaml-language-server": "0.21.1"
+  },
+  "devDependencies": {
+    "yarn-deduplicate": "^3.1.0"
   }
 }

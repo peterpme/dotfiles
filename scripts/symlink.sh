@@ -3,16 +3,6 @@
 DOTFILES=$HOME/dotfiles
 
 # ======================================
-# zprezto setup
-# https://github.com/sorin-ionescu/prezto
-# ======================================
-setopt EXTENDED_GLOB
-echo 'Symlinking zprezto files'
-for rcfile in "${ZDOTDIR:-$HOME}"/dotfiles/prezto/runcoms/^README.md(.N); do
-	ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
-done
-
-# ======================================
 # symlinking all files that have .symlink
 # ======================================
 echo "symlinking .symlink files"

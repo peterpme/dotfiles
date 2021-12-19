@@ -3,9 +3,6 @@
 echo "Read through this file first. Hit ctrl+c now."
 read -n 1
 
-# Disable Gatekeeper (unidentified developer)
-sudo spctl --master-disable
-
 # Install Homebrew
 if test ! "$( command -v brew )"; then
     echo "Installing homebrew"
@@ -18,7 +15,18 @@ fi
 echo 'Install Homebrew dependencies'
 # Install Homebrew dependencies with a Brewfile
 brew bundle
+brew bundle cleanup
 brew cleanup
+
+# Install prezto from peterpme/prezto
+zsh
+git clone --recursive https://github.com/peterpme/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
+
+# Symlink prezto dotfiles
+setopt EXTENDED_GLOB
+for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
+  ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
+done
 
 echo 'Pull in All Submodules'
 git submodule update --recursive --remote --init
@@ -27,18 +35,13 @@ echo 'Agree to Xcode & Download'
 source scripts/xcode.sh
 
 echo 'Symlink setup'
-source scripts/symlink.sh
+source scripts/symlink.sh # todo remove prezto from here
 
 echo 'MacOS Setup'
 source scripts/osx.sh
 
 echo 'Dock Setup'
 source scripts/dock.sh
-
-# Install & setup fzf
-echo -e "\\n\\nRunning fzf install script..."
-echo "=============================="
-/usr/local/opt/fzf/install --all --no-bash --no-fish
 
 # Install neovim python libraries
 echo -e "\\n\\nRunning Neovim Python install"
@@ -67,6 +70,9 @@ mkdir -p ~/.ssh/control
 
 echo 'Install Yarn'
 curl -o- -L https://yarnpkg.com/install.sh | bash
+
+echo 'Install Node LTS via fnm'
+fnm install --lts
 
 echo 'Install tmux plugin manager'
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm

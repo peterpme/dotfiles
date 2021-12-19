@@ -23,28 +23,22 @@ end
 tap "homebrew/bundle"
 tap "homebrew/core"
 
-brew "bat" # cat replacement https://github.com/sharkdp/bat
-
-# Bit: Modern Git CLI
-# https://github.com/chriswalz/bit#how-to-install
-brew "bit-git"
+brew "bat" # modern cat https://github.com/sharkdp/bat
+brew "bit-git" # modern git cli https://github.com/chriswalz/bit#how-to-install
 brew "curl"
 brew "exa" # ls replacement https://github.com/ogham/exa
 brew "fzf" # fuzzy-finder https://github.com/junegunn/fzf
-brew "fd" # Modern find https://github.com/sharkdp/fd
-brew "gh" # Github CLI https://github.com/cli/cli
+brew "fd" # modern find https://github.com/sharkdp/fd
+brew "gh" # github CLI https://github.com/cli/cli
 brew "git" # latest
 
-# diff syntax highlighter https://github.com/dandavison/delta#installation
-brew "git-delta"
+
+brew "git-delta" # better git diff https://github.com/dandavison/delta
 brew "heroku/brew/heroku"
 brew "jq" #jq shell scripts
 
-# The lazier way to manage everything docker
-# https://github.com/jesseduffield/lazydocker
-brew "lazydocker"
-
-brew "lazygit" # https://github.com/jesseduffield/lazygit
+brew "lazydocker" # cli gui https://github.com/jesseduffield/lazydocker
+brew "lazygit" # cli gui https://github.com/jesseduffield/lazygit
 brew "mas" # Mac automation https://github.com/mas-cli/mas
 brew "neovim" # better vim
 
@@ -70,6 +64,7 @@ brew "tree"
 
 brew "wget"
 brew "wifi-password"
+brew "watchman" # file watcher, used by coc
 brew "youtube-dl"
 brew "zoxide" # Modern z https://github.com/ajeetdsouza/zoxide
 brew "zsh"
@@ -84,6 +79,7 @@ cask "discord"
 cask "firefox"
 cask "focus"
 cask "flux"
+cask "iterm2"
 cask "licecap"
 cask "notion"
 cask "polymail"

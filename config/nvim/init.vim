@@ -454,8 +454,9 @@ call plug#begin('~/.config/nvim/plugged')
     " }}}
 
     " FZF {{{
-        Plug '/usr/local/opt/fzf'
+        Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
         Plug 'junegunn/fzf.vim'
+
         let g:fzf_layout = { 'down': '~25%' }
 
         if isdirectory(".git")
@@ -536,7 +537,6 @@ call plug#begin('~/.config/nvim/plugged')
         \ 'coc-json',
         \ 'coc-pairs',
         \ 'coc-prettier',
-        \ 'coc-reason',
         \ 'coc-tabnine',
         \ 'coc-tailwindcss',
         \ 'coc-tsserver',
@@ -654,6 +654,8 @@ call plug#begin('~/.config/nvim/plugged')
     "
     " ReScript {{{
         Plug 'rescript-lang/vim-rescript'
+        set omnifunc=rescript#Complete
+        set completeopt+=preview
     " }}}
 
     " JavaScript {{{

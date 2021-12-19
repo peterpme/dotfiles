@@ -1,8 +1,12 @@
 [user]
-    name = Peter Piekarczyk #gitignore
-    email = peter@draftbit.com #gitignore
-[github]
-    user = peterpme #gitignore
+    # Do not guess the user's identity.
+    # https://github.com/git/git/blob/90f7b16b3adc78d4bbabbd426fb69aa78c714f71/Documentation/config.txt#L2847-L2855
+
+    useConfigOnly = true
+
+    # [!] DO NOT store sensitive information such as the Git user
+    # credentials (`name` / `email`), or things such as the `signingkey`
+    # in this file, add them in `~/.gitconfig.local`!
 [alias]
     cleanup = "!git remote prune origin && git gc && git clean -df && git stash clear"
 
@@ -15,14 +19,11 @@
     # find commits by source code
     fc = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short -S$1; }; f"
 
-[apply]
-    # Detect whitespace errors when applying a patch
-    whitespace = fix
-
 [core]
     excludesfile = ~/.gitignore
     attributesfile = ~/.gitattributes
     editor = nvim
+    pager = delta
 
     # Treat spaces before tabs and all kinds of trailing whitespace as an error
     # [default] trailing-space: looks for spaces at the end of a line
@@ -41,16 +42,28 @@
     # https://git-scm.com/docs/git-update-index#_untracked_cache
     untrackedCache = true
 
+[init]
+   defaultBranch = main
+
+[apply]
+    # Detect whitespace errors when applying a patch
+    whitespace = fix
+
+
 [interactive]
     diffFilter = delta --color-only
+
+[delta]
+    navigate = true
+
+[merge]
+  tool = vimdiff
+  conflictstyle = diff3
 
 [pager]
     # https://github.com/dandavison/delta
     diff = delta | less --tabs=4 -RFX
     show = delta | less --tabs=4 -RFX
-
-[delta]
-    side-by-side = true
 
 [color]
     ui = auto
@@ -65,12 +78,6 @@
     newMoved = cyan
     oldMoved = blue
 
-[color "diff-highlight"]
-    oldNormal = red bold
-    oldHighlight = "red bold 52"
-    newNormal = "green bold"
-    newHighlight = "green bold 22"
-
 [color "branch"]
     current = yellow reverse
     local = yellow
@@ -81,10 +88,6 @@
     changed = green
     untracked = cyan
 
-# git mergetool
-[merge]
-  tool = vimdiff
-  conflictstyle = diff3
 
 [mergetool]
   prompt = true
@@ -98,7 +101,7 @@
 [diff]
   tool = vimdiff
   # Show blocks of moved text of at least 20 alphanumeric characters differently than adds/deletes
-  # https://blog.github.com/2018-04-05-git-217-released/
+  # https://git-scm.com/docs/git-diff#git-diff-zebra
   colorMoved = zebra
 
 [url "git@github.com:"]
@@ -117,15 +120,19 @@
 [url "git://gist.github.com/"]
     insteadOf = "gist:"
 
-# correct typos
 [help]
-    autocorrect = 1
+    # If a command is mistyped, make Git automatically
+    # run the command it thinks the user wanted to type.
+    autocorrect = immediate
+
 [pull]
     rebase = false
 
 # push easily. http://stackoverflow.com/a/23918418/89484
 [push]
   default = current
+  # Make `git push` automatically push relevant
+  # annotated tags when pushing branches out.
   followTags = true
 
 [filter "lfs"]
@@ -141,6 +148,17 @@
 
 [log]
     date = relative
+
 [filter "gitignore"]
 	clean = "sed '/#gitignore$/d'"
 	smudge = cat
+
+[include]
+    # Load local configs.
+    # https://git-scm.com/docs/git-config#_includes
+    #
+    # [!] The following needs to remain at the end of this file in
+    #     order to allow any of the above configs to be overwritten
+    #     by the local ones
+
+    path = ~/.gitconfig.local

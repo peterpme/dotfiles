@@ -1,0 +1,6 @@
+# npmbin instead of global node modules https://github.com/Schniz/fnm/issues/109
+yg() {
+  cd $HOME/dotfiles/npmbin
+  yarn add $@
+  cd -
+}

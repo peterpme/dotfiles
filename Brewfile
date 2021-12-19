@@ -2,7 +2,7 @@ if OS.mac?
   # Taps
   tap 'homebrew/cask'
   tap 'superfly/tap'
-  # tap 'homebrew/cask-fonts'
+  tap 'homebrew/cask-fonts'
 
   brew "trash" # rm, but faster since it goes in the trash
   brew "dockutil" # https://github.com/kcrawford/dockutil
@@ -13,8 +13,8 @@ if OS.mac?
   cask "hammerspoon" # automation https://www.hammerspoon.org/
 
   # Fonts
-  # cask "font-iosevka"
-  # cask "font-3270-nerd-font"
+  cask "font-iosevka"
+  cask "font-3270-nerd-font"
 
 elsif OS.linux?
   brew "xclip" # access to clipboard (similar to pbcopy/pbpaste)

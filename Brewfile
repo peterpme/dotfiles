@@ -1,8 +1,8 @@
 if OS.mac?
   # Taps
-  tap 'homebrew/cask'
-  tap 'superfly/tap'
-  tap 'homebrew/cask-fonts'
+  tap "homebrew/cask"
+  tap "superfly/tap"
+  tap "homebrew/cask-fonts"
 
   brew "trash" # rm, but faster since it goes in the trash
   brew "dockutil" # https://github.com/kcrawford/dockutil
@@ -31,7 +31,6 @@ brew "fzf" # fuzzy-finder https://github.com/junegunn/fzf
 brew "fd" # modern find https://github.com/sharkdp/fd
 brew "gh" # github CLI https://github.com/cli/cli
 brew "git" # latest
-
 
 brew "git-delta" # better git diff https://github.com/dandavison/delta
 brew "heroku/brew/heroku"
@@ -71,10 +70,14 @@ brew "zsh"
 
 ## Casks - actual visual software
 
+case "appcleaner"
 cask "alfred"
+cask "backblaze"
 cask "brave-browser"
+cask "calibre"
 cask "charles"
 cask "chromium"
+cask "docker"
 cask "discord"
 cask "firefox"
 cask "focus"
@@ -86,6 +89,7 @@ cask "polymail"
 cask "postico"
 cask "postman"
 cask "sublime-text"
+cask "signal"
 cask "spotify"
 cask "visual-studio-code"
 cask "zoom"

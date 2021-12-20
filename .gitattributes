@@ -1,1 +1,2 @@
 *.lua filter=gitignore
+* filter=gitignore

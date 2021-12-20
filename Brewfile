@@ -41,9 +41,7 @@ brew "lazygit" # cli gui https://github.com/jesseduffield/lazygit
 brew "mas" # Mac automation https://github.com/mas-cli/mas
 brew "neovim" # better vim
 
-# https://github.com/madler/pigz
-# tar replacement (used inside prezto/archive)
-brew "pigz"
+brew "pigz" # better tar https://github.com/madler/pigz
 brew "python" # latest
 
 brew "redis"
@@ -51,7 +49,6 @@ brew "ripgrep" # Modern grep https://github.com/BurntSushi/ripgrep
 brew "fnm" # fast node manager
 brew "shellcheck" # https://github.com/koalaman/shellcheck
 brew "superfly/tap/flyctl" # https://github.com/superfly/fly
-
 brew "sd" # Modern sed https://github.com/chmln/sd
 
 # Simplified and community-driven man pages
@@ -98,7 +95,7 @@ cask "zoom"
 mas "Numbers", id: 409203825
 mas "1Password 7", id: 1333542190
 mas "Xcode", id: 497799835
-mas "NextDNS", id: 1464122853
+# mas "NextDNS", id: 1464122853 # use the config file
 mas "DaisyDisk", id: 411643860
 mas "Fantastical", id: 975937182
 mas "Slack", id: 803453959

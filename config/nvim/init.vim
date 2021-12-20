@@ -313,8 +313,8 @@ call plug#begin('~/.config/nvim/plugged')
 " }}}
 
 " General Functionality {{{
-    " Treesitter https://github.com/nvim-treesitter/nvim-treesitter
-    Plug 'nvim-treesitter/nvim-treesitter', { 'branch': '0.5-compat', 'do': ':TSUpdate' }
+    " treesitter https://github.com/nvim-treesitter/nvim-treesitter#installation
+    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
     " better terminal integration
     " substitute, search, and abbreviate multiple variants of a word

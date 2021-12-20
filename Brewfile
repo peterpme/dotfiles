@@ -70,7 +70,7 @@ brew "zsh"
 
 ## Casks - actual visual software
 
-case "appcleaner"
+cask "appcleaner"
 cask "alfred"
 cask "backblaze"
 cask "brave-browser"

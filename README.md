@@ -59,6 +59,7 @@ Files that store personal info or api keys are gitignored. Make sure you either 
 
 - `~/.npmrc`
 - `~/.gitconfig.local`
+- `~/.ssh/config`
 
 ## Vim and Neovim Setup
 

@@ -701,13 +701,13 @@ call plug#begin('~/.config/nvim/plugged')
 call plug#end()
 
 " Treesitter modules and configuration.
-:lua << EOF
+" :lua << EOF
 
-    require'nvim-treesitter.configs'.setup {
-        highlight = { enable = true },
-        indent = { enabled = true }
-    }
-EOF
+"     require'nvim-treesitter.configs'.setup {
+"         highlight = { enable = true },
+"         indent = { enabled = true }
+"     }
+" EOF
 
 " Colorizer setup
 lua require'colorizer'.setup()

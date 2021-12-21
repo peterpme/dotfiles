@@ -60,6 +60,7 @@ Files that store personal info or api keys are gitignored. Make sure you either 
 - `~/.npmrc`
 - `~/.gitconfig.local`
 - `~/.ssh/config`
+- [Nicer kitty icon](https://github.com/DinkDonk/kitty-icon)
 
 ## Vim and Neovim Setup
 

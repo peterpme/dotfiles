@@ -6,7 +6,11 @@
 		"bower_components/*"
 	],
 	"bold_folder_labels": true,
+	"caret_extra_bottom": 3,
+	"caret_extra_top": 3,
+	"caret_extra_width": 2,
 	"close_windows_when_empty": true,
+	"color_scheme": "Packages/ayu/ayu-mirage.sublime-color-scheme",
 	"detect_slow_plugins": false,
 	"fade_fold_buttons": false,
 	"file_exclude_patterns":
@@ -39,24 +43,30 @@
 		".hg",
 		".bin"
 	],
-	"font_face": "Menlo",
-	"font_size": 16,
+	"font_face": "Fira Code Retina",
+	"font_options":
+	[
+		"gray_antialias",
+		"subpixel_antialias"
+	],
+	"font_size": 14,
 	"freesia_large_tabs": true,
 	"highlight_line": true,
 	"highlight_modified_tabs": true,
 	"ignored_packages":
 	[
 		"Markdown Extended",
-		"Vintage"
+		"Vintage",
 	],
 	"line_padding_bottom": 1.2,
 	"line_padding_top": 1.2,
+	"overlay_scroll_bars": "enabled",
 	"remember_open_files": false,
 	"scroll_past_end": false,
 	"show_tab_close_buttons": true,
 	"spacegray_tabs_large": true,
 	"tab_size": 2,
-	"theme": "Freesia.sublime-theme",
+	"theme": "ayu-mirage.sublime-theme",
 	"translate_tabs_to_spaces": true,
 	"tree_animation_enabled": false,
 	"trim_trailing_white_space_on_save": true,
@@ -64,5 +74,5 @@
 	"use_tab_stops": true,
 	"vintage_start_in_command_mode": true,
 	"word_separators": "./\\()\"':,.;<>~!@#$%^&*|+=[]{}`~?",
-	"word_wrap": false
+	"word_wrap": false,
 }

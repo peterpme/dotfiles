@@ -76,7 +76,7 @@ call plug#begin('~/.config/nvim/plugged')
     set wildmenu " enhanced command line completion
     set hidden " current buffer can be put into background
     set showcmd " show incomplete commands
-    set noshowmode " don't show which mode disabled for PowerLine
+    set noshowmode " don't show which mode disabled for Lightline
     set wildmode=list:longest " complete files like a shell
     set shell=$SHELL
     set cmdheight=1 " command bar height
@@ -127,10 +127,8 @@ call plug#begin('~/.config/nvim/plugged')
     " highlight conflicts
     match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
-    " Load colorschemes (theme)
-    " Plug 'chriskempson/base16-vim'
-    " Plug 'pineapplegiant/spaceduck', { 'branch': 'main' }
-    Plug 'folke/tokyonight.nvim'
+    Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
+    Plug 'rebelot/kanagawa.nvim'
 
     " LightLine {{{
         Plug 'itchyny/lightline.vim'
@@ -712,11 +710,20 @@ call plug#end()
 " Colorizer setup
 lua require'colorizer'.setup()
 
+" Kanagawa Setup
+lua <<EOF
+local colors = {
+    sumiInk1 = "#7e83b230",
+}
+
+require'kanagawa'.setup({ overrides = overrides, colors = colors })
+EOF
+
 " Colorscheme and final setup {{{
-    let g:tokyonight_style = "night"
-    let g:tokyonight_italic_functions = 1
-    let g:tokyonight_sidebars = [ "qf", "vista_kind", "terminal", "packer" ]
-    colorscheme tokyonight
+    " let g:tokyonight_style = "night"
+    " let g:tokyonight_italic_functions = 1
+    " let g:tokyonight_sidebars = [ "qf", "vista_kind", "terminal", "packer" ]
+    colorscheme kanagawa
 
     syntax on
     filetype plugin indent on

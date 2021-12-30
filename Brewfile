@@ -38,6 +38,7 @@ brew "jq" #jq shell scripts
 
 brew "lazydocker" # cli gui https://github.com/jesseduffield/lazydocker
 brew "lazygit" # cli gui https://github.com/jesseduffield/lazygit
+brew "libpq" # psql postgres cli
 brew "mas" # Mac automation https://github.com/mas-cli/mas
 brew "neovim" # better vim
 

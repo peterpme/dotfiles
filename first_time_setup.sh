@@ -80,4 +80,7 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 echo 'Install fzf options'
 $(brew --prefix)/opt/fzf/install
 
+echo 'Install rust'
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
 echo "Done. Reload your terminal!"

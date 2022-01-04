@@ -526,8 +526,11 @@ call plug#begin('~/.config/nvim/plugged')
     " }}}
 
     " coc {{{
+        Plug 'github/copilot.vim', {'branch': 'release'}
         Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
+        " TODO decide to turn this back on later
+        " \ 'coc-tabnine',
         let g:coc_global_extensions = [
         \ 'coc-css',
         \ 'coc-diagnostic',
@@ -535,7 +538,6 @@ call plug#begin('~/.config/nvim/plugged')
         \ 'coc-json',
         \ 'coc-pairs',
         \ 'coc-prettier',
-        \ 'coc-tabnine',
         \ 'coc-tailwindcss',
         \ 'coc-tsserver',
         \ 'coc-ultisnips',

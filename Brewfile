@@ -1,7 +1,7 @@
 if OS.mac?
   # Taps
   tap "homebrew/cask"
-  tap "superfly/tap"
+  # tap "superfly/tap"
   tap "homebrew/cask-fonts"
 
   brew "trash" # rm, but faster since it goes in the trash
@@ -49,7 +49,7 @@ brew "redis"
 brew "ripgrep" # Modern grep https://github.com/BurntSushi/ripgrep
 brew "fnm" # fast node manager
 brew "shellcheck" # https://github.com/koalaman/shellcheck
-brew "superfly/tap/flyctl" # https://github.com/superfly/fly
+# brew "superfly/tap/flyctl" # https://github.com/superfly/fly
 brew "sd" # Modern sed https://github.com/chmln/sd
 
 # Simplified and community-driven man pages

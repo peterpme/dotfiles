@@ -657,7 +657,6 @@ call plug#begin('~/.config/nvim/plugged')
         set omnifunc=rescript#Complete
         set completeopt+=preview
     " }}}
-
     " JavaScript {{{
         Plug 'othree/yajs.vim'
         Plug 'moll/vim-node'
@@ -665,6 +664,8 @@ call plug#begin('~/.config/nvim/plugged')
         Plug 'yuezk/vim-js'
         Plug 'MaxMEllon/vim-jsx-pretty'
     " }}}
+
+        Plug 'tomlion/vim-solidity'
 
     " TypeScript {{{
         Plug 'leafgarland/typescript-vim', { 'for': ['typescript', 'typescript.tsx'] }

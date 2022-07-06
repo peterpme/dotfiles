@@ -45,6 +45,7 @@ brew "neovim" # better vim
 brew "pigz" # better tar https://github.com/madler/pigz
 brew "python" # latest
 
+brew "ruby"
 brew "redis"
 brew "ripgrep" # Modern grep https://github.com/BurntSushi/ripgrep
 brew "fnm" # fast node manager

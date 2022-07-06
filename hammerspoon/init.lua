@@ -4,7 +4,7 @@ local alert = require "hs.alert"
 local Grid = require 'grid'
 
 require "wifi_control"
--- require "lights"
+require "lights"
 
 local mashGeneral = {
   'cmd',

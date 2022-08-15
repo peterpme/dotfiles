@@ -92,7 +92,7 @@ cask "zoom"
 
 # Mac App Store Installations
 mas "Numbers", id: 409203825
-mas "1Password 7", id: 1333542190
+# mas "1Password 7", id: 1333542190 download from their site
 mas "Xcode", id: 497799835
 mas "NextDNS", id: 1464122853
 mas "DaisyDisk", id: 411643860

@@ -1,7 +1,6 @@
 if OS.mac?
   # Taps
   tap "homebrew/cask"
-  # tap "superfly/tap"
   tap "homebrew/cask-fonts"
 
   brew "trash" # rm, but faster since it goes in the trash
@@ -14,7 +13,7 @@ if OS.mac?
 
   # Fonts
   cask "font-iosevka"
-  cask "font-3270-nerd-font"
+  # cask "font-3270-nerd-font"
 
 elsif OS.linux?
   brew "xclip" # access to clipboard (similar to pbcopy/pbpaste)
@@ -25,7 +24,7 @@ tap "homebrew/core"
 
 brew "bat" # modern cat https://github.com/sharkdp/bat
 brew "bit-git" # modern git cli https://github.com/chriswalz/bit#how-to-install
-brew "curl"
+brew "curl" # https://github.com/curl/curl
 brew "exa" # ls replacement https://github.com/ogham/exa
 brew "fzf" # fuzzy-finder https://github.com/junegunn/fzf
 brew "fd" # modern find https://github.com/sharkdp/fd
@@ -33,7 +32,6 @@ brew "gh" # github CLI https://github.com/cli/cli
 brew "git" # latest
 
 brew "git-delta" # better git diff https://github.com/dandavison/delta
-brew "heroku/brew/heroku"
 brew "jq" #jq shell scripts
 
 brew "lazydocker" # cli gui https://github.com/jesseduffield/lazydocker
@@ -50,14 +48,14 @@ brew "redis"
 brew "ripgrep" # Modern grep https://github.com/BurntSushi/ripgrep
 brew "fnm" # fast node manager
 brew "shellcheck" # https://github.com/koalaman/shellcheck
-# brew "superfly/tap/flyctl" # https://github.com/superfly/fly
+brew "flyctl" # https://github.com/superfly/fly
 brew "sd" # Modern sed https://github.com/chmln/sd
 
 # Simplified and community-driven man pages
 # https://github.com/tldr-pages/tldr
 # brew "tldr" use global npm package
 brew "tmux"
-brew "trash"
+brew "trash" # https://hasseg.org/trash/
 brew "tree"
 
 brew "wget"
@@ -72,24 +70,23 @@ brew "zsh"
 cask "appcleaner"
 cask "alfred"
 cask "backblaze"
+cask "battle-net"
 cask "brave-browser"
 cask "calibre"
 cask "charles"
 cask "chromium"
 cask "docker"
 cask "discord"
-cask "firefox"
 cask "focus"
-cask "flux"
 cask "iterm2"
 cask "licecap"
 cask "notion"
-cask "polymail"
 cask "postico"
 cask "postman"
 cask "sublime-text"
 cask "signal"
 cask "spotify"
+cask "steam"
 cask "visual-studio-code"
 cask "zoom"
 
@@ -97,7 +94,8 @@ cask "zoom"
 mas "Numbers", id: 409203825
 mas "1Password 7", id: 1333542190
 mas "Xcode", id: 497799835
-# mas "NextDNS", id: 1464122853 # use the config file
+mas "NextDNS", id: 1464122853
 mas "DaisyDisk", id: 411643860
 mas "Fantastical", id: 975937182
 mas "Slack", id: 803453959
+mas "Telegram", id: 747648890

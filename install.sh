@@ -71,7 +71,7 @@ setup_symlinks() {
             info "~${target#$HOME} already exists... Skipping."
         else
             info "Creating symlink for $file"
-            # ln -s "$file" "$target"
+            ln -s "$file" "$target"
         fi
     done
 
@@ -89,13 +89,13 @@ setup_symlinks() {
             info "~${target#$HOME} already exists... Skipping."
         else
             info "Creating symlink for $config"
-            # ln -s "$config" "$target"
+            ln -s "$config" "$target"
         fi
     done
 
     info "Setting up hammerspoon"
     if [ ! -d "$HOME/.hammerspoon" ]; then
-        ln -s "$DOTFILES/hammerspoon/" "$HOME/.hammerspoon"
+        ln -s "$DOTFILES/hammerspoon" "$HOME/.hammerspoon"
     fi
 }
 
@@ -176,43 +176,76 @@ function setup_terminfo() {
     tic -x "$DOTFILES/resources/xterm-256color-italic.terminfo"
 }
 
-setup_symlinks
-
-# case "$1" in
-#     backup)
-#         backup
-#         ;;
-#     link)
-#         setup_symlinks
-#         ;;
-#     git)
-#         setup_git
-#         ;;
-#     homebrew)
-#         setup_homebrew
-#         ;;
-#     shell)
-#         setup_shell
-#         ;;
-#     terminfo)
-#         setup_terminfo
-#         ;;
-#     macos)
-#         setup_macos
-#         ;;
-#     all)
-#         setup_symlinks
-#         setup_terminfo
-#         setup_homebrew
-#         setup_shell
-#         setup_git
-#         setup_macos
-#         ;;
-#     *)
-#         echo -e $"\nUsage: $(basename "$0") {backup|link|git|homebrew|shell|terminfo|macos|all}\n"
-#         exit 1
-#         ;;
-# esac
+# setup_zsh_prezto() {
+#   git clone --recursive https://github.com/peterpme/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
 #
-# echo -e
-# success "Done."
+#   # Switch to zsh for this operation
+#   zsh
+#
+#   # Symlink prezto dotfiles
+#   setopt EXTENDED_GLOB
+#   for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
+#     ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
+#   done
+# }
+
+setup_hosts_file() {
+  git clone git@github.com:StevenBlack/hosts.git --depth 1
+  pip3 install --user -r requirements.txt
+}
+
+setup_tmux() {
+  info 'Install tmux plugin manager'
+  git clone https://github.com/tmux-plugins/tpm --depth 1 ~/.tmux/plugins/tpm
+}
+
+setup_misc() {
+  info "Create .ssh/control file for multiplexing..."
+  mkdir -p ~/.ssh/control
+
+  info "Installing Node.js LTS via fnm..."
+  fnm install --lts
+
+  info "Installing neovim python libraries..."
+  python3 -m pip install --user --upgrade pynvim
+}
+
+# Only runs if you pass in parameters. Won't run everything by default unless you pass in: `./install.sh all`
+case "$1" in
+    backup)
+        backup
+        ;;
+    link)
+        setup_symlinks
+        ;;
+    git)
+        setup_git
+        ;;
+    homebrew)
+        setup_homebrew
+        ;;
+    shell)
+        setup_shell
+        ;;
+    terminfo)
+        setup_terminfo
+        ;;
+    macos)
+        setup_macos
+        ;;
+    all)
+        setup_symlinks
+        setup_terminfo
+        setup_homebrew
+        setup_shell
+        setup_git
+        # setup_macos
+        ;;
+    *)
+        echo -e $"\nUsage: $(basename "$0") {backup|link|git|homebrew|shell|terminfo|macos|all}\n"
+        exit 1
+        ;;
+esac
+
+echo -e
+success "Done."

@@ -4,7 +4,10 @@ if OS.mac?
   tap "homebrew/cask-fonts"
 
   brew "trash" # rm, but faster since it goes in the trash
-  brew "dockutil" # https://github.com/kcrawford/dockutil
+  # https://github.com/kcrawford/dockutil/issues/127#issuecomment-1118733013
+  # Broken until the owner wants to support this
+  # brew "dockutil" # https://github.com/kcrawford/dockutil
+  cask "hpedrorodrigues/tools/dockutil"
 
   # Apps
   cask "kitty" # better terminal

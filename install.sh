@@ -233,6 +233,9 @@ case "$1" in
     macos)
         setup_macos
         ;;
+    misc)
+        setup_misc
+        ;;
     all)
         setup_symlinks
         setup_terminfo

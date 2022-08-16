@@ -10,6 +10,7 @@ if OS.mac?
   cask "kitty" # better terminal
   cask "imageoptim" # image optimization tool
   cask "hammerspoon" # automation https://www.hammerspoon.org/
+  cask "1password/tap/1password-cli"
 
   # Fonts
   cask "font-iosevka"
@@ -63,7 +64,7 @@ brew "wifi-password"
 brew "watchman" # file watcher, used by coc
 brew "youtube-dl"
 brew "zoxide" # Modern z https://github.com/ajeetdsouza/zoxide
-brew "zsh"
+brew "zsh" # zsh (latest)
 
 ## Casks - actual visual software
 

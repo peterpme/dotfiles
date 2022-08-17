@@ -190,16 +190,19 @@ function setup_terminfo() {
 # }
 
 setup_hosts_file() {
-  git clone git@github.com:StevenBlack/hosts.git --depth 1
+  info 'Set up hosts file'
+  git clone git@github.com:StevenBlack/hosts.git --depth 1 $DOTFILES/hosts
+  cd $DOTFILES/hosts
   pip3 install --user -r requirements.txt
-}
-
-setup_tmux() {
-  info 'Install tmux plugin manager'
-  git clone https://github.com/tmux-plugins/tpm --depth 1 ~/.tmux/plugins/tpm
+  cp $DOTFILES/hosts-allowlist $DOTFILES/hosts/whitelist
+  cp $DOTFILES/hosts-denylist $DOTFILES/hosts/blacklist
+  python3 updateHostsFile.py -a -f -r -e gambling fakenews porn -w whitelist -x blacklist
 }
 
 setup_misc() {
+  info 'Install tmux plugin manager'
+  git clone https://github.com/tmux-plugins/tpm --depth 1 ~/.tmux/plugins/tpm
+
   info "Create .ssh/control file for multiplexing..."
   mkdir -p ~/.ssh/control
 
@@ -214,6 +217,9 @@ setup_misc() {
 case "$1" in
     backup)
         backup
+        ;;
+    hosts)
+        setup_hosts_file
         ;;
     link)
         setup_symlinks

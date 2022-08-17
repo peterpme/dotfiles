@@ -49,3 +49,6 @@ plug.vim.old
 
 # brewfile
 Brewfile.lock.json
+
+# stevenblack/hosts
+hosts

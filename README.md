@@ -53,6 +53,8 @@ Files that store personal info or api keys are gitignored. Make sure you either 
 - `~/.ssh/config`
 - [Nicer kitty icon](https://github.com/DinkDonk/kitty-icon)
 
+### Fonts
+
 ## Vim and Neovim Setup
 
 [Neovim](https://neovim.io/) is a fork and drop-in replacement for vim. in most cases, you would not notice a difference between the two, other than Neovim allows plugins to run asynchronously so that they do not freeze the editor, which is the main reason I have switched over to it. Vim and Neovim both use Vimscript and most plugins will work in both (all of the plugins I use do work in both Vim and Neovim). For this reason, they share the same configuration files in this setup. Neovim uses the [XDG base directory specification](http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html) which means it won't look for a `.vimrc` in your home directory. Instead, its configuration looks like the following:

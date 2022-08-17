@@ -93,9 +93,19 @@ setup_symlinks() {
         fi
     done
 
-    info "Setting up hammerspoon"
+    info "Symlinking hammerspoon"
     if [ ! -d "$HOME/.hammerspoon" ]; then
         ln -s "$DOTFILES/hammerspoon" "$HOME/.hammerspoon"
+    else
+        info "~/.hammerspoon already exists... Skipping."
+    fi
+
+    info "Symlinking nvchad custom config"
+    mkdir -p ~/.config/nvim/lua
+    if [ ! -d "$HOME/.config/nvim/lua/custom" ]; then
+        ln -s "$DOTFILES/nvim-custom" "$HOME/.config/nvim/lua/custom"
+    else
+        info "~/.config/nvim/lua/custom already exists... Skipping."
     fi
 }
 

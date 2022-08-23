@@ -41,7 +41,6 @@ Check out `./install.sh`. You'll have to run `./install all` or pick the section
 - Install Homebrew & dependencies
 - Install Xcode and Xcode CLI tools
 - Setup symlinks and config
-- Install powerlevel10k font through iterm2 **
 
 ## Post-automation updates
 - Install [NVChad](https://nvchad.github.io/quickstart/install#pre-requisites) if you haven't yet. This replaces the local nvim config
@@ -52,8 +51,7 @@ Files that store personal info or api keys are gitignored. Make sure you either 
 - `~/.gitconfig.local`
 - `~/.ssh/config`
 - [Nicer kitty icon](https://github.com/DinkDonk/kitty-icon)
-
-### Fonts
+- Download & Install into `~/.local/share/fonts/` [Symbols-2048-em Nerd Font Complete.ttf](https://github.com/ryanoasis/nerd-fonts/blob/master/src/glyphs/Symbols-2048-em%20Nerd%20Font%20Complete.ttf)
 
 ## Vim and Neovim Setup
 

@@ -186,18 +186,9 @@ function setup_terminfo() {
     tic -x "$DOTFILES/resources/xterm-256color-italic.terminfo"
 }
 
-# setup_zsh_prezto() {
-#   git clone --recursive https://github.com/peterpme/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
-#
-#   # Switch to zsh for this operation
-#   zsh
-#
-#   # Symlink prezto dotfiles
-#   setopt EXTENDED_GLOB
-#   for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
-#     ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
-#   done
-# }
+setup_zsh_prezto() {
+  source prezto_setup.zsh
+}
 
 setup_hosts_file() {
   info 'Set up hosts file'
@@ -221,15 +212,31 @@ setup_misc() {
 
   info "Installing neovim python libraries..."
   python3 -m pip install --user --upgrade pynvim
+
+  info 'Installing Yarn...'
+  curl -o- -L https://yarnpkg.com/install.sh | bash
+
+  echo 'Installing rust...'
+  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
+  echo 'Configuring dock...'
+  source scripts/dock.sh
+
+}
+
+setup_macos() {
+  title "Configuring macOS"
+  if [[ "$(uname)" == "Darwin" ]]; then
+    source scripts/osx.sh
+  else
+    warning "macOS not detected. Skipping."
+  fi
 }
 
 # Only runs if you pass in parameters. Won't run everything by default unless you pass in: `./install.sh all`
 case "$1" in
     backup)
         backup
-        ;;
-    hosts)
-        setup_hosts_file
         ;;
     link)
         setup_symlinks
@@ -246,11 +253,14 @@ case "$1" in
     terminfo)
         setup_terminfo
         ;;
-    macos)
-        setup_macos
+    hosts)
+        setup_hosts_file
         ;;
     misc)
         setup_misc
+        ;;
+    macos)
+        setup_macos
         ;;
     all)
         setup_symlinks
@@ -258,7 +268,10 @@ case "$1" in
         setup_homebrew
         setup_shell
         setup_git
-        # setup_macos
+        setup_terminfo
+        setup_hosts_file
+        setup_misc
+        setup_macos
         ;;
     *)
         echo -e $"\nUsage: $(basename "$0") {backup|link|git|homebrew|shell|terminfo|macos|all}\n"

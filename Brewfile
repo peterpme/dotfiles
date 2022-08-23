@@ -4,12 +4,16 @@ if OS.mac?
   tap "homebrew/cask-fonts"
 
   brew "trash" # rm, but faster since it goes in the trash
-  brew "dockutil" # https://github.com/kcrawford/dockutil
+  # https://github.com/kcrawford/dockutil/issues/127#issuecomment-1118733013
+  # Broken until the owner wants to support this
+  # brew "dockutil" # https://github.com/kcrawford/dockutil
+  cask "hpedrorodrigues/tools/dockutil"
 
   # Apps
   cask "kitty" # better terminal
   cask "imageoptim" # image optimization tool
   cask "hammerspoon" # automation https://www.hammerspoon.org/
+  cask "1password/tap/1password-cli"
 
   # Fonts
   cask "font-iosevka"
@@ -63,7 +67,7 @@ brew "wifi-password"
 brew "watchman" # file watcher, used by coc
 brew "youtube-dl"
 brew "zoxide" # Modern z https://github.com/ajeetdsouza/zoxide
-brew "zsh"
+brew "zsh" # zsh (latest)
 
 ## Casks - actual visual software
 

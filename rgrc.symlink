@@ -26,6 +26,9 @@ spec:*.{spec,test}.{ts,tsx,js,jsx}
 test:*.{spec,test}.{ts,tsx,js,jsx}
 
 --type-add
+stories:**/*.stories.{ts,tsx,js,jsx}
+
+--type-add
 tsx:*.tsx
 
 --type-add
@@ -33,6 +36,12 @@ jsx:*.jsx
 
 --type-add
 ejs:*.ejs
+
+--type-add
+gql:*.{graphql,gql}
+
+--type-add
+pkg:package.json
 
 # ignore case
 --smart-case

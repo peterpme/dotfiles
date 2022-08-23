@@ -1,0 +1,17 @@
+# Domains added below will be ignored, For example:
+# your-domain-name.com
+app.segment.com
+app.segment.io
+amplitude.com
+fullstory.com
+sentry.io
+newrelic.com
+mask.icloud.com
+mask-h2.icloud.com
+captive.apple.com
+click.redditmail.com
+redditmail.com
+dashboard-03.braze.com
+braze.com
+trk.s.sephora.com
+email.cycle-em.io

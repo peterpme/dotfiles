@@ -10,7 +10,6 @@ main() {
           --remove 'System Preferences' \
           --remove 'App Store' \
           --remove 'Maps' \
-          --remove 'Notes' \
           --remove 'Photos' \
           --remove 'Messages' \
           --remove 'Contacts' \
@@ -29,9 +28,9 @@ main() {
           --remove 'TV' \
           --remove 'News' \
           --add /Applications/kitty.app \
-          --add /Applications/Linear.app \
           --add /Applications/Notion.app \
           --add /Applications/Slack.app \
+          --add /Applications/Obsidian.app \
           &>/dev/null
 
       killall cfprefsd &>/dev/null

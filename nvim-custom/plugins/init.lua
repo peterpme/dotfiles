@@ -15,7 +15,7 @@ return {
    ["goolord/alpha-nvim"] = {
       disable = false,
    },
-   ["github/copilot.vim"] = {},
+   -- ["github/copilot.vim"] = {},
    ["nathom/filetype.nvim"] = {},
    ["nkrkv/nvim-treesitter-rescript"] = {},
    ["rescript-lang/vim-rescript"] = { ft = "rescript" },

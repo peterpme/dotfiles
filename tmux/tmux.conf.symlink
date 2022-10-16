@@ -35,6 +35,7 @@ bind-key ] paste-buffer
 # List of plugins
 set -g @plugin 'tmux-plugins/tpm'
 set -g @plugin 'tmux-plugins/tmux-sensible'
+# keybindings to control panes
 set -g @plugin 'tmux-plugins/tmux-pain-control'
 set -g @plugin 'tmux-plugins/tmux-yank'
 set -g @plugin 'nhdaly/tmux-better-mouse-mode'

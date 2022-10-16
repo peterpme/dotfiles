@@ -4,23 +4,23 @@
   "license": "MIT",
   "postinstall": "yarn-deduplicate yarn.lock",
   "dependencies": {
-    "@fsouza/prettierd": "^0.20.0",
+    "@fsouza/prettierd": "^0.22.3",
     "chalet": "^0.10.2",
-    "eslint_d": "^12.0.0",
-    "expo-cli": "^6.0.2",
+    "eslint_d": "^12.2.1",
+    "expo-cli": "^6.0.6",
     "git-delete-squashed": "^1.0.3",
     "neovim": "^4.10.0",
     "netlify": "^11.0.1",
-    "sharp-cli": "^1.15.0",
-    "tldr": "^3.3.7",
-    "truffle": "^5.4.29",
-    "typescript-language-server": "^0.8.1",
+    "sharp-cli": "^3.0.0",
+    "tldr": "^3.3.8",
+    "truffle": "^5.6.1",
+    "typescript-language-server": "^2.0.1",
     "vscode-css-languageserver-bin": "^1.4.0",
     "vscode-html-languageserver-bin": "^1.4.0",
     "vscode-json-languageserver-bin": "^1.0.1",
-    "yaml-language-server": "1.2.2"
+    "yaml-language-server": "1.10.0"
   },
   "devDependencies": {
-    "yarn-deduplicate": "^3.1.0"
+    "yarn-deduplicate": "^6.0.0"
   }
 }

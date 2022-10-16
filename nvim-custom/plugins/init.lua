@@ -1,48 +1,38 @@
+local overrides = require("custom.plugins.overrides")
+
 return {
-   ["jose-elias-alvarez/null-ls.nvim"] = {
-      after = "nvim-lspconfig",
-      config = function()
-         require("custom.plugins.null-ls").setup()
-      end,
-   },
-   ["windwp/nvim-ts-autotag"] = {
-      ft = { "html", "javascriptreact" },
-      after = "nvim-treesitter",
-      config = function()
-         require("nvim-ts-autotag").setup()
-      end,
-   },
-   ["goolord/alpha-nvim"] = {
-      disable = false,
-   },
-   -- ["github/copilot.vim"] = {},
-   ["nathom/filetype.nvim"] = {},
-   ["nkrkv/nvim-treesitter-rescript"] = {},
-   ["rescript-lang/vim-rescript"] = { ft = "rescript" },
+	["goolord/alpha-nvim"] = overrides.alpha,
 
-   ["williamboman/mason.nvim"] = {
-      ensure_installed = {
-        -- lua stuff
-        "lua-language-server",
-        "stylua",
+	["nvim-treesitter/nvim-treesitter"] = {
+		override_options = overrides.treesitter,
+	},
 
-        -- web dev
-        "css-lsp",
-        "deno",
-        "eslint_d",
-        "graphql-language-service-cli",
-        "html-lsp",
-        "json-lsp",
-        "markdownlint",
-        "prettierd",
-        "reason-language-server",
-        "tailwindcss-language-server",
-        "typescript-language-server",
-        "yaml-language-server",
+	["williamboman/mason.nvim"] = {
+		override_options = overrides.mason,
+	},
 
-        -- shell
-        "shfmt",
-        "shellcheck",
-      },
-    },
+	["kyazdani42/nvim-tree.lua"] = {
+		override_options = overrides.nvimtree,
+	},
+
+	-- code formatting, linting etc
+	["jose-elias-alvarez/null-ls.nvim"] = {
+		after = "nvim-lspconfig",
+		config = function()
+			require("custom.plugins.null-ls")
+		end,
+	},
+
+	-- ["windwp/nvim-ts-autotag"] = {
+	-- 	ft = { "html", "javascriptreact" },
+	-- 	after = "nvim-treesitter",
+	-- 	config = function()
+	-- 		require("nvim-ts-autotag").setup()
+	-- 	end,
+	-- },
+	-- -- ["github/copilot.vim"] = {},
+	-- ["nathom/filetype.nvim"] = {},
+	-- ["nkrkv/nvim-treesitter-rescript"] = {},
+	-- ["rescript-lang/vim-rescript"] = { ft = "rescript" },
+	--
 }

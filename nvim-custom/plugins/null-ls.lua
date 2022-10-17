@@ -10,22 +10,39 @@ local sources = {
 	-- Rescript/Reason
 	-- b.formatting.rescript,
 
-	-- Javascript
+	-- Github Action Workflows
+	b.diagnostics.actionlint,
+
+	-- Javascript / Typescript
+	b.diagnostics.tsc,
 	b.formatting.prettierd,
-	b.formatting.eslint_d,
 
 	b.code_actions.eslint_d,
 	b.diagnostics.eslint_d,
+	b.formatting.eslint_d,
 
-	b.diagnostics.tsc,
+	-- https://github.com/jshint/jshint
+	b.diagnostics.jshint,
+
+	b.diagnostics.yamllint,
+	b.diagnostics.jsonlint,
+	b.diagnostics.markdownlint,
 
 	-- Lua
 	b.formatting.stylua,
-	-- b.diagnostics.luacheck.with { extra_args = { "--global vim" } },
 
 	-- Shell
 	b.formatting.shfmt,
 	b.diagnostics.shellcheck.with({ diagnostics_format = "#{m} [#{c}]" }),
+	b.diagnostics.zsh,
+
+	-- harden shell scripts
+	-- https://github.com/anordal/shellharden
+	b.formatting.shellharden,
+
+	-- SQL / Postgres
+	-- https://github.com/darold/pgFormatter
+	b.formatting.pg_format,
 }
 
 null_ls.setup({

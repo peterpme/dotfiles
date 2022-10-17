@@ -5,7 +5,7 @@ local lspconfig = require("lspconfig")
 
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
 -- :help lspconfig-all
-local servers = { "html", "cssls", "tsserver", "clangd" }
+local servers = { "html", "cssls", "tsserver", "eslint", "graphql", "jsonls", "tailwindcss" }
 
 for _, lsp in ipairs(servers) do
 	lspconfig[lsp].setup({

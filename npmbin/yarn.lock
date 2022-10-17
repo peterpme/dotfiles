@@ -623,6 +623,11 @@
   dependencies:
     defer-to-connect "^2.0.0"
 
+"@tailwindcss/language-server@^0.0.9":
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/@tailwindcss/language-server/-/language-server-0.0.9.tgz#d68c4342f34544cbadf19a5d31d02679930462a9"
+  integrity sha512-x0rvJkO8TmwhJWjBH7z4Qn1SLaaYYtvY8Liw5SnMX62u6QuNZ0R0XU9P7nVQg+x0rxakC8oQgS2+wfYRNUyHgQ==
+
 "@types/cacheable-request@^6.0.1":
   version "6.0.2"
   resolved "https://registry.yarnpkg.com/@types/cacheable-request/-/cacheable-request-6.0.2.tgz#c324da0197de0a98a2312156536ae262429ff6b9"

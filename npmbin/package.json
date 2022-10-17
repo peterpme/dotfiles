@@ -5,6 +5,7 @@
   "postinstall": "yarn-deduplicate yarn.lock",
   "dependencies": {
     "@fsouza/prettierd": "^0.22.3",
+    "@tailwindcss/language-server": "^0.0.9",
     "eslint_d": "^12.2.1",
     "expo-cli": "^6.0.6",
     "git-delete-squashed": "^1.0.3",

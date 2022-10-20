@@ -24,7 +24,7 @@ local sources = {
 	-- https://github.com/jshint/jshint
 	b.diagnostics.jshint,
 
-	b.diagnostics.yamllint,
+	-- b.diagnostics.yamllint, python package only, meh
 	b.diagnostics.jsonlint,
 	b.diagnostics.markdownlint,
 
@@ -37,12 +37,12 @@ local sources = {
 	b.diagnostics.zsh,
 
 	-- harden shell scripts
-	-- https://github.com/anordal/shellharden
-	b.formatting.shellharden,
+	-- https://github.com/anordal/shellharden too lazy to install
+	-- b.formatting.shellharden,
 
 	-- SQL / Postgres
-	-- https://github.com/darold/pgFormatter
-	b.formatting.pg_format,
+	-- https://github.com/darold/pgFormatter too lazy to install via curl
+	-- b.formatting.pg_format,
 }
 
 null_ls.setup({

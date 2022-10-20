@@ -1,3 +1,4 @@
+-- https://github.com/siduck/dotfiles/tree/master/nvchad/custom
 local opt = vim.opt
 local cmd = vim.cmd
 

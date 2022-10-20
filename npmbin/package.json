@@ -9,6 +9,8 @@
     "eslint_d": "^12.2.1",
     "expo-cli": "^6.0.6",
     "git-delete-squashed": "^1.0.3",
+    "jshint": "^2.13.5",
+    "jsonlint": "^1.6.3",
     "neovim": "^4.10.0",
     "sharp-cli": "^3.0.0",
     "typescript": "^4.8.4",

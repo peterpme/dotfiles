@@ -1,7 +1,7 @@
 local overrides = require("custom.plugins.overrides")
 
 return {
-  -- https://github.com/folke/which-key.nvim
+	-- https://github.com/folke/which-key.nvim
 	["folke/which-key.nvim"] = {
 		disable = false,
 	},
@@ -9,7 +9,6 @@ return {
 	-- Dashboard. If not working, run :PackerSync
 	["goolord/alpha-nvim"] = {
 		disable = false,
-		cmd = "Alpha",
 		override_options = overrides.alpha,
 	},
 

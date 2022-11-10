@@ -17,7 +17,10 @@ opt.updatecount = 0 -- don't write swap files after some number of updates
 
 opt.backspace = { "indent", "eol,start" } -- make backspace behave in a sane manner
 
--- Formatting used to timeout 
+-- vim.g.loaded_node_provider = 1 -- Enable node provider
+-- vim.g.node_host_prog = "/Users/peter/dotfiles/npmbin/node_modules/neovim/bin/cli.js"
+
+-- Formatting used to timeout
 -- https://github.com/jose-elias-alvarez/null-ls.nvim#i-am-seeing-a-formatting-timeout-error-message
 vim.lsp.buf.format({ timeout_ms = 5000 })
 

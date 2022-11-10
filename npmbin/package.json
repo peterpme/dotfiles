@@ -6,7 +6,9 @@
   "dependencies": {
     "@fsouza/prettierd": "^0.22.3",
     "@tailwindcss/language-server": "^0.0.10",
+    "eas-cli": "^2.6.0",
     "eslint_d": "^12.2.1",
+    "expo-cli": "^6.0.8",
     "git-delete-squashed": "^1.0.3",
     "jshint": "^2.13.5",
     "jsonlint": "^1.6.3",

@@ -1,9 +1,13 @@
-local application = require("hs.application")
 local hotkey = require("hs.hotkey")
-local alert = require("hs.alert")
 local Grid = require("grid")
 
-require("wifi_control")
+local grid = require("hs.grid")
+
+grid.GRIDHEIGHT = 4
+grid.GRIDWIDTH = 4
+
+require("utils")
+-- require("wifi_control")
 -- require "lights"
 
 local mashGeneral = {
@@ -11,15 +15,10 @@ local mashGeneral = {
 	"ctrl",
 }
 
-local mashExtra = {
+local mashResize = {
 	"cmd",
 	"ctrl",
-	"shift",
-}
-
-local mashApps = {
-	"cmd",
-	"ctrl",
+	"alt",
 }
 
 local screenKeys = {
@@ -57,43 +56,17 @@ hs.hotkey.bind(mashGeneral, "L", Grid.rightHalf)
 hs.hotkey.bind(mashGeneral, "K", Grid.topHalf)
 hs.hotkey.bind(mashGeneral, "J", Grid.bottomHalf)
 
--- Thirds
--- hs.hotkey.bind(mashExtra, "H", Grid.leftThird)
--- hs.hotkey.bind(mashExtra, "L", Grid.rightThird)
-
 hs.hotkey.bind(mashGeneral, "U", Grid.topleft)
 hs.hotkey.bind(mashGeneral, "N", Grid.bottomleft)
 hs.hotkey.bind(mashGeneral, "I", Grid.topright)
 hs.hotkey.bind(mashGeneral, "M", Grid.bottomright)
 
+hotkey.bind(mashResize, "k", grid.resizeWindowShorter)
+hotkey.bind(mashResize, "j", grid.resizeWindowTaller)
+hotkey.bind(mashResize, "l", grid.resizeWindowWider)
+hotkey.bind(mashResize, "h", grid.resizeWindowThinner)
+
 -- Spotify
 hs.hotkey.bind(mashGeneral, "P", hs.spotify.play)
 hs.hotkey.bind(mashGeneral, "Y", hs.spotify.pause)
 hs.hotkey.bind(mashGeneral, "T", hs.spotify.displayCurrentTrack)
-
--- Slack-specific app launcher (since I keep it "peeked" to the side by default)
-function showSlack()
-	local appName = "Slack"
-	local app = hs.application.find(appName)
-	hs.application.launchOrFocus(appName)
-
-	if app and hs.application.isRunning(app) then
-		Grid.topleft()
-	end
-end
-
--- App Shortcuts
-hs.hotkey.bind(mashApps, "1", function()
-	hs.application.launchOrFocus("kitty")
-end)
-hs.hotkey.bind(mashApps, "2", function()
-	hs.application.launchOrFocus("Firefox")
-end)
-hs.hotkey.bind(mashApps, "3", showSlack)
-hs.hotkey.bind(mashApps, "4", function()
-	hs.application.launchOrFocus("Polymail")
-end)
-
--- Reload automatically on config changes
-hs.pathwatcher.new(os.getenv("HOME") .. "/.hammerspoon/", hs.reload):start()
-hs.alert("Hammerspoon is locked and loaded", 1)

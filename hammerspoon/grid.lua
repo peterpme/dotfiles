@@ -9,32 +9,6 @@ Grid.R_CHUNK_SHARE = 0.5
 
 Grid.PEEK_PIXELS = 70
 
-local positions = {
-	fullscreen = { x = 0.00, y = 0.00, w = 1.00, h = 1.00 },
-
-	right50 = { x = 0.50, y = 0.00, w = 0.50, h = 1.00 },
-	left50 = { x = 0.00, y = 0.00, w = 0.50, h = 1.00 },
-	top50 = { x = 0.00, y = 0.00, w = 1.00, h = 0.50 },
-	bottom50 = { x = 0.00, y = 0.50, w = 1.00, h = 0.50 },
-	right33 = { x = (1 / 3) * 2, y = 0.00, x2 = 1.00, h = 1.00 },
-	left33 = { x = 0.00, y = 0.00, w = 1 / 3, h = 1.00 },
-
-	bottomCenter50 = { x = 0.25, y = 0.50, w = 0.50, h = 0.50 },
-}
-
-function alertCannotManipulateWindow()
-	alert.show("Can't move window")
-end
-
-function move(position)
-	local win = window.focusedWindow()
-	if not win then
-		alertCannotManipulateWindow()
-		return
-	end
-	win:move(position, nil, true)
-end
-
 function Grid.fullscreen()
 	local win = hs.window.focusedWindow()
 	if not win then

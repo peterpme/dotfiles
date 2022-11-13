@@ -1,14 +1,16 @@
-local hotkey = require("hs.hotkey")
-local Grid = require("grid")
-
 local grid = require("hs.grid")
+local hotkey = require("hs.hotkey")
+local alert = require("hs.alert")
+local pathwatcher = require("hs.pathwatcher")
 
-grid.GRIDHEIGHT = 4
-grid.GRIDWIDTH = 4
-
-require("utils")
--- require("wifi_control")
+local Grid = require("grid")
 -- require "lights"
+
+grid.setGrid("16x4")
+
+-- Reload automatically on config changes
+pathwatcher.new(os.getenv("HOME") .. "/.hammerspoon/", hs.reload):start()
+alert("Hammerspoon is locked and loaded", 1)
 
 local mashGeneral = {
 	"cmd",
@@ -28,7 +30,7 @@ local screenKeys = {
 }
 
 for screenIndex = 1, 3 do
-	hs.hotkey.bind(screenKeys, tostring(screenIndex), function()
+	hotkey.bind(screenKeys, tostring(screenIndex), function()
 		local win = hs.window.focusedWindow()
 		local screen = hs.screen.allScreens()[screenIndex]
 
@@ -37,9 +39,9 @@ for screenIndex = 1, 3 do
 	end)
 end
 
-hs.hotkey.bind(mashGeneral, "S", function()
+hotkey.bind(mashGeneral, "S", function()
 	for i, screen in ipairs(hs.screen.allScreens()) do
-		hs.alert("Screen " .. i, {}, screen)
+		alert("Screen " .. i, {}, screen)
 	end
 end)
 
@@ -47,19 +49,19 @@ end)
 hs.window.animationDuration = 0
 
 -- Hammerspoon repl
-hs.hotkey.bind(mashGeneral, "C", hs.openConsole)
+hotkey.bind(mashGeneral, "C", hs.openConsole)
 
 -- Window Management
-hs.hotkey.bind(mashGeneral, "O", Grid.fullscreen)
-hs.hotkey.bind(mashGeneral, "H", Grid.leftHalf)
-hs.hotkey.bind(mashGeneral, "L", Grid.rightHalf)
-hs.hotkey.bind(mashGeneral, "K", Grid.topHalf)
-hs.hotkey.bind(mashGeneral, "J", Grid.bottomHalf)
+hotkey.bind(mashGeneral, "O", Grid.fullscreen)
+hotkey.bind(mashGeneral, "H", Grid.leftHalf)
+hotkey.bind(mashGeneral, "L", Grid.rightHalf)
+hotkey.bind(mashGeneral, "K", Grid.topHalf)
+hotkey.bind(mashGeneral, "J", Grid.bottomHalf)
 
-hs.hotkey.bind(mashGeneral, "U", Grid.topleft)
-hs.hotkey.bind(mashGeneral, "N", Grid.bottomleft)
-hs.hotkey.bind(mashGeneral, "I", Grid.topright)
-hs.hotkey.bind(mashGeneral, "M", Grid.bottomright)
+hotkey.bind(mashGeneral, "U", Grid.topleft)
+hotkey.bind(mashGeneral, "N", Grid.bottomleft)
+hotkey.bind(mashGeneral, "I", Grid.topright)
+hotkey.bind(mashGeneral, "M", Grid.bottomright)
 
 hotkey.bind(mashResize, "k", grid.resizeWindowShorter)
 hotkey.bind(mashResize, "j", grid.resizeWindowTaller)

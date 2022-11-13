@@ -7,6 +7,10 @@ local Grid = require("grid")
 -- require "lights"
 
 grid.setGrid("16x4")
+grid.setMargins("0x0")
+
+-- Disable window animations (janky for iTerm)
+hs.window.animationDuration = 0
 
 -- Reload automatically on config changes
 pathwatcher.new(os.getenv("HOME") .. "/.hammerspoon/", hs.reload):start()
@@ -45,9 +49,6 @@ hotkey.bind(mashGeneral, "S", function()
 	end
 end)
 
--- Disable window animations (janky for iTerm)
-hs.window.animationDuration = 0
-
 -- Hammerspoon repl
 hotkey.bind(mashGeneral, "C", hs.openConsole)
 
@@ -63,10 +64,10 @@ hotkey.bind(mashGeneral, "N", Grid.bottomleft)
 hotkey.bind(mashGeneral, "I", Grid.topright)
 hotkey.bind(mashGeneral, "M", Grid.bottomright)
 
-hotkey.bind(mashResize, "k", grid.resizeWindowShorter)
-hotkey.bind(mashResize, "j", grid.resizeWindowTaller)
-hotkey.bind(mashResize, "l", grid.resizeWindowWider)
-hotkey.bind(mashResize, "h", grid.resizeWindowThinner)
+hotkey.bind(mashResize, "K", grid.resizeWindowShorter)
+hotkey.bind(mashResize, "J", grid.resizeWindowTaller)
+hotkey.bind(mashResize, "L", grid.resizeWindowWider)
+hotkey.bind(mashResize, "H", grid.resizeWindowThinner)
 
 -- Spotify
 hs.hotkey.bind(mashGeneral, "P", hs.spotify.play)

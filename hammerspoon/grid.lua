@@ -1,4 +1,4 @@
-local alert = require "hs.alert"
+log = hs.logger.new("hs")
 
 Grid = {}
 Grid.BORDER = 1

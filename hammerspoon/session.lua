@@ -1,4 +1,5 @@
 local wifi = require("wifi")
+-- turnOnUrl / turnOffUrl variables are ripped out
 local headers = {
 	["Content-Type"] = "application/json",
 }

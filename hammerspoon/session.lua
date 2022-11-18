@@ -3,8 +3,6 @@ local headers = {
 	["Content-Type"] = "application/json",
 }
 
-local hey = "1" --gitignore
-
 local watcher = {}
 
 function isAudioInterface(usbDevice)

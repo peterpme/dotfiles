@@ -1,9 +1,11 @@
 local wifi = require("wifi")
-local turnOnUrl = "http://homeassistant.local:8123/api/webhook/-kCb-V-1mjxsPcrgnP3zt7AFG" --git-ignore gitignore
-local turnOffUrl = "http://homeassistant.local:8123/api/webhook/-W1MgMyMCwY3V_bfL5iqu98MZ" --git-ignore gitignore
+local turnOnUrl = "http://homeassistant.local:8123/api/webhook/-kCb-V-1mjxsPcrgnP3zt7AFG" --gitignore
+local turnOffUrl = "http://homeassistant.local:8123/api/webhook/-W1MgMyMCwY3V_bfL5iqu98MZ" --gitignore
 local headers = {
 	["Content-Type"] = "application/json",
 }
+
+local hey = "1" --gitignore
 
 local watcher = {}
 

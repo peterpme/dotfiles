@@ -1,20 +1,18 @@
 local grid = require("hs.grid")
 local hotkey = require("hs.hotkey")
 local alert = require("hs.alert")
-local pathwatcher = require("hs.pathwatcher")
 
 local Grid = require("grid")
--- require "lights"
+require("wifi")
+require("session")
+
+alert("Hammerspoon is locked and loaded", 1)
 
 grid.setGrid("16x4")
 grid.setMargins("0x0")
 
 -- Disable window animations (janky for iTerm)
 hs.window.animationDuration = 0
-
--- Reload automatically on config changes
-pathwatcher.new(os.getenv("HOME") .. "/.hammerspoon/", hs.reload):start()
-alert("Hammerspoon is locked and loaded", 1)
 
 local mashGeneral = {
 	"cmd",
@@ -73,3 +71,17 @@ hotkey.bind(mashResize, "H", grid.resizeWindowThinner)
 hs.hotkey.bind(mashGeneral, "P", hs.spotify.play)
 hs.hotkey.bind(mashGeneral, "Y", hs.spotify.pause)
 hs.hotkey.bind(mashGeneral, "T", hs.spotify.displayCurrentTrack)
+
+-- Easy config reloading
+reloader = hs.pathwatcher.new(os.getenv("HOME") .. "/.hammerspoon/", function(files)
+	doReload = false
+	for _, file in pairs(files) do
+		if file:sub(-4) == ".lua" then
+			doReload = true
+		end
+	end
+	if doReload then
+		hs.reload()
+	end
+end)
+reloader:start()

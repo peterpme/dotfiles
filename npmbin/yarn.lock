@@ -357,21 +357,21 @@
     tmp "^0.0.33"
     tslib "^1.10.0"
 
-"@expo/eas-build-job@0.2.96":
-  version "0.2.96"
-  resolved "https://registry.yarnpkg.com/@expo/eas-build-job/-/eas-build-job-0.2.96.tgz#711d0a03e078d7e03e9514a5c7acdea0d593d110"
-  integrity sha512-Y8jeEEwzU/GfYNSq+5Snbl5NFpXSgqtRCvPIpWUWka0XsPf4qhU9e6iWjOJboi5VbQIAQfZbXMjW/OZByjT/OA==
+"@expo/eas-build-job@0.2.97":
+  version "0.2.97"
+  resolved "https://registry.yarnpkg.com/@expo/eas-build-job/-/eas-build-job-0.2.97.tgz#8f0884c498c17bb3d3e19cad767ee7f3b6b81c05"
+  integrity sha512-1OtHIoJbMQSsp0jEqBLI7nsqqhy1Hv38H0Ogznyr3uFqk5zWLX57pmSx4wWYv9R8M6SXsgJJq/nNa5RAopsipA==
   dependencies:
     joi "^17.4.2"
     semver "^7.3.5"
 
-"@expo/eas-json@2.7.0":
-  version "2.7.0"
-  resolved "https://registry.yarnpkg.com/@expo/eas-json/-/eas-json-2.7.0.tgz#04fd0f1c5c2b0931a6b575f096f7a66352d3b369"
-  integrity sha512-zZKtM3mhMggyW201HO44jmadcRmbaFmcoTwcUkFPMhhz2P37jK7UxyJbpCVeeyVrdBNXC4PEkS9GkYGJbTbrAQ==
+"@expo/eas-json@2.7.1":
+  version "2.7.1"
+  resolved "https://registry.yarnpkg.com/@expo/eas-json/-/eas-json-2.7.1.tgz#3d94f437177377d5050db26ad098d7f1fdfd4ed4"
+  integrity sha512-QHgeQBwtWsGi6i8IOFB9JC5e5FlTYQgTuRFkOsvphsPmcd53rTjRxL8+vcTdha2pjUS6POSy26v2MY5t1FRbrg==
   dependencies:
     "@babel/code-frame" "7.18.6"
-    "@expo/eas-build-job" "0.2.96"
+    "@expo/eas-build-job" "0.2.97"
     chalk "4.1.2"
     env-string "1.0.1"
     fs-extra "10.1.0"
@@ -3332,18 +3332,18 @@ duplexify@^3.4.2, duplexify@^3.6.0:
     readable-stream "^2.0.0"
     stream-shift "^1.0.0"
 
-eas-cli@^2.7.0:
-  version "2.7.0"
-  resolved "https://registry.yarnpkg.com/eas-cli/-/eas-cli-2.7.0.tgz#92bbb6a2cb9f69cef23a4dc894d321bf10e32261"
-  integrity sha512-JPlD56VFZxAxIZIW9t/VoWBMSYilDoE2RIdtkbZt3OdZlz++YAsiht76zSvI+h4YjmSVt1AkKqpVh/CJIqDqxw==
+eas-cli@^2.7.1:
+  version "2.7.1"
+  resolved "https://registry.yarnpkg.com/eas-cli/-/eas-cli-2.7.1.tgz#09f7472e66c0d830893348e15f77cc4a4b7a736d"
+  integrity sha512-orS3Ht5Dh/4J/yqcLls9nj9cwcvxIIpfSt1okcYZXiwchC9nVO+5u1oesHxrlluh0lG1SZOHmDrrsFtNnXXqIQ==
   dependencies:
     "@expo/apple-utils" "0.0.0-alpha.34"
     "@expo/code-signing-certificates" "0.0.3"
     "@expo/config" "7.0.1"
     "@expo/config-plugins" "5.0.1"
     "@expo/config-types" "46.0.2"
-    "@expo/eas-build-job" "0.2.96"
-    "@expo/eas-json" "2.7.0"
+    "@expo/eas-build-job" "0.2.97"
+    "@expo/eas-json" "2.7.1"
     "@expo/json-file" "8.2.36"
     "@expo/multipart-body-parser" "1.1.0"
     "@expo/osascript" "2.0.33"

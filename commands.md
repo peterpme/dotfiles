@@ -18,3 +18,13 @@ rg --files-with-matches <find> | xargs sd <find> <replace-with>
 ```
 rg --files-with-matches "https://auth.xnfts.dev" | xargs sd "https://auth.xnfts.dev" "http://127.0.0.1:8776"
 ```
+
+- vscode find & replace inside parens
+
+```
+find:
+  "typescript": "(.*)"
+
+replace:
+  "typescript": "~4.9.3"
+```

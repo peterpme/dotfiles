@@ -14,15 +14,15 @@ local sources = {
 	b.diagnostics.actionlint,
 
 	-- Javascript / Typescript
-	b.diagnostics.tsc,
+	-- b.diagnostics.tsc,
 	b.formatting.prettierd,
 
-	b.code_actions.eslint_d,
-	b.diagnostics.eslint_d,
+	-- b.code_actions.eslint_d,
+	-- b.diagnostics.eslint_d,
 	b.formatting.eslint_d,
 
 	-- https://github.com/jshint/jshint
-	b.diagnostics.jshint,
+	-- b.diagnostics.jshint,
 
 	-- b.diagnostics.yamllint, python package only, meh
 	b.diagnostics.jsonlint,

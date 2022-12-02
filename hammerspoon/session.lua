@@ -6,6 +6,7 @@ local headers = {
 }
 
 local watcher = {}
+watcher.usb = "off"
 
 function isAudioInterface(usbDevice)
 	return usbDevice.productName == "Scarlett 4i4 USB"
@@ -13,7 +14,6 @@ end
 
 function listenForAudioInterface(event)
 	if wifi.homeSSID == wifi.lastSSID then
-		hs.alert(wifi.lastSSID)
 		if isAudioInterface(event) and event.eventType == "added" then
 			watcher.usb = "on"
 			local payload = [[ { "speakers": "switch.turn_on" }]]
@@ -32,7 +32,6 @@ function listenForAudioInterface(event)
 end
 
 function listenForSession(eventType)
-	hs.alert(watcher.usb)
 	if wifi.homeSSID == wifi.lastSSID then
 		-- start / if usb is plugged in, but computer locks, turn off lights & speakers
 		if eventType == hs.caffeinate.watcher.screensDidLock then
@@ -62,11 +61,6 @@ function listenForSession(eventType)
 			local payload = [[ { "speakers": "switch.turn_on" }]]
 			hs.http.post(turnOnUrl, payload, headers)
 			return
-		end
-
-		if eventType == hs.caffeinate.watcher.sessionDidBecomeActive and watcher.usb == "on" then
-			local payload = [[ { "speakers": "switch.turn_on" }]]
-			hs.http.post(turnOnUrl, payload, headers)
 		end
 	end
 end

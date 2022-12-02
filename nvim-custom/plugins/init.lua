@@ -61,25 +61,25 @@ return {
 
 	-- pure lua replacement for github/copilot.vim
 	-- https://github.com/zbirenbaum/copilot.lua
-  ["zbirenbaum/copilot.lua"] = {
-    branch = "master",
-    -- disable = not plugin_status.copilot,
-    after = "nvim-lspconfig",
-    config = function()
-      vim.defer_fn(function()
-        require('custom.plugins.copilot');
-      end, 100)
-    end,
-  },
-  ["zbirenbaum/copilot-cmp"] = {
-    -- disable = not plugin_status.copilot,
-    after = { "copilot.lua", "nvim-cmp" },
-    config = function ()
-      require("copilot_cmp").setup({
-        clear_after_cursor=true,
-      })
-    end
-  },
+	["zbirenbaum/copilot.lua"] = {
+		branch = "master",
+		-- disable = not plugin_status.copilot,
+		after = "nvim-lspconfig",
+		config = function()
+			vim.defer_fn(function()
+				require("custom.plugins.copilot")
+			end, 100)
+		end,
+	},
+	["zbirenbaum/copilot-cmp"] = {
+		-- disable = not plugin_status.copilot,
+		after = { "copilot.lua", "nvim-cmp" },
+		config = function()
+			require("copilot_cmp").setup({
+				clear_after_cursor = true,
+			})
+		end,
+	},
 
 	-- ["github/copilot.vim"] = { branch = "release" },
 	-- ["nkrkv/nvim-treesitter-rescript"] = {},

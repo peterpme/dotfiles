@@ -12,6 +12,7 @@ local M = {}
 -- 	},
 -- }
 
+-- :MasonInstallAll
 M.mason = {
 	ensure_installed = {
 		-- lua

@@ -1,7 +1,7 @@
 local M = {}
 
 M.ui = {
-	theme = "one_light",
+	theme = "catppuccin",
 	theme_toggle = { "one_light", "catppuccin" },
 }
 

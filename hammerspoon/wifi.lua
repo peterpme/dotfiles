@@ -1,4 +1,4 @@
-local wifi = {}
+wifi = {}
 
 wifi.homeSSID = "NETFLIX & CHILL" --git-ignore
 wifi.lastSSID = hs.wifi.currentNetwork()

@@ -7,18 +7,22 @@ local headers = {
 
 session = {}
 session.usb = "off"
+session.status = "locked"
 
 function isAudioInterface(usbDevice)
 	return usbDevice.productName == "Scarlett 4i4 USB"
 end
 
 function listenForAudioInterface(event)
+	hs.alert.show(session.status)
 	if wifi.homeSSID == wifi.lastSSID then
-		if isAudioInterface(event) and event.eventType == "added" then
-			session.usb = "on"
-			local payload = [[ { "speakers": "switch.turn_on" }]]
-			hs.http.post(turnOnUrl, payload, headers)
-			return
+		if session.status == "unlocked" then
+			if isAudioInterface(event) and event.eventType == "added" then
+				session.usb = "on"
+				local payload = [[ { "speakers": "switch.turn_on" }]]
+				hs.http.post(turnOnUrl, payload, headers)
+				return
+			end
 		end
 
 		-- if usb unplugged, turn off lights & speakers
@@ -32,6 +36,7 @@ function listenForAudioInterface(event)
 end
 
 function listenForSession(eventType)
+	session.status = "locked"
 	if wifi.homeSSID == wifi.lastSSID then
 		-- start / if usb is plugged in, but computer locks, turn off lights & speakers
 		if eventType == hs.caffeinate.watcher.screensDidLock then
@@ -58,6 +63,7 @@ function listenForSession(eventType)
 
 		-- if usb is plugged in and computer unlocks, turn on lights & speakers
 		if eventType == hs.caffeinate.watcher.screensDidUnlock then
+			session.status = "unlocked"
 			if session.usb == "on" then
 				local payload = [[ { "speakers": "switch.turn_on" }]]
 				hs.http.post(turnOnUrl, payload, headers)
@@ -67,10 +73,26 @@ function listenForSession(eventType)
 	end
 end
 
-session.usbWatcher = hs.usb.watcher.new(listenForAudioInterface)
-session.usbWatcher:start()
+function handleSessionChange()
+	return hs.caffeinate.watcher.new(function(eventType)
+		hs.timer.doAfter(2, function()
+			return listenForSession(eventType)
+		end)
+	end)
+end
 
-session.sessionWatcher = hs.caffeinate.watcher.new(listenForSession)
+function handleUsbChange()
+	return hs.usb.watcher.new(function(eventType)
+		hs.timer.doAfter(2, function()
+			return listenForAudioInterface(eventType)
+		end)
+	end)
+end
+
+session.sessionWatcher = handleSessionChange()
 session.sessionWatcher:start()
+
+session.usbWatcher = handleUsbChange()
+session.usbWatcher:start()
 
 return session

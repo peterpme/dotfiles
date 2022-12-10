@@ -43,8 +43,13 @@ set -g @plugin 'nhdaly/tmux-better-mouse-mode'
 set -g @plugin 'tmux-plugins/tmux-resurrect'
 set -g @plugin 'tmux-plugins/tmux-open'
 
-set -g @plugin 'jimeh/tmux-themepack'
-set -g @themepack 'powerline/default/cyan'
+set -g @plugin 'catppuccin/tmux'
+
+set -g @catppuccin_flavour 'mocha' # or frappe, macchiato, mocha
+
+
+# set -g @plugin 'jimeh/tmux-themepack'
+# set -g @themepack 'powerline/default/cyan'
 
 # Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
 run -b '~/.tmux/plugins/tpm/tpm'

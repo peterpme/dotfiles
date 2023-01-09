@@ -7,6 +7,9 @@ require("wifi")
 require("session")
 
 alert("Hammerspoon is locked and loaded", 1)
+	for i, screen in ipairs(hs.screen.allScreens()) do
+		alert("Screen " .. i, {}, screen)
+	end
 
 grid.setGrid("16x4")
 grid.setMargins("0x0")
@@ -31,6 +34,7 @@ local screenKeys = {
 	"shift",
 }
 
+-- Pushes windows to different screens
 for screenIndex = 1, 3 do
 	hotkey.bind(screenKeys, tostring(screenIndex), function()
 		local win = hs.window.focusedWindow()
@@ -41,7 +45,8 @@ for screenIndex = 1, 3 do
 	end)
 end
 
-hotkey.bind(mashGeneral, "S", function()
+-- lists each screen index (Screen 1, 2, 3, etc)
+hotkey.bind(screenKeys, "S", function()
 	for i, screen in ipairs(hs.screen.allScreens()) do
 		alert("Screen " .. i, {}, screen)
 	end

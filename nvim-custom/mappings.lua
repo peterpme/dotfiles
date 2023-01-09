@@ -16,4 +16,12 @@ local M = {}
 --   }
 -- }
 
+M.lspconfig = {
+	n = {
+		["<leader>fe"] = { "<cmd> EslintFixAll <CR>", "eslint fix all" },
+    -- BROKEN: fix this so that submatch works
+		-- ["<leader>fq"] = { '<cmd> %s/\v"d+px"/=submatch(0)[1:-4]/ <CR>', "replace px to numbers" },
+	},
+}
+
 return M

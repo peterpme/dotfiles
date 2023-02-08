@@ -43,10 +43,10 @@ set -g @plugin 'nhdaly/tmux-better-mouse-mode'
 set -g @plugin 'tmux-plugins/tmux-resurrect'
 set -g @plugin 'tmux-plugins/tmux-open'
 
+# https://github.com/catppuccin/tmux
 set -g @plugin 'catppuccin/tmux'
-
-set -g @catppuccin_flavour 'mocha' # or frappe, macchiato, mocha
-
+set -g @catppuccin_flavour 'latte' # or frappe, macchiato, mocha, latte
+set -g @catppuccin_window_tabs_enabled on # or off to disable window_tabs
 
 # set -g @plugin 'jimeh/tmux-themepack'
 # set -g @themepack 'powerline/default/cyan'

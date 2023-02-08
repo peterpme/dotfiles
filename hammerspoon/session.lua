@@ -46,21 +46,18 @@ function listenForSession(eventType)
 	if wifi.homeSSID == wifi.lastSSID then
 		-- start / if usb is plugged in, but computer locks, turn off lights & speakers
 		if eventType == hs.caffeinate.watcher.screensDidLock then
-			hs.spotify.pause()
 			local payload = [[ { "speakers": "switch.turn_off" }]]
 			hs.http.post(turnOffUrl, payload, headers)
 			return
 		end
 
 		if eventType == hs.caffeinate.watcher.screensDidSleep then
-			hs.spotify.pause()
 			local payload = [[ { "speakers": "switch.turn_off" }]]
 			hs.http.post(turnOffUrl, payload, headers)
 			return
 		end
 
 		if eventType == hs.caffeinate.watcher.screensDidPowerOff then
-			hs.spotify.pause()
 			local payload = [[ { "speakers": "switch.turn_off" }]]
 			hs.http.post(turnOffUrl, payload, headers)
 			return

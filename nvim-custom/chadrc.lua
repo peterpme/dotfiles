@@ -1,8 +1,8 @@
 local M = {}
 
 M.ui = {
-	theme = "catppuccin",
-	theme_toggle = { "one_light", "catppuccin" },
+	theme = "catppuccin_latte",
+	theme_toggle = { "catppuccin_latte", "catppuccin" },
 }
 
 M.plugins = require("custom.plugins")

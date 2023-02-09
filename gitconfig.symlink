@@ -51,13 +51,14 @@
 
 
 [interactive]
-    diffFilter = delta --color-only
+  diffFilter = delta --color-only
 
 [delta]
-    navigate = true
+    navigate = true    # use n and N to move between diff sections
+    light = true      # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
 
 [merge]
-  tool = vimdiff
+  # tool = vimdiff
   conflictstyle = diff3
 
 [pager]
@@ -99,10 +100,10 @@
   prompt = false
 
 [diff]
-  tool = vimdiff
+  # tool = vimdiff
   # Show blocks of moved text of at least 20 alphanumeric characters differently than adds/deletes
   # https://git-scm.com/docs/git-diff#git-diff-zebra
-  colorMoved = zebra
+  colorMoved = default
 
 [url "git@github.com:"]
     insteadOf = "gh:"

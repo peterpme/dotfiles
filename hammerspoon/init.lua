@@ -1,7 +1,4 @@
 hs.loadSpoon("SpoonInstall")
-require("menubar2")
-require("crypto")
--- require("weather")
 
 local grid = require("hs.grid")
 local hotkey = require("hs.hotkey")
@@ -10,6 +7,7 @@ local Grid = require("grid")
 
 require("wifi")
 require("session")
+require("crypto")
 
 alert("Hammerspoon is locked and loaded", 1)
 for i, screen in ipairs(hs.screen.allScreens()) do

@@ -27,7 +27,19 @@ spoon.SpoonInstall.repos.ShiftIt = {
 }
 
 spoon.SpoonInstall:andUse("ShiftIt", { repo = "ShiftIt" })
-spoon.ShiftIt:bindHotkeys({})
+
+-- Use Vim arrow keys
+spoon.ShiftIt:bindHotkeys({
+	left = { { "ctrl", "alt", "cmd" }, "h" },
+	down = { { "ctrl", "alt", "cmd" }, "j" },
+	up = { { "ctrl", "alt", "cmd" }, "k" },
+	right = { { "ctrl", "alt", "cmd" }, "l" },
+	upleft = { { "ctrl", "alt", "cmd" }, "u" },
+	upright = { { "ctrl", "alt", "cmd" }, "i" },
+	botleft = { { "ctrl", "alt", "cmd" }, "n" },
+	botright = { { "ctrl", "alt", "cmd" }, "m" },
+	maximum = { { "ctrl", "alt", "cmd" }, "o" },
+})
 
 -- Load PublicIP spoon
 hs.loadSpoon("PublicIP")
@@ -41,12 +53,6 @@ spoon.PublicIP.refreshIP()
 local mashGeneral = {
 	"cmd",
 	"ctrl",
-}
-
-local mashResize = {
-	"cmd",
-	"ctrl",
-	"alt",
 }
 
 local screenKeys = {

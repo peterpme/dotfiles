@@ -1,6 +1,7 @@
 local overrides = require("custom.configs.overrides")
 
 return {
+	{ "wakatime/vim-wakatime", lazy = false },
 	{
 		"hrsh7th/nvim-cmp",
 		opts = {

@@ -9,6 +9,8 @@ cmd([[abbr fitler filter]])
 cmd([[abbr cosnt const]])
 cmd([[abbr attribtue attribute]])
 cmd([[abbr attribuet attribute]])
+cmd([[abbr tamaguii tamagui]])
+cmd([[abbr iimport import]])
 
 opt.backup = false -- don't use backup files
 opt.writebackup = false -- don't backup the file while editing

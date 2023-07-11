@@ -7,7 +7,7 @@ local Grid = require("grid")
 
 require("wifi")
 require("session")
-require("crypto")
+-- require("crypto")
 
 alert("Hammerspoon is locked and loaded", 1)
 for i, screen in ipairs(hs.screen.allScreens()) do
@@ -42,13 +42,13 @@ spoon.ShiftIt:bindHotkeys({
 })
 
 -- Load PublicIP spoon
-hs.loadSpoon("PublicIP")
+-- hs.loadSpoon("PublicIP")
 
 -- Shorter menubar for use with M1 macbooks that have notch
-spoon.PublicIP.terse = true
+-- spoon.PublicIP.terse = true
 
 -- Get new state when loading configuration, this is required
-spoon.PublicIP.refreshIP()
+-- spoon.PublicIP.refreshIP()
 
 local mashGeneral = {
 	"cmd",

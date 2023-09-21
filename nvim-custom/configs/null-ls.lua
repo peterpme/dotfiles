@@ -3,6 +3,14 @@ local null_ls = require("null-ls")
 local format = null_ls.builtins.formatting
 local lint = null_ls.builtins.diagnostics
 
+-- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTIN_CONFIG.md#filetypes
+-- TLDR add extra filetypes with extra_filetypes or replace with filetypes
+-- local sources = {
+--     null_ls.builtins.formatting.prettier.with({
+--         extra_filetypes = { "toml" },
+--     }),
+-- }
+
 local sources = {
 	-- Rescript/Reason
 	-- format.rescript,

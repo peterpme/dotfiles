@@ -15,6 +15,8 @@ local M = {}
 -- :MasonInstallAll
 M.mason = {
 	ensure_installed = {
+		-- ruby
+		"ruby-lsp",
 		-- lua
 		"lua-language-server",
 		"stylua",
@@ -65,24 +67,23 @@ M.treesitter = {
 
 M.nvimtree = {
 	filters = {
-	  dotfiles = true,
-	  custom = { "node_modules" },
+		dotfiles = true,
+		custom = { "node_modules" },
 	},
-  
-	git = {
-	  enable = true,
-	},
-  
-	renderer = {
-	  highlight_git = true,
-	  icons = {
-		show = {
-		  git = true,
-		},
-	  },
-	},
-  }
 
+	git = {
+		enable = true,
+	},
+
+	renderer = {
+		highlight_git = true,
+		icons = {
+			show = {
+				git = true,
+			},
+		},
+	},
+}
 
 -- M.blankline = {
 -- 	filetype_exclude = {

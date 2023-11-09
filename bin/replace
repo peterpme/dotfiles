@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# cli-helper.sh
+
+# Check if enough arguments are supplied
+if [ "$#" -ne 2 ]; then
+	echo "Usage: cli-helper.sh <find_pattern> <replace_with>"
+	exit 1
+fi
+
+# Extract arguments
+find_pattern="$1"
+replace_with="$2"
+
+# Run the command
+rg --files-with-matches "$find_pattern" | xargs sd "$find_pattern" "$replace_with"

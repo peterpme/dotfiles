@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# Get the current directory
+current_dir=$(pwd)
+
+# Check if the current directory contains "backpack"
+if [[ $current_dir != *"backpack"* ]]; then
+  echo "can only be run inside backpack"
+  exit 1
+fi
+
+# Define prefix based on current directory
+prefix=""
+if [[ $current_dir == *"backpack/packages/"* ]]; then
+  prefix=$(basename "$current_dir")":"
+elif [[ $current_dir == *"backpack"* ]]; then
+  prefix="main:"
+fi
+
+# Create the PR with the prefixed title
+gh pr create -d -t "${prefix} $1"

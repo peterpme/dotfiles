@@ -1,6 +1,13 @@
 local overrides = require("custom.configs.overrides")
 
 return {
+	{
+		"rmagatti/goto-preview",
+		config = function()
+			require("goto-preview").setup({})
+		end,
+	},
+
 	{ "wakatime/vim-wakatime", lazy = false },
 	{
 		"hrsh7th/nvim-cmp",

@@ -23,7 +23,7 @@ end
 lspconfig.tsserver.setup({
 	on_attach = on_attach,
 	capabilities = capabilities,
-	root_dir = require("lspconfig.util").root_pattern(".git"),
+	-- root_dir = require("lspconfig.util").root_pattern(".git"),
 })
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {

@@ -1,3 +1,4 @@
+-- print(hs.location.get()) -- a hack to get location services to show up
 hs.loadSpoon("SpoonInstall")
 
 local grid = require("hs.grid")

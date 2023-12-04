@@ -163,3 +163,7 @@
     #     by the local ones
 
     path = ~/.gitconfig.local
+[gpg]
+	format = ssh
+[commit]
+	gpgSign = true

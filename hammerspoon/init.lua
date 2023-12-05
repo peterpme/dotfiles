@@ -28,6 +28,7 @@ spoon.SpoonInstall.repos.ShiftIt = {
 }
 
 spoon.SpoonInstall:andUse("ShiftIt", { repo = "ShiftIt" })
+spoon.SpoonInstall:andUse("Cherry", { repo = "Cherry" })
 
 -- Use Vim arrow keys
 spoon.ShiftIt:bindHotkeys({

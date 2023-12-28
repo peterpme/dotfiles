@@ -1,3 +1,7 @@
+*.js filter=gitignore
+*.jsx filter=gitignore
+*.ts filter=gitignore
+*.tsx filter=gitignore
 *.lua filter=gitignore
 *.re linguist-language=Reason
 *.rei linguist-language=Reason

@@ -16,6 +16,25 @@ local M = {}
 --   }
 -- }
 
+-- function SearchFunctionScreen()
+-- 	require("telescope.builtin").live_grep({
+-- 		default_text = "function.*Screen",
+-- 	})
+-- end
+--
+-- function SearchFunctionScreen()
+-- 	-- The Vim regex pattern for "function *Screen"
+-- 	local pattern = "function.\\{-}Screen"
+-- 	-- Call Vim's search function with the pattern
+-- 	vim.fn.search(pattern)
+-- end
+
+function SearchFunctionScreen(word)
+	local wordPattern = word and ".\\{-}" .. word or ""
+	local pattern = "function" .. wordPattern .. ".\\{-}Screen"
+	vim.fn.search(pattern)
+end
+
 M.lspconfig = {
 	n = {
 		["gpd"] = { "<cmd>lua require('goto-preview').goto_preview_definition()<CR>", "goto-preview definition" },
@@ -30,9 +49,8 @@ M.lspconfig = {
 		["gpD"] = { "<cmd>lua require('goto-preview').goto_preview_declaration()<CR>", "goto-preview declaration" },
 		["gP"] = { "<cmd>lua require('goto-preview').close_all_win()<CR>", "close all preview windows" },
 		["gpr"] = { "<cmd>lua require('goto-preview').goto_preview_references()<CR>", "goto-preview references" },
-		-- BROKEN: fix this so that submatch works
-		-- w
-		-- ["<leader>fq"] = { '<cmd> %s/\v"d+px"/=submatch(0)[1:-4]/ <CR>', "replace px to numbers" },
+		["gS"] = { "<cmd>lua SearchFunctionScreen('')<CR>", "cycle through Screen functions" },
+		["gs"] = { "<cmd>lua SearchFunctionScreen(vim.fn.input('Screen: '))<CR>", "cycle through Screen functions" },
 	},
 }
 

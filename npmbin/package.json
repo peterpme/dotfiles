@@ -7,7 +7,7 @@
     "@fsouza/prettierd": "^0.25.1",
     "@githubnext/github-copilot-cli": "^0.1.33",
     "@tailwindcss/language-server": "^0.0.14",
-    "eas-cli": "^5.9.3",
+    "eas-cli": "^6.0.0",
     "eslint_d": "^12.2.1",
     "expo-cli": "^6.3.12",
     "gatsby-cli": "^5.12.4",
@@ -17,7 +17,7 @@
     "jsonlint": "^1.6.3",
     "neovim": "^4.10.1",
     "netlify-cli": "^16.9.3",
-    "react-devtools": "^4.28.5",
+    "react-devtools": "^5.0.0",
     "sharp-cli": "^4.1.1",
     "tmex": "^1.0.11",
     "typescript": "^5.2.2",
@@ -27,7 +27,7 @@
     "vscode-html-languageserver-bin": "^1.4.0",
     "vscode-json-languageserver-bin": "^1.0.1",
     "vscode-langservers-extracted": "^4.8.0",
-    "wrangler": "^3.16.0",
+    "wrangler": "^3.22.0",
     "yaml-language-server": "1.14.0"
   },
   "devDependencies": {

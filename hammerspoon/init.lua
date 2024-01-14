@@ -8,6 +8,7 @@ local Grid = require("grid")
 
 require("wifi")
 require("session")
+require("menubar")
 -- require("crypto")
 
 alert("Hammerspoon is locked and loaded", 1)

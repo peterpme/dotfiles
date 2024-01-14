@@ -31,7 +31,8 @@ local M = {}
 
 function SearchFunctionScreen(word)
 	local wordPattern = word and ".\\{-}" .. word or ""
-	local pattern = "function" .. wordPattern .. ".\\{-}Screen"
+	-- Add \c at the start of the pattern for case-insensitive search
+	local pattern = "\\cfunction" .. wordPattern .. ".\\{-}Screen"
 	vim.fn.search(pattern)
 end
 

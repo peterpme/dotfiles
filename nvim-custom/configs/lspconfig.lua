@@ -9,33 +9,33 @@ local lspconfig = require("lspconfig")
 
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
 -- :help lspconfig-all
-local servers = { "html", "cssls", "jsonls", "tailwindcss", "ruby_ls" }
+local servers = { "html", "cssls", "jsonls", "tailwindcss", "ruby_ls", "lua_ls" }
 -- tsserver isn't in this list
 
 for _, lsp in ipairs(servers) do
-	lspconfig[lsp].setup({
-		on_attach = on_attach,
-		capabilities = capabilities,
-	})
+  lspconfig[lsp].setup({
+    on_attach = on_attach,
+    capabilities = capabilities,
+  })
 end
 
 -- tsserver is down here
 lspconfig.tsserver.setup({
-	on_attach = on_attach,
-	capabilities = capabilities,
-	-- root_dir = require("lspconfig.util").root_pattern(".git"),
+  on_attach = on_attach,
+  capabilities = capabilities,
+  -- root_dir = require("lspconfig.util").root_pattern(".git"),
 })
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-	virtual_text = false,
-	underline = true,
-	signs = true,
-	severity_sort = true,
-	update_in_insert = false,
+  virtual_text = false,
+  underline = true,
+  signs = true,
+  severity_sort = true,
+  update_in_insert = false,
 })
 
 vim.diagnostic.config({
-	virtual_text = false,
+  virtual_text = false,
 })
 
 -- local autocmd = vim.api.nvim_create_autocmd

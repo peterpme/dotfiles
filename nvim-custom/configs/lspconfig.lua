@@ -8,6 +8,8 @@ local lspconfig = require("lspconfig")
 local servers = {
 	"vimls",
 	"lua_ls",
+	"eslint",
+	"bashls",
 	"html",
 	"cssls",
 	"tsserver",
@@ -41,12 +43,9 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagn
 	update_in_insert = false,
 })
 
--- vim.diagnostic.config({
--- 	virtual_text = false,
--- })
-
-vim.cmd([[autocmd CursorHold * lua vim.lsp.diagnostic.show_line_diagnostics()]])
-vim.cmd([[autocmd CursorHoldI * silent! lua vim.lsp.buf.signature_help()]])
+vim.diagnostic.config({
+	virtual_text = false,
+})
 
 -- ruby / rails
 -- https://github.com/Shopify/ruby-lsp-rails

@@ -1,112 +1,121 @@
 local overrides = require("custom.configs.overrides")
 
 return {
-	{
-		"rmagatti/goto-preview",
-		config = function()
-			require("goto-preview").setup({})
-		end,
-	},
+  {
+    "rmagatti/goto-preview",
+    config = function()
+      require("goto-preview").setup({})
+    end,
+  },
 
-	{ "wakatime/vim-wakatime", lazy = false },
-	{
-		"hrsh7th/nvim-cmp",
-		opts = {
-			sources = {
-				-- trigger_characters is for unocss lsp
-				{ name = "nvim_lsp", trigger_characters = { "-" } },
-				-- { name = "luasnip" },
-				{ name = "buffer" },
-				{ name = "nvim_lua" },
-				{ name = "path" },
-			},
-		},
-	},
+  { "wakatime/vim-wakatime",   lazy = false },
 
-	{
-		"zbirenbaum/copilot.lua",
-		event = { "InsertEnter" },
-		cmd = { "Copilot" },
-		opts = {
-			suggestion = {
-				auto_trigger = true,
-			},
-		},
-	},
+  {
+    "hrsh7th/nvim-cmp",
+    opts = {
+      sources = {
+        -- trigger_characters is for unocss lsp
+        { name = "nvim_lsp", trigger_characters = { "-" } },
+        -- { name = "luasnip" },
+        { name = "buffer" },
+        { name = "nvim_lua" },
+        { name = "path" },
+      },
+    },
+  },
 
-	{
-		"neovim/nvim-lspconfig",
-		dependencies = {
-			{
-				-- format & linting
-				"jose-elias-alvarez/null-ls.nvim",
-				config = function()
-					require("custom.configs.null-ls")
-				end,
-			},
-		},
-		config = function()
-			require("plugins.configs.lspconfig")
-			require("custom.configs.lspconfig")
-		end,
-	},
+  {
+    "zbirenbaum/copilot.lua",
+    event = { "InsertEnter" },
+    cmd = { "Copilot" },
+    opts = {
+      suggestion = {
+        auto_trigger = true,
+      },
+    },
+  },
 
-	-- override default configs
-	{ "nvim-tree/nvim-tree.lua", opts = overrides.nvimtree },
-	{ "nvim-treesitter/nvim-treesitter", opts = overrides.treesitter },
-	{ "williamboman/mason.nvim", opts = overrides.mason },
+  {
+    "neovim/nvim-lspconfig",
+    config = function()
+      require("plugins.configs.lspconfig")
+      require("custom.configs.lspconfig")
+    end,
+  },
 
-	--------------------------------------------- custom plugins ----------------------------------------------
+  {
+    "stevearc/conform.nvim",
+    --  for users those who want auto-save conform + lazyloading!
+    event = "BufWritePre",
+    config = function()
+      require("custom.configs.conform")
+    end,
+  },
 
-	-- {
-	-- 	"karb94/neoscroll.nvim",
-	-- 	keys = {"<C-d>", "<C-u>"},
-	-- 	config = function()
-	-- 		require("neoscroll").setup()
-	-- 	end
-	-- },
+  -- override default configs
+  { "nvim-tree/nvim-tree.lua", opts = overrides.nvimtree },
+  { "williamboman/mason.nvim", opts = overrides.mason },
+  {
+    "nvim-treesitter/nvim-treesitter",
+    opts = overrides.treesitter,
 
-	-- autoclose tags in html, jsx only
-	{
-		"windwp/nvim-ts-autotag",
-		event = "InsertEnter",
-		config = function()
-			require("nvim-ts-autotag").setup()
-		end,
-	},
+    config = function(_, opts)
+      dofile(vim.g.base46_cache .. "syntax")
+      require("nvim-treesitter.configs").setup(opts)
 
-	-- get highlight group under cursor
-	{
-		"nvim-treesitter/playground",
-		cmd = "TSCaptureUnderCursor",
-		config = function()
-			require("nvim-treesitter.configs").setup()
-		end,
-	},
+      -- register mdx ft
+      vim.filetype.add({
+        extension = { mdx = "mdx" },
+      })
 
-	-- dim inactive windows
-	{
-		"andreadev-it/shade.nvim",
-		keys = "<Bslash>",
-		config = function()
-			require("shade").setup({
-				exclude_filetypes = { "NvimTree" },
-			})
-		end,
-	},
-	{
-		"folke/trouble.nvim",
-		cmd = "Trouble",
-		config = function()
-			require("trouble").setup()
-		end,
-	},
-	-- Lua
-	{
-		"folke/zen-mode.nvim",
-		cmd = "ZenMode",
-		config = function()
-			require("custom.configs.zenmode")
-		end,
-	},
+      vim.treesitter.language.register("markdown", "mdx")
+    end,
+  },
+
+  --------------------------------------------- custom plugins ----------------------------------------------
+
+  -- autoclose tags in html, jsx only
+  {
+    "windwp/nvim-ts-autotag",
+    event = "InsertEnter",
+    config = function()
+      require("nvim-ts-autotag").setup()
+    end,
+  },
+
+  -- get highlight group under cursor
+  {
+    "nvim-treesitter/playground",
+    cmd = "TSCaptureUnderCursor",
+    config = function()
+      require("nvim-treesitter.configs").setup()
+    end,
+  },
+
+  -- dim inactive windows
+  {
+    "andreadev-it/shade.nvim",
+    keys = "<Bslash>",
+    config = function()
+      require("shade").setup({
+        exclude_filetypes = { "NvimTree" },
+      })
+    end,
+  },
+  {
+    "folke/trouble.nvim",
+    cmd = "Trouble",
+    config = function()
+      require("trouble").setup()
+    end,
+  },
+
+  -- distraction free mode
+  {
+    "folke/zen-mode.nvim",
+    cmd = "ZenMode",
+    config = function()
+      require("custom.configs.zenmode")
+    end,
+  },
 }

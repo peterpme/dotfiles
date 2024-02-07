@@ -1,40 +1,20 @@
 local M = {}
 
--- Github Copilot Bindings
------------------------------------------------------------
--- M.copilot = {
--- 	mode_opts = { expr = true },
--- 	i = {
--- 		["<C-h>"] = { 'copilot#Accept("<Left>")', "   copilot accept" },
--- 	},
--- }
-
--- M.telescope = {
---   n = {
---     -- https://github.com/NvChad/NvChad/blob/main/lua/core/mappings.lua#L279
---     ["<leader>fw"] = { "<cmd> Telescope live_grep find_command=rg,--ignore,--hidden,--glob,!examples/<CR>", "live grep" },
---   }
--- }
-
--- function SearchFunctionScreen()
--- 	require("telescope.builtin").live_grep({
--- 		default_text = "function.*Screen",
--- 	})
--- end
---
--- function SearchFunctionScreen()
--- 	-- The Vim regex pattern for "function *Screen"
--- 	local pattern = "function.\\{-}Screen"
--- 	-- Call Vim's search function with the pattern
--- 	vim.fn.search(pattern)
--- end
-
 function SearchFunctionScreen(word)
 	local wordPattern = word and ".\\{-}" .. word or ""
 	-- Add \c at the start of the pattern for case-insensitive search
 	local pattern = "\\cfunction" .. wordPattern .. ".\\{-}Screen"
 	vim.fn.search(pattern)
 end
+
+M.general = {
+	n = {
+		[";"] = { ":", "enter command mode", opts = { nowait = true } },
+	},
+	i = {
+		["jk"] = { "<ESC>", "escape insert mode" },
+	},
+}
 
 M.lspconfig = {
 	n = {
@@ -52,6 +32,22 @@ M.lspconfig = {
 		["gpr"] = { "<cmd>lua require('goto-preview').goto_preview_references()<CR>", "goto-preview references" },
 		["gS"] = { "<cmd>lua SearchFunctionScreen('')<CR>", "cycle through Screen functions" },
 		["gs"] = { "<cmd>lua SearchFunctionScreen(vim.fn.input('Screen: '))<CR>", "cycle through Screen functions" },
+	},
+}
+
+M.lsp = {
+	n = {
+		[";"] = { ":", "enter command mode", opts = { nowait = true } },
+		--  format with conform
+		-- ["<leader>fm"] = {
+		-- 	function()
+		-- 		require("conform").format()
+		-- 	end,
+		-- 	"formatting",
+		-- },
+	},
+	v = {
+		[">"] = { ">gv", "indent" },
 	},
 }
 

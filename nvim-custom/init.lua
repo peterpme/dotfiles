@@ -2,6 +2,8 @@
 local opt = vim.opt
 local cmd = vim.cmd
 
+opt.title = true
+
 cmd([[abbr funciton function]])
 cmd([[abbr teh the]])
 cmd([[abbr tempalte template]])
@@ -19,27 +21,11 @@ opt.updatecount = 0 -- don't write swap files after some number of updates
 
 opt.backspace = { "indent", "eol,start" } -- make backspace behave in a sane manner
 
--- vim.g.loaded_node_provider = 1 -- Enable node provider
--- vim.g.node_host_prog = "/Users/peter/dotfiles/npmbin/node_modules/neovim/bin/cli.js"
+if vim.g.neovide then
+	vim.g.neovide_refresh_rate = 75
 
--- Formatting used to timeout
--- https://github.com/jose-elias-alvarez/null-ls.nvim#i-am-seeing-a-formatting-timeout-error-message
-vim.lsp.buf.format({ timeout_ms = 5000 })
+	vim.g.neovide_cursor_vfx_mode = "railgun"
 
--- -- scroll the viewport faster
--- nnoremap("<C-e>", "3<c-e>")
--- nnoremap("<C-y>", "3<c-y>")
---
--- -- -- moving up and down work as you would expect
--- nnoremap("j", 'v:count == 0 ? "gj" : "j"', { expr = true })
--- nnoremap("k", 'v:count == 0 ? "gk" : "k"', { expr = true })
--- nnoremap("^", 'v:count == 0 ? "g^" :  "^"', { expr = true })
--- nnoremap("$", 'v:count == 0 ? "g$" : "$"', { expr = true })
---
--- -- custom text objects
--- -- inner-line
--- xmap("il", ":<c-u>normal! g_v^<cr>")
--- omap("il", ":<c-u>normal! g_v^<cr>")
--- -- around line
--- vmap("al", ":<c-u>normal! $v0<cr>")
--- omap("al", ":<c-u>normal! $v0<cr>")
+	vim.keymap.set("i", "<c-s-v>", "<c-r>+")
+	vim.keymap.set("i", "<c-r>", "<c-s-v>")
+end

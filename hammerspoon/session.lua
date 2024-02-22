@@ -32,7 +32,7 @@ local function handleSessionEvent(eventType)
 end
 
 local sessionWatcher = hs.caffeinate.watcher.new(function(eventType)
-	hs.timer.doAfter(1, function()
+	hs.timer.doAfter(5, function()
 		handleSessionEvent(eventType)
 	end)
 end)

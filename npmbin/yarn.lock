@@ -1515,12 +1515,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@expo/apple-utils@npm:1.3.2":
-  version: 1.3.2
-  resolution: "@expo/apple-utils@npm:1.3.2"
+"@expo/apple-utils@npm:1.4.0":
+  version: 1.4.0
+  resolution: "@expo/apple-utils@npm:1.4.0"
   bin:
     apple-utils: bin.js
-  checksum: 5b945d41d5c1570b0307b4a9af7e27baffe0e29e942569abbfe277bd55c11c3d0955130a67b1df4009774a8fcc92216fe747720b73fa3311e28029348abe465e
+  checksum: a9ed492c2009e4419cf550507b0583995e43866362d2bb4fc089540aeacce6b7241064049be3d05985e8a65921908208172164137725b8bd6899c7bec4bdc7fd
   languageName: node
   linkType: hard
 
@@ -2138,9 +2138,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@expo/steps@npm:1.0.66":
-  version: 1.0.66
-  resolution: "@expo/steps@npm:1.0.66"
+"@expo/steps@npm:1.0.67":
+  version: 1.0.67
+  resolution: "@expo/steps@npm:1.0.67"
   dependencies:
     "@expo/logger": 1.0.57
     "@expo/spawn-async": ^1.7.2
@@ -2152,7 +2152,7 @@ __metadata:
     this-file: ^2.0.3
     uuid: ^9.0.1
     yaml: ^2.3.4
-  checksum: 36569aab9d356fe39d76b7d97f525ef0db8e59836a5f66923cad5c828c7fb86374693bc10a8b8f06d094e85dedf15d71a0efa2bb0f53fd7ab91954d53ac6e39e
+  checksum: a94e6d96f80f1932ca7ed38c2d1469da59cb0eff243c8f0cbf83eaef6ee16f6f520096194f16838f503afcea12cc8b376346454a2773bbd22b3e69d44cb39cb0
   languageName: node
   linkType: hard
 
@@ -8891,11 +8891,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eas-cli@npm:^7.1.3":
-  version: 7.1.3
-  resolution: "eas-cli@npm:7.1.3"
+"eas-cli@npm:^7.2.0":
+  version: 7.2.0
+  resolution: "eas-cli@npm:7.2.0"
   dependencies:
-    "@expo/apple-utils": 1.3.2
+    "@expo/apple-utils": 1.4.0
     "@expo/code-signing-certificates": 0.0.5
     "@expo/config": 8.5.4
     "@expo/config-plugins": 7.8.4
@@ -8914,7 +8914,7 @@ __metadata:
     "@expo/results": 1.0.0
     "@expo/rudder-sdk-node": 1.1.1
     "@expo/spawn-async": 1.7.0
-    "@expo/steps": 1.0.66
+    "@expo/steps": 1.0.67
     "@expo/timeago.js": 1.0.0
     "@oclif/core": ^1.26.2
     "@oclif/plugin-autocomplete": ^2.3.10
@@ -8972,7 +8972,7 @@ __metadata:
     wrap-ansi: 7.0.0
   bin:
     eas: bin/run
-  checksum: a1304b56a32611598f56fc41ab6b74ff4137dcc74ffa778759fd85ddeb0c315f58973af0d87fa0dd9b6735fa895328fe01503c14a18619e820fb5d04f295c433
+  checksum: 54a82d69bb0fda802cd5eb0bc2a77ee4ae84ed1aec087fc8c74ad8005d214f9871a3a652cf6a887cd329318ca03895c9cf68997f3f52aa9e9af015d4f334cff4
   languageName: node
   linkType: hard
 
@@ -19678,7 +19678,7 @@ __metadata:
     "@githubnext/github-copilot-cli": ^0.1.36
     "@tailwindcss/language-server": ^0.0.16
     bash-language-server: ^5.1.2
-    eas-cli: ^7.1.3
+    eas-cli: ^7.2.0
     eslint_d: ^13.1.2
     expo-cli: ^6.3.12
     gatsby-cli: ^5.13.2

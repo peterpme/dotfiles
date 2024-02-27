@@ -11,11 +11,22 @@ fi
 
 # Define prefix based on current directory
 prefix=""
-if [[ $current_dir == *"backpack/packages/"* ]]; then
+
+# Handle backpack-api directory structure
+if [[ $current_dir == *"/backpack-api/workers-expo-eas-services"* ]]; then
+	prefix="workers/mobile-worker:"
+elif [[ $current_dir == *"/backpack-api/"* ]]; then
+	# Extract the relative path after backpack-api and prefix it
+	relative_path=${current_dir#*"/backpack-api/"}
+	# Ensure the relative path doesn't end with a slash
+	relative_path=${relative_path%/}
+	if [[ -n "$relative_path" ]]; then # Check if the relative path is not empty
+		prefix="${relative_path}:"
+	fi
+elif [[ $current_dir == *"backpack/packages/"* ]]; then
 	prefix=$(basename "$current_dir")":"
 elif [[ $current_dir == *"backpack"* ]]; then
 	prefix="main:"
 fi
 
-# Create the PR with the prefixed title
-gh pr create -d -t "${prefix} $1" -b ""
+gh pr create -t "${prefix} $1" -b ""

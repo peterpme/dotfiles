@@ -11,7 +11,7 @@ function renameFile() {
   new_filename="$2"
 
   # Find the file using fd and store the path
-  file_path=$(fd -e "$current_filename" . | head -n 1)
+  file_path=$(fd "$current_filename" . | head -n 1)
 
   if [ -z "$file_path" ]; then
     echo "File not found: $current_filename"

@@ -1506,12 +1506,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@expo/apple-utils@npm:1.4.0":
-  version: 1.4.0
-  resolution: "@expo/apple-utils@npm:1.4.0"
+"@expo/apple-utils@npm:1.5.0":
+  version: 1.5.0
+  resolution: "@expo/apple-utils@npm:1.5.0"
   bin:
     apple-utils: bin.js
-  checksum: a9ed492c2009e4419cf550507b0583995e43866362d2bb4fc089540aeacce6b7241064049be3d05985e8a65921908208172164137725b8bd6899c7bec4bdc7fd
+  checksum: 142e44e00deeb117de15c99b1934f1d12ccabf84ca154c2d00201be1794ba3e16d27a87cc72ec2ea7436185166159650a833476865a9c8ea1aa29f41c82f487c
   languageName: node
   linkType: hard
 
@@ -1735,22 +1735,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@expo/eas-build-job@npm:1.0.71":
-  version: 1.0.71
-  resolution: "@expo/eas-build-job@npm:1.0.71"
+"@expo/eas-build-job@npm:1.0.83":
+  version: 1.0.83
+  resolution: "@expo/eas-build-job@npm:1.0.83"
   dependencies:
     joi: ^17.11.0
     semver: ^7.5.4
-  checksum: bffd7bde1d47a5524416c6543d7447add396e117a125bddb9e54e820fb1927bb2ee4aecd44ea5611958f7e2458145554ed4cc134adfced3cf4761446c3247de8
+  checksum: a890ccd8c7fa4e324f275587db0b5b5ae32e0bf3aaa97aeeefe07fa26fd9aea084c30851601d658933ddde49094a523c63016414e63f0e25644211a129c45340
   languageName: node
   linkType: hard
 
-"@expo/eas-json@npm:7.3.0":
-  version: 7.3.0
-  resolution: "@expo/eas-json@npm:7.3.0"
+"@expo/eas-json@npm:7.5.0":
+  version: 7.5.0
+  resolution: "@expo/eas-json@npm:7.5.0"
   dependencies:
     "@babel/code-frame": 7.23.5
-    "@expo/eas-build-job": 1.0.71
+    "@expo/eas-build-job": 1.0.83
     chalk: 4.1.2
     env-string: 1.0.1
     fs-extra: 11.2.0
@@ -1760,7 +1760,7 @@ __metadata:
     semver: 7.5.2
     terminal-link: 2.1.1
     tslib: 2.4.1
-  checksum: 3d9d00e95c72bed7028782bd2b34c22003ca97b6e95218a87b64b39721631435ded24bbd5717eaa53edad6731598f1da6be26b2a64fef13ea64bb694ca1669c3
+  checksum: e5bc2afea14c18773fb236b238ad20d83e10f37f9a6ba3dbd1ff24ae6746023137e02f1cf5673499b8d73e5e989e06ccb43c8179a3f7e9af5da3dbb881d516e2
   languageName: node
   linkType: hard
 
@@ -2129,10 +2129,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@expo/steps@npm:1.0.70":
-  version: 1.0.70
-  resolution: "@expo/steps@npm:1.0.70"
+"@expo/steps@npm:1.0.83":
+  version: 1.0.83
+  resolution: "@expo/steps@npm:1.0.83"
   dependencies:
+    "@expo/eas-build-job": 1.0.83
     "@expo/logger": 1.0.57
     "@expo/spawn-async": ^1.7.2
     arg: ^5.0.2
@@ -2143,7 +2144,7 @@ __metadata:
     this-file: ^2.0.3
     uuid: ^9.0.1
     yaml: ^2.3.4
-  checksum: 22c348defa037646155c0638ae898d9b3c61850fc84a741b79e6e12bbec1ab76cc33e6067cf8e30a532633fddec65c520abde5da45d34476874c194afe3f9272
+  checksum: 1643ca97a0e897afa1f961b45a778c279015837743753a296fe8e3c3c2625ed5d45dcaddd7fc94a60002e067a2f51f47360592f488fb45db35f9796252c6553a
   languageName: node
   linkType: hard
 
@@ -8907,17 +8908,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eas-cli@npm:^7.3.0":
-  version: 7.3.0
-  resolution: "eas-cli@npm:7.3.0"
+"eas-cli@npm:^7.5.0":
+  version: 7.5.0
+  resolution: "eas-cli@npm:7.5.0"
   dependencies:
-    "@expo/apple-utils": 1.4.0
+    "@expo/apple-utils": 1.5.0
     "@expo/code-signing-certificates": 0.0.5
     "@expo/config": 8.5.4
     "@expo/config-plugins": 7.8.4
     "@expo/config-types": 50.0.0
-    "@expo/eas-build-job": 1.0.71
-    "@expo/eas-json": 7.3.0
+    "@expo/eas-build-job": 1.0.83
+    "@expo/eas-json": 7.5.0
     "@expo/json-file": 8.2.37
     "@expo/multipart-body-parser": 1.1.0
     "@expo/osascript": 2.0.33
@@ -8930,7 +8931,7 @@ __metadata:
     "@expo/results": 1.0.0
     "@expo/rudder-sdk-node": 1.1.1
     "@expo/spawn-async": 1.7.0
-    "@expo/steps": 1.0.70
+    "@expo/steps": 1.0.83
     "@expo/timeago.js": 1.0.0
     "@oclif/core": ^1.26.2
     "@oclif/plugin-autocomplete": ^2.3.10
@@ -8988,7 +8989,7 @@ __metadata:
     wrap-ansi: 7.0.0
   bin:
     eas: bin/run
-  checksum: f4be5fe7660698cfb33cad1e16886e11d32f668fe33f39bbe545a474e484c97896251b1ca51bb91ac080b3c19aa02926129fde69f028bd38842bff7485c466e2
+  checksum: 265a0c946cf08780f97fcd6ecaf4c62394a70ff2ec41793073076b5ec460639cca80b76ba4f8a5340b42703c45a68e19c20cda873b722b8bda89ce2a16fdcd55
   languageName: node
   linkType: hard
 
@@ -19701,7 +19702,7 @@ __metadata:
     "@githubnext/github-copilot-cli": ^0.1.36
     "@tailwindcss/language-server": ^0.0.16
     bash-language-server: ^5.1.2
-    eas-cli: ^7.3.0
+    eas-cli: ^7.5.0
     eslint_d: ^13.1.2
     expo-cli: ^6.3.12
     gatsby-cli: ^5.13.2

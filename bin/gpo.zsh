@@ -1,4 +1,3 @@
-}
 #!/bin/zsh
 
 # Function to commit, push, and create a new branch with the commit message

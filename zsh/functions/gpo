@@ -19,7 +19,7 @@ function gpo() {
   git commit -m "$commit_message"
 
   # Push changes to the current branch
-  gp
+  git push
 
   # Create a pull request
   prc "$commit_message"

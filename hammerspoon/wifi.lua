@@ -1,6 +1,6 @@
 wifi = {}
 
-wifi.homeSSID = "NETFLIX & CHILL" --git-ignore
+wifi.homeSSID = "Chestnut Castle" --git-ignore
 wifi.lastSSID = nil -- Initialize as nil and let the watcher update it
 
 function handleWifiNetwork()
@@ -9,7 +9,7 @@ function handleWifiNetwork()
 
 	if newSSID == wifi.homeSSID and wifi.lastSSID ~= wifi.homeSSID then
 		-- We just joined our home WiFi network
-		hs.audiodevice.defaultOutputDevice():setVolume(25)
+		hs.audiodevice.defaultOutputDevice():setVolume(50)
 	elseif newSSID ~= wifi.homeSSID and wifi.lastSSID == wifi.homeSSID then
 		-- We just departed our home WiFi network
 		hs.audiodevice.defaultOutputDevice():setVolume(0)

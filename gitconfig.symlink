@@ -102,6 +102,7 @@
   # Show blocks of moved text of at least 20 alphanumeric characters differently than adds/deletes
   # https://git-scm.com/docs/git-diff#git-diff-zebra
   colorMoved = default
+	tool = delta
 
 [url "git@github.com:"]
     insteadOf = "gh:"
@@ -165,3 +166,5 @@
 	format = ssh
 [commit]
 	gpgSign = true
+[difftool "delta"]
+	cmd = "delta --color-only  "

@@ -4,9 +4,9 @@
 current_dir=$(pwd)
 
 # Check if the current directory contains "backpack"
-if [[ $current_dir != *"backpack"* ]]; then
-	echo "can only be run inside backpack"
-	exit 1
+if [[ $current_dir != *"wallet"* ]]; then
+  echo "can only be run inside backpack"
+  exit 1
 fi
 
 # Define prefix based on current directory
@@ -14,19 +14,20 @@ prefix=""
 
 # Handle backpack-api directory structure
 if [[ $current_dir == *"/backpack-api/workers-expo-eas-services"* ]]; then
-	prefix="workers/mobile-worker:"
+  prefix="workers/mobile-worker:"
 elif [[ $current_dir == *"/backpack-api/"* ]]; then
-	# Extract the relative path after backpack-api and prefix it
-	relative_path=${current_dir#*"/backpack-api/"}
-	# Ensure the relative path doesn't end with a slash
-	relative_path=${relative_path%/}
-	if [[ -n "$relative_path" ]]; then # Check if the relative path is not empty
-		prefix="${relative_path}:"
-	fi
-elif [[ $current_dir == *"backpack/packages/"* ]]; then
-	prefix=$(basename "$current_dir")":"
-elif [[ $current_dir == *"backpack"* ]]; then
-	prefix="main:"
+  # Extract the relative path after backpack-api and prefix it
+  relative_path=${current_dir#*"/backpack-api/"}
+  # Ensure the relative path doesn't end with a slash
+  relative_path=${relative_path%/}
+  if [[ -n "$relative_path" ]]; then # Check if the relative path is not empty
+    prefix="${relative_path}:"
+  fi
+elif [[ $current_dir == */wallet/packages/* ]]; then
+  # Extract just the package name (e.g., "app-mobile" from "packages/app-mobile")
+  prefix=$(basename "$current_dir")":"
+elif [[ $current_dir == */wallet/* ]] || [[ $current_dir == */wallet ]]; then
+  prefix="monorepo:"
 fi
 
 gh pr create -t "${prefix} $1" -b ""

@@ -17,6 +17,9 @@
     # find commits by source code
     fc = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short -S$1; }; f"
 
+[branch]
+  sort = -committerdate
+
 [core]
     excludesfile = ~/.gitignore
     attributesfile = ~/.gitattributes
@@ -56,26 +59,27 @@
     light = false      # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
 
 [merge]
-  # tool = vimdiff
   conflictstyle = diff3
 
 [pager]
-    # https://github.com/dandavison/delta
-    diff = delta | less --tabs=4 -RFX
-    show = delta | less --tabs=4 -RFX
+  diff = delta
+  show = delta
+  # https://github.com/dandavison/delta
+  # diff = delta | less --tabs=4 -RFX
+  # show = delta | less --tabs=4 -RFX
 
 [color]
-    ui = auto
+  ui = auto
 
 [color "diff"]
-    meta = yellow bold
-    commit = green bold
-    frag = magenta bold
-    old = red bold
-    new = green bold
-    whitespace = red reverse
-    newMoved = cyan
-    oldMoved = blue
+  meta = yellow bold
+  commit = green bold
+  frag = magenta bold
+  old = red bold
+  new = green bold
+  whitespace = red reverse
+  newMoved = cyan
+  oldMoved = blue
 
 [color "branch"]
     current = yellow reverse
@@ -98,35 +102,33 @@
   prompt = false
 
 [diff]
-  # tool = vimdiff
-  # Show blocks of moved text of at least 20 alphanumeric characters differently than adds/deletes
-  # https://git-scm.com/docs/git-diff#git-diff-zebra
+  tool = delta
   colorMoved = default
-	tool = delta
+  # cmd = "delta --color-only"
 
 [url "git@github.com:"]
-    insteadOf = "gh:"
-    pushInsteadOf = "github:"
-    pushInsteadOf = "git://github.com/"
+  insteadOf = "gh:"
+  pushInsteadOf = "github:"
+  pushInsteadOf = "git://github.com/"
 
 [url "git://github.com/"]
-    insteadOf = "github:"
+  insteadOf = "github:"
 
 [url "git@gist.github.com:"]
-    insteadOf = "gst:"
-    pushInsteadOf = "gist:"
-    pushInsteadOf = "git://gist.github.com/"
+  insteadOf = "gst:"
+  pushInsteadOf = "gist:"
+  pushInsteadOf = "git://gist.github.com/"
 
 [url "git://gist.github.com/"]
-    insteadOf = "gist:"
+  insteadOf = "gist:"
 
 [help]
-    # If a command is mistyped, make Git automatically
-    # run the command it thinks the user wanted to type.
-    autocorrect = immediate
+  # If a command is mistyped, make Git automatically
+  # run the command it thinks the user wanted to type.
+  autocorrect = immediate
 
 [pull]
-    rebase = false
+  rebase = false
 
 # push easily. http://stackoverflow.com/a/23918418/89484
 [push]
@@ -134,6 +136,7 @@
   # Make `git push` automatically push relevant
   # annotated tags when pushing branches out.
   followTags = true
+  autoSetupRemote = true
 
 [filter "lfs"]
     clean = git-lfs clean %f
@@ -142,6 +145,8 @@
 
 [fetch]
     prune = true
+    pruneTgs = true
+    all = true
 
 [stash]
     showPatch = true
@@ -150,8 +155,8 @@
     date = relative
 
 [filter "gitignore"]
-	clean = "sed '/#gitignore$/d'"
-	smudge = cat
+    clean = "sed '/#gitignore$/d'"
+    smudge = cat
 
 [include]
     # Load local configs.
@@ -164,7 +169,11 @@
     path = ~/.gitconfig.local
 [gpg]
 	format = ssh
+
 [commit]
 	gpgSign = true
-[difftool "delta"]
-	cmd = "delta --color-only  "
+  verbose = true
+
+[rerere]
+  enabled = true
+  autoupdate = true

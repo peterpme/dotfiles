@@ -1,4 +1,1 @@
-/.yarn/**            linguist-vendored -filter
-/.yarn/releases/*    binary -filter
-/.yarn/plugins/**/*  binary -filter
-/.pnp.*              binary linguist-generated -filter
+bun.lock binary

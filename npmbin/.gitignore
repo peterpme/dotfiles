@@ -1,10 +1,1 @@
 node_modules/
-
-# Yarn Berry - ignore all except essential dirs
-.pnp.*
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/sdks
-!.yarn/versions

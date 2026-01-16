@@ -16,13 +16,15 @@ local servers = {
 	"tsserver",
 	"jsonls",
 	"cssls",
+	"yamlls",
 	-- "stylelint"
 }
 
 local function on_attach(client, bufnr)
-	-- Disable document formatting for tsserver
+	-- Disable document formatting for tsserver (use Prettier via conform instead)
 	if client.name == "tsserver" then
-		client.resolved_capabilities.document_formatting = false
+		client.server_capabilities.documentFormattingProvider = false
+		client.server_capabilities.documentRangeFormattingProvider = false
 	end
 
 	-- Call the imported on_attach function to ensure any setup defined there is also executed

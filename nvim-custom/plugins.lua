@@ -17,7 +17,6 @@ return {
 			sources = {
 				-- trigger_characters is for unocss lsp
 				{ name = "nvim_lsp", trigger_characters = { "-" } },
-				-- { name = "luasnip" },
 				{ name = "buffer" },
 				{ name = "nvim_lua" },
 				{ name = "path" },
@@ -118,5 +117,46 @@ return {
 		config = function()
 			require("custom.configs.zenmode")
 		end,
+	},
+
+	-- AI chat and code assistance (Cursor-like experience)
+	{
+		"yetone/avante.nvim",
+		event = "VeryLazy",
+		lazy = false,
+		version = false,
+		build = "make",
+		dependencies = {
+			"stevearc/dressing.nvim",
+			"nvim-lua/plenary.nvim",
+			"MunifTanjim/nui.nvim",
+			"nvim-tree/nvim-web-devicons",
+			"hrsh7th/nvim-cmp",
+		},
+		opts = {
+			provider = "claude",
+			providers = {
+				claude = {
+					model = "claude-sonnet-4-20250514",
+					extra_request_body = {
+						max_tokens = 4096,
+					},
+				},
+			},
+			behaviour = {
+				auto_suggestions = false,
+				auto_set_keymaps = true,
+			},
+			mappings = {
+				ask = "<leader>aa",
+				edit = "<leader>ae",
+				refresh = "<leader>ar",
+				toggle = {
+					default = "<leader>at",
+					debug = "<leader>ad",
+					hint = "<leader>ah",
+				},
+			},
+		},
 	},
 }

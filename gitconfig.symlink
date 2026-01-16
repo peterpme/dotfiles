@@ -155,7 +155,7 @@
     date = relative
 
 [filter "gitignore"]
-    clean = "sed '/#gitignore$/d'"
+    clean = git-filter-gitignore
     smudge = cat
 
 [include]

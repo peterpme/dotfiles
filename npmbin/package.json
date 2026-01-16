@@ -4,14 +4,13 @@
   "license": "MIT",
   "postinstall": "yarn-deduplicate yarn.lock",
   "dependencies": {
-    "@anthropic-ai/claude-code": "^2.0.24",
     "@fsouza/prettierd": "^0.25.2",
     "@githubnext/github-copilot-cli": "^0.1.36",
     "@google/gemini-cli": "^0.14.0",
     "@sentry/cli": "^2.45.0",
     "@tailwindcss/language-server": "^0.0.16",
     "bash-language-server": "^5.1.2",
-    "eas-cli": "~16.13.1",
+    "eas-cli": "^16.28.0",
     "eslint_d": "^13.1.2",
     "gatsby-cli": "^5.13.2",
     "git-delete-squashed": "^1.0.4",
@@ -35,5 +34,5 @@
   "devDependencies": {
     "yarn-deduplicate": "^6.0.2"
   },
-  "packageManager": "yarn@4.9.1"
+  "packageManager": "yarn@4.12.0"
 }

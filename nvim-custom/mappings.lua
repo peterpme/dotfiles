@@ -51,4 +51,10 @@ M.lsp = {
 	},
 }
 
+-- Avante AI keybindings (set via plugin opts)
+-- <leader>aa - Ask AI about code
+-- <leader>ae - Edit code with AI
+-- <leader>ar - Refresh AI response
+-- <leader>at - Toggle Avante panel
+
 return M

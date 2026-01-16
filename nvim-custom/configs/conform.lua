@@ -23,10 +23,8 @@ for _, fileType in ipairs(prettierFileTypes) do
 end
 
 local options = {
-	lsp_fallback = true,
-
 	formatters = {
-		prettier = {
+		prettierd = {
 			require_cwd = true,
 		},
 	},
@@ -35,8 +33,8 @@ local options = {
 
 	format_on_save = {
 		-- These options will be passed to conform.format()
-		timeout_ms = 300,
-		lsp_fallback = true,
+		timeout_ms = 500,
+		lsp_format = "fallback",
 	},
 }
 

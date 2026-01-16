@@ -4,7 +4,7 @@
 current_dir=$(pwd)
 
 # Check if the current directory contains "backpack"
-if [[ $current_dir != *"wallet"* ]]; then
+if [[ $current_dir != *"backpack"* ]]; then
   echo "can only be run inside backpack"
   exit 1
 fi

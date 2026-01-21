@@ -1,0 +1,8 @@
+{
+  "diagnostics": {
+    "globals": ["hs", "spoon"]
+  },
+  "workspace": {
+    "checkThirdParty": false
+  }
+}

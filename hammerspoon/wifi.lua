@@ -1,18 +1,28 @@
-wifi = {}
+local wifi = {}
 
 wifi.homeSSID = "Chestnut Castle" --git-ignore
 wifi.lastSSID = nil -- Initialize as nil and let the watcher update it
 
-function handleWifiNetwork()
+local function handleWifiNetwork()
 	local newSSID = hs.wifi.currentNetwork()
-	-- hs.alert.show("Current SSID: " .. (newSSID or "None"))
+	local audioDevice = hs.audiodevice.defaultOutputDevice()
 
-	if newSSID == wifi.homeSSID and wifi.lastSSID ~= wifi.homeSSID then
+	if newSSID == nil then
+		-- WiFi disconnected
+		if wifi.lastSSID ~= nil then
+			hs.alert.show("WiFi Disconnected")
+		end
+	elseif newSSID == wifi.homeSSID and wifi.lastSSID ~= wifi.homeSSID then
 		-- We just joined our home WiFi network
-		hs.audiodevice.defaultOutputDevice():setVolume(50)
+		if audioDevice then
+			audioDevice:setVolume(50)
+		end
+		hs.alert.show("Connected to Home Network")
 	elseif newSSID ~= wifi.homeSSID and wifi.lastSSID == wifi.homeSSID then
 		-- We just departed our home WiFi network
-		hs.audiodevice.defaultOutputDevice():setVolume(0)
+		if audioDevice then
+			audioDevice:setVolume(0)
+		end
 		hs.alert.show("Disconnected from Home Network")
 	end
 
@@ -22,7 +32,7 @@ end
 wifi.wifiWatcher = hs.wifi.watcher.new(handleWifiNetwork)
 wifi.wifiWatcher:start()
 
--- Optionally, call handleWifiNetwork() to set the initial state
+-- Set the initial state
 handleWifiNetwork()
 
 return wifi

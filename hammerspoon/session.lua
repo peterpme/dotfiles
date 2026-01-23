@@ -1,8 +1,10 @@
 -- luacheck: globals hs
-local wifi = require("wifi")
 
 local thunderboltMonitorName = "LG HDR WQHD"
 local log = hs.logger.new("session", "info") -- levels: debug, info, warning, error
+
+-- Track dock state to detect disconnect
+local wasDocked = false
 
 local function asyncHttpPost(url)
 	log.d("HTTP POST -> " .. url)
@@ -19,7 +21,6 @@ end
 
 local function isThunderboltMonitorConnected()
 	for _, screen in ipairs(hs.screen.allScreens()) do
-		-- Log names to help confirm the monitor label
 		log.d("Found screen: " .. (screen:name() or "nil"))
 		if screen:name() == thunderboltMonitorName then
 			return true
@@ -28,50 +29,33 @@ local function isThunderboltMonitorConnected()
 	return false
 end
 
-local function atHome()
-	local ssid = wifi.lastSSID
-	log.d("Current SSID: " .. tostring(ssid))
-	return ssid == wifi.homeSSID
+local function isCalDigitDockConnected()
+	local _, status = hs.execute("ioreg -p IOUSB -l | grep -q 'CalDigit'")
+	local connected = status == true
+	log.d("CalDigit dock connected? " .. tostring(connected))
+	return connected
 end
 
--- local eventNames = {
--- 	[hs.caffeinate.watcher.screensDidUnlock] = "screensDidUnlock",
--- 	[hs.caffeinate.watcher.screensDidLock] = "screensDidLock",
--- 	[hs.caffeinate.watcher.screensDidSleep] = "screensDidSleep",
--- 	[hs.caffeinate.watcher.screensDidWake] = "screensDidWake",
--- 	[hs.caffeinate.watcher.screensDidPowerOff] = "screensDidPowerOff",
--- 	[hs.caffeinate.watcher.systemWillSleep] = "systemWillSleep",
--- 	[hs.caffeinate.watcher.systemDidWake] = "systemDidWake",
--- 	[hs.caffeinate.watcher.sessionDidBecomeActive] = "sessionDidBecomeActive",
--- 	[hs.caffeinate.watcher.sessionDidResignActive] = "sessionDidResignActive",
--- 	[hs.caffeinate.watcher.screensaverDidStart] = "screensaverDidStart",
--- 	[hs.caffeinate.watcher.screensaverWillStop] = "screensaverWillStop",
--- 	[hs.caffeinate.watcher.screensaverDidStop] = "screensaverDidStop",
--- }
-
 local function handleSessionEvent(eventType)
-	if not atHome() then
-		log.d("Not on home Wi-Fi; skipping Home Assistant webhook.")
-		return
-	end
-
+	local docked = isCalDigitDockConnected()
 	local tbConnected = isThunderboltMonitorConnected()
-	log.i("Thunderbolt monitor connected? " .. tostring(tbConnected))
+	log.i(string.format("Session event: docked=%s, monitor=%s", tostring(docked), tostring(tbConnected)))
 
-	if eventType == hs.caffeinate.watcher.screensDidUnlock and isThunderboltMonitorConnected() then
+	-- Lights ON: unlock while docked with monitor
+	if eventType == hs.caffeinate.watcher.screensDidUnlock and docked and tbConnected then
 		asyncHttpPost(unlockUrl)
+	-- Lights OFF: lock/sleep while docked
 	elseif
-		eventType == hs.caffeinate.watcher.screensDidLock
-		or eventType == hs.caffeinate.watcher.screensDidSleep
-		or eventType == hs.caffeinate.watcher.screensDidPowerOff
-		or (eventType == hs.caffeinate.watcher.screensDidWake and not isThunderboltMonitorConnected())
+		docked
+		and (eventType == hs.caffeinate.watcher.screensDidLock
+			or eventType == hs.caffeinate.watcher.screensDidSleep
+			or eventType == hs.caffeinate.watcher.screensDidPowerOff)
 	then
 		asyncHttpPost(lockUrl)
 	end
 end
 
 local sessionWatcher = hs.caffeinate.watcher.new(function(eventType)
-	-- Delay to let Wi-Fi/display settle.
 	hs.timer.doAfter(5, function()
 		local ok, err = pcall(handleSessionEvent, eventType)
 		if not ok then
@@ -80,5 +64,31 @@ local sessionWatcher = hs.caffeinate.watcher.new(function(eventType)
 	end)
 end)
 
+-- Watch for USB changes to detect dock disconnect
+local usbWatcher = hs.usb.watcher.new(function(event)
+	log.d("USB event: " .. hs.inspect(event))
+
+	-- Small delay to let USB settle
+	hs.timer.doAfter(1, function()
+		local docked = isCalDigitDockConnected()
+
+		-- Dock was connected, now disconnected -> turn off lights
+		if wasDocked and not docked then
+			log.i("CalDigit dock disconnected, turning off lights")
+			asyncHttpPost(lockUrl)
+		-- Dock was disconnected, now connected -> will handle via session events
+		elseif not wasDocked and docked then
+			log.i("CalDigit dock connected")
+		end
+
+		wasDocked = docked
+	end)
+end)
+
+-- Initialize dock state
+wasDocked = isCalDigitDockConnected()
+log.i("Initial dock state: " .. tostring(wasDocked))
+
 sessionWatcher:start()
-return { sessionWatcher = sessionWatcher }
+usbWatcher:start()
+return { sessionWatcher = sessionWatcher, usbWatcher = usbWatcher }

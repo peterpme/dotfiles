@@ -65,3 +65,4 @@ hosts
 
 *.local
 *secret*
+CLEANUP.md

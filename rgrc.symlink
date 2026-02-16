@@ -5,18 +5,6 @@
 style:*.{css,sass,less,stylus}
 
 --type-add
-bs:*.{bs,gen}
-
---type-add
-re:*.{res,re,rei,ml,mli}
-
---type-add
-pug:*.{pug,jade}
-
---type-add
-tmpl:*.{html,hbs,pug}
-
---type-add
 dts:*.d.ts
 
 --type-add

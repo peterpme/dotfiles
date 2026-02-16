@@ -210,11 +210,14 @@ setup_misc() {
   info "Installing Node.js LTS via fnm..."
   fnm install --lts
 
+  info "Enabling corepack (provides yarn + pnpm via Node)..."
+  corepack enable
+
+  info "Installing pnpm via corepack..."
+  corepack prepare pnpm@latest --activate
+
   info "Installing neovim python libraries..."
   python3 -m pip install --user --upgrade pynvim
-
-  info 'Installing Yarn...'
-  curl -o- -L https://yarnpkg.com/install.sh | bash
 
   echo 'Installing rust...'
   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
@@ -268,7 +271,6 @@ case "$1" in
         setup_homebrew
         setup_shell
         setup_git
-        setup_terminfo
         setup_hosts_file
         setup_misc
         setup_macos

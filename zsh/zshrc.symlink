@@ -1,0 +1,71 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+# Source Prezto
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+fi
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# fzf https://github.com/junegunn/fzf
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# zoxide https://github.com/ajeetdsouza/zoxide
+eval "$(zoxide init zsh)"
+
+# fnm https://github.com/Schniz/fnm
+eval "$(fnm env --use-on-cd)" >/dev/null
+
+
+# forgit https://github.com/wfxr/forgit
+# unalias glo # unaliased bc of zprezto git extension
+# [ -f $HOME/dotfiles/forgit/forgit.plugin.zsh ] && source $HOME/dotfiles/forgit/forgit.plugin.zsh >/dev/null
+
+# aliases
+alias vi="nvim"
+alias vim="nvim"
+alias tmn="tmux new-session -s"
+alias tma="tmux attach -t"
+alias tml="tmux ls"
+alias tmk="tmux kill-session -t"
+alias tmd="tmux detach -a"
+alias y="yarn"
+alias fdns="sudo dscacheutil -flushcache"
+alias "sudoedit"='function _sudoedit(){sudo -e "$1";};_sudoedit'
+
+# bun completions
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+
+# secrets / API keys (from macOS Keychain)
+export OPENAI_API_KEY=$(security find-generic-password -a "$USER" -s "OPENAI_API_KEY" -w 2>/dev/null)
+
+# flashlight
+export PATH="$HOME/.flashlight/bin:$PATH"
+
+
+
+# pnpm
+export PNPM_HOME="$HOME/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:$HOME/.lmstudio/bin"
+# End of LM Studio CLI section
+
+# opencode
+export PATH="$HOME/.opencode/bin:$PATH"

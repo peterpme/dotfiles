@@ -187,7 +187,28 @@ function setup_terminfo() {
 }
 
 setup_zsh_prezto() {
-  source prezto_setup.zsh
+  title "Setting up Prezto"
+
+  if [ -d "$HOME/.zprezto" ]; then
+    info "~/.zprezto already exists... Skipping clone."
+  else
+    info "Cloning upstream prezto..."
+    git clone --recursive https://github.com/sorin-ionescu/prezto.git "$HOME/.zprezto"
+  fi
+
+  # Symlink zlogin and zlogout from upstream prezto (default templates)
+  for rcfile in zlogin zlogout; do
+    target="$HOME/.$rcfile"
+    if [ -e "$target" ]; then
+      info "~/.${rcfile} already exists... Skipping."
+    else
+      info "Creating symlink for $rcfile"
+      ln -s "$HOME/.zprezto/runcoms/$rcfile" "$target"
+    fi
+  done
+
+  # zshrc, zprofile, zpreztorc, zshenv are handled by setup_symlinks via *.symlink files
+  info "Custom runcoms (zshrc, zprofile, zpreztorc, zshenv) are managed by dotfiles/zsh/*.symlink"
 }
 
 setup_hosts_file() {
@@ -259,6 +280,9 @@ case "$1" in
     hosts)
         setup_hosts_file
         ;;
+    prezto)
+        setup_zsh_prezto
+        ;;
     misc)
         setup_misc
         ;;
@@ -266,6 +290,7 @@ case "$1" in
         setup_macos
         ;;
     all)
+        setup_zsh_prezto
         setup_symlinks
         setup_terminfo
         setup_homebrew
@@ -276,7 +301,7 @@ case "$1" in
         setup_macos
         ;;
     *)
-        echo -e $"\nUsage: $(basename "$0") {backup|link|git|homebrew|shell|terminfo|macos|all}\n"
+        echo -e $"\nUsage: $(basename "$0") {backup|link|git|homebrew|shell|terminfo|prezto|macos|all}\n"
         exit 1
         ;;
 esac

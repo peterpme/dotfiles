@@ -1,6 +1,11 @@
 -- luacheck: globals hs
+local secrets = require("secrets")
+local baseUrl = secrets.homeAssistantBaseUrl
 
+local backlightWebhook = secrets.backlightWebhook
 
+local turnOnSpeakersWebhook = secrets.turnOnSpeakersWebhook
+local turnOffSpeakersWebhook = secrets.turnOffSpeakersWebhook
 
 local turnOnUrl = baseUrl .. "/" .. turnOnSpeakersWebhook
 local turnOffUrl = baseUrl .. "/" .. turnOffSpeakersWebhook

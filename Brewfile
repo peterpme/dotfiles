@@ -1,5 +1,5 @@
 if OS.mac?
-  brew "trash" # rm, but faster since it goes in the trash
+  brew "trash-cli" # rm, but moves to trash instead of deleting
   # https://github.com/kcrawford/dockutil/issues/127#issuecomment-1118733013
   # Broken until the owner wants to support this
   # brew "dockutil" # https://github.com/kcrawford/dockutil

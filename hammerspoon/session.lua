@@ -1,5 +1,8 @@
 -- luacheck: globals hs
 
+local secrets = require("secrets")
+local lockUrl = secrets.homeAssistantBaseUrl .. "/" .. secrets.lockWebhook
+local unlockUrl = secrets.homeAssistantBaseUrl .. "/" .. secrets.unlockWebhook
 local thunderboltMonitorName = "LG HDR WQHD"
 local geforceNowAppName = "NVIDIA GeForce NOW"
 local log = hs.logger.new("session", "info") -- levels: debug, info, warning, error

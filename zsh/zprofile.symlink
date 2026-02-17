@@ -1,0 +1,135 @@
+#
+# Executes commands at login pre-zshrc.
+#
+# Authors:
+#   Sorin Ionescu <sorin.ionescu@gmail.com>
+#
+
+#
+# Browser
+#
+
+if [[ -z "$BROWSER" && "$OSTYPE" == darwin* ]]; then
+  export BROWSER='open'
+fi
+
+#
+# Editors
+#
+
+if [[ -z "$EDITOR" ]]; then
+  export EDITOR='vim'
+fi
+if [[ -z "$VISUAL" ]]; then
+  export VISUAL='vim'
+fi
+if [[ -z "$PAGER" ]]; then
+  export PAGER='less'
+fi
+
+#
+# Language
+#
+
+export LANG='en_US.UTF-8'
+export LC_ALL='en_US.UTF-8'
+
+#
+# Paths
+#
+
+# Ensure path arrays do not contain duplicates.
+typeset -gU cdpath fpath mailpath path
+
+# Set the list of directories that cd searches.
+# cdpath=(
+#   $cdpath
+# )
+
+# Set the list of directories that Zsh searches for programs.
+path=(
+  $HOME/{,s}bin(N)
+  /opt/{homebrew,local}/{,s}bin(N)
+  /usr/local/{,s}bin(N)
+  /usr/local/{bin,sbin}
+
+  $HOME/dotfiles/bin
+  $HOME/dotfiles/npmbin/node_modules/.bin
+  /opt/homebrew/opt/trash-cli/bin
+  /Applications/Sublime\ Text.app/Contents/SharedSupport/bin
+  $path
+)
+
+export ANDROID_HOME=$HOME/Library/Android/sdk
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+export JAVA_HOME="/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home"
+
+#
+# Less
+#
+
+# Set the default Less options.
+# Mouse-wheel scrolling has been disabled by -X (disable screen clearing).
+# Remove -X to enable it.
+if [[ -z "$LESS" ]]; then
+  export LESS='-g -i -M -R -S -w -X -z-4'
+fi
+
+# Set the Less input preprocessor.
+# Try both `lesspipe` and `lesspipe.sh` as either might exist on a system.
+if [[ -z "$LESSOPEN" ]] && (( $#commands[(i)lesspipe(|.sh)] )); then
+  export LESSOPEN="| /usr/bin/env $commands[(i)lesspipe(|.sh)] %s 2>&-"
+fi
+
+#
+# Misc
+#
+
+# Load custom functions
+# Not ideal, should be using `autoload -Uz` but too lazy to set that up right now
+# https://pnguyen.io/posts/speed-up-zsh-custom-functions/
+FUNCTIONS_DIR=$HOME/dotfiles/zsh/functions
+for func_def in $FUNCTIONS_DIR/*; do
+    source "$func_def"
+done
+
+# Static brew shellenv for Apple Silicon (run `/opt/homebrew/bin/brew shellenv` to regenerate)
+export HOMEBREW_PREFIX="/opt/homebrew"
+export HOMEBREW_CELLAR="/opt/homebrew/Cellar"
+export HOMEBREW_REPOSITORY="/opt/homebrew"
+export MANPATH="/opt/homebrew/share/man${MANPATH+:$MANPATH}:"
+export INFOPATH="/opt/homebrew/share/info:${INFOPATH:-}"
+
+# if eza exists, switch it over
+if [ -x "$(command -v eza)" ]; then
+    alias ls="eza"
+    alias la="eza --long --all --group"
+fi
+
+# if bat exists, switch it over
+if [ -x "$(command -v bat)" ]; then
+    alias cat="bat"
+fi
+
+# rg config
+export RIPGREP_CONFIG_PATH="$HOME/.rgrc"
+
+# Setting fd as the default source for fzf
+export FZF_DEFAULT_COMMAND="fd . $HOME"
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_ALT_C_COMMAND="fd -t d . $HOME"
+export PRETTIERD_LOCAL_PRETTIER_ONLY=true
+
+# Lazy-load rbenv (initialized on first use of rbenv/ruby/gem/irb/bundle/rake/rails)
+if [ -d "$HOME/.rbenv" ]; then
+  export PATH="$HOME/.rbenv/bin:$PATH"
+  _lazy_rbenv_commands=(rbenv ruby gem irb bundle rake rails)
+  for cmd in $_lazy_rbenv_commands; do
+    eval "function $cmd() { unfunction $_lazy_rbenv_commands; eval \"\$(command rbenv init - zsh)\"; $cmd \"\$@\" }"
+  done
+  unset _lazy_rbenv_commands
+fi
+
+# Created by `pipx` on 2024-08-14 14:39:17
+export PATH="$PATH:$HOME/.local/bin"

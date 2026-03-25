@@ -25,6 +25,30 @@ vim.lsp.config("lua_ls", {
 	},
 })
 
+-- auto-fix eslint errors on save
+vim.lsp.config("eslint", {
+	settings = {
+		useFlatConfig = true,
+	},
+	on_attach = function(client, bufnr)
+		client.server_capabilities.diagnosticProvider = nil
+		vim.api.nvim_create_autocmd("BufWritePre", {
+			buffer = bufnr,
+			callback = function()
+				client:request_sync("workspace/executeCommand", {
+					command = "eslint.applyAllFixes",
+					arguments = {
+						{
+							uri = vim.uri_from_bufnr(bufnr),
+							version = vim.lsp.util.buf_versions[bufnr],
+						},
+					},
+				}, 3000, bufnr)
+			end,
+		})
+	end,
+})
+
 -- disable formatting for ts_ls (use prettierd via conform instead)
 vim.lsp.config("ts_ls", {
 	on_attach = function(client)

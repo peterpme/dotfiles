@@ -33,6 +33,10 @@ map(
 	{ desc = "Goto preview references" }
 )
 
+-- diagnostics
+map("n", "gl", vim.diagnostic.open_float, { desc = "Line diagnostics" })
+map("n", "<leader>lf", vim.diagnostic.open_float, { desc = "Line diagnostics" })
+
 -- format with conform
 map("n", "<leader>fm", function()
 	require("conform").format()

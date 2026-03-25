@@ -69,3 +69,7 @@ export PATH="$PATH:$HOME/.lmstudio/bin"
 
 # opencode
 export PATH="$HOME/.opencode/bin:$PATH"
+
+# peon-ping quick controls
+alias peon="bash /Users/peter/.claude/hooks/peon-ping/peon.sh"
+[ -f /Users/peter/.claude/hooks/peon-ping/completions.bash ] && source /Users/peter/.claude/hooks/peon-ping/completions.bash

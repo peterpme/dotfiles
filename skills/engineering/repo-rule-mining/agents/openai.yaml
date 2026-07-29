@@ -1,0 +1,7 @@
+interface:
+  display_name: "Repo Rule Mining"
+  short_description: "Turn repeated review feedback into repo guardrails"
+  default_prompt: "Use $repo-rule-mining to turn repeated review findings into the smallest useful repo guardrail."
+
+policy:
+  allow_implicit_invocation: true

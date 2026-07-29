@@ -257,6 +257,11 @@ setup_macos() {
   fi
 }
 
+setup_skills() {
+  title "Linking agent skills"
+  bash "$DOTFILES/skills/scripts/link-skills.sh"
+}
+
 # Only runs if you pass in parameters. Won't run everything by default unless you pass in: `./install.sh all`
 case "$1" in
     backup)
@@ -289,6 +294,9 @@ case "$1" in
     macos)
         setup_macos
         ;;
+    skills)
+        setup_skills
+        ;;
     all)
         setup_zsh_prezto
         setup_symlinks
@@ -299,9 +307,10 @@ case "$1" in
         setup_hosts_file
         setup_misc
         setup_macos
+        setup_skills
         ;;
     *)
-        echo -e $"\nUsage: $(basename "$0") {backup|link|git|homebrew|shell|terminfo|prezto|macos|all}\n"
+        echo -e $"\nUsage: $(basename "$0") {backup|link|git|homebrew|shell|terminfo|prezto|macos|skills|all}\n"
         exit 1
         ;;
 esac

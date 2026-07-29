@@ -1,0 +1,7 @@
+interface:
+  display_name: "Component + Data Refactor"
+  short_description: "Sketch React data and component architecture before refactoring"
+  default_prompt: "Use $component-data-refactor to review this target, ask architecture questions, sketch data flow and component tree, then wait for approval before coding."
+
+policy:
+  allow_implicit_invocation: true

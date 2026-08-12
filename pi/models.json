@@ -1,0 +1,22 @@
+{
+  "providers": {
+    "xai": {
+      "modelOverrides": {
+        "grok-4.6": {
+          "compat": {
+            "supportsReasoningEffort": true
+          },
+          "thinkingLevelMap": {
+            "off": null,
+            "minimal": null,
+            "low": "low",
+            "medium": "medium",
+            "high": "high",
+            "xhigh": "xhigh",
+            "max": null
+          }
+        }
+      }
+    }
+  }
+}

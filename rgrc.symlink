@@ -36,3 +36,61 @@ pkg:package.json
 
 # follow symlinks
 --follow
+
+## Type additions (stack: RN / TS / Vite / Next.js / Rust)
+
+--type-add
+rust:*.rs
+
+--type-add
+toml:*.toml
+
+--type-add
+config:*.{json,jsonc,toml,yaml,yml}
+
+--type-add
+env:*.env*
+
+--type-add
+mdx:*.mdx
+
+--type-add
+prisma:*.prisma
+
+--type-add
+sql:*.sql
+
+--type-add
+proto:*.proto
+
+## Output formatting
+# Cap long lines (minified bundles, JSON blobs, base64) and show a preview
+# instead of dumping the whole line into the terminal.
+--max-columns=100
+--max-columns-preview
+
+## Always-exclude generated / binary artifacts.
+## These apply even with --no-ignore — they are never useful to grep.
+## To search one anyway, re-include it: rg --glob '*.heapsnapshot' <pattern>
+--glob=!**/*.heapsnapshot
+--glob=!**/*.cpuprofile
+--glob=!**/*.tsbuildinfo
+--glob=!**/*.min.{js,css}
+--glob=!**/*.map
+
+## Never search env files, even with --hidden (keeps secrets out of results).
+## To intentionally search one: rg --glob '.env*' <pattern>
+--glob=!**/.env
+--glob=!**/.env.*
+
+## Never descend into .git internals (matters once --hidden is used, e.g. `rgh`).
+--glob=!**/.git/**
+
+## Lockfiles — regenerated, huge, rarely the search target.
+## Re-include when you need a resolved version: rg --glob 'Cargo.lock' <pattern>
+--glob=!**/package-lock.json
+--glob=!**/pnpm-lock.yaml
+--glob=!**/yarn.lock
+--glob=!**/bun.lock
+--glob=!**/bun.lockb
+--glob=!**/Cargo.lock

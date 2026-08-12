@@ -21,6 +21,7 @@ eval "$(zoxide init zsh)"
 
 # fnm https://github.com/Schniz/fnm
 eval "$(fnm env --use-on-cd)" >/dev/null
+corepack enable yarn >/dev/null 2>&1
 
 
 # forgit https://github.com/wfxr/forgit
@@ -36,6 +37,8 @@ alias tml="tmux ls"
 alias tmk="tmux kill-session -t"
 alias tmd="tmux detach -a"
 alias y="yarn"
+# ripgrep, including hidden/dot files (still excludes .git and .env via ~/.rgrc)
+alias rgh="rg --hidden"
 alias fdns="sudo dscacheutil -flushcache"
 alias "sudoedit"='function _sudoedit(){sudo -e "$1";};_sudoedit'
 
@@ -73,3 +76,30 @@ export PATH="$HOME/.opencode/bin:$PATH"
 # peon-ping quick controls
 alias peon="bash /Users/peter/.claude/hooks/peon-ping/peon.sh"
 [ -f /Users/peter/.claude/hooks/peon-ping/completions.bash ] && source /Users/peter/.claude/hooks/peon-ping/completions.bash
+
+if command -v wt >/dev/null 2>&1; then eval "$(command wt config shell init zsh)"; fi
+
+# Added by LM Studio CLI tool (lms)
+export PATH="$PATH:/Users/peter/.lmstudio/bin"
+
+# Backpack wallet scripts
+export PATH="$PATH:/Users/peter/Projects/backpack/wallet/scripts"
+
+# Vite+ bin (https://viteplus.dev)
+. "$HOME/.vite-plus/env"
+
+# Added by Devin
+export PATH="/Users/peter/.codeium/windsurf/bin:$PATH"
+
+# >>> grok installer >>>
+export PATH="$HOME/.grok/bin:$PATH"
+fpath=(~/.grok/completions/zsh $fpath)
+autoload -Uz compinit && compinit -C
+# <<< grok installer <<<
+
+# Pi
+export PATH="/Users/peter/.vite-plus/js_runtime/node/24.18.0/bin:$PATH"
+
+# >>> railway initialize >>>
+source "$HOME/.railway/env"
+# <<< railway initialize <<<

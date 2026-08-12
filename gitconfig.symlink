@@ -22,7 +22,7 @@
 
 [core]
     excludesfile = ~/.gitignore
-    attributesfile = ~/.gitattributes
+	attributesFile = /dev/null
     editor = nvim
     pager = delta
 
@@ -177,3 +177,9 @@
 [rerere]
   enabled = true
   autoupdate = true
+[credential "https://github.com"]
+	helper =
+	helper = !/opt/homebrew/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper =
+	helper = !/opt/homebrew/bin/gh auth git-credential

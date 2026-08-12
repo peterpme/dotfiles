@@ -1,0 +1,553 @@
+#!/usr/bin/env bash
+# hwt — simple Herdr worktree helper
+#
+# Installed as: ~/dotfiles/bin/hwt  (on PATH via zsh zprofile)
+#
+# Setup is repo-local and commit-able:
+#   <repo>/.hwt/setup     one shell command per line (preferred)
+#   <repo>/.hwt/setup.sh  same
+# Scaffold with: hwt setup --init
+#
+#   hwt                 pick a worktree (fzf) and open it in Herdr
+#   hwt open            same
+#   hwt ls              list worktrees for this repo
+#   hwt new [branch]    create + open
+#   hwt new BR -s       create + open + setup (confirms first)
+#   hwt setup           print setup steps, confirm, run in focused pane
+#   hwt setup -y        skip confirm
+#   hwt setup --show    print steps only (don't run)
+#   hwt setup --init    write .hwt/setup in the current repo
+#   hwt which           show this script path + setup plan for cwd
+#   hwt rm              pick an open linked worktree and remove checkout
+#
+set -euo pipefail
+
+die()  { echo "hwt: $*" >&2; exit 1; }
+info() { echo "hwt: $*" >&2; }
+
+need() { command -v "$1" >/dev/null 2>&1 || die "need $1"; }
+
+need herdr
+need jq
+need fzf
+
+SELF="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/$(basename "${BASH_SOURCE[0]}")"
+
+# ── repo / parent workspace ──────────────────────────────────────────────────
+
+repo_root() {
+  git rev-parse --show-toplevel 2>/dev/null \
+    || die "not inside a git repo (cd into wallet / bpx-backend / wallet-api first)"
+}
+
+parent_workspace_id() {
+  local root="$1"
+  herdr workspace list 2>/dev/null | jq -r --arg root "$root" '
+    .result.workspaces[]?
+    | select(.worktree.repo_root == $root and (.worktree.is_linked_worktree | not))
+    | .workspace_id
+  ' | head -n1
+}
+
+worktree_json() {
+  local root="$1"
+  herdr worktree list --cwd "$root"
+}
+
+# ── setup plan (repo-local .hwt/setup) ───────────────────────────────────────
+# Prefer a committed file in the repo so anyone with hwt can share the same plan:
+#   <repo>/.hwt/setup      one command per line (# comments ok)
+#   <repo>/.hwt/setup.sh   same
+# Fallback: built-in defaults for known personal repos (not shared).
+
+setup_file_for() {
+  local root="$1"
+  if [[ -f "$root/.hwt/setup" ]]; then
+    echo "$root/.hwt/setup"
+  elif [[ -f "$root/.hwt/setup.sh" ]]; then
+    echo "$root/.hwt/setup.sh"
+  fi
+}
+
+# Built-in fallback only when the repo has no .hwt/setup yet.
+builtin_setup_steps_for() {
+  local root="$1"
+  local name
+  name="$(basename "$root")"
+  case "$name" in
+    wallet)
+      cat <<'STEPS'
+yarn
+yarn build:mobile
+STEPS
+      ;;
+    bpx-backend|wallet-api)
+      cat <<'STEPS'
+yarn
+yarn build
+STEPS
+      ;;
+    *)
+      if [[ -f "$root/package.json" ]]; then
+        cat <<'STEPS'
+yarn
+yarn build
+STEPS
+      fi
+      ;;
+  esac
+}
+
+# Resolve source + emit executable step lines (no comments/blanks).
+# Sets globals: SETUP_SOURCE SETUP_SOURCE_KIND
+#   kind = file | builtin | none
+load_setup_steps() {
+  local root="$1"
+  local file
+  file="$(setup_file_for "$root" || true)"
+  SETUP_STEPS=()
+
+  if [[ -n "${file:-}" ]]; then
+    SETUP_SOURCE="$file"
+    SETUP_SOURCE_KIND="file"
+    local line
+    while IFS= read -r line || [[ -n "$line" ]]; do
+      # trim leading whitespace
+      line="${line#"${line%%[![:space:]]*}"}"
+      [[ -z "$line" ]] && continue
+      [[ "$line" == \#* ]] && continue
+      SETUP_STEPS+=("$line")
+    done < "$file"
+    return 0
+  fi
+
+  local step
+  while IFS= read -r step; do
+    [[ -z "$step" ]] && continue
+    SETUP_STEPS+=("$step")
+  done < <(builtin_setup_steps_for "$root")
+
+  if [[ ${#SETUP_STEPS[@]} -gt 0 ]]; then
+    SETUP_SOURCE="built-in fallback (add .hwt/setup to share)"
+    SETUP_SOURCE_KIND="builtin"
+    return 0
+  fi
+
+  SETUP_SOURCE="(none)"
+  SETUP_SOURCE_KIND="none"
+  return 1
+}
+
+default_init_contents() {
+  local root="$1"
+  local name
+  name="$(basename "$root")"
+  case "$name" in
+    wallet)
+      cat <<'EOF'
+# hwt setup — run from repo root in the focused Herdr pane
+# Commit this file so others with hwt can run the same bootstrap.
+# One shell command per line. Blank lines and # comments are ignored.
+
+yarn
+yarn build:mobile
+EOF
+      ;;
+    bpx-backend|wallet-api)
+      cat <<'EOF'
+# hwt setup — run from repo root in the focused Herdr pane
+# One shell command per line. Blank lines and # comments are ignored.
+
+yarn
+yarn build
+EOF
+      ;;
+    *)
+      cat <<'EOF'
+# hwt setup — run from repo root in the focused Herdr pane
+# One shell command per line. Blank lines and # comments are ignored.
+# Example:
+# yarn
+# yarn build
+EOF
+      ;;
+  esac
+}
+
+print_setup_plan() {
+  local root="$1"
+  local pane="${2:-}"
+  local name
+  name="$(basename "$root")"
+
+  if ! load_setup_steps "$root"; then
+    echo "setup plan"
+    echo "  hwt:     $SELF"
+    echo "  repo:    $root ($name)"
+    echo "  source:  (none)"
+    echo "  steps:"
+    echo "    (none — run: hwt setup --init)"
+    return 1
+  fi
+
+  echo "setup plan"
+  echo "  hwt:     $SELF"
+  echo "  repo:    $root ($name)"
+  echo "  source:  $SETUP_SOURCE"
+  if [[ -n "$pane" ]]; then
+    echo "  pane:    $pane  (commands are sent here via herdr pane run)"
+  else
+    echo "  pane:    (focused herdr pane)"
+  fi
+  echo "  steps:"
+
+  local i=0
+  local step
+  for step in "${SETUP_STEPS[@]}"; do
+    i=$((i + 1))
+    printf '    %d. %s\n' "$i" "$step"
+  done
+  return 0
+}
+
+confirm_proceed() {
+  local yes="$1"
+  if [[ "$yes" -eq 1 ]]; then
+    return 0
+  fi
+  if [[ ! -t 0 ]]; then
+    die "no tty for confirm; re-run with -y"
+  fi
+  local answer
+  read -rp "proceed? [y/N] " answer
+  case "$answer" in
+    y|Y|yes|YES) return 0 ;;
+    *) die "aborted" ;;
+  esac
+}
+
+# Join steps into one bash -lc script (stop on first failure).
+setup_script_for() {
+  local root="$1"
+  load_setup_steps "$root" || return 1
+  local script="set -euo pipefail"
+  local step
+  for step in "${SETUP_STEPS[@]}"; do
+    script+=$'\n'"$step"
+  done
+  printf '%s' "$script"
+}
+
+focused_pane_id() {
+  herdr pane current 2>/dev/null | jq -r '.result.pane.pane_id // .result.pane_id // empty'
+}
+
+run_setup_in_pane() {
+  local root="$1"
+  local pane="$2"
+  local yes="${3:-0}"
+  local show_only="${4:-0}"
+
+  print_setup_plan "$root" "$pane" || die "no setup steps — run: hwt setup --init"
+
+  if [[ "$show_only" -eq 1 ]]; then
+    return 0
+  fi
+
+  confirm_proceed "$yes"
+
+  local script
+  script="$(setup_script_for "$root")"
+  info "running in pane $pane …"
+  herdr pane run "$pane" bash -lc "$script"
+  info "setup submitted to pane (watch that terminal for yarn output)"
+}
+
+cmd_setup_init() {
+  local root force=0
+  root="$(repo_root)"
+
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      -f|--force) force=1; shift ;;
+      *) die "unknown flag: $1" ;;
+    esac
+  done
+
+  local dest="$root/.hwt/setup"
+  if [[ -e "$dest" && "$force" -ne 1 ]]; then
+    die "$dest already exists (use --force to overwrite)"
+  fi
+
+  mkdir -p "$root/.hwt"
+  default_init_contents "$root" > "$dest"
+  info "wrote $dest"
+  info "commit it so others can run: hwt setup"
+  echo
+  print_setup_plan "$root" "" || true
+}
+
+# ── actions ──────────────────────────────────────────────────────────────────
+
+cmd_ls() {
+  local root
+  root="$(repo_root)"
+  worktree_json "$root" | jq -r '
+    .result.worktrees[]
+    | [
+        (if .open_workspace_id then "●" else "○" end),
+        (.branch // "(detached)"),
+        .path
+      ]
+    | @tsv
+  ' | column -t -s $'\t'
+}
+
+cmd_open() {
+  local root
+  root="$(repo_root)"
+  local pick path branch
+  pick="$(
+    worktree_json "$root" | jq -r '
+      .result.worktrees[]
+      | [
+          (if .open_workspace_id then "open" else "    " end),
+          (.branch // "(detached)"),
+          .path
+        ]
+      | @tsv
+    ' | fzf --prompt="open worktree> " --with-nth=1,2 --header="enter = open in herdr" \
+        --preview='echo {3}' --preview-window=down,1
+  )" || exit 0
+  [[ -n "$pick" ]] || exit 0
+
+  path="$(echo "$pick" | awk -F'\t' '{print $3}')"
+  branch="$(echo "$pick" | awk -F'\t' '{print $2}')"
+
+  info "opening $branch"
+  # herdr accepts --workspace OR --cwd, not both
+  local args=(worktree open --path "$path" --focus)
+  local ws
+  ws="$(parent_workspace_id "$root" || true)"
+  if [[ -n "${ws:-}" ]]; then
+    args+=(--workspace "$ws")
+  else
+    args+=(--cwd "$root")
+  fi
+
+  herdr "${args[@]}" >/dev/null
+  info "opened · attach with: herdr"
+}
+
+cmd_new() {
+  local setup=0
+  local yes=0
+  local branch=""
+  local base=""
+
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      -s|--setup) setup=1; shift ;;
+      -y|--yes) yes=1; shift ;;
+      --base)
+        base="${2:-}"
+        [[ -n "$base" ]] || die "--base needs a ref"
+        shift 2
+        ;;
+      -*) die "unknown flag: $1" ;;
+      *) branch="$1"; shift ;;
+    esac
+  done
+
+  local root
+  root="$(repo_root)"
+
+  if [[ -z "$branch" ]]; then
+    read -rp "branch name: " branch
+  fi
+  [[ -n "$branch" ]] || die "branch name required"
+
+  # herdr accepts --workspace OR --cwd, not both
+  local args=(worktree create --branch "$branch" --focus)
+  local ws
+  ws="$(parent_workspace_id "$root" || true)"
+  if [[ -n "${ws:-}" ]]; then
+    args+=(--workspace "$ws")
+  else
+    args+=(--cwd "$root")
+  fi
+  [[ -n "$base" ]] && args+=(--base "$base")
+
+  info "creating $branch"
+  local out pane
+  out="$(herdr "${args[@]}")"
+  pane="$(echo "$out" | jq -r '
+    .result.root_pane.pane_id
+    // .result.pane.pane_id
+    // empty
+  ')"
+
+  info "created · open in herdr sidebar under parent"
+
+  if [[ "$setup" -eq 1 ]]; then
+    [[ -n "$pane" ]] || die "could not resolve new pane id; run: hwt setup"
+    run_setup_in_pane "$root" "$pane" "$yes" 0
+  fi
+}
+
+cmd_rm() {
+  local yes=0
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      -y|--yes) yes=1; shift ;;
+      *) die "unknown flag: $1" ;;
+    esac
+  done
+
+  local root
+  root="$(repo_root)"
+  local pick ws path branch
+  pick="$(
+    worktree_json "$root" | jq -r '
+      .result.worktrees[]
+      | select(.is_linked_worktree == true and .open_workspace_id != null)
+      | [ .open_workspace_id, (.branch // "(detached)"), .path ]
+      | @tsv
+    ' | fzf --prompt="remove worktree> " --header="removes git checkout (not the branch)" \
+        --preview='echo {3}' --preview-window=down,1
+  )" || exit 0
+  [[ -n "$pick" ]] || exit 0
+
+  ws="$(echo "$pick" | awk -F'\t' '{print $1}')"
+  branch="$(echo "$pick" | awk -F'\t' '{print $2}')"
+  path="$(echo "$pick" | awk -F'\t' '{print $3}')"
+
+  echo "remove checkout?"
+  echo "  branch: $branch"
+  echo "  path:   $path"
+  if [[ "$yes" -eq 1 ]]; then
+    :
+  else
+    local confirm
+    read -rp "type yes: " confirm
+    [[ "$confirm" == "yes" ]] || die "aborted"
+  fi
+
+  herdr worktree remove --workspace "$ws" || herdr worktree remove --workspace "$ws" --force
+  info "removed $branch"
+}
+
+cmd_setup() {
+  local yes=0
+  local show_only=0
+
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      -y|--yes) yes=1; shift ;;
+      --show|-n|--dry-run) show_only=1; shift ;;
+      --init)
+        shift
+        cmd_setup_init "$@"
+        return 0
+        ;;
+      -h|--help)
+        cat <<EOF
+hwt setup — run repo bootstrap in the focused Herdr pane
+
+  hwt setup           show steps, ask proceed?, then run
+  hwt setup -y        same, skip confirm
+  hwt setup --show    print steps only
+  hwt setup --init    create commit-able .hwt/setup in this repo
+
+Steps come from (first match wins):
+  1. <repo>/.hwt/setup
+  2. <repo>/.hwt/setup.sh
+  3. built-in fallback in hwt (personal only)
+
+hwt itself: $SELF
+EOF
+        exit 0
+        ;;
+      *) die "unknown flag: $1 (try: hwt setup --help)" ;;
+    esac
+  done
+
+  local root pane
+  root="$(repo_root)"
+  if [[ "$show_only" -eq 1 ]]; then
+    print_setup_plan "$root" "" || die "no setup steps — run: hwt setup --init"
+    return 0
+  fi
+
+  pane="$(focused_pane_id)"
+  [[ -n "$pane" ]] || die "no focused herdr pane (attach with: herdr)"
+  run_setup_in_pane "$root" "$pane" "$yes" 0
+}
+
+cmd_which() {
+  local root=""
+  root="$(git rev-parse --show-toplevel 2>/dev/null || true)"
+
+  echo "hwt script:  $SELF"
+  echo "resolved:    $(command -v hwt 2>/dev/null || echo 'not on PATH in this shell')"
+  echo "type:        shell script on PATH (not a shell function/alias)"
+  if [[ -n "$root" ]]; then
+    echo
+    print_setup_plan "$root" "" || true
+  else
+    echo
+    echo "cwd is not a git repo — cd into one to see its setup plan"
+  fi
+}
+
+usage() {
+  cat <<EOF
+hwt — herdr worktrees, one command
+
+  installed: $SELF
+  on PATH via ~/dotfiles/bin (zsh zprofile) — not a shell function
+
+  hwt                 fzf → open existing worktree in herdr
+  hwt open            same
+  hwt ls              list (● open / ○ closed)
+  hwt new [branch]    create + open
+  hwt new foo -s      create + open + setup (shows steps, asks proceed)
+  hwt new foo -s -y   create + setup, no confirm
+  hwt setup           show setup steps, ask proceed?, run in focused pane
+  hwt setup -y        skip confirm
+  hwt setup --show    print steps only
+  hwt setup --init    write commit-able <repo>/.hwt/setup
+  hwt which           script path + setup plan for this repo
+  hwt rm              fzf → delete an open linked checkout
+
+Setup file (commit this):
+  <repo>/.hwt/setup     one command per line
+EOF
+}
+
+# ── main ─────────────────────────────────────────────────────────────────────
+
+main() {
+  local cmd="${1:-open}"
+  [[ $# -gt 0 ]] && shift || true
+
+  case "$cmd" in
+    open|o) cmd_open "$@" ;;
+    ls|list) cmd_ls "$@" ;;
+    new|n|add) cmd_new "$@" ;;
+    rm|remove|del) cmd_rm "$@" ;;
+    setup|s) cmd_setup "$@" ;;
+    which|where|path) cmd_which "$@" ;;
+    -h|--help|help) usage ;;
+    *)
+      if [[ "$cmd" == -* ]]; then
+        usage
+        exit 1
+      fi
+      # bare `hwt some-branch` → create
+      cmd_new "$cmd" "$@"
+      ;;
+  esac
+}
+
+main "$@"

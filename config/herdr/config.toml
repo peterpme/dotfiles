@@ -1,0 +1,99 @@
+# herdr configuration — keybindings aligned with tmux (C-a prefix)
+# Source: ~/dotfiles/config/herdr/config.toml
+# Live path: ~/.config/herdr/config.toml
+#
+# Reload after edits: herdr server reload-config
+# Show active bindings in-app: prefix+?
+
+onboarding = false
+
+[theme]
+# Matches catppuccin/tmux mocha in tmux.conf
+name = "catppuccin"
+
+[terminal]
+# Inherit cwd from the source pane/workspace (like tmux -c "#{pane_current_path}")
+new_cwd = "follow"
+
+# Isolated branch checkouts live here — not /tmp, not .codex, not sibling clones
+# Layout: <directory>/<repo>/<branch-slug>
+[worktrees]
+directory = "~/.herdr/worktrees"
+
+[keys]
+# tmux: set-option -g prefix C-a
+prefix = "ctrl+a"
+
+# --- splits (tmux + pain-control) ---
+# tmux: bind-key v split-window -h
+# herdr split_vertical = side-by-side (same as tmux -h)
+split_vertical = ["prefix+v", "prefix+|", "prefix+%"]
+# tmux: bind-key s split-window -v
+# pain-control also binds "-"
+# herdr split_horizontal = stacked (same as tmux -v)
+split_horizontal = ["prefix+s", "prefix+minus", "prefix+_"]
+
+# --- tabs ≈ tmux windows ---
+# tmux: bind-key space next-window / bspace previous-window
+next_tab = ["prefix+space", "prefix+n"]
+previous_tab = ["prefix+backspace", "prefix+p"]
+new_tab = "prefix+c"
+switch_tab = "prefix+1..9"
+
+# --- panes (pain-control h/j/k/l) ---
+focus_pane_left = "prefix+h"
+focus_pane_down = "prefix+j"
+focus_pane_up = "prefix+k"
+focus_pane_right = "prefix+l"
+# pain-control used H/J/K/L to resize; herdr uses a resize mode
+# Enter resize mode, then h/j/k/l (or arrows). Esc to leave.
+resize_mode = "prefix+r"
+swap_pane_left = "prefix+shift+h"
+swap_pane_down = "prefix+shift+j"
+swap_pane_up = "prefix+shift+k"
+swap_pane_right = "prefix+shift+l"
+
+# --- copy mode ---
+copy_mode = "prefix+["
+
+# --- session ---
+# tmux default detach is prefix+d; herdr default is prefix+q — support both
+detach = ["prefix+d", "prefix+q"]
+
+zoom = "prefix+z"
+close_pane = "prefix+x"
+# Sidebar expand/collapse
+toggle_sidebar = "prefix+b"
+workspace_picker = "prefix+w"
+goto = "prefix+g"
+help = "prefix+?"
+# moved off prefix+s (that's split stacked)
+settings = "prefix+comma"
+
+# --- workspaces ---
+new_workspace = "prefix+shift+n"
+rename_workspace = "prefix+shift+w"
+close_workspace = "prefix+shift+d"
+
+# --- worktrees (run from a parent repo workspace) ---
+new_worktree = "prefix+shift+g"
+open_worktree = "prefix+shift+o"
+remove_worktree = "prefix+shift+backspace"
+
+rename_tab = "prefix+shift+t"
+close_tab = "prefix+shift+x"
+reload_config = "prefix+shift+r"
+
+[ui]
+mouse_capture = true
+copy_on_select = true
+# Don't force a name prompt on every new tab (closer to tmux `c`)
+prompt_new_tab_name = false
+# Sidebar: prefix+b toggles. "compact" keeps a thin status rail when collapsed.
+sidebar_collapsed_mode = "compact"
+sidebar_start_collapsed = false
+
+[ui.toast]
+# Notify when a background agent finishes or needs input
+delivery = "herdr"
+delay_seconds = 1

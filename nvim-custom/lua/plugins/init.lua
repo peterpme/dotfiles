@@ -164,6 +164,35 @@ return {
 		end,
 	},
 
+	-- context-aware jsx/tsx comments via treesitter
+	{
+		"JoosepAlviste/nvim-ts-context-commentstring",
+		lazy = true,
+		config = function()
+			vim.g.skip_ts_context_commentstring_module = true
+			require("ts_context_commentstring").setup({
+				enable_autocmd = false,
+				languages = {
+					-- add jsx_self_closing_element (<Foo />) which is missing from defaults
+					tsx = { jsx_self_closing_element = "{/* %s */}" },
+					javascript = { jsx_self_closing_element = "{/* %s */}" },
+				},
+			})
+		end,
+	},
+
+	-- wire ts-context-commentstring into mini.comment via pre hook
+	{
+		"echasnovski/mini.comment",
+		opts = {
+			hooks = {
+				pre = function()
+					require("ts_context_commentstring.internal").update_commentstring()
+				end,
+			},
+		},
+	},
+
 	-- wakatime
 	{ "wakatime/vim-wakatime", lazy = false },
 

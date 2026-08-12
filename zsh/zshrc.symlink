@@ -91,11 +91,6 @@ export PATH="$PATH:/Users/peter/Projects/backpack/wallet/scripts"
 # Added by Devin
 export PATH="/Users/peter/.codeium/windsurf/bin:$PATH"
 
-# >>> grok installer >>>
-export PATH="$HOME/.grok/bin:$PATH"
-fpath=(~/.grok/completions/zsh $fpath)
-autoload -Uz compinit && compinit -C
-# <<< grok installer <<<
 
 # Pi
 export PATH="/Users/peter/.vite-plus/js_runtime/node/24.18.0/bin:$PATH"

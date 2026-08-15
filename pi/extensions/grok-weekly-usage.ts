@@ -5,8 +5,8 @@
  * that backs grok.com Settings → Usage:
  *   GET https://cli-chat-proxy.grok.com/v1/billing?format=credits
  *
- * The compact chip sits after the model picker, in white:
- *   8%•Aug 15th
+ * The compact chip sits after the model picker, same color as the model:
+ *   8% • Aug 15th
  *
  * Usage:
  * - `/grok-usage`          fetch now and show details
@@ -24,8 +24,6 @@ const PROVIDERS = ["xai", "grok-cli"] as const;
 const POLL_MS = 5 * 60 * 1000;
 const FETCH_TIMEOUT_MS = 15_000;
 const WEEKLY_PERIOD = "USAGE_PERIOD_TYPE_WEEKLY";
-const WHITE = "\x1b[97m";
-const RESET_FG = "\x1b[39m";
 
 type WeeklyUsage = {
 	percent?: number;
@@ -76,11 +74,7 @@ function compactLabel(usage: WeeklyUsage): string | undefined {
 	const parts: string[] = [];
 	if (usage.percent !== undefined) parts.push(formatPercent(usage.percent));
 	if (usage.resetsAt) parts.push(formatResetDay(usage.resetsAt));
-	return parts.length > 0 ? parts.join("•") : undefined;
-}
-
-function white(text: string): string {
-	return `${WHITE}${text}${RESET_FG}`;
+	return parts.length > 0 ? parts.join(" • ") : undefined;
 }
 
 function parseWeeklyUsage(payload: unknown, fetchedAt: Date): WeeklyUsage {
@@ -295,27 +289,14 @@ export default function grokWeeklyUsageExtension(pi: ExtensionAPI) {
 					}
 
 					const chip = isGrokModel(model) ? (latest ? compactLabel(latest) : undefined) : undefined;
-					const rightPlain = chip ? `${modelLabel} ${chip}` : modelLabel;
+					const rightPlain = chip ? `${modelLabel} • ${chip}` : modelLabel;
 					const minPad = 2;
 					const leftWidth = visibleWidth(statsLeft);
-					const rightWidth = visibleWidth(rightPlain);
-					let shownModel = modelLabel;
-					let shownChip = chip;
-					if (leftWidth + minPad + rightWidth > width) {
-						const available = Math.max(0, width - leftWidth - minPad);
-						const truncated = truncateToWidth(rightPlain, available, "");
-						if (chip && truncated.endsWith(chip)) {
-							shownModel = truncated.slice(0, truncated.length - chip.length).trimEnd();
-							shownChip = chip;
-						} else {
-							shownModel = truncated;
-							shownChip = "";
-						}
+					let right = rightPlain;
+					if (leftWidth + minPad + visibleWidth(right) > width) {
+						right = truncateToWidth(right, Math.max(0, width - leftWidth - minPad), "");
 					}
-
-					const rightStyled = shownChip
-						? `${theme.fg("dim", shownModel)} ${white(shownChip)}`
-						: theme.fg("dim", shownModel);
+					const rightStyled = theme.fg("dim", right);
 					const pad = " ".repeat(Math.max(0, width - leftWidth - visibleWidth(rightStyled)));
 
 					const statuses = Array.from(footerData.getExtensionStatuses().entries())

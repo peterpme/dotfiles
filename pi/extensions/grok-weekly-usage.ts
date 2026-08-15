@@ -26,7 +26,7 @@ const FETCH_TIMEOUT_MS = 15_000;
 const WEEKLY_PERIOD = "USAGE_PERIOD_TYPE_WEEKLY";
 
 type WeeklyUsage = {
-	percent?: number;
+	percent: number;
 	resetsAt?: Date;
 	products: Array<{ product: string; percent?: number }>;
 	fetchedAt: Date;
@@ -70,11 +70,10 @@ function formatPercent(percent: number): string {
 	return `${percent.toFixed(1)}%`;
 }
 
-function compactLabel(usage: WeeklyUsage): string | undefined {
-	const parts: string[] = [];
-	if (usage.percent !== undefined) parts.push(formatPercent(usage.percent));
+function compactLabel(usage: WeeklyUsage): string {
+	const parts = [formatPercent(usage.percent)];
 	if (usage.resetsAt) parts.push(formatResetDay(usage.resetsAt));
-	return parts.length > 0 ? parts.join(" • ") : undefined;
+	return parts.join(" • ");
 }
 
 function parseWeeklyUsage(payload: unknown, fetchedAt: Date): WeeklyUsage {
@@ -88,9 +87,15 @@ function parseWeeklyUsage(payload: unknown, fetchedAt: Date): WeeklyUsage {
 		throw new Error("billing payload is not a weekly usage period");
 	}
 
+	// grok.com omits proto3 creditUsagePercent when usage is 0.
 	const rawPercent = config.creditUsagePercent;
 	const percent =
-		typeof rawPercent === "number" && Number.isFinite(rawPercent) ? rawPercent : undefined;
+		rawPercent === undefined || rawPercent === null
+			? 0
+			: rawPercent;
+	if (typeof percent !== "number" || !Number.isFinite(percent)) {
+		throw new Error("billing payload has invalid creditUsagePercent");
+	}
 
 	const endRaw =
 		(typeof config.billingPeriodEnd === "string" && config.billingPeriodEnd) ||
@@ -112,7 +117,7 @@ function parseWeeklyUsage(payload: unknown, fetchedAt: Date): WeeklyUsage {
 	}
 
 	return {
-		...(percent !== undefined ? { percent } : {}),
+		percent,
 		...(resetsAt ? { resetsAt } : {}),
 		products,
 		fetchedAt,
@@ -120,15 +125,9 @@ function parseWeeklyUsage(payload: unknown, fetchedAt: Date): WeeklyUsage {
 }
 
 function formatDetail(usage: WeeklyUsage): string {
-	const lines: string[] = [];
-	if (usage.percent !== undefined) {
-		lines.push(`Weekly usage  ${formatPercent(usage.percent)} used`);
-	}
+	const lines = [`Weekly usage  ${formatPercent(usage.percent)} used`];
 	if (usage.resetsAt) {
 		lines.push(`Resets        ${usage.resetsAt.toISOString()} (${formatResetDay(usage.resetsAt)})`);
-	}
-	if (lines.length === 0) {
-		lines.push("Weekly usage  no percent or reset in billing response");
 	}
 	lines.push(`Fetched       ${usage.fetchedAt.toLocaleTimeString()}`);
 

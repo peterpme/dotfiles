@@ -11,10 +11,9 @@
  * Ineligible models keep the setting armed and show `fast: n/a`.
  *
  * Usage:
- * - `/fastmode`             toggle
- * - `/fastmode on|off`      set explicitly
- * - `/fastmode status`      show current state
- * - `Ctrl+Shift+F`          toggle
+ * - `/fast`                 toggle
+ * - `/fast on|off`          set explicitly
+ * - `/fast status`          show current state
  * - `pi --fast`             start with fast mode on
  *
  * Docs:
@@ -161,7 +160,7 @@ export default function grokFastModeExtension(pi: ExtensionAPI) {
 		const parsed = parseEnabledArg(trimmed);
 		if (trimmed && parsed === undefined) {
 			if (ctx.hasUI) {
-				ctx.ui.notify("Usage: /fastmode [on|off|status]", "error");
+				ctx.ui.notify("Usage: /fast [on|off|status]", "error");
 			}
 			return;
 		}
@@ -188,20 +187,13 @@ export default function grokFastModeExtension(pi: ExtensionAPI) {
 		handler: handleFastCommand,
 	};
 
-	pi.registerCommand("fastmode", commandOptions);
+	pi.registerCommand("fast", commandOptions);
 
 	pi.on("input", async (event, ctx) => {
-		const match = event.text.trim().match(/^\/fastmode(?:\s+(.*))?$/i);
+		const match = event.text.trim().match(/^\/fast(?:\s+(.*))?$/i);
 		if (!match) return;
 		await handleFastCommand(match[1], ctx);
 		return { action: "handled" as const };
-	});
-
-	pi.registerShortcut("ctrl+shift+f", {
-		description: "Toggle Fast Mode",
-		handler: async (ctx) => {
-			toggle(ctx);
-		},
 	});
 
 	pi.on("session_start", async (_event, ctx) => {

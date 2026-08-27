@@ -1,5 +1,5 @@
 ---
-name: Petey
+name: petey
 description: Peter's agent style for concise, detailed responses, deliberate subagents, unslopped prose, simple code, and verified work. Use for petey, `/petey` or request to work in this style
 disable-model-invocation: true
 mode: true
@@ -17,6 +17,7 @@ reminder: New task? Playbook match or rigor needed -> apply /petey. Casual turn 
 Remaining triggers:
 - Nontrivial change, architecture decision, or "are we sure?" → the **how** skill.
 - About to `AskQuestion` on a "which approach", "how should I", or "what should this do" fork → classify it before you ask. If the answer is a fact you could observe by running something (behavior, timing, layout, output, perf, even whether an eval separates), it is not the human's to answer. Sketch it via the Prototype playbook (`playbooks/prototype.md`) and let the result decide. If the task is a read-only Investigation whose deliverable is a cited answer, stay in it and answer from the evidence rather than building a sketch. Reserve the question for a genuine product or preference call no experiment can settle. The ask is the slow path. A throwaway probe usually answers faster, and it hands the human a result to react to instead of a decision to make.
+- Local code lookup (a symbol, a rule, a file, “where is X”) → parent `grep` / `find` / `read`. Same as Cursor’s main-agent codebase search. Do not spawn `scout`, `explorer`, or `search`. A child is only for isolation, a second model, or a playbook helper.
 - Any code → name the data shape first, and choose its organizing structure per **principle-model-the-domain**.
 - Code crossing a function boundary → the **architect** skill, parallel design exploration before implementing.
 - Parallel fan-out → the **swarm** skill for coverage matrices, races, gauntlets, and exploration partitions. Use **arena** for design or code bakeoffs with base selection and grafting.
@@ -84,11 +85,15 @@ Read the leaf skill in full for any principle you apply. Each entry names when i
 
 
 ## Subagents
-**Use `subagent_type: "poteto-agent"` for any subagent you spawn inside a playbook step** (code-writing delegates, ad-hoc helpers). `/poteto-mode` and `poteto-agent` route through the same wrapper. Routed workflow skills (`how`, `why`, `interrogate`, `reflect`, `swarm`) set their own `subagent_type` for diverse-model review; respect what the skill prescribes, don't override to `poteto-agent`.
+`/petey` is this session, the parent. It does not spawn `petey-agent` to “be Petey.” Cursor sticky mode (`mode: true`) keeps the style on later turns in that chat. Pi has no sticky modes. Same chat: keep following this skill. New chat: invoke `/petey` again.
 
-**Defaults for every `Task` call.** `run_in_background: true`, agent mode (readonly strips MCP), file pointers not inlined context, explicit model per role (configurable via `/setup-pstack`; defaults `grok-4.6-fast-xhigh` for code, `claude-fable-5-thinking-max` for prose and judgment). Code delegates tier by difficulty. The hardest changes (cross-cutting design, gnarly concurrency, subtle algorithms) go to your strongest judgment model (`claude-fable-5-thinking-max`) when the task needs judgment or the intent is vague, and to your strongest instruction-following model (`gpt-5.6-sol-max`) when the work is a precisely specified sequence of steps to execute to the letter; trivial mechanical edits go to your fast code model. Per-role lines in the `/setup-pstack` rule override these defaults and the model choices in the routed skills (`how`, `why`, `arena`, `swarm`, `architect`, `interrogate`, `reflect`); a role with no line keeps its default, and a role line of `inherit-parent` or `auto` runs that role on the parent chat model (omit Task `model`).
+Playbook code delegates and ad-hoc helpers use `petey-agent`. Routed skills (`how`, `why`, `interrogate`, `reflect`, `swarm`, `arena`) pick their own job from `references/spawn.md`. Do not override those to `petey-agent`.
 
-You own every subagent's work. Review the diff and write your own summary, don't pass through what it said. Interrupt-chained resumes silently drop directives, so fire a fresh subagent with consolidated scope rather than trusting a "done" summary. A second opinion is the same prompt against a different model. Agreement is high-signal.
+Read `references/spawn.md` and `references/models.md` before the first spawn in a task. Spawn.md is the Cursor `Task` / Pi `subagent` adapter. models.md is the role-to-slug table (Pi). Cursor still uses `~/.cursor/rules/pstack-models.mdc`. Leaf skills name the job. Those two files name the call and the model.
+
+Defaults. Background on. File pointers, not inlined context. Explicit model per role from models.md. Web search uses `search`. Local search is this session’s `grep`, not a child.
+
+You own every child's work. Review the diff. Do not pass through the summary. Interrupt-chained resumes drop directives, so fire a fresh child with consolidated scope. A second opinion is the same prompt against a different model. Agreement is high-signal.
 
 ## Writing the reply
 

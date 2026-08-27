@@ -83,9 +83,7 @@ find ~/dotfiles/skills -name SKILL.md \
 
 ### ppstack
 
-Capsule at [`ppstack/`](./ppstack). Each `SKILL.md` still links as its own skill name.
+Capsule at [`ppstack/`](./ppstack). Cursor plugin and Pi skill tree. `petey` is the mode. Each `SKILL.md` under `ppstack/skills/` still links as its own skill name. Agent markdown under `ppstack/agents/` links into `~/.pi/agent/agents`.
 
-- **[pp-mode](./ppstack/skills/pp-mode/SKILL.md)** — Router for concise, verified work.
-- **[no-comments](./ppstack/skills/no-comments/SKILL.md)** — Strip comments before review.
-- **[typescript-best-practices](./ppstack/skills/typescript-best-practices/SKILL.md)** — TypeScript type-system rules.
-- **[unslop](./ppstack/skills/unslop/SKILL.md)** — Cut AI tells from writing.
+- **[petey](./ppstack/skills/petey/SKILL.md)** — Router for concise, verified work.
+- Sibling skills (`how`, `why`, principles, `unslop`, ...) live next to it in `ppstack/skills/`.

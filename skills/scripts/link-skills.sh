@@ -66,8 +66,40 @@ link_into() {
   done
 }
 
+link_pi_agents() {
+  local src_root="$REPO/ppstack/agents"
+  local dest_root="$HOME/.pi/agent/agents"
+
+  if [ ! -d "$src_root" ]; then
+    return 0
+  fi
+
+  mkdir -p "$dest_root"
+
+  local src name target
+  for src in "$src_root"/*.md; do
+    [ -e "$src" ] || continue
+    name="$(basename "$src")"
+    target="$dest_root/$name"
+    if [ -L "$target" ]; then
+      local current
+      current="$(readlink "$target")"
+      if [ "$current" = "$src" ]; then
+        echo "ok      pi-agent/$name"
+        continue
+      fi
+    fi
+    if [ -e "$target" ] || [ -L "$target" ]; then
+      rm -rf "$target"
+    fi
+    ln -sfn "$src" "$target"
+    echo "linked  pi-agent/$name -> $src"
+  done
+}
+
 echo "Linking skills from $REPO"
 link_into "$HOME/.agents/skills" "agents"
 link_into "$HOME/.pi/agent/skills" "pi"
 link_into "$HOME/.claude/skills" "claude"
+link_pi_agents
 echo "Done."

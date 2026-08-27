@@ -16,7 +16,12 @@
 
 import type { ExtensionAPI, ExtensionContext } from "@earendil-works/pi-coding-agent";
 import type { AutocompleteItem } from "@earendil-works/pi-tui";
-import { truncateToWidth, visibleWidth } from "@earendil-works/pi-tui";
+import {
+	registerUsageChip,
+	requestUsageFooterRender,
+	syncUsageFooter,
+	uninstallUsageFooter,
+} from "./lib/usage-footer.ts";
 
 const BILLING_URL = "https://cli-chat-proxy.grok.com/v1/billing?format=credits";
 const TOKEN_AUTH = "xai-grok-cli";
@@ -145,176 +150,16 @@ function formatDetail(usage: WeeklyUsage): string {
 	return lines.join("\n");
 }
 
-function formatTokens(count: number): string {
-	if (count < 1000) return count.toString();
-	if (count < 10_000) return `${(count / 1000).toFixed(1)}k`;
-	if (count < 1_000_000) return `${Math.round(count / 1000)}k`;
-	if (count < 10_000_000) return `${(count / 1_000_000).toFixed(1)}M`;
-	return `${Math.round(count / 1_000_000)}M`;
-}
-
-function formatCwd(cwd: string, home: string | undefined): string {
-	if (!home) return cwd;
-	if (cwd === home) return "~";
-	if (cwd.startsWith(`${home}/`) || cwd.startsWith(`${home}\\`)) {
-		return `~${cwd.slice(home.length)}`;
-	}
-	return cwd;
-}
-
 export default function grokWeeklyUsageExtension(pi: ExtensionAPI) {
 	let latest: WeeklyUsage | undefined;
 	let lastError: string | undefined;
 	let inflight: Promise<WeeklyUsage> | undefined;
 	let timer: ReturnType<typeof setInterval> | undefined;
-	let footerInstalled = false;
-	let requestRender: (() => void) | undefined;
 
-	function uninstallFooter(ctx: ExtensionContext): void {
-		if (!ctx.hasUI || !footerInstalled) return;
-		footerInstalled = false;
-		requestRender = undefined;
-		ctx.ui.setFooter(undefined);
-	}
-
-	function syncFooter(ctx: ExtensionContext): void {
-		if (!ctx.hasUI) return;
-		if (isGrokModel(ctx.model)) {
-			installFooter(ctx);
-			return;
-		}
-		uninstallFooter(ctx);
-	}
-
-	function installFooter(ctx: ExtensionContext): void {
-		if (!ctx.hasUI || footerInstalled) return;
-		footerInstalled = true;
-
-		ctx.ui.setFooter((tui, theme, footerData) => {
-			requestRender = () => tui.requestRender();
-			const unsub = footerData.onBranchChange(() => tui.requestRender());
-
-			return {
-				dispose() {
-					unsub();
-					requestRender = undefined;
-				},
-				invalidate() {},
-				render(width: number): string[] {
-					const model = ctx.model;
-					let pwd = formatCwd(ctx.sessionManager.getCwd(), process.env.HOME || process.env.USERPROFILE);
-					const branch = footerData.getGitBranch();
-					if (branch) pwd = `${pwd} (${branch})`;
-					const sessionName = ctx.sessionManager.getSessionName();
-					if (sessionName) pwd = `${pwd} • ${sessionName}`;
-
-					let input = 0;
-					let output = 0;
-					let cacheRead = 0;
-					let cacheWrite = 0;
-					let cost = 0;
-					let latestCacheHitRate: number | undefined;
-					for (const entry of ctx.sessionManager.getEntries()) {
-						if (entry.type === "message" && entry.message.role === "assistant") {
-							const usage = entry.message.usage;
-							input += usage.input;
-							output += usage.output;
-							cacheRead += usage.cacheRead;
-							cacheWrite += usage.cacheWrite;
-							cost += usage.cost.total;
-							const promptTokens = usage.input + usage.cacheRead + usage.cacheWrite;
-							latestCacheHitRate = promptTokens > 0 ? (usage.cacheRead / promptTokens) * 100 : undefined;
-						} else if (entry.type === "message" && entry.message.role === "toolResult" && entry.message.usage) {
-							const usage = entry.message.usage;
-							input += usage.input;
-							output += usage.output;
-							cacheRead += usage.cacheRead;
-							cacheWrite += usage.cacheWrite;
-							cost += usage.cost.total;
-						} else if ((entry.type === "branch_summary" || entry.type === "compaction") && entry.usage) {
-							const usage = entry.usage;
-							input += usage.input;
-							output += usage.output;
-							cacheRead += usage.cacheRead;
-							cacheWrite += usage.cacheWrite;
-							cost += usage.cost.total;
-						}
-					}
-
-					const stats: string[] = [];
-					if (input) stats.push(`↑${formatTokens(input)}`);
-					if (output) stats.push(`↓${formatTokens(output)}`);
-					if (cacheRead) stats.push(`R${formatTokens(cacheRead)}`);
-					if (cacheWrite) stats.push(`W${formatTokens(cacheWrite)}`);
-					if ((cacheRead > 0 || cacheWrite > 0) && latestCacheHitRate !== undefined) {
-						stats.push(`CH${latestCacheHitRate.toFixed(1)}%`);
-					}
-
-					const usingSubscription = Boolean(model && ctx.modelRegistry.isUsingOAuth(model));
-					if (cost || usingSubscription) {
-						stats.push(`$${cost.toFixed(3)}${usingSubscription ? " (sub)" : ""}`);
-					}
-
-					const contextUsage = ctx.getContextUsage();
-					const contextWindow = contextUsage?.contextWindow ?? model?.contextWindow ?? 0;
-					const contextPercentValue = contextUsage?.percent ?? 0;
-					const contextDisplay =
-						contextUsage?.percent == null
-							? `?/${formatTokens(contextWindow)}`
-							: `${contextPercentValue.toFixed(1)}%/${formatTokens(contextWindow)}`;
-					let contextStr = contextDisplay;
-					if (contextUsage?.percent != null && contextPercentValue > 90) {
-						contextStr = theme.fg("error", contextDisplay);
-					} else if (contextUsage?.percent != null && contextPercentValue > 70) {
-						contextStr = theme.fg("warning", contextDisplay);
-					}
-					stats.push(contextStr);
-
-					let statsLeft = stats.join(" ");
-					if (visibleWidth(statsLeft) > width) {
-						statsLeft = truncateToWidth(statsLeft, width, "...");
-					}
-
-					let modelLabel = model?.id || "no-model";
-					if (model?.reasoning) {
-						const thinking = ctx.thinkingLevel || "off";
-						modelLabel = thinking === "off" ? `${modelLabel} • thinking off` : `${modelLabel} • ${thinking}`;
-					}
-					if (footerData.getAvailableProviderCount() > 1 && model) {
-						const withProvider = `(${model.provider}) ${modelLabel}`;
-						if (visibleWidth(statsLeft) + 2 + visibleWidth(withProvider) <= width) {
-							modelLabel = withProvider;
-						}
-					}
-
-					const chip = isGrokModel(model) ? (latest ? compactLabel(latest) : undefined) : undefined;
-					const rightPlain = chip ? `${modelLabel} • ${chip}` : modelLabel;
-					const minPad = 2;
-					const leftWidth = visibleWidth(statsLeft);
-					let right = rightPlain;
-					if (leftWidth + minPad + visibleWidth(right) > width) {
-						right = truncateToWidth(right, Math.max(0, width - leftWidth - minPad), "");
-					}
-					const rightStyled = theme.fg("dim", right);
-					const pad = " ".repeat(Math.max(0, width - leftWidth - visibleWidth(rightStyled)));
-
-					const statuses = Array.from(footerData.getExtensionStatuses().entries())
-						.sort(([a], [b]) => a.localeCompare(b))
-						.map(([, text]) => text.replace(/[\r\n\t]+/g, " ").replace(/ +/g, " ").trim())
-						.filter(Boolean);
-
-					const lines = [
-						truncateToWidth(theme.fg("dim", pwd), width, theme.fg("dim", "...")),
-						theme.fg("dim", statsLeft) + pad + rightStyled,
-					];
-					if (statuses.length > 0) {
-						lines.push(truncateToWidth(statuses.join(" "), width, theme.fg("dim", "...")));
-					}
-					return lines;
-				},
-			};
-		});
-	}
+	registerUsageChip("grok", {
+		matches: isGrokModel,
+		label: () => (latest ? compactLabel(latest) : undefined),
+	});
 
 	async function resolveToken(ctx: ExtensionContext): Promise<string> {
 		let lastErrorMessage = "no xAI or Grok CLI login";
@@ -353,7 +198,7 @@ export default function grokWeeklyUsageExtension(pi: ExtensionAPI) {
 			const usage = await inflight;
 			latest = usage;
 			lastError = undefined;
-			requestRender?.();
+			requestUsageFooterRender();
 			return usage;
 		} catch (error) {
 			lastError = error instanceof Error ? error.message : String(error);
@@ -421,7 +266,7 @@ export default function grokWeeklyUsageExtension(pi: ExtensionAPI) {
 	});
 
 	pi.on("session_start", async (_event, ctx) => {
-		syncFooter(ctx);
+		syncUsageFooter(ctx);
 		startPolling(ctx);
 		void fetchWeeklyUsage(ctx).catch(() => {
 			// Stay quiet until /grok-usage; omit the chip until Grok returns fields.
@@ -429,7 +274,7 @@ export default function grokWeeklyUsageExtension(pi: ExtensionAPI) {
 	});
 
 	pi.on("model_select", async (_event, ctx) => {
-		syncFooter(ctx);
+		syncUsageFooter(ctx);
 	});
 
 	pi.on("agent_settled", async (_event, ctx) => {
@@ -442,6 +287,6 @@ export default function grokWeeklyUsageExtension(pi: ExtensionAPI) {
 
 	pi.on("session_shutdown", async (_event, ctx) => {
 		stopPolling();
-		uninstallFooter(ctx);
+		uninstallUsageFooter(ctx);
 	});
 }

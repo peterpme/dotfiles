@@ -1,8 +1,47 @@
 {
   "providers": {
+    "local": {
+      "baseUrl": "http://127.0.0.1:18766/v1",
+      "api": "openai-completions",
+      "apiKey": "mlx",
+      "compat": {
+        "supportsDeveloperRole": false,
+        "supportsReasoningEffort": false,
+        "supportsUsageInStreaming": false,
+        "maxTokensField": "max_tokens"
+      },
+      "models": [
+        {
+          "id": "qwen3.8-27b-uncensored-mlx-8bit",
+          "name": "qwen3.8-27b-uncensored-mlx-8bit",
+          "reasoning": false,
+          "input": ["text", "image"],
+          "contextWindow": 32768,
+          "maxTokens": 1024,
+          "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 },
+          "compat": {
+            "thinkingFormat": "qwen-chat-template"
+          }
+        }
+      ]
+    },
     "xai": {
       "modelOverrides": {
         "grok-4.6": {
+          "compat": {
+            "supportsReasoningEffort": true
+          },
+          "thinkingLevelMap": {
+            "off": null,
+            "minimal": null,
+            "low": "low",
+            "medium": "medium",
+            "high": "high",
+            "xhigh": "xhigh",
+            "max": null
+          }
+        },
+        "grok-4.6-fast": {
           "compat": {
             "supportsReasoningEffort": true
           },

@@ -29,7 +29,14 @@ const ENTRY_TYPE = "grok-fast-mode";
 const COST_MULTIPLIER = 2;
 
 const XAI_HOST_RE = /(?:^|[./])(?:api\.x\.ai|cli-chat-proxy\.grok\.com)(?:$|[/:])/i;
-const OPENAI_FAST_PROVIDERS = new Set(["openai", "openai-codex"]);
+const OPENAI_FAST_PROVIDERS = new Set([
+	"openai",
+	"openai-codex",
+	"codex-peterpme-work",
+	"peter@backpack.app",
+	"services+openai@peterp.me",
+	"peter@backpack.exchange",
+]);
 const OPENAI_FAST_MODEL_RE = /gpt-5(?:\.5|\.6)|o3|o4/i;
 
 type FastEntry = {

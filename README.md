@@ -26,6 +26,9 @@ Create, split, save, move terminal tabs easily all within one window.
 - [Fzf](https://github.com/junegunn/fzf)
 The fastest way to search for ANYTHING on your computer
 
+- [Local model names](caddy/README.md)
+`qwen38-27b.ai.peterp.local` via Caddy + /etc/hosts (no ports in the URL)
+
 - [Forgit](https://github.com/wfxr/forgit)
 Use git interactively. Powered by fzf
 

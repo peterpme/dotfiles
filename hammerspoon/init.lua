@@ -6,6 +6,7 @@ local alert = require("hs.alert")
 
 require("wifi")
 require("session")
+require("mlx-server")
 -- require("menubar")
 -- require("crypto")
 -- require("weather")

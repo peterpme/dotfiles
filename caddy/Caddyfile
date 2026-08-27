@@ -1,0 +1,16 @@
+# This Mac only. Nothing on Wi‑Fi or the internet.
+# Edit, then: sudo brew services reload caddy
+#
+# :18766 is the short-name alias in front of mlx-vlm (:18765).
+
+{
+	auto_https off
+	http_port 80
+	default_bind 127.0.0.1
+	admin localhost:2019
+}
+
+http://qwen38-27b.ai.peterp.local {
+	bind 127.0.0.1
+	reverse_proxy 127.0.0.1:18766
+}

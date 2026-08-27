@@ -1,7 +1,0 @@
-interface:
-  display_name: "Source Parity"
-  short_description: "Compare a reference system to a target implementation"
-  default_prompt: "Use $source-parity to compare the source-of-truth implementation with the target and produce a narrow parity plan."
-
-policy:
-  allow_implicit_invocation: true

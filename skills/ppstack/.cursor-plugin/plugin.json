@@ -1,0 +1,29 @@
+{
+  "name": "petey",
+  "displayName": "petey",
+  "version": "0.1.0",
+  "description": "Petey makes coding fun again",
+  "author": {
+    "name": "Peter Piekarczyk"
+  },
+  "homepage": "https://github.com/peterpme/dotfiles",
+  "repository": "https://github.com/peterpme/dotfiles",
+  "license": "MIT",
+  "keywords": [
+    "petey",
+    "workflow",
+    "principles",
+    "agent-style",
+    "subagents",
+    "unslop"
+  ],
+  "category": "developer-tools",
+  "tags": [
+    "workflow",
+    "principles",
+    "review",
+    "planning"
+  ],
+  "skills": "./skills/",
+  "agents": "./agents/"
+}

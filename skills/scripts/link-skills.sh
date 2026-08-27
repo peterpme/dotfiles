@@ -4,7 +4,7 @@ set -euo pipefail
 # Link every SKILL.md-bearing directory under skills/ into the agent skill
 # homes this machine uses. Canonical source stays in the dotfiles repo.
 #
-#   ~/dotfiles/skills/<bucket>/<name>/
+#   ~/dotfiles/skills/<name>/
 #     -> ~/.agents/skills/<name>
 #     -> ~/.pi/agent/skills/<name>
 #     -> ~/.claude/skills/<name>

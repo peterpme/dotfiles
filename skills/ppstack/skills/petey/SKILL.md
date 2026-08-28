@@ -86,7 +86,7 @@ Read the leaf skill in full for any principle you apply. Each entry names when i
 
 `/petey` is the parent session. Petey chooses the job and writes the contract. The installed `pi-subagents` package owns execution, workflows, contexts, worktrees, missions, councils, waiting, recovery, and result delivery. Read its installed skill before delegating.
 
-Use builtin `scout` for broad local retrieval, `researcher` for cited web research, `worker` for standard implementation, `reviewer` for independent review, and forked `oracle` for inherited-context judgment. Use `petey-agent` only when the writer must load the full Petey policy. Use `comment-sicko` for the final comment pass. Council work uses Council Mode with `council-sol` and `council-grok`.
+Use builtin `scout` for broad local retrieval, `researcher` for cited web research, `worker` for standard implementation, `reviewer` for independent review and a possible council counterpoint, and forked `oracle` for inherited-context judgment. Use `petey-agent` only when the writer must load the full Petey policy. Use `comment-sicko` for the final comment pass. Council work uses Council Mode. Choose the roster per decision from fresh `council-sol`, fresh `reviewer`, and forked `oracle`; include `oracle` only when inherited context matters.
 
 Launch composed work through `workflowScript`. Ordinary runs do not select models. `pi/settings.json` owns routing. Fresh children receive standalone briefs with the goal, scope, evidence, authority, success checks, and report contract. Council advisors receive the same neutral brief. The parent owns the claim matrix, cross-exam packet, and verdict.
 

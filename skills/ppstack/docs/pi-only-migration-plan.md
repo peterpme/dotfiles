@@ -8,10 +8,11 @@ ppstack and Petey support Pi as their only active runtime. Pi owns the parent se
 
 ## Final role policy
 
-- `scout`, `researcher`, `worker`, `petey-agent`, `reviewer`, `comment-sicko`, `council-sol`, and `council-grok` use fresh context.
+- `scout`, `researcher`, `worker`, `petey-agent`, `reviewer`, `comment-sicko`, and `council-sol` use fresh context.
 - `oracle` uses forked context for inherited decision consistency.
 - Fresh writers receive standalone implementation briefs.
 - Fresh reviewers receive named paths, materialized patches, command output, and test results.
+- The parent chooses each council roster from fresh `council-sol`, fresh `reviewer`, and forked `oracle`; `oracle` joins only when inherited context matters.
 - Council advisors receive the same neutral brief without peer opinions during the first pass.
 - The parent owns evidence collection, claim synthesis, cross-exam packets, and final decisions.
 - Read-only agents return `MISSING EVIDENCE` instead of reconstructing missing change state from `.git` internals.

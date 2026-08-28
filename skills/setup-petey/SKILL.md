@@ -14,7 +14,7 @@ Use `pi/settings.json` as the routing source. This skill does not carry a second
 2. Show every agent override with its model, thinking level, context, tools, and fallback status. Apply changes named in the invocation. For a bare `/setup-petey`, ask whether to keep the displayed mapping or change specific roles. The checked-in settings are the defaults. The skill carries no fallback table.
 3. Run `pi --list-models`. Resolve every configured override model to an exact provider and model row. Stop before writing if any selector is missing or ambiguous.
 4. Run a tiny no-tools launch for each distinct selector. A registry row without a successful launch is not available. Keep native priority mode off unless its supported provider selector passes this probe.
-5. Confirm implementation overrides have an empty fallback list. Confirm retrieval, research, implementation, review, prose, comment review, and council roles use fresh context. Confirm `oracle` uses forked context. Confirm read-only profiles have no mutation tools.
+5. Confirm implementation and Grok review overrides have an empty fallback list. Confirm retrieval, research, implementation, review, prose, comment review, and `council-sol` use fresh context. Confirm `oracle` uses forked context. Confirm read-only profiles have no mutation tools.
 6. Run `bash install.sh skills`. This preserves unrelated Pi skills, links the canonical settings and model registry, and removes retired duplicate agents.
 7. Run `bun run scripts/check-typescript-automation.ts`, `bun run scripts/render-model-routing.ts`, and `bun run scripts/check-pi-only.ts`.
 8. Report the exact selectors checked and tell the user to restart Pi. Do not claim the live runtime changed before restart.
@@ -23,7 +23,7 @@ Use `pi/settings.json` as the routing source. This skill does not carry a second
 
 1. Run the package doctor and live model report.
 2. Probe each configured role with a bounded task. Inspect its resolved model, thinking level, context, tools, fallback status, and priority-mode status in the runtime receipt.
-3. For `scout`, verify read-only tools, bounded returned text, and no project writes. For `researcher`, require source citations. For implementation and review, use a disposable worktree or a read-only task. For council profiles, give both the same neutral decision brief.
+3. For `scout`, verify read-only tools, bounded returned text, and no project writes. For `researcher`, require source citations. For implementation and review, use a disposable worktree or a read-only task. For council runs, give every selected advisor the same neutral decision brief and confirm `oracle` appears only when inherited context matters.
 4. Run a malformed workflow validation probe and confirm it starts no child. Run one async workflow and confirm completion delivery reaches the parent without status polling or transcript scraping.
 5. Save run ids and receipts under ignored `skills/ppstack/debug/traces/pi-only-eval/`. Record failures and fixes in `skills/ppstack/debug/PETEY-LOG.md`. Update only the eval evidence and verification date inputs in `scripts/render-model-routing.ts`, then regenerate the routing document.
 6. Report failures as runtime failures. Do not rewrite package orchestration to hide them.

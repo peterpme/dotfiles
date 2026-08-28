@@ -20,7 +20,7 @@ const roleMetadata = {
   worker: ["Implementation", "Workflow 1ce208b8: disposable /tmp writer created two-line PROBE.md", "2026-08-28"],
   "petey-agent": ["Petey-aware implementation and prose", "Workflow 1ce208b8: Grok Fast high read-only routing probe", "2026-08-28"],
   reviewer: ["Independent review, council counterpoint, and cross-judging", "Pending post-restart Grok xhigh role probe", "Pending"],
-  "comment-sicko": ["Read-only comment review", "Workflow 1ce208b8: Luna low read-only comment review of PROBE.md", "2026-08-28"],
+  "comment-sicko": ["Scoped comment deletion", "Pending post-restart Luna medium writer probe", "Pending"],
   oracle: ["Inherited-context judgment", "Workflow 1ce208b8: Sol xhigh forked one-shot PASS on PROBE.md", "2026-08-28"],
   "council-sol": ["Council and architecture judgment", "Workflow 1ce208b8: independent Sol xhigh accept on content", "2026-08-28"],
 };

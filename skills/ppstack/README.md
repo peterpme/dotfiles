@@ -1,22 +1,21 @@
 # ppstack
 
-Hi I'm [Peter](https://x.com/peterpme). This is my take on pstack. I just wanted to build it myself. I agree that ai writes too much slop. I don't want to ship slop. I want to increase throughouput and keep quality high.
+Hi, I'm [Peter](https://x.com/peterpme). This is my take on pstack. AI writes too much slop. I want higher throughput without shipping it.
 
-`ppstack` is the capsule. `petey` is the mode.
+`ppstack` is the skill capsule. `petey` is the operating style. Pi is the only active runtime.
 
-This is a Cursor plugin and a Pi skill capsule. Same tree.
-
-```
+```text
 ppstack/
-  .cursor-plugin/plugin.json
-  skills/     # every SKILL.md, including petey
-  agents/     # petey-agent, comment-sicko, search, explorer
+  agents/
+  debug/
+  docs/
+  skills/
 ```
 
-**Cursor.** Install the folder as a local plugin. `plugin.json` mounts `skills/` and `agents/`. Turn off the public pstack plugin so you do not run poteto-mode next to petey.
+Run `~/dotfiles/install.sh skills`. The installer links each skill into `~/.pi/agent/skills`, links ppstack agents into `~/.pi/agent/agents`, and links tracked Pi extensions, settings, and models into `~/.pi/agent/`.
 
-**Pi.** `~/dotfiles/install.sh skills` runs `link-skills.sh`. Every `SKILL.md` under this repo is linked by folder basename into `~/.pi/agent/skills`. Agent markdown under `agents/` is linked into `~/.pi/agent/agents`. How those children relate to pi-subagents builtins is in [`docs/pi-subagents.md`](./docs/pi-subagents.md). Model pins and the Cursor/Pi split are in [`docs/models.md`](./docs/models.md).
+Run `/petey-debug [label]` to copy the current Pi session JSONL into ignored `debug/traces/` and add an untriaged entry to `debug/PETEY-LOG.md`. The extension command bypasses the model.
 
-These are my skills. They're similar to other skills you've seen online. You can do the same and copy me. I think you should copy and make it better.
+The installed `pi-subagents` package owns execution. ppstack-specific overrides are in [`docs/pi-subagents.md`](./docs/pi-subagents.md). The generated routing table is at [`../../docs/model-routing.md`](../../docs/model-routing.md). Repository automation follows [`docs/typescript-automation.md`](../../docs/typescript-automation.md).
 
-I primarily use Pi, but mess around with Cursor as well.
+These are my skills. Copy them and make them better.

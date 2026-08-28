@@ -66,3 +66,9 @@ hosts
 *.local
 *secret*
 CLEANUP.md
+
+# Local ppstack diagnostics
+skills/ppstack/PETEY-LOG.md
+skills/ppstack/traces/
+skills/ppstack/debug/PETEY-LOG.md
+skills/ppstack/debug/traces/

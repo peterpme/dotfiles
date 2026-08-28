@@ -1,0 +1,94 @@
+{
+  "lastChangelogVersion": "0.84.3",
+  "theme": "dark",
+  "packages": [
+    "npm:@hypabolic/pi-hypa",
+    "npm:pi-web-access",
+    "npm:pi-subagents",
+    "npm:pi-btw",
+    "npm:@juicesharp/rpiv-ask-user-question",
+    "npm:@plannotator/pi-extension"
+  ],
+  "defaultProvider": "xai",
+  "defaultModel": "grok-4.6-fast",
+  "defaultThinkingLevel": "high",
+  "subagents": {
+    "agentOverrides": {
+      "scout": {
+        "tools": [
+          "read",
+          "grep",
+          "find",
+          "ls"
+        ],
+        "acceptanceRole": "read-only",
+        "model": "peter@backpack.app/gpt-5.6-luna",
+        "thinking": "low",
+        "defaultContext": "fresh",
+        "output": false
+      },
+      "researcher": {
+        "model": "peter@backpack.app/gpt-5.6-luna",
+        "thinking": "medium",
+        "defaultContext": "fresh",
+        "output": false
+      },
+      "worker": {
+        "model": "xai/grok-4.6-fast",
+        "thinking": "high",
+        "defaultContext": "fresh",
+        "fallbackModels": []
+      },
+      "petey-agent": {
+        "model": "xai/grok-4.6-fast",
+        "thinking": "high",
+        "defaultContext": "fresh",
+        "fallbackModels": []
+      },
+      "reviewer": {
+        "description": "Independent review of supplied paths, patches, and validation evidence",
+        "model": "peter@backpack.app/gpt-5.6-sol",
+        "thinking": "xhigh",
+        "defaultContext": "fresh"
+      },
+      "comment-sicko": {
+        "model": "peter@backpack.app/gpt-5.6-luna",
+        "thinking": "low",
+        "defaultContext": "fresh"
+      },
+      "oracle": {
+        "description": "Forked decision-consistency oracle; inspect Git only when repository state or history is evidence",
+        "model": "peter@backpack.app/gpt-5.6-sol",
+        "thinking": "xhigh",
+        "defaultContext": "fork"
+      },
+      "council-sol": {
+        "model": "peter@backpack.app/gpt-5.6-sol",
+        "thinking": "xhigh",
+        "defaultContext": "fresh"
+      },
+      "council-grok": {
+        "model": "xai/grok-4.6",
+        "thinking": "xhigh",
+        "defaultContext": "fresh",
+        "fallbackModels": []
+      }
+    }
+  },
+  "enabledModels": [
+    "peter@backpack.app/gpt-5.6-luna",
+    "peter@backpack.app/gpt-5.6-sol",
+    "peter@backpack.app/gpt-5.6-terra",
+    "services+openai@peterp.me/gpt-5.6-luna",
+    "services+openai@peterp.me/gpt-5.6-sol",
+    "services+openai@peterp.me/gpt-5.6-terra",
+    "xai/grok-4.5",
+    "xai/grok-4.5-fast",
+    "xai/grok-4.6",
+    "xai/grok-4.6-fast",
+    "opencode/deepseek-v4-pro",
+    "opencode/deepseek-v4-flash",
+    "opencode/kimi-k3",
+    "opencode/x-preview-f-free"
+  ]
+}

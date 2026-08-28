@@ -1,6 +1,6 @@
 ---
 name: petey-agent
-description: Routing target for Petey. Reads the petey skill SKILL.md in full before any work, including its Principles index. Resume an existing petey-agent rather than spawning a sibling.
+description: Fresh Petey-aware writer for standalone implementation and prose briefs
 is_background: true
 tools: read, grep, find, ls, bash, edit, write
 inheritSkills: true

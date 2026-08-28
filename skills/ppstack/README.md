@@ -16,6 +16,6 @@ Run `~/dotfiles/install.sh skills`. The installer links each skill into `~/.pi/a
 
 Run `/petey-debug [label]` to copy the current Pi session JSONL into ignored `debug/traces/` and add an untriaged entry to `debug/PETEY-LOG.md`. The extension command bypasses the model.
 
-The installed `pi-subagents` package owns execution. ppstack-specific overrides are in [`docs/pi-subagents.md`](./docs/pi-subagents.md). The generated routing table is at [`../../docs/model-routing.md`](../../docs/model-routing.md). Repository automation follows [`docs/typescript-automation.md`](../../docs/typescript-automation.md).
+The installed `pi-subagents` package owns execution. ppstack-specific guidance is in [`docs/pi-subagents.md`](./docs/pi-subagents.md). `pi/settings.json` owns model routing.
 
 These are my skills. Copy them and make them better.

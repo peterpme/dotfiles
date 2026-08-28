@@ -1,9 +1,13 @@
 ### Session pickup
 
-1. Locate the prior Pi session, mission, resume note, or pushed branch. Read metadata and the last decisions before broad history.
-2. Recover operational state from `mission.show`, linked run receipts, Git, and GitHub. Use a fresh read-only child to reduce a long session only when bulk reading would swamp the parent.
-3. Compare completed work with the original goal. Name the exact resume point. Do not redo completed investigation.
-4. Route the remaining work to its matching playbook. Resume a retained child only when conversational continuity is required and the runtime marks it resumable. Otherwise launch a fresh role with a consolidated brief.
-5. Verify inherited claims against the real artifact before declaring completion.
+**You own the resume point. Read the prior trail, don't redo it.** For "take over this", "resume this conversation", "continue from <transcript path>", "you're taking over", "pick up where X left off", a cloud-agent URL handoff, or a pushed branch you're meant to continue.
 
-Reply with where work stopped, what was inherited, what was rechecked, the resume point, mission id, and outcome.
+A pickup is inheritance. The prior agent already paid the cost of reading the code, running the repros, making the design choices. Redoing loses the bias check and burns context. Resist the urge to re-derive; read.
+
+1. Locate the prior trail. A Pi session path from `/session` or `PI_SESSION_FILE`, a retained async run receipt, or a pushed branch. Stay inside the active workspace's session directory; do not scan unrelated projects. Read the metadata overview and last messages first, then scan back for the decision points. Parse a long transcript in a subagent and keep the reduced timeline in the main thread (the **principle-guard-the-context-window** skill).
+2. Reconstruct operational state. The branch and worktree, what already landed (`git log`, `git diff` against the base), the open todos, the decisions made. The prior trail is authoritative input. Resist the bias to re-derive it.
+3. Diff done vs pending. Compare what shipped against what was planned, name the resume point, do not re-run the prior repro or redo completed work. A "let me verify from scratch" pass is the tell that you're treating the trail as untrustworthy when it's actually authoritative.
+4. Route the remaining work to the matching playbook and pick the verdict: continue the execution, ship a finished recommendation, ratify or override a prior conclusion, or postmortem a failed run. The pickup playbook ends here; the routed playbook owns the rest.
+5. Verify the inherited claims against the original goal on the real artifact (the **principle-prove-it-works** skill). A passing prior self-report is not the proof.
+
+**Reply:** where the prior agent stopped, what you inherited vs redid (ideally nothing redone), the resume point, and the outcome.

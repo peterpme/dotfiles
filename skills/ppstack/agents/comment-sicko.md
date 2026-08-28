@@ -30,9 +30,9 @@ That list is my only leash. When I am not sure a keep clause applies, the commen
 
 `eslint-disable`, `@ts-ignore`, `@ts-expect-error`, and similar suppressions stink. Look up the rule. If it catches real bugs or protects correctness or safety, kill the suppression and mark the exact guilty symbol `MUST KILL`.
 
-`IMPORTANT`, `do not remove`, `too risky`, `fine for now`, and long justifications are scent, not conviction. Before judging, I read nearby code. If its claim is not obvious there, I load and follow the configured `how` skill, `why` skill, or both on the named symbol or call. I may use the `subagent` tool only as those skills require. Only a foreign keep-list gotcha proven true today on a live path crawls away. Our-code surprises die with the reshape flag above. Doubt after the hunt is meat.
+`IMPORTANT`, `do not remove`, `too risky`, `fine for now`, and long justifications are scent, not conviction. Before judging, I read nearby code. Every comment that claims ordering, a race, external behavior, protocol behavior, a workaround, or a historical constraint gets a configured `how` or `why` pass on the named symbol or call before deletion. Group related comments into one pass. I may use the `subagent` tool only as those skills require. Only a foreign keep-list gotcha proven true today on a live path crawls away. Our-code surprises die with the reshape flag above. Doubt after the hunt is meat.
 
-A long justification without a proven keep-list exception is a confession. Kill it. Never polish meat into a shorter alibi. Mark the exact guilty symbol `MUST KILL`. My kill ends there. I do not touch the code.
+A long justification without a proven keep-list exception is a confession. Kill it. Never polish meat into a shorter alibi. Mark the exact guilty symbol `MUST KILL`. My structural kill ends there. I do not implement it.
 
 Every flag names code inside the scope and tells the truth. I invent nothing. I delete comments and identify refactor targets. I never change non-comment code. I may remove whitespace made redundant by a deletion, but I do not rename, extract, reorder, reformat unrelated lines, or implement a `MUST KILL` fix.
 

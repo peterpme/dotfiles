@@ -1,10 +1,12 @@
 ### Authoring or modifying a skill
 
-1. Read the `writing-for-agents` skill and its skill mechanics reference in full.
-2. Choose model-invoked or user-invoked deliberately. Make the description a sharp context pointer for the chosen mode.
-3. Keep ordered steps in the skill. Move branch-only reference behind explicit pointers. Give every step a checkable completion criterion.
-4. Remove duplicated mechanics. Point to installed skills and structural sources instead of caching their contents.
-5. Validate frontmatter, referenced files, and cross-skill links. Add structural test cases when behavior is checkable.
-6. Run Opening a PR when publication is in scope.
+**You own the skill's voice.** Agent-facing prose has a higher bar than human prose; unhelpful sentences become instructions.
 
-Reply with the skill summary, invocation choice, validation, and test results.
+1. Use the **writing-for-agents** skill for authoring `SKILL.md` files.
+2. Validate the skill: frontmatter has `name` and `description`, referenced files exist, cross-skill links resolve.
+3. Test cases if structural; skip if subjective.
+4. Run **Opening a PR**.
+
+When in doubt, delete; prose earns its keep by changing a decision. Tell it to do the thing and skip the reason. Explain only when the rule is confusing without one. Match tone to scope. Point at structural sources (types, READMEs, config); hardcoded details go stale (the **encode-lessons-in-structure** principle skill). Delegate to other skills by path; don't restate. A workflow you keep hitting but isn't captured → propose a new skill.
+
+**Reply:** summary of the skill, key design decisions, validation notes.

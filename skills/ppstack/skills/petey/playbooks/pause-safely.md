@@ -1,9 +1,10 @@
 ### Pause safely
 
-1. Finish or back out of the current atomic step. Start no new work.
-2. Use runtime stop controls for children that must stop. Leave safe async work attached to its mission when it should continue.
-3. Make edits durable only within existing commit and push authority. Otherwise leave the working tree untouched and record its exact state.
-4. Update mission state with the intent, verified progress, current branch and worktree, linked run ids, next ready action, key files, risks, and owner decisions.
-5. Write a separate resume note when mission state is unavailable. Point to an existing decision trail instead of duplicating it.
+**You own a clean stop. Leave a checkpoint a cold-start agent can resume from.** For "pause safely", "I need to go offline", "restart Pi", or "board my flight", and when context is about to compact or summarize. This is explicit only. On "keep going", "going to bed, keep going", or "don't stop", do not pause. Those mean continue, and Autonomous run already checkpoints per iteration.
 
-Reply with the current phase, durable state, active runs, tree state, mission or note path, and first resume action.
+1. Stop at a safe boundary. Finish the current atomic step or back out of it. Never stop mid-edit in a known-broken state. Start nothing new, and cancel any nested subagents.
+2. Don't cross an irreversible line to pause. No PR and no push unless you already had one out.
+3. Make the work durable. Commit uncommitted edits as one clear `wip:` commit on the current branch so nothing is lost. If the tree is broken, say so in the commit body in one line.
+4. Write the resume note off-context. Capture intent, what you were doing, progress and what's verified, current state, next steps, key files, and gotchas. For the compaction trigger write it to a file like `/tmp/<slug>-resume.md`, because the in-context plan won't survive summarization. If a show-me-your-work trail exists, point at it instead of duplicating it.
+
+**Reply:** where you are in the loop, what's on disk versus still in your head (paths, no diff dumps), the commits you made and whether the tree is clean, and the first action on resume. This is a pause, not a final report. Resume is the Session pickup playbook reading this note.

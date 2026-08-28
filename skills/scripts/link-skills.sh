@@ -5,30 +5,6 @@ set -euo pipefail
 # source stays in the dotfiles repo. Existing third-party Pi skills are left
 # alone because this script replaces only matching names.
 
-learn_live_settings() {
-  local source="$1"
-  local live="$2"
-
-  if [ ! -f "$live" ] || [ -L "$live" ]; then
-    return 0
-  fi
-
-  node - "$live" "$source" <<'NODE'
-const fs = require("node:fs");
-const [livePath, sourcePath] = process.argv.slice(2);
-const live = JSON.parse(fs.readFileSync(livePath, "utf8"));
-const source = JSON.parse(fs.readFileSync(sourcePath, "utf8"));
-function merge(base, selected) {
-  if (!base || typeof base !== "object" || Array.isArray(base)) return selected;
-  if (!selected || typeof selected !== "object" || Array.isArray(selected)) return selected;
-  const result = { ...base };
-  for (const [key, value] of Object.entries(selected)) result[key] = merge(base[key], value);
-  return result;
-}
-fs.writeFileSync(sourcePath, `${JSON.stringify(merge(live, source), null, 2)}\n`);
-NODE
-}
-
 link_pi_config() {
   local name="$1"
   local source="$DOTFILES_ROOT/pi/$name"
@@ -36,9 +12,6 @@ link_pi_config() {
 
   [ -f "$source" ] || { echo "error: missing $source" >&2; return 1; }
   mkdir -p "$(dirname "$target")"
-  if [ "$name" = "settings.json" ]; then
-    learn_live_settings "$source" "$target"
-  fi
   if [ -L "$target" ] && [ "$(readlink "$target")" = "$source" ]; then
     echo "ok      pi-config/$name"
     return 0

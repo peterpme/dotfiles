@@ -6,7 +6,7 @@ disable-model-invocation: true
 
 # Interrogate
 
-Spawn one reviewer per configured model to adversarially review code changes. Each model gets the same prompt and rubric. The adversarial signal comes from model diversity, not assigned personas. Models differ in blind spots, priors, and reasoning patterns. Agreement across models is high-confidence signal; lone-model findings are worth reading but lower confidence.
+Spawn multiple fresh reviewers to adversarially review code changes. Each reviewer gets the same prompt and rubric. The adversarial signal comes from independent passes and configured role diversity, not assigned personas. Reviewers differ in blind spots, priors, and reasoning patterns. Agreement is high-confidence signal; lone-reviewer findings are worth reading but lower confidence.
 
 The deliverable is a synthesized verdict. Do NOT auto-apply changes.
 
@@ -33,9 +33,7 @@ Write one clear paragraph. Reviewers challenge whether the work achieves the int
 
 ## Step 3, Spawn Reviewers
 
-Read `../petey/references/spawn.md` and `../petey/references/models.md` first. Launch all reviewers in one call. One child per `interrogate reviewers` entry. Pi: one `workflowScript` with `await runs.all` of `agent: "reviewer"`, `model` per list entry, then `return` the outputs. Cursor: one message of Task calls, `readonly: true`, `subagent_type: generalPurpose`, `model` per entry.
-
-If a slug is unresolvable, pick the closest family tier and keep going. `inherit-parent` / `auto` means omit `model`.
+Read the installed `pi-subagents` skill first. Launch all reviewers in one async `workflowScript` with `await runs.all` of fresh `reviewer` children, then return the outputs. Give each reviewer one distinct named source seam or review angle, the same intent statement, rubric, and materialized evidence. Do not select models per run.
 
 Read `references/reviewer-prompt.md` and fill in the template with:
 1. The stated intent
@@ -43,7 +41,7 @@ Read `references/reviewer-prompt.md` and fill in the template with:
 3. The review rubric from `references/rubric.md`
 4. The code-quality lens from `references/code-quality-review.md`
 
-The same filled template goes to all reviewers, so every model applies the code-quality lens.
+The same filled template goes to all reviewers, so every reviewer applies the code-quality lens.
 
 Each reviewer produces structured findings as described in the prompt template.
 
@@ -52,10 +50,10 @@ Each reviewer produces structured findings as described in the prompt template.
 As results come back, build a unified picture:
 
 1. **Parse all findings** from the reviewers
-2. **Identify consensus**. Findings raised by 2+ models independently are highest signal.
-3. **Identify lone-model findings**. Still worth reading, but weight accordingly.
-4. **Deduplicate**. Different models may describe the same issue differently. Merge these and note which models raised it.
-5. **Note disagreements**. If one model flags something and another explicitly says the opposite, that's useful context for the verdict.
+2. **Identify consensus**. Findings raised by 2+ reviewers independently are highest signal.
+3. **Identify lone-reviewer findings**. Still worth reading, but weight accordingly.
+4. **Deduplicate**. Different reviewers may describe the same issue differently. Merge these and note which reviewers raised it.
+5. **Note disagreements**. If one reviewer flags something and another explicitly says the opposite, that's useful context for the verdict.
 
 ## Step 5, Lead Judgment
 

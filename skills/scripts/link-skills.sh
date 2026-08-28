@@ -1,16 +1,27 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Link every SKILL.md-bearing directory under skills/ into the agent skill
-# homes this machine uses. Canonical source stays in the dotfiles repo.
-#
-#   ~/dotfiles/skills/<name>/
-#     -> ~/.agents/skills/<name>
-#     -> ~/.pi/agent/skills/<name>
-#     -> ~/.claude/skills/<name>
-#
-# Skips deprecated/. Third-party skills installed via the skills CLI into
-# ~/.agents/skills are left alone (we only overwrite matching names).
+# Link every SKILL.md-bearing directory under skills/ into Pi. Canonical
+# source stays in the dotfiles repo. Existing third-party Pi skills are left
+# alone because this script replaces only matching names.
+
+link_pi_config() {
+  local name="$1"
+  local source="$DOTFILES_ROOT/pi/$name"
+  local target="$HOME/.pi/agent/$name"
+
+  [ -f "$source" ] || { echo "error: missing $source" >&2; return 1; }
+  mkdir -p "$(dirname "$target")"
+  if [ -L "$target" ] && [ "$(readlink "$target")" = "$source" ]; then
+    echo "ok      pi-config/$name"
+    return 0
+  fi
+  rm -f "$target"
+  ln -s "$source" "$target"
+  echo "linked  pi-config/$name -> $source"
+}
+
+# Skips deprecated/.
 
 REPO="$(cd "$(dirname "$0")/.." && pwd)"
 DOTFILES_ROOT="$(cd "$REPO/.." && pwd)"
@@ -97,9 +108,28 @@ link_pi_agents() {
   done
 }
 
+link_pi_extension() {
+  local name="$1"
+  local source="$DOTFILES_ROOT/pi/extensions/$name"
+  local target="$HOME/.pi/agent/extensions/$name"
+
+  [ -f "$source" ] || { echo "error: missing $source" >&2; return 1; }
+  mkdir -p "$(dirname "$target")"
+  if [ -L "$target" ] && [ "$(readlink "$target")" = "$source" ]; then
+    echo "ok      pi-extension/$name"
+    return 0
+  fi
+  rm -rf "$target"
+  ln -s "$source" "$target"
+  echo "linked  pi-extension/$name -> $source"
+}
+
 echo "Linking skills from $REPO"
-link_into "$HOME/.agents/skills" "agents"
 link_into "$HOME/.pi/agent/skills" "pi"
-link_into "$HOME/.claude/skills" "claude"
+rm -f "$HOME/.pi/agent/skills/petey-debug"
 link_pi_agents
-echo "Done."
+rm -f "$HOME/.pi/agent/agents/explorer.md" "$HOME/.pi/agent/agents/search.md"
+link_pi_extension petey-debug.ts
+link_pi_config models.json
+link_pi_config settings.json
+echo "Done. Restart Pi to load settings changes."

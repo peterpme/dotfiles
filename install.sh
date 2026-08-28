@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-DOTFILES="$(pwd)"
+DOTFILES="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 COLOR_GRAY="\033[1;38;5;243m"
 COLOR_BLUE="\033[1;34m"
 COLOR_GREEN="\033[1;32m"
@@ -258,7 +258,7 @@ setup_macos() {
 }
 
 setup_skills() {
-  title "Linking agent skills"
+  title "Linking Pi skills, agents, extensions, models, and settings"
   bash "$DOTFILES/skills/scripts/link-skills.sh"
 }
 

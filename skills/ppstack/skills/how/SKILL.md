@@ -32,11 +32,7 @@ Identify the scope. If ambiguous, state your best-guess interpretation before ex
 
 When in doubt, lean simple. You can always spawn explorers if you hit a wall. A bare `/how` or `/petey how` with no target is simple and ambiguous. Guess the subsystem in one sentence, then Step 2b. Do not fan out four explorers.
 
-Before any spawn, read `../petey/references/spawn.md` and `../petey/references/models.md`. Role slugs come from models.md (`how explorer`, `how explainer`, `how critics`).
-
-Pi (`subagent` in the tool list). Never pass top-level `agent` together with `workflowScript`. One child is `workflowScript` with `await runs.run(...)`. N children is one `workflowScript` with `await runs.all([...])`. Agent name for recon is `explorer`, not `scout`, not `generalPurpose`.
-
-Cursor (`Task` in the tool list). `subagent_type: generalPurpose`, `readonly: true`, `model` from the role line.
+Before any spawn, read the installed `pi-subagents` skill. Never pass top-level `agent` together with `workflowScript`. One child is a `workflowScript` with `await runs.run(...)`. N children use one `workflowScript` with `await runs.all([...])`. Do not select models per run.
 
 ### Step 2a. Explore (complex questions only)
 
@@ -48,7 +44,7 @@ Decompose the question into 2-4 parallel exploration angles, each a distinct sli
 
 The right decomposition depends on the question. Use your judgment. Narrow questions: 2 explorers is fine. Broad subsystems: up to 4.
 
-Spawn every explorer in one call. Pi: `runs.all` of `agent: "explorer"`, `model` from how explorer. Cursor: one message of Task calls, `readonly: true`, same model role.
+Spawn every exploration angle in one call with `runs.all` of fresh read-only `scout` children. Give each a distinct source seam, entry points, evidence requirement, and bounded report shape.
 
 Each explorer gets the same base prompt from `references/explorer-prompt.md` plus a specific exploration angle naming its slice. Each explorer should:
 - Start broad: Glob for relevant directories, Grep for key types/interfaces/class names
@@ -63,7 +59,7 @@ Then proceed to Step 3.
 
 ### Step 2b. Direct Explain (simple questions)
 
-The parent greps, reads, and writes the explanation. Same as Cursor’s main agent using codebase search. Do not spawn a child. Read `references/explainer-prompt.md` for voice and output format.
+The parent greps, reads, and writes the explanation. Do not spawn a child. Read `references/explainer-prompt.md` for voice and output format.
 
 Proceed to Step 4.
 
@@ -99,9 +95,7 @@ Run the full explain flow above (Steps 1-4). You must understand the architectur
 
 ### Step 2. Spawn Critics
 
-After the explanation is complete, spawn one critic per slug in the how-critics list (models.md on Pi, pstack-models.mdc on Cursor), all in one call.
-
-Pi: one `workflowScript` with `runs.all` of `agent: "oracle"` (or `reviewer`), `model` per list entry. Cursor: one message of Task calls, `subagent_type: generalPurpose`, `readonly: true`, `model` per entry. These are minimum reasoning levels. Escalate when the architecture warrants it.
+After the explanation is complete, spawn multiple fresh critics in one `workflowScript` with `runs.all` of `reviewer`. Give each a distinct architectural angle and the same grounded explanation, paths, prompt, and rubric. Use `oracle` only when inherited context matters. Do not select models per run.
 
 Read `references/critic-prompt.md` for the prompt template. Each critic gets:
 1. The explanation from Step 1 (so they don't re-explore)

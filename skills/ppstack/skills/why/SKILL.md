@@ -56,7 +56,7 @@ Parse what the user is asking. The **target** is usually a chunk of code, a patt
 - "Why does this code still exist?" Dead-code territory.
 - "What's the history of X?" Broad archaeological sweep.
 
-If the target is vague ("why do we do it this way?" with no clear referent), make your best guess from conversation context (open files, recent edits, cursor location, what was just discussed). State your interpretation briefly so the user can redirect if you're off, then proceed.
+If the target is vague ("why do we do it this way?" with no clear referent), make your best guess from conversation context (open files, recent edits, current focus, what was just discussed). State your interpretation briefly so the user can redirect if you're off, then proceed.
 
 ## Step 2. Establish the Code Anchor
 
@@ -97,7 +97,7 @@ Capture this as seed context (file paths, symbols, commits, PR numbers, linked t
 
 ### Discovery
 
-Before spawning investigators, list available evidence tools. Cursor: MCP servers. Pi: git, `gh`, and whatever search tools this session has. Null categories still count.
+Before spawning investigators, list available evidence tools: git, `gh`, web search, direct MCP tools, and any other search tools this Pi session exposes. Null categories still count.
 
 Map each available MCP to one evidence category:
 
@@ -115,7 +115,7 @@ Aim for a complete **coverage map**, not a minimal one. A null result from an is
 
 Launch all matching investigators in a single message so they run concurrently. One investigator per category lets each specialize in one tool's query vocabulary and result shape. Don't ask one agent to cover multiple MCPs.
 
-Read `../petey/references/spawn.md` and `../petey/references/models.md`. Spawn all investigators in one call. Pi: `workflowScript` `runs.all` of `agent: "oracle"` (bash, no edit), `model` from why investigators. Cursor: Task, agent mode so MCPs stay. Investigators must not write. That's a posture. On Pi, source-control-only why can stay in the parent with git/`gh`.
+Read the installed `pi-subagents` skill. Spawn all investigators in one async `workflowScript` with `runs.all` of fresh read-only `researcher` or `oracle` children, one evidence category per lane. Do not select models per run. Investigators must not write. Source-control-only why can stay in the parent with git and `gh`.
 
 Each investigator gets:
 1. The base prompt from `references/investigator-prompt.md`
@@ -157,7 +157,7 @@ If your scope assessment suggests a single-commit trivial target where the PR de
 
 ## Step 4. Synthesize
 
-The parent synthesizes. Do not spawn a synthesizer child unless investigator dumps cannot fit. Voice and epistemics from `references/synthesizer-prompt.md` and `references/epistemics.md`. Pi model for that child, if any, is why synthesizer in models.md.
+The parent synthesizes. Do not spawn a synthesizer child unless investigator dumps cannot fit. Voice and epistemics come from `references/synthesizer-prompt.md` and `references/epistemics.md`. If a child is necessary, use a configured fresh reviewer without selecting a model per run.
 
 The synthesizer gets:
 1. The investigator findings, including any null results and any categories skipped with justification

@@ -6,7 +6,7 @@ disable-model-invocation: true
 
 # Swarm
 
-Fan out N parallel workers. They may cover separate slices, race the same brief, or mix both. The parent waits, aggregates, and returns one report. Read `../petey/references/spawn.md` and `../petey/references/models.md` before spawning.
+Fan out N parallel workers. They may cover separate slices, race the same brief, or mix both. The parent waits, aggregates, and returns one report. Read the installed `pi-subagents` skill before spawning.
 
 ## Start
 
@@ -22,12 +22,12 @@ Open a todolist with one entry per phase before launching anything.
 1. State the done predicate and the artifact or report the swarm must return.
 2. Choose the shape. Partition into slices, race N workers on identical briefs, or mix both. For a race or mixed shape, declare `first pass`, `rank all`, or `best-of` before spawning.
 3. Set N from the user or derive it from the shape. N is total workers, not the cloud concurrency limit.
-4. Pick the worker model from the `swarm workers` line in models.md (Pi) or `pstack-models.mdc` (Cursor). For a model race, name each arm's model up front.
+4. For a race, give every arm the same brief and configured role. Do not select models per run.
 5. Give each worker its own writable output when it writes. Use a worktree, branch, or `/tmp/swarm-<slug>/worker-<n>/`.
 
 ## Phase B: Fan out
 
-Spawn all N workers in one call. Pi: one `workflowScript` with `await runs.all`, `agent: "petey-agent"` if they write, `agent: "explorer"` if they only search, `model` from swarm workers, `worktree: true` when they write. Return the outputs. Cursor: one message of Task calls, `run_in_background: true`. `environment: "cloud"` only when the user asked for Cursor cloud.
+Spawn all N workers in one async `workflowScript` with `await runs.all`. Use `agent: "petey-agent"` if they write and fresh `scout` when they only search. Give each writer a separate worktree. Return the outputs.
 
 Do not mix top-level `agent` with `workflowScript`.
 

@@ -1,106 +1,84 @@
 # Pi subagents, for Petey
 
-Source of truth for how Pi children work. Upstream is [nicobailon/pi-subagents](https://github.com/nicobailon/pi-subagents). We do not fork that package. Spawn calls live in `skills/petey/references/spawn.md`.
+Source of truth for how Pi children work. Upstream is [nicobailon/pi-subagents](https://github.com/nicobailon/pi-subagents). We do not fork that package. The installed package owns execution, workflows, contexts, worktrees, missions, councils, waiting, status, recovery, and result delivery.
 
-The parent session is Petey. A subagent is a child Pi process with its own tools and prompt. Cursor’s equivalent is `Task` plus `subagent_type`.
+The parent session is Petey. A subagent is a child Pi process with its own tools and prompt.
 
 ## Builtins
 
-These six ship in the package `agents/` directory. None of them pin a model. They inherit the parent unless settings or the spawn call override it. All six set `inheritSkills: false`, so they will not load `petey` unless we say so.
+The package supplies the normal roles below. Model routing and role overrides live in `pi/settings.json`, not in skill prose or per-run selectors.
 
-| Name | Job | Tools (package default) | Writes? | Notes |
-|---|---|---|---|---|
-| `scout` | Local recon, compressed handoff | `read, grep, find, ls, bash, write` | yes | We override tools to `read, grep, find, ls`. Treat as readonly. |
-| `worker` | Implement an approved plan | `read, grep, find, ls, bash, edit, write, contact_supervisor` | yes | Aliases `developer`, `coder`, `implementer`. `defaultContext: fork`. |
-| `reviewer` | Evidence review of a diff or plan | `read, grep, find, ls` | no | Cannot run tests. Docs say “small fixes”; the allowlist cannot. |
-| `oracle` | Second opinion, catch drift. Alias `advisor` | `read, grep, find, ls, bash` | bash only | Forked context. Prompt says do not edit. |
-| `delegate` | Thin clone of the parent | same as worker | yes | Only builtin with `systemPromptMode: append`. |
-| `researcher` | Web brief | `read, write, web_search, fetch_content, get_search_content` | notes only | No grep/find. Needs `pi-web-access`. Petey uses `luna` instead. |
+| Name | Job | Writes? | Petey use |
+|---|---|---|---|
+| `scout` | Local recon and compressed handoff | no after our override | Cross-cutting codebase retrieval |
+| `worker` | Implement an approved plan | yes | Standard implementation |
+| `reviewer` | Independent evidence review | no | Reviews, cross-judging, council counterpoint |
+| `oracle` | Second opinion and drift detection | bash only, prompt forbids edits | Inherited-context judgment |
+| `delegate` | Thin parent-shaped helper | yes | Only when parent-like behavior is intentional |
+| `researcher` | Web and documentation brief | notes only | Cited external research |
 
-There are also CLI adapter builtins (`claude-code`, `cursor-agent`, `codex-exec`, and their writer variants). Leave them. `disableBuiltins: true` would hide those too.
+The package may also expose external CLI adapters. Leave those package roles intact unless a task explicitly calls for one.
 
 ## Discovery
 
-Lowest to highest.
+Lowest to highest priority:
 
-1. Package builtins
-2. Other installed packages
-3. `~/.pi/agent/agents/**/*.md` (ppstack `agents/` is symlinked here)
-4. Project `.pi/agents/**/*.md`
+1. Package builtins.
+2. Other installed packages.
+3. `~/.pi/agent/agents/**/*.md`.
+4. Project `.pi/agents/**/*.md`.
 
-Same runtime `name:` shadows the lower one. `agentOverrides` in `~/.pi/agent/settings.json` patches fields on a builtin without copying the file. `tools` in that JSON must be an array, `"inherit"`, or `false`. A comma string throws and `subagent list` dies.
+ppstack agents are linked into the user agent directory. The same runtime `name:` shadows the lower-priority definition. `subagents.agentOverrides` in Pi settings patches a role without copying its agent file.
 
-Do not `eject` a builtin unless the persona itself has to change. After eject, settings overrides skip fields the file already sets.
+Do not eject a builtin unless its persona must change. Keep deployment choices in settings and specialist behavior in agent files.
 
 ## House agents
 
-These are ours. They do not replace the six names.
+| Name | Job | Mutation boundary |
+|---|---|---|
+| `petey-agent` | Fresh writer that loads Petey policy | Normal writer tools |
+| `comment-sicko` | Scoped comment deletion with `how` and `why` available | Comments and resulting whitespace only |
+| `council-sol` | Fresh read-only Sol council judgment | No writes |
 
-| Name | Job | Model | Tools |
-|---|---|---|---|
-| `petey-agent` | Playbook writer. Reads Petey first. | inherit | write |
-| `comment-sicko` | Comment deletion pass. Alias `Comment Sicko`. | inherit | readonly |
-| `search` | Web and docs search | pinned `peter@backpack.app/gpt-5.6-luna` | web search tools |
-| `explorer` | Local codebase lookup | Luna low | `read, grep, find, ls`. No files. |
-
-That is the pstack shape. pstack did not replace Cursor `generalPurpose`. It added `poteto-agent` and Comment Sicko on top. We do the same on Pi.
+`comment-sicko` reports structural `MUST KILL` findings but never implements them. The parent verifies only the scoped diff boundary. It does not reimplement Comment Sicko's keep list.
 
 ## What Petey should call
 
-| Job | `agent:` | Do not call |
-|---|---|---|
-| Local codebase search | `explorer` | `scout` |
-| Playbook writer | `petey-agent` | `worker` |
-| Evidence review | `reviewer` | `comment-sicko` |
-| Comment pass | `comment-sicko` | `reviewer` |
-| Second opinion | `oracle` | `search` |
-| Web search | `search` | `researcher` |
-| Parent-shaped helper | `delegate` | only if you mean it |
+| Job | Agent |
+|---|---|
+| Narrow local lookup | Parent `grep`, `find`, and `read` |
+| Cross-cutting local retrieval | `scout` |
+| Web research | `researcher` |
+| Standard implementation | `worker` |
+| Petey-aware implementation or prose | `petey-agent` |
+| Evidence review | `reviewer` |
+| Comment pass | `comment-sicko` |
+| Inherited-context judgment | `oracle` |
+| Fresh Sol council judgment | `council-sol` |
 
-Keep builtin names when the job matches. Local search is ours (`explorer`). Do not send that job to `scout`.
+Use one async `workflowScript` for composed work. Do not select models per run. Fresh children receive standalone briefs. Give each writer its own checkout or managed worktree.
 
-## Overrides we already have
+## Evidence boundary
 
-`~/.pi/agent/settings.json`. Model pins are documented in [`models.md`](./models.md).
+The parent materializes named paths, patches, command output, and test results before review. Read-only children return `MISSING EVIDENCE` when a required artifact is absent. They do not reconstruct change state through `.git` internals.
 
-```json
-"subagents": {
-  "agentOverrides": {
-    "scout": {
-      "tools": ["read", "grep", "find", "ls"],
-      "acceptanceRole": "read-only",
-      "model": "peter@backpack.app/gpt-5.6-luna",
-      "thinking": "low"
-    },
-    "researcher": {
-      "model": "peter@backpack.app/gpt-5.6-luna"
-    }
-  }
-}
-```
-
-Scout override is load-bearing. Builtin scout can write `context.md`. Researcher pin is the mix-match so a Grok parent does not send web search to Grok.
-
-## Changes worth making later
-
-Smallest first. None of these require a package fork.
-
-1. Optional. `agentOverrides.worker.skills: ["petey"]` if a stock worker launch should see Petey. Do not set `inheritSkills: true` on scout or reviewer. That dumps the whole catalog into a narrow child.
-2. `setup-petey` should write the Cursor mdc and these Pi pins from [`models.md`](./models.md). List roles (how critics, interrogate) still need the parent to pass `model:` on each spawn. Settings cannot express “four reviewers, four slugs."
-
-Do not shadow `worker` with a file named `worker.md` that is actually `petey-agent`. You would steal the `developer` / `coder` aliases.
+Keep discovery inside the repository and named configuration directories. Never widen a failed resource lookup to the user's home directory. Agent profiles own their policy; the parent normally has no reason to locate or read their source files.
 
 ## How to check
 
-New Pi session.
+Start a new Pi session after settings or agent changes.
 
 ```text
-List available subagents.
+/subagents-models
+/subagents-models reviewer
 ```
 
-You want `petey-agent`, `comment-sicko`, and `search` as `user`, and the six builtins still present. Then:
+Then list available agents and run bounded probes:
 
 ```text
-Use scout to map skills/petey/references/spawn.md. Do not edit.
-Use search to look up pi-subagents model precedence. Cite docs.
+Use scout to map one named repository directory. Do not edit.
+Use researcher to answer one documentation question with citations.
+Run Comment Sicko on one tracked fixture and inspect the host-produced diff.
 ```
+
+A runtime receipt must show the expected model, thinking level, context, tools, and fallback behavior. A settings change is pending until a restarted Pi process reports it.

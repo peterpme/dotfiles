@@ -1,9 +1,9 @@
 ---
-name: effect
-description: Effect v4 rules for TypeScript. Use when writing or reviewing Effect programs (Effect.gen, Effect.fn, Layer, Schema, Context.Service, TaggedError, Data.taggedEnum, Effect.forEach, ManagedRuntime).
+name: effect-v4-best-practices
+description: Effect v4 best practices for TypeScript. Use when writing or reviewing Effect programs (Effect.gen, Effect.fn, Layer, Schema, Context.Service, TaggedError, Data.taggedEnum, Effect.forEach, ManagedRuntime).
 ---
 
-# Effect
+# Effect v4 best practices
 
 `Effect.Effect<A, E, R>` is a value. Building it does no IO. `A` is success. `E` is acknowledged failure. `R` is services still required. Run at the program edge (`runPromise`, `ManagedRuntime`). Callers either return an Effect or they run it.
 

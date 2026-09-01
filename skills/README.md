@@ -80,6 +80,9 @@ find ~/dotfiles/skills -name SKILL.md \
 - **[writing-great-skills](./writing-great-skills/SKILL.md)** — Vocabulary and principles for writing predictable skills.
 - **[plain-book](./plain-book/SKILL.md)** — Programmer-plain explanatory book voice.
 - **[rewrite-this](./rewrite-this/SKILL.md)** — Rewrite in Peter's voice for Slack.
+- **[effect-v4-best-practices](./effect-v4-best-practices/SKILL.md)** — Effect v4 write and review rules.
+- **[herdr](./herdr/SKILL.md)** — Spaces, worktrees, Peter's Herdr config and workflow. Manual invoke only.
+- **[unifi-network-diagnostics](./unifi-network-diagnostics/SKILL.md)** — Home UniFi investigation and `LOG.md` updates. Manual invoke only.
 
 ### ppstack
 

@@ -75,6 +75,10 @@ EXPAND ONLY WHEN: failed check or missing fact that permits widening
 
 The writer starts at `FIRST UNIT`. It does not repeat broad discovery or redesign settled decisions. Adjacent reads must serve the named write seam. Before a writer starts in a new worktree, the parent verifies dependencies and proves `FIRST CHECK` starts there.
 
+## Skill locations
+
+Petey's inline Principles section is the upfront index. It does not require every principle leaf at startup. When a principle applies, read its exact `available_skills` location. Installed principle skills are siblings of `petey`, not children under `petey/principles/`. Never infer a skill path from its name.
+
 ## Evidence boundary
 
 The parent materializes named paths, patches, command output, and test results before review. Read-only children return `MISSING EVIDENCE` when a required artifact is absent. They do not reconstruct change state through `.git` internals.

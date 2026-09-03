@@ -35,7 +35,12 @@ Remaining triggers:
 - Long, autonomous, or multi-phase work, or any task the user steps away from to review later ("going to bed", "trust it when i'm back", "keep going until X") → a decision trail via the **show-me-your-work** skill. Commit it when stakes need an auditable record; keep it local otherwise.
 
 ## Principles
-Read the leaf skill in full for any principle you apply. Each entry names when it applies.
+
+Read this entire section up front. It is the index of every principle, not an instruction to load every leaf file.
+
+Load a leaf skill in full only when its trigger changes a decision in the current task. Resolve the leaf from its exact `available_skills` location. Principle skills are installed as siblings of `petey`; never infer a child path such as `petey/principles/`. Before batching leaf reads, open one declared location successfully.
+
+Each entry names when it applies.
 
 **Core**
 

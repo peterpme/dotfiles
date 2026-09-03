@@ -14,7 +14,7 @@ ppstack/
 
 Run `~/dotfiles/install.sh skills`. The installer links each skill into `~/.pi/agent/skills`, links ppstack agents into `~/.pi/agent/agents`, and links tracked Pi extensions, settings, and models into `~/.pi/agent/`.
 
-Run `/petey-debug [label]` to copy the current Pi session JSONL into ignored `debug/traces/` and add an untriaged entry to `debug/PETEY-LOG.md`. The extension command bypasses the model.
+Run `/petey-debug [label]` to copy the current Pi session JSONL into ignored `debug/traces/` and append an untriaged `capture` row to `debug/problems.tsv`. The extension command bypasses the model. The **debugger** skill owns that log and the session-local one beside each Pi session.
 
 The installed `pi-subagents` package owns execution. ppstack-specific guidance is in [`docs/pi-subagents.md`](./docs/pi-subagents.md). `pi/settings.json` owns model routing.
 

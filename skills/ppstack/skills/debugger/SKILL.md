@@ -1,79 +1,71 @@
 ---
-name: log-problems
+name: debugger
 description: >-
-  Log session-local problems: agent misunderstandings, wrong assumptions,
-  abandoned paths, and out-of-scope leftovers. Write LOG.md next to the Pi
-  session file, never in the repo, never commit it. Surface it when wrapping
-  up. Use when confused, corrected, a wrong path is dropped, leftover work is
-  noticed, a feature or PR is finishing, or the user says log-problems.
+  Append-only TSV log of what broke this session and how it was fixed: a model
+  call or subagent failed, a file or skill was missing, a tool misbehaved, an
+  assumption was wrong, the user corrected you, a path was abandoned, leftover
+  work surfaced. Lives beside the Pi session file, never in the repo. Recapped
+  at every wrap-up. Rows that should change ppstack are promoted so the loop
+  closes. Use whenever something breaks or surprises you, when corrected, when
+  finishing a task, or when the user says debugger.
 ---
 
-# Log problems
+# Debugger
 
-Scratch log of snags in this session. Keep working. Recap only at wrap-up.
+Every snag this session hits becomes a row that can change ppstack later. Keep working. Recap at wrap-up. That is the whole job.
 
-This is not a decision trail. That is **show-me-your-work**.
-This is not a project file. Other repos already use `LOG.md` for real records.
+Not a decision trail. That is **show-me-your-work**. Not a skill editor. That is **reflect**, which reads these rows to propose skill edits.
 
 ## Where
 
-Next to the session jsonl:
+Session log, next to the session JSONL:
 
 ```bash
-printf '%s\n' "${PI_SESSION_FILE%.jsonl}.LOG.md"
+printf '%s\n' "${PI_SESSION_FILE%.jsonl}.problems.tsv"
 ```
 
-Create it on the first snag. Header:
+Durable log, for rows that should change ppstack: `~/dotfiles/skills/ppstack/debug/problems.tsv`. Ignored by git, local to this machine. `/petey-debug <label>` appends a `capture` row there with the saved trace path.
 
-```markdown
-# Session log
+No `PI_SESSION_FILE` (ephemeral session): keep rows in memory and print them in the wrap-up recap. Leave the repo tree untouched.
 
-Session: $PI_SESSION_ID
+## Row
+
+Append with the helper. It stamps `ts`, writes the header on first use, strips tabs and newlines, and guards cells a spreadsheet would read as a formula.
+
+```bash
+scripts/log.sh <logfile> <kind> <problem> <fix> <status> <target> [trace]
 ```
 
-No `PI_SESSION_FILE` (ephemeral session): keep snags in memory and print them only in the wrap-up recap. Leave the repo tree untouched.
+Columns: `ts`, `kind`, `problem`, `fix`, `status`, `target`, `trace`.
 
-Only the interactive parent writes. A child names the snag in its returned output. The parent appends.
+- `kind`: `model-call`, `tool`, `missing-file`, `wrong-assumption`, `correction`, `wrong-path`, `drift`, `leftover`, `capture`.
+- `problem`: one line. What broke or what you got wrong.
+- `fix`: one line. What was true instead, or what fixed it. `-` while open.
+- `status`: `open`, `fixed`, or `leftover`.
+- `target`: the skill, playbook, script, or config file that should change so this does not recur, or `-`.
+- `trace`: session id, run id, or trace path, or `-`.
 
-## When to append
+## When
 
-Append and continue. Do not mention the log in chat until wrap-up.
+Append and continue. Do not discuss a row unless it blocks the work.
 
-- You assumed something about the repo, API, or task that was wrong
-- The user corrected you
-- You dropped a path after it failed
-- You hit leftover work that is out of scope (a TODO, bug, or broken link you actually ran into). Do not grep the tree for TODOs to fill the log.
+- A model call, subagent, or tool failed, timed out, or returned garbage.
+- A file, skill, script, or command the instructions named was missing or different from described.
+- You assumed something about the repo, API, or task that was wrong.
+- The user corrected you.
+- You dropped a path after it failed.
+- You hit leftover work out of scope that you actually ran into. Do not grep the tree for TODOs to fill the log.
 
-Skip routine progress, plans, and guesses that were right.
-
-## Entry
-
-Append-only. One heading per snag.
-
-```markdown
-## 2026-09-01T18:22Z misunderstanding
-Assumed skills live only in ~/.pi/agent/skills. They are linked from ~/dotfiles/skills.
-Status: corrected
-```
-
-Kinds: `misunderstanding`, `wrong-path`, `correction`, `leftover`, `confusion`.
-
-Status: `open`, `corrected`, or `leftover`.
-
-One or two sentences. What you got wrong, what was true instead.
+Skip routine progress and guesses that were right. Only the interactive parent writes. A child names the snag in its report and the parent appends.
 
 ## Wrap-up
 
-When the feature, PR, or task is finishing, or the user asks for the log (`/skill:log-problems`, "show the log"):
+Every reply that closes a task carries a **Session log** section. Open rows first, then fixed rows whose `target` names a ppstack or Pi file. Empty log: write `**Session log.** No snags.` The section is never omitted, so its absence means the wrap-up was skipped.
 
-1. Read the session `.LOG.md`.
-2. Put a **Session log** section in that reply. Open items first. Then corrected items that should change a skill or the repo later.
-3. Empty or missing file: omit the section.
+Promote every row whose `target` is under `skills/ppstack` or `pi/` to the durable log with the same columns and the session id in `trace`. Those rows are what **reflect** and the next `/petey` session read to improve ppstack.
 
-Invoked with no current snag: print the log, or say it is empty.
+Invoked with no current snag (`/skill:debugger`, "show the log"): print the session log, or say it is empty.
 
 ## Guardrails
 
-Write only beside the session file, or recap from memory if there is no session file.
-Keep the log out of `git add`, commits, and the project tree.
-Do not pause the task to discuss a snag unless it blocks the work.
+Write only beside the session file or into the ignored durable log. Never `git add` either file. Never pause the task to discuss a snag unless it blocks the work.

@@ -4,6 +4,7 @@ import { homedir } from "node:os";
 import { basename, join } from "node:path";
 
 const DEBUG_DIRECTORY = join(homedir(), "dotfiles", "skills", "ppstack", "debug");
+const PROBLEMS_HEADER = "ts\tkind\tproblem\tfix\tstatus\ttarget\ttrace\n";
 
 type SnapshotResult = {
 	path: string;
@@ -20,24 +21,34 @@ function labelSuffix(value: string): string {
 	return label ? `_${label}` : "";
 }
 
+function cell(value: string): string {
+	const flat = value.replace(/[\t\n\r]+/g, " ");
+	return /^[=+\-@]/.test(flat) ? `'${flat}` : flat;
+}
+
 async function recordSnapshot(
 	result: SnapshotResult,
 	sessionId: string,
 	label: string,
 	debugDirectory: string,
 ): Promise<void> {
-	const peteyLog = join(debugDirectory, "PETEY-LOG.md");
-	await appendFile(peteyLog, "", { mode: 0o600 });
-	const current = await readFile(peteyLog, "utf8");
+	const problems = join(debugDirectory, "problems.tsv");
+	await appendFile(problems, "", { mode: 0o600 });
+	const current = await readFile(problems, "utf8");
 	if (current.length === 0) {
-		await writeFile(peteyLog, "# PETEY log\n\n", { mode: 0o600 });
+		await writeFile(problems, PROBLEMS_HEADER, { mode: 0o600 });
 	}
-	const separator = current.length === 0 || current.endsWith("\n\n") ? "" : current.endsWith("\n") ? "\n" : "\n\n";
-	const displayLabel = label.trim() || "unlabeled";
-	await appendFile(
-		peteyLog,
-		`${separator}## ${result.createdAt} Debug capture\n\n- Label: ${displayLabel}\n- Session: ${sessionId}\n- Trace: traces/${basename(result.path)}\n- Status: untriaged\n\n`,
-	);
+	const row = [
+		result.createdAt,
+		"capture",
+		cell(label.trim() || "unlabeled"),
+		"-",
+		"untriaged",
+		"-",
+		`traces/${basename(result.path)} session ${sessionId}`,
+	].join("\t");
+	const separator = current.length === 0 || current.endsWith("\n") ? "" : "\n";
+	await appendFile(problems, `${separator}${row}\n`);
 }
 
 export async function saveSessionSnapshot(
@@ -59,7 +70,7 @@ export async function saveSessionSnapshot(
 
 export default function peteyDebugExtension(pi: ExtensionAPI): void {
 	pi.registerCommand("petey-debug", {
-		description: "Save the current Pi session JSONL under ppstack/debug/traces",
+		description: "Save the current Pi session JSONL under ppstack/debug/traces and log a capture row in problems.tsv",
 		handler: async (args, ctx) => {
 			await ctx.waitForIdle();
 			const sessionFile = ctx.sessionManager.getSessionFile();

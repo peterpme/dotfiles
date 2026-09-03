@@ -57,17 +57,17 @@ find ~/dotfiles/skills -name SKILL.md \
 
 ## House catalog
 
+- **[cloudflare-setup](./cloudflare-setup/SKILL.md)** — House Worker setup: `wrangler.json`, never `wrangler.toml`.
 - **[rewrite-this](./rewrite-this/SKILL.md)** — Rewrite in Peter's voice for Slack.
 - **[setup-petey](./setup-petey/SKILL.md)** — Install or verify Petey's tracked Pi model routing.
 - **[effect-v4-best-practices](./effect-v4-best-practices/SKILL.md)** — Effect v4 write and review rules.
 - **[herdr](./herdr/SKILL.md)** — Spaces, worktrees, Peter's Herdr config and workflow. Manual invoke only.
 - **[unifi-network-diagnostics](./unifi-network-diagnostics/SKILL.md)** — Home UniFi investigation and `LOG.md` updates. Manual invoke only.
-- **[log-problems](./log-problems/SKILL.md)** — Session-local log of misunderstandings and leftovers. Never committed. Recap at wrap-up.
 
 ### ppstack
 
 Capsule at [`ppstack/`](./ppstack). Pi skill tree and agent set. `petey` is the mode. Each `SKILL.md` under `ppstack/skills/` still links as its own skill name. Agent markdown under `ppstack/agents/` links into `~/.pi/agent/agents`.
 
 - **[petey](./ppstack/skills/petey/SKILL.md)** — Router for concise, verified work.
-- Sibling skills (`how`, `why`, `grill`, `proof-plan`, `night-watch`, `peer-review`, `no-stupid-tests`, `tdd`, principles, `unslop`, ...) live next to it in `ppstack/skills/`.
-- Agents (`petey-agent`, `comment-sicko`, `test-sicko`, `council-sol`) live in `ppstack/agents/`.
+- Sibling skills (`how`, `why`, `grill`, `proof-plan`, `night-watch`, `peer-review`, `no-stupid-tests`, `debugger`, `tdd`, principles, `unslop`, ...) live next to it in `ppstack/skills/`.
+- Agents (`petey-agent`, `comment-sicko`, `test-butcher`, `council-sol`) live in `ppstack/agents/`.

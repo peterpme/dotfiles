@@ -32,18 +32,33 @@ Sort every candidate question before you ask it.
 - **An empirical question.** Does this layout work, is this fast enough, does the library behave that way, does the eval separate. Not the user's either. Route it to the Prototype playbook (`petey/playbooks/prototype.md`) and let the result decide.
 - **A product or preference call** no lookup or experiment settles. The user's. Ask it, recommend, wait.
 
+## Strong mode
+
+`/grill strong`, or any grill that **night-watch** starts, drafts each round with a stronger model than this session's. Hand the current tree (settled decisions, open frontier, facts found so far) to the Claude lane in **peer-review**'s `references/agents.tsv` at `--effort high` (rounds want speed, review keeps max), ask it for the next frontier with a recommendation per question, then relay the round to the user in the format above and record the answers yourself. You still sort the questions and run the lookups. The strong model proposes, this session conducts.
+
 ## Round one is first principles
 
 Start from the problem, not from the user's proposed solution. Round one always covers these, whatever the idea.
 
 1. Who is this for, and what changes for them the day it ships.
 2. What is true today that must stay true. The invariants.
-3. What data shape sits at the center, and what structure organizes it (**principle-model-the-domain**).
+3. What data shape sits at the center, and what structure organizes it (**principle-model-the-domain**). Every actor, state, and transition gets a one-word name a domain expert would use. An awkward name is a wrong shape.
 4. What is explicitly out.
 5. How we will know it is done. A falsifiable predicate, not a feeling.
 6. What the smallest version that is already useful looks like.
 
-If the proposed solution cannot answer question 1, say so in the recommendation. Recommend not building it when that is your honest read, and name the cheaper thing that gets most of the value (**principle-laziness-protocol**, **principle-subtract-before-you-add**). Agreement is not the default.
+Round two applies the systems lens to whatever survived round one.
+
+1. Where is the source of truth for this state, and who else writes it (**principle-separate-before-serializing-shared-state**).
+2. Which module owns the new behavior, and what boundary does data cross to reach it (**principle-boundary-discipline**).
+3. What breaks at ten times the load, the data, or the users, and what breaks at zero.
+4. Which decisions are one-way doors. Those get a prototype, and an **architect** pass only if the shape is still contested after it. Reversible decisions get a default and move on.
+5. How does this fail, and who notices first. If the answer is "the user", name the check that would notice sooner.
+6. What existing thing could be deleted if this lands (**principle-subtract-before-you-add**).
+7. What would show, three months in, that this shape was the wrong call, and what is the earliest signal of it. That signal goes in the brief's Risks.
+8. Make the case for the opposite shape, or for doing nothing, and name the evidence that rules it out.
+
+If the proposed solution cannot answer question 1 of round one, say so in the recommendation. Recommend not building it when that is your honest read, and name the cheaper thing that gets most of the value (**principle-laziness-protocol**, **principle-subtract-before-you-add**). Agreement is not the default.
 
 ## Finish
 

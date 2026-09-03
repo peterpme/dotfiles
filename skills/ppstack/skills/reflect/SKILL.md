@@ -24,6 +24,8 @@ Skip when the conversation is trivial, off-topic, or already covered by an exist
 
 The parent finds its own Pi session file before fanning out. Use `PI_SESSION_FILE` when available or `/session` in interactive mode. Stay inside the active workspace's directory under `~/.pi/agent/sessions/`; do not scan other projects. If no path resolves, write a tight digest of the session and pass that instead.
 
+Also pass the session's `problems.tsv` from the **debugger** skill and every row in `skills/ppstack/debug/problems.tsv` whose `status` is not `fixed`. Those rows are pre-triaged findings that already name a `target`; reviewers start from them and confirm or reject each against the transcript.
+
 ### 2. Spawn three reviewers in parallel
 
 Use one async `workflowScript` with `runs.all` of three fresh `reviewer` children. Do not select models per run. The prompt forbids file writes; the parent applies edits.

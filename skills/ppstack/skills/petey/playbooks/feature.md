@@ -2,7 +2,7 @@
 
 **You own the design. Plan, review, verify.** Delegate implementation; stay in the lead.
 
-1. Trace the affected code in this session with `grep`, `find`, and `read`. Name the invariant and the data shape. `how` only when that pass leaves the subsystem opaque. Skipping stays as `how skipped: parent traced <symbols>`.
+1. Trace the affected code in this session with `grep`, `find`, and `read`. Name the invariant and the data shape. `how` only when that pass leaves the subsystem opaque. Skipping stays as `how skipped: parent traced <symbols>`. A **grill** brief's Invariants and Data shape count as this trace; then the item reads `trace: brief <path>`.
 2. `architect` only when the design remains contested after that trace. Skipping stays as `architect skipped: <reason>`. Do not fold a still-open design decision into implementation.
 3. Write the throughput checkpoint as four todo items. A dimension that genuinely does not apply (single file, no fan-out) keeps its item with `n/a: <reason>` rather than being dropped:
    - **Blocking first steps.** Gates run before fan-out.

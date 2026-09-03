@@ -8,15 +8,15 @@ disable-model-invocation: true
 
 ## Non negotiables
 
-**Start every multi-step task with a todolist whose first item is to read the Principles section below in full.** The principles ground every trigger here. In your reply, name each trigger and principle that shaped a decision and the specific choice it changed. A citation with no decision behind it means you skipped its leaf skill; it must trace to a real choice the leaf's rule drove. If something doesn't exist or is broken, bring it up.
+**Start every multi-step task with a todolist whose first item is to read the Principles section below in full, and whose last item is the debugger wrap-up.** Every reply that closes a task carries the **Session log** section, todolist or not, even when it says no snags. The principles ground every trigger here. In your reply, name each trigger and principle that shaped a decision and the specific choice it changed. A citation with no decision behind it means you skipped its leaf skill; it must trace to a real choice the leaf's rule drove. If something doesn't exist or is broken, bring it up.
 
 Remaining triggers:
 - Nontrivial change, architecture decision, or "are we sure?" after this session has not already traced the subsystem → the **how** skill.
 - About to ask the user a structured question on a "which approach", "how should I", or "what should this do" fork → classify it before you ask. If the answer is a fact you could observe by running something (behavior, timing, layout, output, perf, even whether an eval separates), it is not the human's to answer. Sketch it via the Prototype playbook (`playbooks/prototype.md`) and let the result decide. If the task is a read-only Investigation whose deliverable is a cited answer, stay in it and answer from the evidence rather than building a sketch. Reserve the question for a genuine product or preference call no experiment can settle. The ask is the slow path. A throwaway probe usually answers faster, and it hands the human a result to react to instead of a decision to make.
 - New project, feature, or idea the user has not fully specified, or "grill me" / "think this through with me" → the **grill** skill before any design or code. It ends in a brief with a done predicate.
-- A brief or Feature with no written `## Proof` → the **proof-plan** skill before implementation (Feature step 4). The proof is written before the code, not after.
+- A brief or Feature with no written `## Proof` → the **proof-plan** skill before implementation (Feature step 4). The proof is written before the code, not after. Bug fix, Refactoring, and Perf issue carry their own proof-first step (the repro, the pin, the baseline); those steps are never skipped either.
 - Leaving the agent unattended ("going to bed", "run this overnight", "set this up while I'm away") → the **night-watch** skill pre-flight, then the matched long-run playbook.
-- A second opinion from another vendor ("ask claude", "spawn claude -p", "what does codex or gemini think") → the **peer-review** skill. Pinned Fable 5.1 alone is **fable-peer-review**.
+- A second opinion from another model family ("ask claude", "spawn claude -p", "what does codex think", "get grok's read") → the **peer-review** skill. Its `references/agents.tsv` lists the lanes; one lane is enough for a routine second look.
 - Local code lookup (a symbol, a rule, a file, “where is X”) → parent `grep` / `find` / `read`. Do not spawn a child for a narrow lookup. Use fresh `scout` only for cross-cutting retrieval or a handoff that benefits from isolation.
 - Any code → name the data shape first, and choose its organizing structure per **principle-model-the-domain**.
 - Design still contested after this session traces the code → the **architect** skill. Crossing a function boundary is not enough. A named invariant and data shape is enough to implement.
@@ -33,7 +33,7 @@ Remaining triggers:
 - Bugbot or the agentic security review commented → skeptical posture. They catch real bugs and also file non-issues and nitpicks, so assess each on its merits and dismiss noise with a concrete reason instead of churning code. Triage fix / dismiss / ask per `references/bugbot-triage.md`.
 - Broken skill mid-task → fix it in its own PR. Don't block. Don't silently work around it.
 - Long, autonomous, or multi-phase work, or any task the user steps away from to review later ("going to bed", "trust it when i'm back", "keep going until X") → a decision trail via the **show-me-your-work** skill. Commit it when stakes need an auditable record; keep it local otherwise.
-- Wrong assumption, user correction, abandoned path, leftover noticed mid-task, or wrapping up → the **log-problems** skill.
+- A model call, tool, or subagent failed, a named file or skill was missing, a wrong assumption, a user correction, an abandoned path, leftover noticed mid-task, or wrapping up → the **debugger** skill. Append the row and keep going.
 
 ## Principles
 Read the leaf skill in full for any principle you apply. Each entry names when it applies.
@@ -105,7 +105,7 @@ You own every child's work. Review the artifact and diff. Do not pass through th
 
 Materialize review evidence before launch. Supply named paths, patches, command output, and test results. Keep discovery inside the repository and named configuration directories. A missing artifact yields `MISSING EVIDENCE`; it never authorizes a home-directory search. Read-only reviewers do not reconstruct change state from `.git` internals.
 
-Cap every council, scout, reviewer, and composed discovery or design workflow at 10 minutes (`timeoutMs: 600000`). A composed workflow gets one budget for the whole chain, not 10 minutes per child. Implementation workers get a brief-sized cap. Do not spend that budget on another architecture pass.
+Children run until they finish their brief. The one fixed deadline in ppstack is **peer-review**'s 15-minute lane cap. Do not spend a child's time on another architecture pass.
 
 Inspect active async work every minute with `subagent({ action: "status", id })`. Say whether work is in discovery, design, implementation, verification, or done. Done follows verification only. Name elapsed time, the artifacts produced, and whether implementation has started. Never summarize the chain as merely running. At each inspection, stop or steer work that repeats repository discovery, exceeds its named source seam, or has not produced a concrete artifact for that phase.
 

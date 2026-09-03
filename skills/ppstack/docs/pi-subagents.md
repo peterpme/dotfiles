@@ -63,6 +63,18 @@ Do not eject a builtin unless its persona must change. Keep deployment choices i
 
 Use one async `workflowScript` for composed work. Do not select models per run. Fresh children receive standalone briefs. Give each writer its own checkout or managed worktree.
 
+A writer brief has this packet.
+
+```text
+TRACE: paths, symbols, runtime path, and settled decisions
+FIRST UNIT: smallest behavior to implement
+WRITE SEAM: owned files or module boundary
+FIRST CHECK: exact command or surface for that unit
+EXPAND ONLY WHEN: failed check or missing fact that permits widening
+```
+
+The writer starts at `FIRST UNIT`. It does not repeat broad discovery or redesign settled decisions. Adjacent reads must serve the named write seam. Before a writer starts in a new worktree, the parent verifies dependencies and proves `FIRST CHECK` starts there.
+
 ## Evidence boundary
 
 The parent materializes named paths, patches, command output, and test results before review. Read-only children return `MISSING EVIDENCE` when a required artifact is absent. They do not reconstruct change state through `.git` internals.

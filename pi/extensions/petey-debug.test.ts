@@ -26,3 +26,20 @@ test("copies the session and records an untriaged Petey log entry", async () => 
 		await rm(root, { recursive: true, force: true });
 	}
 });
+
+test("separates a new capture from a hand-written entry that ends without a blank line", async () => {
+	const root = await mkdtemp(join(tmpdir(), "petey-debug-"));
+	try {
+		const sessionFile = join(root, "source.jsonl");
+		await writeFile(sessionFile, "{}\n");
+		await writeFile(join(root, "PETEY-LOG.md"), "# PETEY log\n\n## 2026-08-28 Incident\n\n- Status: open\n");
+
+		await saveSessionSnapshot(sessionFile, "session-2", "", root);
+
+		const log = await readFile(join(root, "PETEY-LOG.md"), "utf8");
+		expect(log).toContain("- Status: open\n\n## ");
+		expect(log).toContain("- Label: unlabeled");
+	} finally {
+		await rm(root, { recursive: true, force: true });
+	}
+});

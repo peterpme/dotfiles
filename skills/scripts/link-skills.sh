@@ -5,6 +5,21 @@ set -euo pipefail
 # source stays in the dotfiles repo. Existing third-party Pi skills are left
 # alone because this script replaces only matching names.
 
+prune_dangling() {
+  local dir="$1"
+  local label="$2"
+  local link target
+
+  [ -d "$dir" ] || return 0
+  for link in "$dir"/*; do
+    [ -L "$link" ] || continue
+    [ -e "$link" ] && continue
+    target="$(readlink "$link")"
+    rm -f "$link"
+    echo "pruned  $label/$(basename "$link") -> $target (dangling)"
+  done
+}
+
 link_pi_config() {
   local name="$1"
   local source="$DOTFILES_ROOT/pi/$name"
@@ -113,7 +128,7 @@ link_pi_extension() {
   local source="$DOTFILES_ROOT/pi/extensions/$name"
   local target="$HOME/.pi/agent/extensions/$name"
 
-  [ -f "$source" ] || { echo "error: missing $source" >&2; return 1; }
+  [ -e "$source" ] || { echo "error: missing $source" >&2; return 1; }
   mkdir -p "$(dirname "$target")"
   if [ -L "$target" ] && [ "$(readlink "$target")" = "$source" ]; then
     echo "ok      pi-extension/$name"
@@ -129,7 +144,10 @@ link_into "$HOME/.pi/agent/skills" "pi"
 rm -f "$HOME/.pi/agent/skills/petey-debug"
 link_pi_agents
 rm -f "$HOME/.pi/agent/agents/explorer.md" "$HOME/.pi/agent/agents/search.md"
+prune_dangling "$HOME/.pi/agent/skills" pi
+prune_dangling "$HOME/.pi/agent/agents" pi-agent
 link_pi_extension petey-debug.ts
+link_pi_extension herdr-tab-name
 link_pi_config models.json
 link_pi_config settings.json
 echo "Done. Restart Pi to load settings changes."

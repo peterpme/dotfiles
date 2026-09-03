@@ -17,7 +17,7 @@ The package supplies the normal roles below. Model routing and role overrides li
 | `delegate` | Thin parent-shaped helper | yes | Only when parent-like behavior is intentional |
 | `researcher` | Web and documentation brief | notes only | Cited external research |
 
-The package may also expose external CLI adapters. Leave those package roles intact unless a task explicitly calls for one.
+The package also exposes external CLI adapters (`claude-code`, `codex-exec`, `cursor-agent`, and their `-writer` variants). They run one shot, read-only, no tools, prompt on stdin, and take no Pi model or thinking options. The **peer-review** skill is the task that calls them. Leave them intact otherwise.
 
 ## Discovery
 
@@ -38,9 +38,12 @@ Do not eject a builtin unless its persona must change. Keep deployment choices i
 |---|---|---|
 | `petey-agent` | Fresh writer that loads Petey policy | Normal writer tools |
 | `comment-sicko` | Scoped comment deletion with `how` and `why` available | Comments and resulting whitespace only |
+| `test-sicko` | Scoped deletion of tests that cannot fail, with `MUST KILL` and `NO PROOF` flags | Test files only, deletions only |
 | `council-sol` | Fresh read-only Sol council judgment | No writes |
 
 `comment-sicko` reports structural `MUST KILL` findings but never implements them. The parent verifies only the scoped diff boundary. It does not reimplement Comment Sicko's keep list.
+
+`test-sicko` deletes tests and flags holes. It never writes a test. The parent fills each accepted `NO PROOF` red first through a writer, and verifies only the scoped diff boundary and that the named test command is green after.
 
 ## What Petey should call
 
@@ -53,8 +56,10 @@ Do not eject a builtin unless its persona must change. Keep deployment choices i
 | Petey-aware implementation or prose | `petey-agent` |
 | Evidence review | `reviewer` |
 | Comment pass | `comment-sicko` |
+| Test pass | `test-sicko` |
 | Inherited-context judgment | `oracle` |
 | Fresh Sol council judgment | `council-sol` |
+| Cross-vendor second opinion | **peer-review** over `claude-code`, `cursor-agent`, or a bash lane |
 
 Use one async `workflowScript` for composed work. Do not select models per run. Fresh children receive standalone briefs. Give each writer its own checkout or managed worktree.
 
@@ -63,6 +68,12 @@ Use one async `workflowScript` for composed work. Do not select models per run. 
 The parent materializes named paths, patches, command output, and test results before review. Read-only children return `MISSING EVIDENCE` when a required artifact is absent. They do not reconstruct change state through `.git` internals.
 
 Keep discovery inside the repository and named configuration directories. Never widen a failed resource lookup to the user's home directory. Agent profiles own their policy; the parent normally has no reason to locate or read their source files.
+
+## Bounds
+
+Cap every council, scout, reviewer, and composed discovery or design workflow at 10 minutes (`timeoutMs: 600000`). A composed workflow gets one budget for the whole chain, not 10 minutes per child. Implementation workers get a brief-sized cap.
+
+Inspect active async work every minute with `subagent({ action: "status", id })`. Say whether work is in discovery, design, implementation, verification, or done. Done follows verification only. Name elapsed time, artifacts, and whether implementation has started. Stop or steer work that repeats repository discovery, exceeds its named source seam, or has not produced a concrete artifact for that phase.
 
 ## How to check
 
@@ -79,6 +90,7 @@ Then list available agents and run bounded probes:
 Use scout to map one named repository directory. Do not edit.
 Use researcher to answer one documentation question with citations.
 Run Comment Sicko on one tracked fixture and inspect the host-produced diff.
+Run Test Sicko on one fixture with its test command and inspect the host-produced diff.
 ```
 
 A runtime receipt must show the expected model, thinking level, context, tools, and fallback behavior. A settings change is pending until a restarted Pi process reports it.

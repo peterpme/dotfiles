@@ -1,7 +1,7 @@
 ---
 name: council-sol
 description: Read-only fresh-context advisor for bounded council decisions
-is_background: true
+async: true
 tools: read, grep, find, ls
 inheritSkills: false
 systemPromptMode: replace

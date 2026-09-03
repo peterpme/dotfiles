@@ -10,28 +10,17 @@ bash ~/dotfiles/skills/scripts/link-skills.sh
 ~/dotfiles/install.sh skills
 ```
 
-That writes per-skill symlinks into `~/.agents/skills`, `~/.pi/agent/skills`, and `~/.claude/skills`.
+That writes per-skill symlinks into `~/.pi/agent/skills`, links `ppstack/agents/*.md` into `~/.pi/agent/agents`, links the tracked Pi extensions plus `pi/settings.json` and `pi/models.json` into `~/.pi/agent/`, and prunes dangling links it finds in those directories.
 
 Do not symlink this whole tree onto `~/.agents/skills`. `ppstack/` is a capsule, not a skill, and `link-skills.sh` refuses that.
 
 ## Agent homes
 
-`~/.agents`, `~/.pi`, `~/.claude`, and `~/.cursor` are not four skill folders. The last three are whole apps. Skills are one subdirectory.
+Pi is the only runtime this repo installs into. `~/.pi/agent` is Pi itself: settings, sessions, models, extensions, auth. `skills/` and `agents/` are the two subdirectories the linker writes.
 
-| Path | What it is |
-|------|------------|
-| `~/.agents/skills` | Shared skill store. `npx skills` installs here. Pi and Cursor already read it. |
-| `~/.pi/agent` | Pi itself: settings, sessions, models, extensions, auth. `skills/` is extra. |
-| `~/.claude` | Claude Code itself: settings, hooks, MCP, `CLAUDE.md`, sessions. |
-| `~/.cursor` | Cursor itself. `skills/` is yours. `skills-cursor/` is Cursor's built-in product skills. Leave that alone. |
+`~/.agents/skills` is the shared store `npx skills` installs into. Pi reads it alongside `~/.pi/agent/skills`.
 
-Pi loads `~/.pi/agent/skills` and `~/.agents/skills`. Copies in `~/.pi/agent/skills` are redundant once `~/.agents/skills` is populated.
-
-Cursor loads `~/.cursor/skills` and `~/.agents/skills`. Same story.
-
-Claude Code loads `~/.claude/skills` only. It does not read `~/.agents`. That is why the linker still writes Claude copies.
-
-You cannot point Pi or Claude at `~/.agents` for everything. Their settings and session files stay in their own homes.
+`~/.claude/skills` and `~/.cursor/skills` still hold links from before the Pi-only migration on 2026-08-27. Nothing here maintains them. Claude Code reads only `~/.claude/skills`, so a house skill added after that date is not visible there unless you link it by hand.
 
 ## Two installers
 
@@ -40,7 +29,7 @@ You cannot point Pi or Claude at `~/.agents` for everything. Their settings and 
 **Third-party.** Installed with the [skills CLI](https://github.com/vercel-labs/skills):
 
 ```bash
-npx skills add cloudflare/skills -g -a pi -a claude-code
+npx skills add cloudflare/skills -g -a pi
 npx skills ls -g
 npx skills update -g
 npx skills remove wrangler -g
@@ -68,25 +57,17 @@ find ~/dotfiles/skills -name SKILL.md \
 
 ## House catalog
 
-- **[engineering-manager](./engineering-manager/SKILL.md)** — Coordinate complex work with specialists, gates, PRs, audits.
-- **[continuity](./continuity/SKILL.md)** — Learn, record, audit, and apply codebase patterns.
-- **[component-data-refactor](./component-data-refactor/SKILL.md)** — Focused React/RN refactor with data-flow sketch first.
-- **[source-parity](./source-parity/SKILL.md)** — Compare source-of-truth vs target, then narrow parity plan.
-- **[repo-rule-mining](./repo-rule-mining/SKILL.md)** — Turn repeated review findings into durable guardrails.
-- **[cloudflare-setup](./cloudflare-setup/SKILL.md)** — House Worker setup: `wrangler.json`, never `wrangler.toml`.
-- **[morning-recap](./morning-recap/SKILL.md)** — Summarize recent PRs worth reviewing.
-- **[study-repo](./study-repo/SKILL.md)** — Clone a repo and run an interactive study session.
-- **[bro](./bro/SKILL.md)** — Restate the last message in plain human language.
-- **[writing-great-skills](./writing-great-skills/SKILL.md)** — Vocabulary and principles for writing predictable skills.
-- **[plain-book](./plain-book/SKILL.md)** — Programmer-plain explanatory book voice.
 - **[rewrite-this](./rewrite-this/SKILL.md)** — Rewrite in Peter's voice for Slack.
+- **[setup-petey](./setup-petey/SKILL.md)** — Install or verify Petey's tracked Pi model routing.
 - **[effect-v4-best-practices](./effect-v4-best-practices/SKILL.md)** — Effect v4 write and review rules.
 - **[herdr](./herdr/SKILL.md)** — Spaces, worktrees, Peter's Herdr config and workflow. Manual invoke only.
 - **[unifi-network-diagnostics](./unifi-network-diagnostics/SKILL.md)** — Home UniFi investigation and `LOG.md` updates. Manual invoke only.
+- **[log-problems](./log-problems/SKILL.md)** — Session-local log of misunderstandings and leftovers. Never committed. Recap at wrap-up.
 
 ### ppstack
 
-Capsule at [`ppstack/`](./ppstack). Cursor plugin and Pi skill tree. `petey` is the mode. Each `SKILL.md` under `ppstack/skills/` still links as its own skill name. Agent markdown under `ppstack/agents/` links into `~/.pi/agent/agents`.
+Capsule at [`ppstack/`](./ppstack). Pi skill tree and agent set. `petey` is the mode. Each `SKILL.md` under `ppstack/skills/` still links as its own skill name. Agent markdown under `ppstack/agents/` links into `~/.pi/agent/agents`.
 
 - **[petey](./ppstack/skills/petey/SKILL.md)** — Router for concise, verified work.
-- Sibling skills (`how`, `why`, principles, `unslop`, ...) live next to it in `ppstack/skills/`.
+- Sibling skills (`how`, `why`, `grill`, `proof-plan`, `night-watch`, `peer-review`, `no-stupid-tests`, `tdd`, principles, `unslop`, ...) live next to it in `ppstack/skills/`.
+- Agents (`petey-agent`, `comment-sicko`, `test-sicko`, `council-sol`) live in `ppstack/agents/`.

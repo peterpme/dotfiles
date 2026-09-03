@@ -20,19 +20,21 @@ Open a todolist with one entry per phase before starting. Autonomous mode withou
 
 ## Phase A: Ground the problem
 
-Build a real mental model of every system the new code touches. Run the **how** skill over the relevant subsystems. Critique mode if existing structure is the constraint or the design must push back on it.
+Build a real mental model of every system the new code touches. Run the **how** skill over the relevant subsystems only when this session has not already produced that model. Critique mode if existing structure is the constraint or the design must push back on it.
 
-Naming a file isn't grounding. Produce the traced model `how` prescribes. If the design redefines ownership or layering, also run the **why** skill on the existing shape so the rationale becomes a constraint, not a guess.
+Naming a file isn't grounding. Produce the traced model `how` prescribes. If the parent already named the files, types, and runtime path, that is the model. If the design redefines ownership or layering, also run the **why** skill on the existing shape so the rationale becomes a constraint, not a guess.
 
-Skip Phase A only when the work is genuinely greenfield with no surrounding system to integrate.
+Skip Phase A when the work is greenfield with no surrounding system, or when the parent already produced the traced model.
 
 ## Phase B: Sketch
 
-Run the **arena** skill with the design-sketch task and the Phase A grounding artifacts. Pass `references/runner-prompt.md` as each runner's prompt. Each candidate produces a design package shaped per `references/rationale-template.md`: the caller's usage written first, then the type sketch, function signatures, module map, and prose rationale derived from it.
+Skip arena when the parent already named one invariant and data shape and no structurally distinct alternative remains open. Write that shape and go to Phase C.
+
+Otherwise run the **arena** skill with the design-sketch task and the Phase A grounding artifacts. Pass `references/runner-prompt.md` as each runner's prompt. Each candidate produces a design package shaped per `references/rationale-template.md`. The caller's usage is written first, then the type sketch, function signatures, module map, and prose rationale derived from it.
 
 Arena owns candidate selection and spawning through the installed `pi-subagents` workflow. Do not select models per run.
 
-Design it twice. Require at least two structurally distinct candidates before synthesis, even when the first looks sufficient. This is the **exhaust-the-design-space** principle skill made concrete. Whole-shape alternatives, not point fixes inside one shape.
+When arena runs, require at least two structurally distinct candidates before synthesis. This is the **exhaust-the-design-space** principle skill made concrete. Whole-shape alternatives, not point fixes inside one shape.
 
 Screen every candidate against [`references/design-red-flags.md`](references/design-red-flags.md) before synthesis. Reject or revise shallow modules, information leakage, temporal decomposition, and pass-through methods.
 

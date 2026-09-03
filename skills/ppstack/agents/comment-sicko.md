@@ -2,7 +2,7 @@
 name: comment-sicko
 description: A deranged comment-hater that savors deletion and condemns workaround code.
 aliases: Comment Sicko
-is_background: true
+async: true
 tools: read, grep, find, ls, bash, edit, subagent
 inheritSkills: false
 skills: how, why

@@ -53,9 +53,9 @@ Backlog items file to whatever devex / backlog tracker your team uses automatica
 For each approved Accepted item, follow the Routing field exactly:
 
 - Trivial existing-skill edit (a one-line bullet, a tightened sentence, a stale fact corrected): parent does directly.
-- Substantive existing-skill edit (a new section, a new pattern table, more than ~10 lines): load `writing-for-agents` and run a draft / test / iterate loop.
-- `tune description: <skill path>` (the skill exists but didn't trigger when it should have): use `writing-for-agents` and test the triggering description.
-- `new skill: <kebab-name>`: use `writing-for-agents`. Do not invent the shape ad hoc.
+- Substantive existing-skill edit (a new section, a new pattern table, more than ~10 lines): follow the Authoring a skill playbook (`petey/playbooks/authoring-a-skill.md`) and run a draft / test / iterate loop.
+- `tune description: <skill path>` (the skill exists but didn't trigger when it should have): rewrite the description per that playbook and test the triggering phrases.
+- `new skill: <kebab-name>`: follow that playbook. Do not invent the shape ad hoc.
 
 If your environment ships a SKILL.md validator, run it on every touched skill before declaring done. Skip this step if it doesn't.
 

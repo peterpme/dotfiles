@@ -2,7 +2,7 @@
 
 **You own the skill's voice.** Agent-facing prose has a higher bar than human prose; unhelpful sentences become instructions.
 
-1. Use the **writing-for-agents** skill for authoring `SKILL.md` files.
+1. Write for an agent that reads it cold, mid-task. Front-load the trigger phrases in `description`. One instruction per sentence. Point at files by path. Never restate another skill's rules; name the skill.
 2. Validate the skill: frontmatter has `name` and `description`, referenced files exist, cross-skill links resolve.
 3. Test cases if structural; skip if subjective.
 4. Run **Opening a PR**.

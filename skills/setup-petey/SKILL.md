@@ -14,7 +14,7 @@ Use `pi/settings.json` as the routing source. This skill does not carry a second
 2. Show every agent override with its model, thinking level, context, tools, and fallback status. Apply changes named in the invocation. For a bare `/setup-petey`, ask whether to keep the displayed mapping or change specific roles. The checked-in settings are the defaults. The skill carries no fallback table.
 3. Run `pi --list-models`. Resolve every configured override model to an exact provider and model row. Stop before writing if any selector is missing or ambiguous.
 4. Run a tiny no-tools launch for each distinct selector. A registry row without a successful launch is not available. Keep native priority mode off unless its supported provider selector passes this probe.
-5. Confirm implementation and Grok review overrides have an empty fallback list. Confirm retrieval, research, implementation, review, prose, comment cleanup, and `council-sol` use fresh context. Confirm `oracle` uses forked context. Confirm read-only profiles have no mutation tools and `comment-sicko` has only the mutation tools its comment pass requires.
+5. Confirm implementation and Grok review overrides have an empty fallback list. Confirm retrieval, research, implementation, review, prose, comment cleanup, and `council-sol` use fresh context. Confirm `oracle` uses forked context. Confirm read-only profiles have no mutation tools and `comment-sicko` and `test-sicko` have only the mutation tools their passes require.
 6. Run `bash install.sh skills`. This preserves unrelated Pi skills, links the canonical settings and model registry, and removes retired duplicate agents.
 7. Report the exact selectors checked and tell the user to restart Pi. Do not claim the live runtime changed before restart.
 

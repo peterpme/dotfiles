@@ -28,14 +28,15 @@ async function recordSnapshot(
 ): Promise<void> {
 	const peteyLog = join(debugDirectory, "PETEY-LOG.md");
 	await appendFile(peteyLog, "", { mode: 0o600 });
-	const current = await readFile(peteyLog);
-	if (current.byteLength === 0) {
+	const current = await readFile(peteyLog, "utf8");
+	if (current.length === 0) {
 		await writeFile(peteyLog, "# PETEY log\n\n", { mode: 0o600 });
 	}
+	const separator = current.length === 0 || current.endsWith("\n\n") ? "" : current.endsWith("\n") ? "\n" : "\n\n";
 	const displayLabel = label.trim() || "unlabeled";
 	await appendFile(
 		peteyLog,
-		`## ${result.createdAt} Debug capture\n\n- Label: ${displayLabel}\n- Session: ${sessionId}\n- Trace: traces/${basename(result.path)}\n- Status: untriaged\n\n`,
+		`${separator}## ${result.createdAt} Debug capture\n\n- Label: ${displayLabel}\n- Session: ${sessionId}\n- Trace: traces/${basename(result.path)}\n- Status: untriaged\n\n`,
 	);
 }
 

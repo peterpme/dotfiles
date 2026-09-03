@@ -27,7 +27,7 @@ Open a todolist with one entry per phase before launching anything.
 
 ## Phase B: Fan out
 
-Spawn all N workers in one async `workflowScript` with `await runs.all`. Use `agent: "petey-agent"` if they write and fresh `scout` when they only search. Give each writer a separate worktree. Return the outputs.
+Spawn all N workers in one async `workflowScript` with `await runs.all`. Use `agent: "worker"` if they write and fresh `scout` when they only search. Give each writer a separate worktree. Return the outputs.
 
 Do not mix top-level `agent` with `workflowScript`.
 

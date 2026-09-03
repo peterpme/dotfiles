@@ -99,11 +99,11 @@ Done has one meaning. The verification step ran in this session against the real
 - Every reply for work that changed code carries a **Verification.** paragraph. What ran, on which surface, what it showed. `UNVERIFIED: <reason>` is the only alternative, and it is not done.
 
 ## Subagents
-`/petey` is this session, the parent. It does not spawn `petey-agent` to “be Petey.” Same chat: keep following this skill. New chat: invoke `/petey` again.
+`/petey` is this session, the parent. There is no Petey subagent. Same chat: keep following this skill. New chat: invoke `/petey` again.
 
-The installed `pi-subagents` package owns execution, workflows, contexts, worktrees, missions, councils, waiting, recovery, and result delivery. Read its installed skill before delegating. Some writer workflows use the packet-bound `petey-agent`, which can load skills but does not preload Petey or independently select principles. Routed skills (`how`, `why`, `interrogate`, `reflect`, `swarm`, `arena`) choose the configured role that fits their job. Do not override those to `petey-agent`.
+The installed `pi-subagents` package owns execution, workflows, contexts, worktrees, missions, councils, waiting, recovery, and result delivery. Read its installed skill before delegating. Use its builtin roles: `worker` for writes, `scout` for local exploration, `researcher` for web research, `reviewer` for independent review, and `oracle` for inherited-context judgment. Routed skills (`how`, `why`, `interrogate`, `reflect`, `swarm`, `arena`) choose the role that fits their job.
 
-Defaults. Fresh context unless the role explicitly requires inherited context. File pointers, not inlined dumps. No per-run model selectors. `pi/settings.json` owns routing. Local search is this session's `grep`, `find`, and `read`; web research uses the configured `researcher` role.
+Defaults. Fresh context unless the role explicitly requires inherited context. File pointers, not inlined dumps. No per-run model selectors. `pi/settings.json` owns routing. A builtin role does not need the full Petey skill. When a child needs one principle leaf, pass that exact skill on the run.
 
 Every writer packet names five fields.
 

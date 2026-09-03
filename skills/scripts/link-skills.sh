@@ -170,6 +170,7 @@ link_pi_agents
 rm -f "$HOME/.pi/agent/agents/explorer.md" "$HOME/.pi/agent/agents/search.md"
 prune_dangling "$HOME/.pi/agent/agents" pi-agent
 link_pi_extension herdr-tab-name
+link_pi_extension debugger
 link_pi_config models.json
 link_pi_config settings.json
 echo "Done. Restart Pi to load settings changes."

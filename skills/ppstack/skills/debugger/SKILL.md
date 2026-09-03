@@ -5,17 +5,16 @@ description: >-
   call or subagent failed, a file or skill was missing, a tool misbehaved, an
   assumption was wrong, the user corrected you, a path was abandoned, leftover
   work surfaced. Lives beside the Pi session file, never in the repo. Recapped
-  at every wrap-up. Rows that should change ppstack are promoted so the loop
-  closes. Use whenever something breaks or surprises you, when corrected, when
+  at every wrap-up. Use whenever something breaks or surprises you, when corrected, when
   finishing a task, or when the user says debugger.
 disable-model-invocation: true
 ---
 
 # Debugger
 
-Every snag this session hits becomes a row that can change ppstack later. Keep working. Recap at wrap-up. That is the whole job.
+Every snag this session hits becomes a row you can read back at wrap-up. Keep working. Recap at the end. That is the whole job.
 
-Not a decision trail. That is **show-me-your-work**. Not a skill editor. That is **reflect**, which reads these rows to propose skill edits.
+Not a decision trail. That is **show-me-your-work**. Not a skill editor. That is **reflect**, which mines the transcript on its own.
 
 ## Where
 
@@ -24,8 +23,6 @@ Session log, next to the session JSONL:
 ```bash
 printf '%s\n' "${PI_SESSION_FILE%.jsonl}.problems.tsv"
 ```
-
-Durable log, for rows that should change ppstack: `~/dotfiles/skills/ppstack/debug/problems.tsv`. Ignored by git, local to this machine. `/petey-debug <label>` appends a `capture` row there with the saved trace path.
 
 No `PI_SESSION_FILE` (ephemeral session): keep rows in memory and print them in the wrap-up recap. Leave the repo tree untouched.
 
@@ -39,7 +36,7 @@ scripts/log.sh <logfile> <kind> <problem> <fix> <status> <target> [trace]
 
 Columns: `ts`, `kind`, `problem`, `fix`, `status`, `target`, `trace`.
 
-- `kind`: `model-call`, `tool`, `missing-file`, `wrong-assumption`, `correction`, `wrong-path`, `drift`, `leftover`, `capture`.
+- `kind`: `model-call`, `tool`, `missing-file`, `wrong-assumption`, `correction`, `wrong-path`, `drift`, `leftover`.
 - `problem`: one line. What broke or what you got wrong.
 - `fix`: one line. What was true instead, or what fixed it. `-` while open.
 - `status`: `open`, `fixed`, or `leftover`.
@@ -61,12 +58,12 @@ Skip routine progress and guesses that were right. Only the interactive parent w
 
 ## Wrap-up
 
-Every reply that closes a task carries a **Session log** section. Open rows first, then fixed rows whose `target` names a ppstack or Pi file. Empty log: write `**Session log.** No snags.` The section is never omitted, so its absence means the wrap-up was skipped.
+While this skill is loaded, every reply that closes a task carries a **Session log** section. Open rows first, then fixed rows whose `target` names a ppstack or Pi file. Empty log: `**Session log.** No snags.`
 
-Promote every row whose `target` is under `skills/ppstack` or `pi/` to the durable log with the same columns and the session id in `trace`. Those rows are what **reflect** and the next `/petey` session read to improve ppstack.
+The rows stay beside the session file. Nothing promotes them anywhere. If a row should change ppstack, the human reads it and decides, or runs **reflect**.
 
 Invoked with no current snag (`/skill:debugger`, "show the log"): print the session log, or say it is empty.
 
 ## Guardrails
 
-Write only beside the session file or into the ignored durable log. Never `git add` either file. Never pause the task to discuss a snag unless it blocks the work.
+Write only beside the session file. Never `git add` it. Never pause the task to discuss a snag unless it blocks the work.

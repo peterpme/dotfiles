@@ -8,6 +8,7 @@ description: >-
   at every wrap-up. Rows that should change ppstack are promoted so the loop
   closes. Use whenever something breaks or surprises you, when corrected, when
   finishing a task, or when the user says debugger.
+disable-model-invocation: true
 ---
 
 # Debugger

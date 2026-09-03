@@ -84,13 +84,26 @@ Inside a space, a typical layout is tab `agents` and tab `dev` (tests, servers, 
 
 The row at the top is tabs, not panes. Pane names show in the sidebar and pane UI. Tab names are what you switch between with `prefix+1..9`.
 
+Spaces are the project (`ENGINE`, `wallet-api`). Tabs are the topic, 1-2 words. Do not name a tab after the repo unless that is the topic.
+
+Pi auto-names the current Herdr tab after 3 user turns, once per session, even if the tab already has a lazy name. Model is `opencode/deepseek-v4-flash` (Luna fallback). It also sets the Pi session name. It uses `$HERDR_TAB_ID`, not the focused pane.
+
+```text
+/tabname           # name now from the conversation
+/tabname Auth Fix  # set an explicit label
+/tabname off       # stop auto-renaming this session
+/tabname on        # re-enable and name now
+```
+
+After it names a session, it stops. `/tabname off` keeps the current label. Subagent sessions are skipped.
+
 ```bash
 herdr pane rename w1C:p1 dotfiles
 herdr pane rename w1C:p1 --clear
-herdr tab rename w1C:t1 dotfiles
+herdr tab rename w1C:t1 Auth Fix
 ```
 
-Keyboard: `prefix+shift+p` renames the pane, `prefix+shift+t` renames the tab. Rename both when the top bar should match the pane.
+Keyboard: `prefix+shift+p` renames the pane, `prefix+shift+t` renames the tab. Rename the pane after the repo if you want both. The extension only touches the tab.
 
 ### Switch tabs
 

@@ -1,6 +1,7 @@
 # herdr configuration — keybindings aligned with tmux (C-a prefix)
 # Source: ~/dotfiles/config/herdr/config.toml
 # Live path: ~/.config/herdr/config.toml
+# Conventions: ~/dotfiles/skills/herdr/SKILL.md
 #
 # Reload after edits: herdr server reload-config
 # Show active bindings in-app: prefix+?
@@ -81,6 +82,7 @@ open_worktree = "prefix+shift+o"
 remove_worktree = "prefix+shift+backspace"
 
 rename_tab = "prefix+shift+t"
+rename_pane = "prefix+shift+p"
 close_tab = "prefix+shift+x"
 reload_config = "prefix+shift+r"
 

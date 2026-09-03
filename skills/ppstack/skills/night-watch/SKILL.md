@@ -17,7 +17,7 @@ Open a todolist with the ten items below copied verbatim. A skipped item stays l
 5. **Wake mechanism.** An event to watch (CI, a merge, a ref advancing) gets an async watcher run with a long scheduled heartbeat as fallback. No event gets a fixed schedule sized to when a re-check is worth it. Cross-turn programs arm a Pi mission. Never a polling loop in the parent. Name the cadence.
 6. **Budgets.** Children run until they finish; only **peer-review** lanes carry a fixed 15-minute cap. Name the whole-run budget and stop spawning at roughly 70 percent of it to land what is verified. Two retries per unit, then abandon and replan.
 7. **Standing orders.** What the run may do without asking (commit, push its own branch, open PRs) and the lines it never crosses (force-push to shared branches, deploys, deletions, customer messages). Numbered lines. Pasted into every spawn and every resume.
-8. **Trail.** The `decisions.tsv` path per **show-me-your-work**, committed or local. Snags go to **debugger**.
+8. **Trail.** The `decisions.tsv` path per **show-me-your-work**, committed or local.
 9. **Escalation.** What ends the run early: a dead end after N attempts, a predicate the code contradicts, a gate only the human can answer. Where the stop note goes, per `petey/playbooks/pause-safely.md`.
 10. **Morning report.** The shape the user reads first: predicate state, what landed, the trail review's Attention section, what needs them. Nothing else above the fold.
 

@@ -69,5 +69,5 @@ find ~/dotfiles/skills -name SKILL.md \
 Capsule at [`ppstack/`](./ppstack). Pi skill tree and agent set. `petey` is the mode. Each `SKILL.md` under `ppstack/skills/` still links as its own skill name. Agent markdown under `ppstack/agents/` links into `~/.pi/agent/agents`.
 
 - **[petey](./ppstack/skills/petey/SKILL.md)** — Router for concise, verified work.
-- Sibling skills (`how`, `why`, `grill`, `proof-plan`, `night-watch`, `peer-review`, `no-stupid-tests`, `debugger`, `tdd`, principles, `unslop`, ...) live next to it in `ppstack/skills/`.
+- Sibling skills (`how`, `why`, `grill`, `proof-plan`, `night-watch`, `peer-review`, `no-stupid-tests`, `tdd`, principles, `unslop`, ...) live next to it in `ppstack/skills/`.
 - Agents (`petey-agent`, `comment-sicko`, `test-butcher`, `council-sol`) live in `ppstack/agents/`.

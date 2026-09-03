@@ -24,5 +24,5 @@ Use `pi/settings.json` as the routing source. This skill does not carry a second
 2. Probe each configured role with a bounded task. Inspect its resolved model, thinking level, context, tools, fallback status, and priority-mode status in the runtime receipt.
 3. For `scout`, verify read-only tools, bounded returned text, and no project writes. For `researcher`, require source citations. For implementation and review, use a disposable worktree or a read-only task. For council runs, give every selected advisor the same neutral decision brief and confirm `oracle` appears only when inherited context matters.
 4. Run a malformed workflow validation probe and confirm it starts no child. Run one async workflow and confirm completion delivery reaches the parent without status polling or transcript scraping.
-5. Save run ids and receipts under ignored `skills/ppstack/debug/traces/pi-only-eval/`. Record failures and fixes as rows in `skills/ppstack/debug/problems.tsv` through the **debugger** skill's helper.
+5. Save run ids and receipts under ignored `skills/ppstack/debug/traces/pi-only-eval/`. Report failures and fixes in the reply, then run **reflect** so they reach a skill.
 6. Report failures as runtime failures. Do not rewrite package orchestration to hide them.

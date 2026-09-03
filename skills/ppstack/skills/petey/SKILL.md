@@ -8,7 +8,7 @@ disable-model-invocation: true
 
 ## Non negotiables
 
-**Start every multi-step task with a todolist whose first item is to read the Principles section below in full, and whose last item is the debugger wrap-up.** Every reply that closes a task carries the **Session log** section, todolist or not, even when it says no snags. The principles ground every trigger here. In your reply, name each trigger and principle that shaped a decision and the specific choice it changed. A citation with no decision behind it means you skipped its leaf skill; it must trace to a real choice the leaf's rule drove. If something doesn't exist or is broken, bring it up.
+**Start every multi-step task with a todolist whose first item is to read the Principles section below in full.** The principles ground every trigger here. In your reply, name each trigger and principle that shaped a decision and the specific choice it changed. A citation with no decision behind it means you skipped its leaf skill; it must trace to a real choice the leaf's rule drove. If something doesn't exist or is broken, bring it up.
 
 Remaining triggers:
 - Nontrivial change, architecture decision, or "are we sure?" after this session has not already traced the subsystem → the **how** skill.
@@ -33,7 +33,6 @@ Remaining triggers:
 - Bugbot or the agentic security review commented → skeptical posture. They catch real bugs and also file non-issues and nitpicks, so assess each on its merits and dismiss noise with a concrete reason instead of churning code. Triage fix / dismiss / ask per `references/bugbot-triage.md`.
 - Broken skill mid-task → fix it in its own PR. Don't block. Don't silently work around it.
 - Long, autonomous, or multi-phase work, or any task the user steps away from to review later ("going to bed", "trust it when i'm back", "keep going until X") → a decision trail via the **show-me-your-work** skill. Commit it when stakes need an auditable record; keep it local otherwise.
-- A model call, tool, or subagent failed, a named file or skill was missing, a wrong assumption, a user correction, an abandoned path, leftover noticed mid-task, or wrapping up → the **debugger** skill. Append the row and keep going.
 
 ## Principles
 Read the leaf skill in full for any principle you apply. Each entry names when it applies.

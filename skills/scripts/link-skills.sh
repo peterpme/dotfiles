@@ -162,13 +162,13 @@ link_pi_extension() {
 
 echo "Linking skills from $REPO"
 link_into "$HOME/.agents/skills" "agents"
+rm -f "$HOME/.pi/agent/extensions/petey-debug.ts"
 prune_dangling "$HOME/.agents/skills" agents
 unlink_house_links "$HOME/.pi/agent/skills" pi
 prune_dangling "$HOME/.pi/agent/skills" pi
 link_pi_agents
 rm -f "$HOME/.pi/agent/agents/explorer.md" "$HOME/.pi/agent/agents/search.md"
 prune_dangling "$HOME/.pi/agent/agents" pi-agent
-link_pi_extension petey-debug.ts
 link_pi_extension herdr-tab-name
 link_pi_config models.json
 link_pi_config settings.json

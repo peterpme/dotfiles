@@ -1,5 +1,5 @@
 {
-  "lastChangelogVersion": "0.84.3",
+  "lastChangelogVersion": "0.84.4",
   "theme": "dark",
   "packages": [
     "npm:@hypabolic/pi-hypa",
@@ -57,6 +57,11 @@
         "thinking": "medium",
         "defaultContext": "fresh"
       },
+      "test-butcher": {
+        "model": "peter@backpack.app/gpt-5.6-luna",
+        "thinking": "high",
+        "defaultContext": "fresh"
+      },
       "oracle": {
         "description": "Forked decision-consistency oracle; inspect Git only when repository state or history is evidence",
         "model": "peter@backpack.app/gpt-5.6-sol",
@@ -83,7 +88,6 @@
     "xai/grok-4.6-fast",
     "opencode/deepseek-v4-pro",
     "opencode/deepseek-v4-flash",
-    "opencode/kimi-k3",
-    "opencode/x-preview-f-free"
+    "opencode/kimi-k3"
   ]
 }

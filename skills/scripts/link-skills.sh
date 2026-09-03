@@ -1,9 +1,26 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Link every SKILL.md-bearing directory under skills/ into Pi. Canonical
-# source stays in the dotfiles repo. Existing third-party Pi skills are left
-# alone because this script replaces only matching names.
+# Link every SKILL.md-bearing directory under skills/ into ~/.agents/skills,
+# the shared store every harness reads (Pi, Cursor, npx skills). Canonical
+# source stays in the dotfiles repo. Third-party installs are never touched:
+# a real directory with a house skill's name is reported, not replaced.
+# Pi-only pieces (agents, extensions, settings, models) still go to ~/.pi/agent.
+
+prune_dangling() {
+  local dir="$1"
+  local label="$2"
+  local link target
+
+  [ -d "$dir" ] || return 0
+  for link in "$dir"/*; do
+    [ -L "$link" ] || continue
+    [ -e "$link" ] && continue
+    target="$(readlink "$link")"
+    rm -f "$link"
+    echo "pruned  $label/$(basename "$link") -> $target (dangling)"
+  done
+}
 
 link_pi_config() {
   local name="$1"
@@ -59,17 +76,17 @@ link_into() {
     name="$(basename "$src")"
     target="$dest_root/$name"
 
-    # Replace real dirs (e.g. earlier copies) with symlinks.
-    if [ -e "$target" ] || [ -L "$target" ]; then
-      if [ -L "$target" ]; then
-        local current
-        current="$(readlink "$target")"
-        if [ "$current" = "$src" ]; then
-          echo "ok      $label/$name"
-          continue
-        fi
+    if [ -L "$target" ]; then
+      local current
+      current="$(readlink "$target")"
+      if [ "$current" = "$src" ]; then
+        echo "ok      $label/$name"
+        continue
       fi
-      rm -rf "$target"
+      rm -f "$target"
+    elif [ -e "$target" ]; then
+      echo "skip    $label/$name is a real directory (third-party install?), not replacing" >&2
+      continue
     fi
 
     ln -sfn "$src" "$target"
@@ -108,12 +125,31 @@ link_pi_agents() {
   done
 }
 
+# Remove house links from a directory this script no longer targets.
+unlink_house_links() {
+  local dir="$1"
+  local label="$2"
+  local link target
+
+  [ -d "$dir" ] || return 0
+  for link in "$dir"/*; do
+    [ -L "$link" ] || continue
+    target="$(readlink "$link")"
+    case "$target" in
+      "$REPO"/*)
+        rm -f "$link"
+        echo "removed $label/$(basename "$link") -> $target (now linked under ~/.agents/skills)"
+        ;;
+    esac
+  done
+}
+
 link_pi_extension() {
   local name="$1"
   local source="$DOTFILES_ROOT/pi/extensions/$name"
   local target="$HOME/.pi/agent/extensions/$name"
 
-  [ -f "$source" ] || { echo "error: missing $source" >&2; return 1; }
+  [ -e "$source" ] || { echo "error: missing $source" >&2; return 1; }
   mkdir -p "$(dirname "$target")"
   if [ -L "$target" ] && [ "$(readlink "$target")" = "$source" ]; then
     echo "ok      pi-extension/$name"
@@ -125,11 +161,16 @@ link_pi_extension() {
 }
 
 echo "Linking skills from $REPO"
-link_into "$HOME/.pi/agent/skills" "pi"
-rm -f "$HOME/.pi/agent/skills/petey-debug"
+link_into "$HOME/.agents/skills" "agents"
+rm -f "$HOME/.pi/agent/extensions/petey-debug.ts"
+prune_dangling "$HOME/.agents/skills" agents
+unlink_house_links "$HOME/.pi/agent/skills" pi
+prune_dangling "$HOME/.pi/agent/skills" pi
 link_pi_agents
 rm -f "$HOME/.pi/agent/agents/explorer.md" "$HOME/.pi/agent/agents/search.md"
-link_pi_extension petey-debug.ts
+prune_dangling "$HOME/.pi/agent/agents" pi-agent
+link_pi_extension herdr-tab-name
+link_pi_extension debugger
 link_pi_config models.json
 link_pi_config settings.json
 echo "Done. Restart Pi to load settings changes."

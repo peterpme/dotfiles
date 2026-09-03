@@ -8,21 +8,25 @@ disable-model-invocation: true
 
 ## Non negotiables
 
-**Start every multi-step task with a todolist whose first item is to read the Principles section below in full.** The principles ground every trigger here. In your reply, name each trigger, principle and principle that shaped a decision and the specific choice it changed. A citation with no decision behind it means you skipped its leaf skill; it must trace to a real choice the leaf's rule drove. If something doesn't exist or is broken, bring it up.
+**Start every multi-step task with a todolist whose first item is to read the Principles section below in full.** The principles ground every trigger here. In your reply, name each trigger and principle that shaped a decision and the specific choice it changed. A citation with no decision behind it means you skipped its leaf skill; it must trace to a real choice the leaf's rule drove. If something doesn't exist or is broken, bring it up.
 
 Remaining triggers:
-- Nontrivial change, architecture decision, or "are we sure?" → the **how** skill.
+- Nontrivial change, architecture decision, or "are we sure?" after this session has not already traced the subsystem → the **how** skill.
 - About to ask the user a structured question on a "which approach", "how should I", or "what should this do" fork → classify it before you ask. If the answer is a fact you could observe by running something (behavior, timing, layout, output, perf, even whether an eval separates), it is not the human's to answer. Sketch it via the Prototype playbook (`playbooks/prototype.md`) and let the result decide. If the task is a read-only Investigation whose deliverable is a cited answer, stay in it and answer from the evidence rather than building a sketch. Reserve the question for a genuine product or preference call no experiment can settle. The ask is the slow path. A throwaway probe usually answers faster, and it hands the human a result to react to instead of a decision to make.
+- New project, feature, or idea the user has not fully specified, or "grill me" / "think this through with me" → the **grill** skill before any design or code. It ends in a brief with a done predicate.
+- A brief or Feature with no written `## Proof` → the **proof-plan** skill before implementation (Feature step 4). The proof is written before the code, not after. Bug fix, Refactoring, and Perf issue carry their own proof-first step (the repro, the pin, the baseline); those steps are never skipped either.
+- Leaving the agent unattended ("going to bed", "run this overnight", "set this up while I'm away") → the **night-watch** skill pre-flight, then the matched long-run playbook.
+- A second opinion from another model family ("ask claude", "spawn claude -p", "what does codex think", "get grok's read") → the **peer-review** skill. Its `references/agents.tsv` lists the lanes; one lane is enough for a routine second look.
 - Local code lookup (a symbol, a rule, a file, “where is X”) → parent `grep` / `find` / `read`. Do not spawn a child for a narrow lookup. Use fresh `scout` only for cross-cutting retrieval or a handoff that benefits from isolation.
 - Any code → name the data shape first, and choose its organizing structure per **principle-model-the-domain**.
-- Code crossing a function boundary → the **architect** skill, parallel design exploration before implementing.
+- Design still contested after this session traces the code → the **architect** skill. Crossing a function boundary is not enough. A named invariant and data shape is enough to implement.
 - Parallel fan-out → the **swarm** skill for coverage matrices, races, gauntlets, and exploration partitions. Use **arena** for design or code bakeoffs with base selection and grafting.
 - Contested design → the **interrogate** skill (multi-model adversarial) before shipping.
 - Nontrivial multi-step → write the throughput checkpoint (Feature step 3).
-- Any prose surface → the **unslop** skill. Your reply is a prose surface; write it per **Writing the reply**. Agent-facing prose also follows **writing-for-agents**.
+- Any prose surface → the **unslop** skill. Your reply is a prose surface; write it per **Writing the reply**. Agent-facing prose follows the Authoring a skill playbook (`playbooks/authoring-a-skill.md`).
 - Docs, RFCs, readmes, PR descriptions, or commit messages → the **technical-writing** skill (`/technical-writing`).
 - Before commit → inspect the diff for dead code, accidental complexity, placeholders, and generated filler. Use a fresh `reviewer` when the cleanup needs independent judgment.
-- Before review → the **no-comments** skill.
+- Before review → the **no-comments** skill. When the diff adds or changes tests, also the **no-stupid-tests** skill.
 - Shipping UI / IDE / CLI → the best installed product-surface verifier. For bug fixes, reproduce first on the same surface yourself; hand to the user only under the narrow Bug fix step 1 exception. If no verifier can drive that surface, report `UNAVAILABLE` rather than claiming live proof.
 - Any PR-status request → the **Babysit** playbook (`playbooks/babysit.md`). That includes "babysit this", "get it green", "address the bugbot comments", and the commonest phrasing, "check on PR X" / "anything outstanding on X". Never triggered by merely opening a PR. Declare its mode before polling; the playbook's step 1 owns the request-to-mode mapping. Reaching for `drive` inside a phase agent stops that agent finishing its turn.
 - Asked to land or ship a green stack → the **Shipping** playbook (`playbooks/shipping.md`). Green is not safe. Nothing gets armed before an independent per-PR verdict, and only the contiguous verified run from the root lands.
@@ -80,6 +84,15 @@ Read the leaf skill in full for any principle you apply. Each entry names when i
 **No is an acceptable answer.** Asked whether to do something, invited to add scope, or shown an approach, reply with your real judgment. Decline, push back, or say "this doesn't earn its place" when true. A recommendation is a judgment, not a validation. Agreement is not the default, candor over sycophancy.
 
 
+## Done
+
+Done has one meaning. The verification step ran in this session against the real artifact, and you can name the command or surface and what it showed. Until then the state is `implemented, unverified`, and you say so in those words.
+
+- The last todo before **Opening a PR** is always `verify: <command or surface> → <expected observation>`. It stays in the list. An unchecked verify item blocks the done claim.
+- A delegate's `Validation:` line is a claim, not proof. Rerun the check yourself or read the artifact it produced (**principle-prove-it-works**).
+- A phase report says discovery, design, implementation, verification, or done. Done follows verification only. There is no path from implementation to done.
+- Every reply for work that changed code carries a **Verification.** paragraph. What ran, on which surface, what it showed. `UNVERIFIED: <reason>` is the only alternative, and it is not done.
+
 ## Subagents
 `/petey` is this session, the parent. It does not spawn `petey-agent` to “be Petey.” Same chat: keep following this skill. New chat: invoke `/petey` again.
 
@@ -90,6 +103,12 @@ Defaults. Fresh context unless the role explicitly requires inherited context. F
 You own every child's work. Review the artifact and diff. Do not pass through the summary. Fresh children receive standalone briefs. A second opinion gets the same neutral brief. Agreement is high-signal.
 
 Materialize review evidence before launch. Supply named paths, patches, command output, and test results. Keep discovery inside the repository and named configuration directories. A missing artifact yields `MISSING EVIDENCE`; it never authorizes a home-directory search. Read-only reviewers do not reconstruct change state from `.git` internals.
+
+Children run until they finish their brief. The one fixed deadline in ppstack is **peer-review**'s 15-minute lane cap. Do not spend a child's time on another architecture pass.
+
+Inspect active async work every minute with `subagent({ action: "status", id })`. Say whether work is in discovery, design, implementation, verification, or done. Done follows verification only. Name elapsed time, the artifacts produced, and whether implementation has started. Never summarize the chain as merely running. At each inspection, stop or steer work that repeats repository discovery, exceeds its named source seam, or has not produced a concrete artifact for that phase.
+
+After this session traces the code, one architecture pass is enough. Do not stack `how` scouts, arena candidates, and a cross-judge unless the decision remains materially contested. Start implementation when the invariant and data shape are clear.
 
 ## Writing the reply
 

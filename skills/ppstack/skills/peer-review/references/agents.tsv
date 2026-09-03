@@ -1,0 +1,4 @@
+lane	family	model	effort	how	command_or_role	pinned	state	checked
+claude	Anthropic	claude-fable-5-1	max (high for interactive rounds such as grill strong mode)	bash	claude -p --model claude-fable-5-1 --effort max --permission-mode plan "$BRIEF"	yes	works	2026-09-02
+codex	OpenAI	gpt-5.6-sol	xhigh	bash	codex exec -m gpt-5.6-sol -c model_reasoning_effort=xhigh --sandbox read-only "$BRIEF"	yes	codex not installed; model id unverified	2026-09-02
+grok	xAI	xai/grok-4.6	xhigh	pi-subagents role	reviewer (fresh context, read tools; routing in pi/settings.json)	via settings	works	2026-09-02

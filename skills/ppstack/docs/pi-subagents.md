@@ -36,7 +36,7 @@ Do not eject a builtin unless its persona must change. Keep deployment choices i
 
 | Name | Parent skill | Job | Mutation boundary |
 |---|---|---|---|
-| `petey-agent` | playbooks | Fresh writer that loads Petey policy | Normal writer tools |
+| `petey-agent` | playbooks | Fresh packet-bound writer; no inherited skills or principles | Normal writer tools |
 | `comment-sicko` | **no-comments** | Scoped comment deletion with `how` and `why` available | Comments and resulting whitespace only |
 | `test-butcher` | **no-stupid-tests** | Keeps one cut per function, trims tests not worth keeping, flags `MUST KILL` and `NO PROOF` | Test files only, deletions only |
 | `council-sol` | councils | Fresh read-only Sol council judgment | No writes |
@@ -53,7 +53,7 @@ Do not eject a builtin unless its persona must change. Keep deployment choices i
 | Cross-cutting local retrieval | `scout` |
 | Web research | `researcher` |
 | Standard implementation | `worker` |
-| Petey-aware implementation or prose | `petey-agent` |
+| Packet-bound implementation or prose | `petey-agent` |
 | Evidence review | `reviewer` |
 | Comment pass | `comment-sicko` |
 | Test pass | `test-butcher` |
@@ -77,7 +77,9 @@ The writer starts at `FIRST UNIT`. It does not repeat broad discovery or redesig
 
 ## Skill locations
 
-Petey's inline Principles section is the upfront index. It does not require every principle leaf at startup. When a principle applies, read its exact `available_skills` location. Installed principle skills are siblings of `petey`, not children under `petey/principles/`. Never infer a skill path from its name.
+Petey's inline Principles section is the parent's upfront index. It does not require every principle leaf at startup. When a principle applies to the parent's decision, the parent reads its exact `available_skills` location. Installed principle skills are siblings of `petey`, not children under `petey/principles/`. Never infer a skill path from its name.
+
+Children do not apply principles. `petey-agent` sets `inheritSkills: false` and loads no skills. The parent encodes settled principle decisions in the writer packet.
 
 ## Evidence boundary
 

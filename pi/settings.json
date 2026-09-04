@@ -45,9 +45,57 @@
         "defaultContext": "fresh",
         "fallbackModels": []
       },
+      "candidate-sol": {
+        "model": "peter@backpack.app/gpt-5.6-sol",
+        "thinking": "xhigh",
+        "defaultContext": "fresh",
+        "fallbackModels": []
+      },
+      "candidate-grok": {
+        "model": "opencode/grok-4.6",
+        "thinking": "high",
+        "defaultContext": "fresh",
+        "fallbackModels": []
+      },
+      "candidate-fable": {
+        "model": "opencode/claude-fable-5-1",
+        "thinking": "max",
+        "defaultContext": "fresh",
+        "fallbackModels": []
+      },
+      "candidate-terra": {
+        "model": "peter@backpack.app/gpt-5.6-terra",
+        "thinking": "xhigh",
+        "defaultContext": "fresh",
+        "fallbackModels": []
+      },
       "reviewer": {
         "description": "Independent review of supplied paths, patches, and validation evidence",
         "model": "xai/grok-4.6",
+        "thinking": "xhigh",
+        "defaultContext": "fresh",
+        "fallbackModels": []
+      },
+      "reviewer-sol": {
+        "model": "peter@backpack.app/gpt-5.6-sol",
+        "thinking": "xhigh",
+        "defaultContext": "fresh",
+        "fallbackModels": []
+      },
+      "reviewer-grok": {
+        "model": "opencode/grok-4.6",
+        "thinking": "xhigh",
+        "defaultContext": "fresh",
+        "fallbackModels": []
+      },
+      "reviewer-fable": {
+        "model": "opencode/claude-fable-5-1",
+        "thinking": "max",
+        "defaultContext": "fresh",
+        "fallbackModels": []
+      },
+      "reviewer-terra": {
+        "model": "peter@backpack.app/gpt-5.6-terra",
         "thinking": "xhigh",
         "defaultContext": "fresh",
         "fallbackModels": []
@@ -86,6 +134,8 @@
     "xai/grok-4.5-fast",
     "xai/grok-4.6",
     "xai/grok-4.6-fast",
+    "opencode/claude-fable-5-1",
+    "opencode/grok-4.6",
     "opencode/deepseek-v4-pro",
     "opencode/deepseek-v4-flash",
     "opencode/kimi-k3"

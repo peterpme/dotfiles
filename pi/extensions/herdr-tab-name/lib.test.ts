@@ -115,7 +115,9 @@ test("conversationExcerpt prefers later non-ping prompts", () => {
 	expect(excerpt).not.toContain("testing hello 123");
 });
 
-test("isSubagentSession is true only when the parent id differs", () => {
+test("helpers never rename their parent's tab, including before Pi assigns a session id", () => {
+	expect(isSubagentSession({ PPSTACK_SUBAGENT: "1" })).toBe(true);
+	expect(isSubagentSession({ PPSTACK_SUBAGENT: "0" })).toBe(false);
 	expect(isSubagentSession({})).toBe(false);
 	expect(
 		isSubagentSession({

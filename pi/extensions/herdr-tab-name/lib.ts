@@ -140,6 +140,7 @@ export function herdrTabId(env: NodeJS.ProcessEnv): string | undefined {
 }
 
 export function isSubagentSession(env: NodeJS.ProcessEnv): boolean {
+	if (env.PPSTACK_SUBAGENT === "1") return true;
 	const sessionId = env.PI_SESSION_ID;
 	const parentId = env.PI_SUBAGENT_PARENT_SESSION;
 	return Boolean(sessionId && parentId && sessionId !== parentId);

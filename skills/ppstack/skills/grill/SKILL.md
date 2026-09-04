@@ -28,13 +28,13 @@ Format a round like this.
 
 Sort every candidate question before you ask it. Permission to implement supplies an outcome, not answers to product or preference branches. Any such branch the user did not answer remains on the frontier.
 
-- **A fact about the environment.** What the code does today, what the API returns, what the file contains, what the library supports. Yours to find. Use this session's `grep`, `find`, and `read`, or a fresh `scout` for cross-cutting retrieval. Never put a fact to the user. A running lookup is an unsettled prerequisite, so only the questions downstream of it wait.
-- **An empirical question.** Does this layout work, is this fast enough, does the library behave that way, does the eval separate. Not the user's either. Route it to the Prototype playbook (`petey/playbooks/prototype.md`) and let the result decide.
+- **A fact about the environment.** What the code does today, what the API returns, what the file contains, what the library supports. Yours to find. Use this session's `grep`, `find`, and `read`, or a fresh helper through **spawn-subagent** for cross-cutting retrieval, with a neutral no-edits brief and no further delegation. Never put a fact to the user. A running lookup is an unsettled prerequisite, so only the questions downstream of it wait.
+- **An empirical question.** Does this layout work, is this fast enough, does the library behave that way, does the eval separate. Not the user's either. Route it to the Prototype playbook (`petey-pi/playbooks/prototype.md`) and let the result decide.
 - **A product or preference call** no lookup or experiment settles. The user's. Ask it, recommend, wait.
 
 ## Strong mode
 
-`/grill strong`, or any grill that **night-watch** starts, drafts each round with a stronger model than this session's. Hand the current tree (settled decisions, open frontier, facts found so far) to the Claude lane in **peer-review**'s `references/agents.tsv` at `--effort high` (rounds want speed, review keeps max), ask it for the next frontier with a recommendation per question, then relay the round to the user in the format above and record the answers yourself. You still sort the questions and run the lookups. The strong model proposes, this session conducts.
+`/grill strong`, or a grill that **night-watch** starts, gets an independent critique of each round. Follow **peer-review** and load **spawn-subagent**. Give native Claude a neutral brief with the settled decisions, open questions, and observed facts. Ask for the next questions and recommendations in chat, with no edits or further delegation. Do not pass this skill. The Pi parent sorts the questions, runs lookups, relays the round, and records the user's answers.
 
 ## Round one is first principles
 

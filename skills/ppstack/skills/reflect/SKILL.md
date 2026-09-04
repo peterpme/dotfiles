@@ -22,11 +22,11 @@ Skip when the conversation is trivial, off-topic, or already covered by an exist
 
 ### 1. Locate the active transcript
 
-The parent finds its own Pi session file before fanning out. Use `PI_SESSION_FILE` when available or `/session` in interactive mode. Stay inside the active workspace's directory under `~/.pi/agent/sessions/`; do not scan other projects. If no path resolves, write a tight digest of the session and pass that instead.
+The parent identifies its active transcript or prepares a tight digest. In Pi, use `PI_SESSION_FILE` or `/session`. For a Herdr child, inspect the recorded name and pane. Stay within the active workspace's evidence and do not scan other projects. Pass the transcript path or digest explicitly.
 
 ### 2. Spawn three reviewers in parallel
 
-Use one async `workflowScript` with `runs.all` of three fresh `reviewer` children. Do not select models per run. The prompt forbids file writes; the parent applies edits.
+Read [the delegation contract](../../docs/subagents.md) and load **spawn-subagent**. Launch three fresh children, one per lens below, with the appropriate reference template made absolute. The parent runs this skill. Each standalone brief forbids edits and further delegation and requests findings in chat. The parent applies approved edits.
 
 | Lens | Prompt template |
 |---|---|
@@ -53,7 +53,7 @@ Backlog items file to whatever devex / backlog tracker your team uses automatica
 For each approved Accepted item, follow the Routing field exactly:
 
 - Trivial existing-skill edit (a one-line bullet, a tightened sentence, a stale fact corrected): parent does directly.
-- Substantive existing-skill edit (a new section, a new pattern table, more than ~10 lines): follow the Authoring a skill playbook (`petey/playbooks/authoring-a-skill.md`) and run a draft / test / iterate loop.
+- Substantive existing-skill edit (a new section, a new pattern table, more than ~10 lines): follow the Authoring a skill playbook (`petey-pi/playbooks/authoring-a-skill.md`) and run a draft / test / iterate loop.
 - `tune description: <skill path>` (the skill exists but didn't trigger when it should have): rewrite the description per that playbook and test the triggering phrases.
 - `new skill: <kebab-name>`: follow that playbook. Do not invent the shape ad hoc.
 

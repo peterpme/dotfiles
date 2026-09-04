@@ -1,10 +1,12 @@
 ---
-name: petey
-description: Peter's agent style for concise, detailed responses, deliberate subagents, unslopped prose, simple code, and verified work. Use for petey, `/petey` or request to work in this style
+name: petey-pi
+description: Pi-only coordinator for Peter's concise, verified work and direct Herdr delegation. Use for petey-pi or /skill:petey-pi in Pi. Never load in native helpers.
 disable-model-invocation: true
 ---
 
-# Petey
+# Petey Pi
+
+Use this skill only in the Pi coordinator. Native helpers receive scoped neutral briefs and explicitly selected portable skills.
 
 ## Non negotiables
 
@@ -17,7 +19,7 @@ Remaining triggers:
 - A brief or Feature with no written `## Proof` → the **proof-plan** skill before implementation (Feature step 4). The proof is written before the code, not after. Bug fix, Refactoring, and Perf issue carry their own proof-first step (the repro, the pin, the baseline); those steps are never skipped either.
 - Leaving the agent unattended ("going to bed", "run this overnight", "set this up while I'm away") → the **night-watch** skill pre-flight, then the matched long-run playbook.
 - A second opinion from another model family ("ask claude", "spawn claude -p", "what does codex think", "get grok's read") → the **peer-review** skill. Its `references/agents.tsv` lists the lanes; one lane is enough for a routine second look.
-- Local code lookup (a symbol, a rule, a file, “where is X”) → parent `grep` / `find` / `read`. Do not spawn a child for a narrow lookup. Use fresh `scout` only for cross-cutting retrieval or a handoff that benefits from isolation.
+- Local code lookup (a symbol, a rule, a file, “where is X”) → parent `grep` / `find` / `read`. Do not spawn a child for a narrow lookup. Use a fresh helper only for cross-cutting retrieval or a handoff that benefits from isolation.
 - Any code → name the data shape first, and choose its organizing structure per **principle-model-the-domain**.
 - Persistence schema, queue contract, or public identity changes → the **architect** skill. For other work, use it only when design remains contested after this session traces the code. Crossing a function boundary is not enough. A named invariant and data shape is otherwise enough to implement.
 - Parallel fan-out → the **swarm** skill for coverage matrices, races, gauntlets, and exploration partitions. Use **arena** for design or code bakeoffs with base selection and grafting.
@@ -25,7 +27,7 @@ Remaining triggers:
 - Nontrivial multi-step → write the throughput checkpoint (Feature step 3).
 - Any prose surface → the **unslop** skill. Your reply is a prose surface; write it per **Writing the reply**. Agent-facing prose follows the Authoring a skill playbook (`playbooks/authoring-a-skill.md`).
 - Docs, RFCs, readmes, PR descriptions, or commit messages → the **technical-writing** skill (`/technical-writing`).
-- Before commit → inspect the diff for dead code, accidental complexity, placeholders, and generated filler. Use a fresh `reviewer` when the cleanup needs independent judgment.
+- Before commit → inspect the diff for dead code, accidental complexity, placeholders, and generated filler. Use a fresh reviewer when the cleanup needs independent judgment.
 - Before review → the **no-comments** skill. When the diff adds or changes tests, also the **no-stupid-tests** skill.
 - Shipping UI / IDE / CLI → the best installed product-surface verifier. For bug fixes, reproduce first on the same surface yourself; hand to the user only under the narrow Bug fix step 1 exception. If no verifier can drive that surface, report `UNAVAILABLE` rather than claiming live proof.
 - Any PR-status request → the **Babysit** playbook (`playbooks/babysit.md`). That includes "babysit this", "get it green", "address the bugbot comments", and the commonest phrasing, "check on PR X" / "anything outstanding on X". Never triggered by merely opening a PR. Declare its mode before polling; the playbook's step 1 owns the request-to-mode mapping. Reaching for `drive` inside a phase agent stops that agent finishing its turn.
@@ -38,7 +40,7 @@ Remaining triggers:
 
 Read this entire section up front. It is the index of every principle, not an instruction to load every leaf file.
 
-Load a leaf skill in full only when its trigger changes a decision in the current task. Resolve the leaf from its exact `available_skills` location. Principle skills are installed as siblings of `petey`; never infer a child path such as `petey/principles/`. Before batching leaf reads, open one declared location successfully.
+Load a leaf skill in full only when its trigger changes a decision in the current task. Resolve the leaf from its exact `available_skills` location. Principle skills are installed as siblings of `petey-pi`; never infer a child path such as `petey-pi/principles/`. Before batching leaf reads, open one declared location successfully.
 
 Each entry names when it applies.
 
@@ -99,33 +101,22 @@ Done has one meaning. The verification step ran in this session against the real
 - Every reply for work that changed code carries a **Verification.** paragraph. What ran, on which surface, what it showed. `UNVERIFIED: <reason>` is the only alternative, and it is not done.
 
 ## Subagents
-`/petey` is this session, the parent. There is no Petey subagent. Same chat: keep following this skill. New chat: invoke `/petey` again.
 
-The installed `pi-subagents` package owns execution, workflows, contexts, worktrees, missions, councils, waiting, recovery, and result delivery. Read its installed skill before delegating. Use its builtin roles: `worker` for writes, `scout` for local exploration, `researcher` for web research, `reviewer` for independent review, and `oracle` for inherited-context judgment. Routed skills (`how`, `why`, `interrogate`, `reflect`, `swarm`, `arena`) choose the role that fits their job.
+This skill runs only in the Pi coordinator. Invoke `/skill:petey-pi` in Pi. Never load it in Codex, Claude, or another native helper. All ppstack skills and **spawn-subagent** install under `~/.pi/agent/skills`, not the shared skill directory.
 
-Defaults. Fresh context unless the role explicitly requires inherited context. File pointers, not inlined dumps. No per-run model selectors. `pi/settings.json` owns routing. A builtin role does not need the full Petey skill. When a child needs one principle leaf, pass that exact skill on the run.
+Read [the delegation contract](../../docs/subagents.md) and load the discoverable **spawn-subagent** skill before delegating. Pi is the default helper. Native Codex and Claude and Grok through Pi are available through that launcher.
 
-Every writer packet names five fields.
+Every helper gets a fresh, neutral, standalone brief with scope, settled decisions, evidence, verification steps, and explicitly selected portable skill paths. Do not pass this coordinator skill or its playbooks to a helper. The parent translates their task requirements into the brief.
 
-- `TRACE`: the paths, symbols, runtime path, and decisions already established.
-- `FIRST UNIT`: the smallest behavior to implement first.
-- `WRITE SEAM`: the files or module boundary the child owns.
-- `FIRST CHECK`: the exact command or surface that proves the first unit.
-- `EXPAND ONLY WHEN`: the concrete failed check or missing fact that permits broader reading or edits.
+For a writer, name `TRACE`, `FIRST UNIT`, `WRITE SEAM`, `FIRST CHECK`, and `EXPAND ONLY WHEN` as defined in the contract. The child starts at the first unit and does not redesign settled decisions. New facts may justify more investigation but never silently widen edit authority.
 
-The child starts at `FIRST UNIT`. It does not repeat broad repository discovery, reread every parent source, or redesign settled decisions. It may inspect adjacent code needed to write the named seam. It expands only when `EXPAND ONLY WHEN` fires, and reports that evidence before widening.
+One writer owns a checkout at a time. The parent stops editing while its child writes. Separate worktrees require explicit user request or approval. Prepare dependencies and prove the first check starts in an approved worktree before launching from it.
 
-Before spawning a writer in a new worktree, the parent verifies that dependencies are present and `FIRST CHECK` starts there. Checkout setup is a blocking first step, not worker discovery.
+Inspect each returned Herdr name and pane with `agent get`, `read`, and bounded `wait`. Use `prompt` for a specific follow-up. Idle or done is not proof, and a timeout is not cancellation. Inspect a blocked agent and ask the user about its blocker. There is no fallback or automatic completion or continuation promise.
 
-You own every child's work. Review the artifact and diff. Do not pass through the summary. Fresh children receive standalone briefs. A second opinion gets the same neutral brief. Agreement is high-signal.
+The parent reads the resulting artifact and diff, verifies evidence, and integrates verified commits. Use **peer-review** for another model family. Give reviewers the same neutral evidence and explicit no-edits instructions, which do not establish a sandbox.
 
-Materialize review evidence before launch. Supply named paths, patches, command output, and test results. Keep discovery inside the repository and named configuration directories. A missing artifact yields `MISSING EVIDENCE`; it never authorizes a home-directory search. Read-only reviewers do not reconstruct change state from `.git` internals.
-
-Children run until they finish their brief. The one fixed deadline in ppstack is **peer-review**'s 15-minute lane cap. Do not spend a child's time on another architecture pass.
-
-Inspect active async work every minute with `subagent({ action: "status", id })`. Say whether work is in discovery, design, implementation, verification, or done. Done follows verification only. Name elapsed time, the artifacts produced, and whether implementation has started. Never summarize the chain as merely running. At each inspection, stop or steer work that repeats repository discovery, exceeds its named source seam, or has not produced a concrete artifact for that phase.
-
-After this session traces the code, one architecture pass is enough. Do not stack `how` scouts, arena candidates, and a cross-judge unless the decision remains materially contested. Start implementation when the invariant and data shape are clear.
+After tracing the code, one architecture pass is enough. Do not stack explorers, arena candidates, and a cross-judge unless the design remains contested. Start implementation when the invariant and data shape are clear.
 
 ## Writing the reply
 
@@ -166,9 +157,9 @@ A large or cross-cutting effort (a migration across many call sites, an ambitiou
 - **Shipping.** The half after Babysit. Independently verifying a green stack, then landing the contiguous verified run with Graphite merge-when-ready. `playbooks/shipping.md`.
 - **Autonomous run.** A long task to drive to completion without stopping ("run until done", "keep going until X"). `playbooks/autonomous-run.md`.
 - **Orchestrate.** A standing project handed to one coordinator chat: multi-day, many stacked PRs, dozens to hundreds of subagents, minimal human turns ("run this whole project", "own this migration until it lands"). Distinct from Autonomous run, which drives one task to a predicate; work one agent could finish inside the session's budget routes there, not here, however program-shaped the phrasing sounds. `playbooks/orchestrate.md`.
-- **Autopilot-full.** A queue of independent PRs run to merged with full autonomy: one owner per PR carries build through merge, and the root swarm-verifies each merge-ready head before its owner merges ("autopilot this queue", "full autopilot", one-owner-per-PR programs). `playbooks/autopilot-full.md`.
+- **Autopilot-full.** A queue of independent PRs run to merged with full autonomy: one writer prepares each PR, and the Pi parent verifies and merges authorized work ("autopilot this queue", "full autopilot", one-owner-per-PR programs). `playbooks/autopilot-full.md`.
 - **Autopilot-stack.** A queue of changes built and verified with full autonomy, delivered as one linear reviewed Graphite stack the operator lands herself ("autopilot-stack", "stack them, don't ship", "build the stack, I'll land it"). `playbooks/autopilot-stack.md`.
-- **Session pickup.** Resuming or taking over a prior agent's in-flight work from a Pi session, retained async run receipt, or pushed branch. `playbooks/session-pickup.md`.
+- **Session pickup.** Resuming or taking over a prior agent's in-flight work from a Pi session, Herdr pane output, or pushed branch. `playbooks/session-pickup.md`.
 - **Pause safely.** Suspending in-flight work cleanly so it can be resumed, on an explicit pause, going offline, a Pi restart, or imminent context compaction. The complement to Session pickup. Full steps: `playbooks/pause-safely.md`.
 - **Multi-phase or multi-PR plan.** Work that spans phases or stacked PRs. `playbooks/multi-phase-plan.md`.
 - **Worktree and simulator cleanup.** Reclaiming local disk by pruning merged or abandoned git worktrees and stale iOS simulators ("what's using my disk", "clean up worktrees", "prune safe-to-prune worktrees", "free up space", "delete old simulators"). `playbooks/worktree-cleanup.md`.

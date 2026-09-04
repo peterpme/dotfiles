@@ -30,9 +30,9 @@ Identify the scope. If ambiguous, state your best-guess interpretation before ex
 - **Simple** (a single module, a small utility, a narrow question like "how does function X work"): skip explorer agents; the explainer explores and explains in a single pass. Go to Step 2b.
 - **Complex** (a subsystem spanning multiple files/services, a cross-cutting feature, a full architectural overview): spawn parallel explorer agents first, then hand off to the explainer. Go to Step 2a.
 
-When in doubt, lean simple. You can always spawn explorers if you hit a wall. A bare `/how` or `/petey how` with no target is simple and ambiguous. Guess the subsystem in one sentence, then Step 2b. Do not fan out four explorers.
+When in doubt, lean simple. You can always spawn explorers if you hit a wall. A bare `/how` or `/skill:petey-pi how` with no target is simple and ambiguous. Guess the subsystem in one sentence, then Step 2b. Do not fan out four explorers.
 
-Before any spawn, read the installed `pi-subagents` skill. Never pass top-level `agent` together with `workflowScript`. One child is a `workflowScript` with `await runs.run(...)`. N children use one `workflowScript` with `await runs.all([...])`. Do not select models per run.
+Before spawning, read [the delegation contract](../../docs/subagents.md) and load **spawn-subagent**. The Pi parent runs this skill. Give each child only the relevant reference paths and a standalone brief with no-edits and no-further-delegation instructions. Return findings in chat.
 
 ### Step 2a. Explore (complex questions only)
 
@@ -44,7 +44,7 @@ Decompose the question into 2-4 parallel exploration angles, each a distinct sli
 
 The right decomposition depends on the question. Use your judgment. Narrow questions: 2 explorers is fine. Broad subsystems: up to 4.
 
-Spawn every exploration angle in one call with `runs.all` of fresh read-only `scout` children. Give each a distinct source seam, entry points, evidence requirement, and bounded report shape.
+Launch one fresh child per exploration angle. Give each a distinct source boundary, entry points, evidence requirement, and bounded report shape. They may read concurrently and must not edit.
 
 Initial exploration excludes vendored, dependency, and generated trees such as `repos/`, `vendor/`, `node_modules/`, and `dist/`. Include one only when the question names it, repository instructions designate it as the source of truth, or first-party code leaves a specific external API fact unresolved.
 
@@ -97,7 +97,7 @@ Run the full explain flow above (Steps 1-4). You must understand the architectur
 
 ### Step 2. Spawn Critics
 
-After the explanation is complete, spawn multiple fresh critics in one `workflowScript` with `runs.all` of `reviewer`. Give each a distinct architectural angle and the same grounded explanation, paths, prompt, and rubric. Use `oracle` only when inherited context matters. Do not select models per run.
+After the explanation is complete, launch fresh critics through **spawn-subagent**. Give each a distinct architectural angle and the same grounded explanation, paths, prompt, and rubric. Require no edits. Use **peer-review** for actual different model families.
 
 Read `references/critic-prompt.md` for the prompt template. Each critic gets:
 1. The explanation from Step 1 (so they don't re-explore)

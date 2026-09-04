@@ -21,3 +21,4 @@ The human supervises asynchronously. Agents must stay unblocked: make reasonable
 - **Irreversible actions** (force-push, delete production data, send external messages) still require confirmation.
 - **Reversible actions** (write code, edit notes, split tasks) should proceed without blocking.
 - **Product direction** comes from the human; *execution* should not block.
+- **Delegation boundaries** still apply. Worktrees require explicit request or approval. If a Herdr helper is blocked, inspect its state and output and ask the user. Continue independent authorized work while the decision is pending.

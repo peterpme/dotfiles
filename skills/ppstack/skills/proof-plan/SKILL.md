@@ -34,6 +34,6 @@ Tests alone are not sufficient verification. Done means every box below is check
 - [ ] Side effects. <what is read and where>.
 ```
 
-7. **Hand off.** Feature step 6 works the boxes in order. Opening a PR copies each box and its result into `## Verification`. An unchecked box means the reply says `implemented, unverified` per the petey **Done** rule. Nobody relaxes a box to declare victory.
+7. **Hand off.** Feature step 6 works the boxes in order. Opening a PR copies each box and its result into `## Verification`. An unchecked box means the reply says `implemented, unverified` per the petey-pi **Done** rule. Nobody relaxes a box to declare victory.
 
 **Reply:** the plan path, how many boxes and which are `UNAVAILABLE`, the tests that earned their place, and the first thing to build.

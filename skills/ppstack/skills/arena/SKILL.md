@@ -25,20 +25,20 @@ The N candidates will receive the same prompt, so the prompt is the contract. Ge
 
 1. State the artifact each candidate is producing.
 2. Derive the rubric. State what success looks like for *this* task, then turn it into 3-6 concrete gradeable criteria. Concrete: `Adds a --dry-run flag that skips writes`. Vague: `code is correct`. The rubric is the picker's tool in Phase D; candidates only see the task.
-3. Set N from the task. Spawn more when the arena covers multiple design directions. When the work is generation-bound rather than judgment-sensitive, race identical briefs through the configured writer role rather than introducing artificial differences.
-4. Assign output paths. Each candidate writes to its own location (a git worktree where possible, otherwise `/tmp/arena-<slug>/candidate-<n>/`). N candidates writing to the same path is shared mutable state and fails the **separate-before-serializing-shared-state** principle skill test.
+3. Set N from the task. Spawn more when the arena covers multiple design directions. When the work is generation-bound rather than judgment-sensitive, race identical briefs through the same selected agent rather than introducing artificial differences.
+4. Decide whether candidates need writes. Design proposals can return in chat. Only one writer may use a checkout at a time. Parallel code candidates require worktrees explicitly requested or approved by the user. Otherwise sequence them and preserve each completed candidate before the next begins. A separate branch name does not isolate files.
 
 ## Phase B: Fan out
 
-Spawn all N candidates in one async `workflowScript` with `await runs.all`. Use `agent: "worker"` and `worktree: true` for writable candidates, then return the outputs. Read-only design candidates may use the configured council and reviewer roles. Do not select models per run. Each gets the task, the shared grounding path, its own output path, and must produce the artifact plus a short rationale.
+Read [the delegation contract](../../docs/subagents.md) and load **spawn-subagent**. Launch each candidate with a standalone brief, explicit portable skill paths, scope, grounding evidence, and verification steps. Require no edits for in-chat design proposals. For code candidates, launch from the assigned checkout and keep one writer there. Request a short in-chat rationale alongside the artifact, without requiring a report file in the initial prompt.
 
 The rationale is mandatory. Without it, the parent cannot tell whether a candidate's structure is principled or accidental, which makes Phase E grafting unreliable. Each rationale names the alternatives the candidate considered and what it rejected.
 
-If a candidate fails to produce output, proceed with N-1 and note the dropout in the synthesis record.
+If a candidate fails to produce output, inspect its Herdr state and scrollback. A timeout does not cancel it. Ask the user about a blocked state, and confirm any writer has stopped before reusing its checkout. Note missing candidates in the synthesis.
 
 ## Phase C: Cross-judge
 
-After all Phase B candidates complete, spawn one read-only judge through the installed `pi-subagents` workflow. Use `reviewer` for fresh independent judgment or `oracle` when inherited context matters. It sees the rubric and the candidates by path label, scores each criterion, and recommends a base with rationale. It runs in parallel with the parent's reading in Phase D, not with the candidates themselves. Spawning while candidates are still writing means the judge sees partial or empty outputs and reports them as dropouts.
+After candidate artifacts are complete, launch one fresh judge through **spawn-subagent** with no-edits instructions. Supply the rubric and candidate artifacts or returned proposals under neutral labels. It scores each criterion and recommends a base with rationale. It may run alongside the parent's reading in Phase D. Use **peer-review** when the judgment needs another model family. Never judge artifacts that candidates are still writing.
 
 ## Phase D: Pick a base
 

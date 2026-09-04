@@ -64,14 +64,14 @@ Fix the log, not the story. If the work diverged from what a row claims, the row
 
 ## Cross-model review of the trail
 
-Before handing back, you must spawn a fresh `reviewer` or `oracle` subagent. Self-review is not a substitute; the point is fresh eyes you cannot bring yourself. Do not select a model per run. The subagent reads the audit trail and the run's transcript, then flags what the user should pay attention to. Not a redo of the work, a scan for what's suboptimal or risky.
+Before handing back, use **peer-review** to launch a fresh reviewer from a different model family through **spawn-subagent**. Pass the audit trail, transcript or session digest, and the review criteria below in a neutral brief. Require no edits, no further delegation, and in-chat findings. The parent runs this skill. The reviewer flags weak evidence and risky decisions without redoing the work. If the family is unavailable or the agent is blocked, inspect and ask the user. Do not replace cross-family review with another alias from the same family.
 
 - Decisions logged with weak or absent evidence.
 - Verification steps skipped or claimed without proof in the transcript.
 - Choices that look risky in hindsight (premature, scope-creeping, papering over a symptom).
 - Gaps the user would otherwise miss on a casual skim.
 
-Every reply for a run that produced a trail ends with an "Attention" section. Lead with the reviewer role on its own line (`reviewed by <agent>`), then list each flag pointing to specific rows or moments. "No flags" is a valid value; the agent name is not. The self-audit asks if the log told the truth; this asks what the user should still scrutinize even when it did.
+Every reply for a run that produced a trail ends with an "Attention" section. Lead with the Herdr name and actual family on their own line (`reviewed by <name>, <family>`), then list each flag pointing to specific rows or moments. "No flags" is a valid value; the agent name is not. The self-audit asks if the log told the truth; this asks what the user should still scrutinize even when it did.
 
 ## Reviewing the trail
 

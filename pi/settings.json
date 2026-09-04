@@ -4,7 +4,6 @@
   "packages": [
     "npm:@hypabolic/pi-hypa",
     "npm:pi-web-access",
-    "npm:pi-subagents",
     "npm:pi-btw",
     "npm:@juicesharp/rpiv-ask-user-question",
     "npm:@plannotator/pi-extension",
@@ -14,77 +13,8 @@
   "defaultProvider": "xai",
   "defaultModel": "grok-4.6",
   "defaultThinkingLevel": "high",
-  "subagents": {
-    "agentOverrides": {
-      "scout": {
-        "tools": [
-          "read",
-          "grep",
-          "find",
-          "ls"
-        ],
-        "acceptanceRole": "read-only",
-        "model": "openai-codex/gpt-5.6-luna",
-        "thinking": "low",
-        "defaultContext": "fresh",
-        "output": false
-      },
-      "researcher": {
-        "model": "openai-codex/gpt-5.6-luna",
-        "thinking": "medium",
-        "defaultContext": "fresh",
-        "output": false
-      },
-      "worker": {
-        "model": "xai/grok-4.6",
-        "thinking": "high",
-        "defaultContext": "fresh",
-        "fallbackModels": []
-      },
-      "petey-agent": {
-        "model": "xai/grok-4.6",
-        "thinking": "high",
-        "defaultContext": "fresh",
-        "fallbackModels": []
-      },
-      "reviewer": {
-        "description": "Independent review of supplied paths, patches, and validation evidence",
-        "model": "xai/grok-4.6",
-        "thinking": "xhigh",
-        "defaultContext": "fresh",
-        "fallbackModels": []
-      },
-      "comment-sicko": {
-        "model": "openai-codex/gpt-5.6-luna",
-        "thinking": "medium",
-        "defaultContext": "fresh"
-      },
-      "test-butcher": {
-        "model": "openai-codex/gpt-5.6-luna",
-        "thinking": "high",
-        "defaultContext": "fresh"
-      },
-      "oracle": {
-        "description": "Forked decision-consistency oracle; inspect Git only when repository state or history is evidence",
-        "model": "openai-codex/gpt-5.6-sol",
-        "thinking": "xhigh",
-        "defaultContext": "fork"
-      },
-      "council-sol": {
-        "model": "openai-codex/gpt-5.6-sol",
-        "thinking": "xhigh",
-        "defaultContext": "fresh"
-      }
-    }
-  },
   "enabledModels": [
-    "openai-codex/gpt-5.6-luna",
-    "openai-codex/gpt-5.6-sol",
-    "openai-codex/gpt-5.6-terra",
-    "openai-codex-2/gpt-5.6-luna",
-    "openai-codex-2/gpt-5.6-sol",
-    "openai-codex-2/gpt-5.6-terra",
-    "xai/grok-4.5",
+    "openai-codex/gpt-6-astra",
     "xai/grok-4.6",
     "opencode/deepseek-v4-pro",
     "opencode/deepseek-v4-flash",

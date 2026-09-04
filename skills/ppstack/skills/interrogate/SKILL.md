@@ -6,7 +6,7 @@ disable-model-invocation: true
 
 # Interrogate
 
-Spawn multiple fresh reviewers to adversarially review code changes. Each reviewer gets the same prompt and rubric. The adversarial signal comes from independent passes and configured role diversity, not assigned personas. Reviewers differ in blind spots, priors, and reasoning patterns. Agreement is high-confidence signal; lone-reviewer findings are worth reading but lower confidence.
+Spawn multiple fresh reviewers to adversarially review code changes. Each reviewer gets the same prompt and rubric. The adversarial signal comes from independent passes across actual different model families. Reviewers differ in blind spots, priors, and reasoning patterns. Agreement is high-confidence signal; lone-reviewer findings are worth reading but lower confidence.
 
 The deliverable is a synthesized verdict. Do NOT auto-apply changes.
 
@@ -33,7 +33,7 @@ Write one clear paragraph. Reviewers challenge whether the work achieves the int
 
 ## Step 3, Spawn Reviewers
 
-Read the installed `pi-subagents` skill first. Launch all reviewers in one async `workflowScript` with `await runs.all` of fresh `reviewer` children, then return the outputs. Give each reviewer one distinct named source seam or review angle, the same intent statement, rubric, and materialized evidence. Do not select models per run.
+Follow **peer-review** for family selection and [direct Herdr delegation](../../docs/subagents.md). Load **spawn-subagent** and launch fresh reviewers from actual different families. Give each the same intent, rubric, materialized evidence, and no-edits instruction. The Pi parent runs this skill. Pass only the filled reviewer template and absolute rubric and code-quality reference paths, require no further delegation, and request findings in chat. A same-family alias is not a substitute for an unavailable family.
 
 Read `references/reviewer-prompt.md` and fill in the template with:
 1. The stated intent

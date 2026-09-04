@@ -10,17 +10,15 @@ bash ~/dotfiles/skills/scripts/link-skills.sh
 ~/dotfiles/install.sh skills
 ```
 
-That writes per-skill symlinks into `~/.pi/agent/skills`, links `ppstack/agents/*.md` into `~/.pi/agent/agents`, links the tracked Pi extensions plus `pi/settings.json` and `pi/models.json` into `~/.pi/agent/`, and prunes dangling links it finds in those directories.
+General root skills use per-skill links under `~/.agents/skills`. All ppstack skills, **spawn-subagent**, and **setup-petey-pi** install only under `~/.pi/agent/skills`. Verify the links after installation. Runtime settings and extensions remain separate from skill discovery.
 
 Do not symlink this whole tree onto `~/.agents/skills`. `ppstack/` is a capsule, not a skill, and `link-skills.sh` refuses that.
 
 ## Agent homes
 
-Pi is the only runtime this repo installs into. `~/.pi/agent` is Pi itself: settings, sessions, models, extensions, auth. `skills/` and `agents/` are the two subdirectories the linker writes.
+`~/.agents/skills` holds shared general skills. Pi's settings, sessions, models, extensions, and auth live under `~/.pi/agent`. Its `skills/` directory holds ppstack, **spawn-subagent**, and **setup-petey-pi**.
 
-`~/.agents/skills` is the shared store `npx skills` installs into. Pi reads it alongside `~/.pi/agent/skills`.
-
-`~/.claude/skills` and `~/.cursor/skills` still hold links from before the Pi-only migration on 2026-08-27. Nothing here maintains them. Claude Code reads only `~/.claude/skills`, so a house skill added after that date is not visible there unless you link it by hand.
+Only the Pi coordinator loads **petey-pi** and delegates through the discoverable **spawn-subagent** skill. Helpers run in sibling Herdr panes using Pi, native Codex, native Claude, or Grok through Pi. Give them neutral standalone briefs and explicitly selected portable skills by absolute path. Never load **petey-pi** in a native helper or rely on native auto-discovery of ppstack. See [the delegation contract](./ppstack/docs/subagents.md).
 
 ## Two installers
 
@@ -59,15 +57,15 @@ find ~/dotfiles/skills -name SKILL.md \
 
 - **[cloudflare-setup](./cloudflare-setup/SKILL.md)** — House Worker setup: `wrangler.json`, never `wrangler.toml`.
 - **[rewrite-this](./rewrite-this/SKILL.md)** — Rewrite in Peter's voice for Slack.
-- **[setup-petey](./setup-petey/SKILL.md)** — Install or verify Petey's tracked Pi model routing.
+- **[setup-petey-pi](./setup-petey-pi/SKILL.md)** — Install or verify Petey Pi's Pi-only skills and Herdr delegation.
 - **[effect-v4-best-practices](./effect-v4-best-practices/SKILL.md)** — Effect v4 write and review rules.
 - **[herdr](./herdr/SKILL.md)** — Spaces, worktrees, Peter's Herdr config and workflow. Manual invoke only.
 - **[unifi-network-diagnostics](./unifi-network-diagnostics/SKILL.md)** — Home UniFi investigation and `LOG.md` updates. Manual invoke only.
 
 ### ppstack
 
-Capsule at [`ppstack/`](./ppstack). Pi skill tree and agent set. `petey` is the mode. Each `SKILL.md` under `ppstack/skills/` still links as its own skill name. Agent markdown under `ppstack/agents/` links into `~/.pi/agent/agents`.
+Collection at [`ppstack/`](./ppstack). `petey-pi` is the mode. Each `SKILL.md` under `ppstack/skills/` links as its own skill name only under `~/.pi/agent/skills`.
 
-- **[petey](./ppstack/skills/petey/SKILL.md)** — Router for concise, verified work.
+- **[petey-pi](./ppstack/skills/petey-pi/SKILL.md)** — Router for concise, verified work.
 - Sibling skills (`how`, `why`, `grill`, `proof-plan`, `night-watch`, `peer-review`, `no-stupid-tests`, `tdd`, principles, `unslop`, ...) live next to it in `ppstack/skills/`.
-- Agents (`petey-agent`, `comment-sicko`, `test-butcher`, `council-sol`) live in `ppstack/agents/`.
+- Specialist review and deletion rules live in each skill's references.

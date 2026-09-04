@@ -97,7 +97,7 @@ Capture this as seed context (file paths, symbols, commits, PR numbers, linked t
 
 ### Discovery
 
-Before spawning investigators, list available evidence tools: git, `gh`, web search, direct MCP tools, and any other search tools this Pi session exposes. Null categories still count.
+Before spawning investigators, list available evidence tools: git, `gh`, web search, direct MCP tools, and any other search tools this session exposes. Null categories still count.
 
 Map each available MCP to one evidence category:
 
@@ -115,7 +115,7 @@ Aim for a complete **coverage map**, not a minimal one. A null result from an is
 
 Launch all matching investigators in a single message so they run concurrently. One investigator per category lets each specialize in one tool's query vocabulary and result shape. Don't ask one agent to cover multiple MCPs.
 
-Read the installed `pi-subagents` skill. Spawn all investigators in one async `workflowScript` with `runs.all` of fresh read-only `researcher` or `oracle` children, one evidence category per lane. Do not select models per run. Investigators must not write. Source-control-only why can stay in the parent with git and `gh`.
+Read [the delegation contract](../../docs/subagents.md) and load **spawn-subagent**. Launch fresh investigators with one evidence category per child. The parent runs this skill. Pass only the relevant reference paths as absolute paths, plus the code anchor and question. Require no edits, no further delegation, and in-chat findings. Check that each selected CLI has the evidence tools it needs. Missing access is a reported gap, not permission to substitute a launcher. Source-control-only why can stay in the parent with git and `gh`.
 
 Each investigator gets:
 1. The base prompt from `references/investigator-prompt.md`
@@ -157,7 +157,7 @@ If your scope assessment suggests a single-commit trivial target where the PR de
 
 ## Step 4. Synthesize
 
-The parent synthesizes. Do not spawn a synthesizer child unless investigator dumps cannot fit. Voice and epistemics come from `references/synthesizer-prompt.md` and `references/epistemics.md`. If a child is necessary, use a configured fresh reviewer without selecting a model per run.
+The parent synthesizes. Do not spawn a synthesizer child unless investigator dumps cannot fit. Voice and epistemics come from `references/synthesizer-prompt.md` and `references/epistemics.md`. If a child is necessary, launch it through **spawn-subagent** with the findings, these reference paths, and no-edits instructions.
 
 The synthesizer gets:
 1. The investigator findings, including any null results and any categories skipped with justification

@@ -1,23 +1,17 @@
 ---
 name: peer-review
-description: "Send one neutral review brief to reviewers from other model families (Claude Fable 5.1, Codex on Sol, Grok 4.6) and compare their answers. Use for /peer-review, 'second opinion from claude', 'spawn claude -p', 'ask codex to review this', 'get grok's read', or any cross-model review of a diff or design. One lane is fine for a routine second look."
+description: "Send one neutral review brief to actual different model families through Herdr: native Claude, native Codex, or Grok through Pi. Use for /peer-review, 'second opinion from claude', 'ask codex to review this', 'get grok's read', or cross-model review of a diff or design."
 disable-model-invocation: true
 ---
 
 # Peer review
 
-Fresh eyes from another model family. Every reviewer gets the same brief. None sees the others. Agreement is the signal.
+Give every reviewer the same neutral brief. Keep their answers independent, then settle disagreement with evidence.
 
-The reviewers on this machine, how each is spawned, and whether each works today live in `references/agents.tsv`. Open it before spawning. Update its `state` and `checked` columns when a lane is probed. Do not inline a lane's command anywhere else; this file is the one place it lives.
+1. Read [the delegation contract](../../docs/subagents.md) and load the discoverable **spawn-subagent** skill. Read `references/agents.tsv` for available family selections. Probe availability when needed and update its `state` and `checked` fields with observed results.
+2. Choose one family different from the author's for a routine second look. Use two or three for contested or expensive decisions. Codex model aliases such as Sol and Terra are both OpenAI, not separate families. Confirm the actual family used. Do not substitute a same-family agent when a requested CLI is unavailable.
+3. Materialize the evidence: named paths, patch text, command output, and test results. Include the question, scope, relevant absolute skill paths, and expected report. Require no edits and `MISSING EVIDENCE` for absent artifacts. No-edits is an instruction, not a sandbox.
+4. Launch each reviewer through `spawn.py` with `--agent claude`, `--agent codex`, or `--agent grok`. Pass the same standalone brief. Request answers in chat, then inspect and wait through Herdr. A timeout does not cancel a reviewer. If blocked, read its output and ask the user.
+5. Read every answer end to end. Check the cited evidence. Name agreement, disagreement, missing evidence, and unavailable families. Decide from the evidence, not a vote.
 
-The pi-subagents external CLI adapters take no model or effort flags, so they are not lanes. There is no Gemini lane. A CLI that could run under a personal Google account is not worth the account.
-
-## Steps
-
-1. Pick lanes. One for a routine second look. Two or three when the decision is contested or expensive to reverse.
-2. Materialize the evidence. Named paths, the patch as text, command output, test results. Bash lanes have no Pi tools and cannot ask questions, so the brief carries everything they need. The `reviewer` lane may read the repo.
-3. Write one neutral brief. The question, the scope, what to return, and the rule that a missing artifact yields `MISSING EVIDENCE` rather than a guess. No hint of your own view. The same text goes to every lane.
-4. Fan out in one async `workflowScript` capped at 15 minutes (`timeoutMs: 900000`). This is the only fixed deadline any child gets in ppstack; a reviewer that has not answered in 15 minutes is not going to. Role lanes are `runs.run("<lane>", { agent: "<role>", task })`. Bash lanes run from the repo under review with the brief in a heredoc so quotes survive, `BRIEF="$(cat <<'EOF' ... EOF)"`. Run all lanes in parallel.
-5. Read every answer end to end. Do not pass summaries through. Where lanes agree, treat it as high signal. Where they disagree, name the question and settle it with evidence, not by vote.
-
-**Reply:** per lane, verdict and key findings; the agreement map; your decision and the evidence that settled any disagreement.
+Return each agent's Herdr name, actual family, verdict, and key findings, followed by your decision and the evidence that settled disagreement.

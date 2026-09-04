@@ -12,7 +12,7 @@ Don't reinvent a playbook you already have. A focused single-unit task that matc
 
 ## Start
 
-Open a todolist whose first item is to read the Principles section of the **petey** skill. Then add the phases below as todos.
+The Pi coordinator reads the Principles section of **petey-pi** and adds the phases below to its task list. Helpers receive scoped neutral tasks and selected portable references. They do not load this coordinating skill or **petey-pi**.
 
 ## Phase A: Frame
 
@@ -29,8 +29,8 @@ Present the framing and tradeoffs before committing to a long run. Reversible wo
 Decompose into atomic, independently-landable units. Sequence riskiest-unknown-first so option value stays high. Scaffold and verification come before features (the **foundational-thinking** principle skill).
 
 - Build the verification harness before the work, with the baseline captured from the pre-change state, so the check reads as "old value vs new value".
-- For one-way-door design decisions, run the **architect** skill (it runs **arena**) with diverse, isolated, opinionated configured roles and a fresh read-only judge. Skip it for mechanical work whose shape is already concrete. A second arena over a settled design is over-engineering (the **laziness-protocol** principle skill).
-- Decide what fans out. Parallelize only across genuine seams, and give each worker its own worktree or branch (the **separate-before-serializing-shared-state** principle skill). Don't over-fan.
+- For one-way-door design decisions, run the **architect** skill (it runs **arena**) with distinct design candidates and a fresh judge instructed not to edit. Skip it for mechanical work whose shape is already concrete. A second arena over a settled design is over-engineering (the **laziness-protocol** principle skill).
+- Decide what fans out. Follow [the delegation contract](../../docs/subagents.md). Parallelize independent reads, but keep one writer per checkout. Parallel writers need worktrees explicitly requested or approved by the user. Don't over-fan.
 - Write the designed phase list down. That list is what the human reviews.
 
 Then put the design into motion. Add its steps to the todolist as concrete items, after the Phase C entry and before Phase D. Run each under the Phase C loop discipline, and weave the Phase D log through them, a row as each step lands, rather than saving the whole trail for the end.

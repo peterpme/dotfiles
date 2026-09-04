@@ -32,7 +32,7 @@ Skip arena when the parent already named one invariant and data shape and no str
 
 Otherwise run the **arena** skill with the design-sketch task and the Phase A grounding artifacts. Pass `references/runner-prompt.md` as each runner's prompt. Each candidate produces a design package shaped per `references/rationale-template.md`. The caller's usage is written first, then the type sketch, function signatures, module map, and prose rationale derived from it.
 
-Arena owns candidate selection and spawning through the installed `pi-subagents` workflow. Do not select models per run.
+Arena owns candidate selection and [direct Herdr delegation](../../docs/subagents.md). Use **peer-review** when distinct model families are needed.
 
 When arena runs, require at least two structurally distinct candidates before synthesis. This is the **exhaust-the-design-space** principle skill made concrete. Whole-shape alternatives, not point fixes inside one shape.
 

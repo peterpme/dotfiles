@@ -49,10 +49,6 @@ alias "sudoedit"='function _sudoedit(){sudo -e "$1";};_sudoedit'
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
-
-# secrets / API keys (from macOS Keychain)
-export OPENAI_API_KEY=$(security find-generic-password -a "$USER" -s "OPENAI_API_KEY" -w 2>/dev/null)
-
 # flashlight
 export PATH="$HOME/.flashlight/bin:$PATH"
 

@@ -10,6 +10,7 @@
  */
 
 import type { ExtensionAPI, ExtensionContext } from "@earendil-works/pi-coding-agent";
+import { isCodexProvider } from "./lib/codex-provider.ts";
 import {
 	registerUsageChip,
 	requestUsageFooterRender,
@@ -19,13 +20,6 @@ import {
 
 const USAGE_URL = "https://chatgpt.com/backend-api/wham/usage";
 const CODEX_ACCOUNT_CLAIM = "https://api.openai.com/auth";
-const CODEX_PROVIDERS = new Set([
-	"openai-codex",
-	"codex-peterpme-work",
-	"peter@backpack.app",
-	"services+openai@peterp.me",
-	"peter@backpack.exchange",
-]);
 const POLL_MS = 5 * 60 * 1000;
 const FETCH_TIMEOUT_MS = 15_000;
 
@@ -56,7 +50,7 @@ function ordinal(day: number): string {
 }
 
 function isCodexModel(model: ExtensionContext["model"] | undefined): boolean {
-	return Boolean(model?.provider && CODEX_PROVIDERS.has(model.provider));
+	return isCodexProvider(model?.provider);
 }
 
 function formatResetDay(date: Date): string {

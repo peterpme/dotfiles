@@ -9,12 +9,7 @@ import { compact, type ExtensionAPI, type ExtensionContext } from "@earendil-wor
 
 const LUNA_ID = "gpt-5.6-luna";
 const THINKING_LEVEL = "high" as const;
-const LUNA_PROVIDERS = [
-	"peter@backpack.app",
-	"services+openai@peterp.me",
-	"openai-codex",
-	"openai",
-] as const;
+const LUNA_PROVIDERS = ["openai-codex", "openai-codex-2", "openai"] as const;
 
 function findLuna(ctx: ExtensionContext) {
 	if (ctx.model?.id === LUNA_ID && ctx.modelRegistry.hasConfiguredAuth(ctx.model)) {

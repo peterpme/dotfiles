@@ -259,6 +259,7 @@ setup_macos() {
 
 setup_skills() {
   title "Linking Pi skills, agents, extensions, models, and settings"
+  node "$DOTFILES/skills/scripts/check-model-diversity.mjs"
   bash "$DOTFILES/skills/scripts/link-skills.sh"
 }
 

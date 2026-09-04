@@ -33,7 +33,7 @@ Write one clear paragraph. Reviewers challenge whether the work achieves the int
 
 ## Step 3, Spawn Reviewers
 
-Read the installed `pi-subagents` skill first. Launch all reviewers in one async `workflowScript` with `await runs.all` of fresh `reviewer` children, then return the outputs. Give each reviewer one distinct named source seam or review angle, the same intent statement, rubric, and materialized evidence. Do not select models per run.
+Read the installed `pi-subagents` skill first. Launch `reviewer-sol`, `reviewer-grok`, and `reviewer-fable` in one async `workflowScript` with `await runs.all`, then return the outputs. Their model routing lives in `pi/settings.json`; do not select models per run or replace an unavailable family with a duplicate. Give each reviewer one distinct named source seam or review angle, the same intent statement, rubric, and materialized evidence.
 
 Read `references/reviewer-prompt.md` and fill in the template with:
 1. The stated intent

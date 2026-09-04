@@ -17,7 +17,7 @@ The package supplies the normal roles below. Model routing and role overrides li
 | `delegate` | Thin parent-shaped helper | yes | Only when parent-like behavior is intentional |
 | `researcher` | Web and documentation brief | notes only | Cited external research |
 
-The package also exposes external CLI adapters (`claude-code`, `codex-exec`, `cursor-agent`, and their `-writer` variants). They take no model or thinking options, so they cannot pin Fable 5.1 or Sol. The **peer-review** skill uses bash lanes for `claude` and `codex` instead, and the configured `reviewer` role for Grok. Never invoke the adapters. The peer-review lanes replace them.
+The package also exposes external CLI adapters (`claude-code`, `codex-exec`, `cursor-agent`, and their `-writer` variants). They take no model or thinking options. Never use them to approximate a pinned review lane; the house review roles below own that routing.
 
 ## Discovery
 
@@ -37,6 +37,8 @@ Do not eject a builtin unless its persona must change. Keep deployment choices i
 | Name | Parent skill | Job | Mutation boundary |
 |---|---|---|---|
 | `petey-agent` | playbooks | Fresh writer that loads Petey policy | Normal writer tools |
+| `candidate-{sol,grok,fable,terra}` | **arena** | Model-diverse Petey-aware candidate writers | One assigned worktree or output path |
+| `reviewer-{sol,grok,fable,terra}` | **reflect**, **how**, **interrogate**, **arena**, **peer-review** | Pinned fresh review families | No writes |
 | `comment-sicko` | **no-comments** | Scoped comment deletion with `how` and `why` available | Comments and resulting whitespace only |
 | `test-butcher` | **no-stupid-tests** | Keeps one cut per function, trims tests not worth keeping, flags `MUST KILL` and `NO PROOF` | Test files only, deletions only |
 | `council-sol` | councils | Fresh read-only Sol council judgment | No writes |
@@ -54,12 +56,15 @@ Do not eject a builtin unless its persona must change. Keep deployment choices i
 | Web research | `researcher` |
 | Standard implementation | `worker` |
 | Petey-aware implementation or prose | `petey-agent` |
-| Evidence review | `reviewer` |
+| One evidence review | `reviewer` |
+| Cross-model review | `reviewer-sol`, `reviewer-grok`, and `reviewer-fable` |
+| Model-diverse writable candidates | `candidate-sol`, `candidate-grok`, `candidate-fable`, and `candidate-terra` |
+| Model-diverse cross-judge | One unused `reviewer-*` family |
 | Comment pass | `comment-sicko` |
 | Test pass | `test-butcher` |
 | Inherited-context judgment | `oracle` |
 | Fresh Sol council judgment | `council-sol` |
-| Second opinion from another model family | **peer-review**: bash `claude` on Fable 5.1, bash `codex` on Sol, `reviewer` on Grok 4.6 |
+| Neutral second opinions | **peer-review** with the configured `reviewer-*` lanes |
 
 Use one async `workflowScript` for composed work. Do not select models per run. Fresh children receive standalone briefs. Give each writer its own checkout or managed worktree.
 

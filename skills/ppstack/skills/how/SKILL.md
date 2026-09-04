@@ -95,7 +95,7 @@ Run the full explain flow above (Steps 1-4). You must understand the architectur
 
 ### Step 2. Spawn Critics
 
-After the explanation is complete, spawn multiple fresh critics in one `workflowScript` with `runs.all` of `reviewer`. Give each a distinct architectural angle and the same grounded explanation, paths, prompt, and rubric. Use `oracle` only when inherited context matters. Do not select models per run.
+After the explanation is complete, spawn three fresh critics in one `workflowScript` with `runs.all`: `reviewer-sol`, `reviewer-grok`, and `reviewer-fable`. Their model routing lives in `pi/settings.json`; do not select models per run or replace an unavailable family with a duplicate. Give each a distinct architectural angle and the same grounded explanation, paths, prompt, and rubric.
 
 Read `references/critic-prompt.md` for the prompt template. Each critic gets:
 1. The explanation from Step 1 (so they don't re-explore)

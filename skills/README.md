@@ -70,4 +70,4 @@ Capsule at [`ppstack/`](./ppstack). Pi skill tree and agent set. `petey` is the 
 
 - **[petey](./ppstack/skills/petey/SKILL.md)** — Router for concise, verified work.
 - Sibling skills (`how`, `why`, `grill`, `proof-plan`, `night-watch`, `peer-review`, `no-stupid-tests`, `tdd`, principles, `unslop`, ...) live next to it in `ppstack/skills/`.
-- Agents (`petey-agent`, `comment-sicko`, `test-butcher`, `council-sol`) live in `ppstack/agents/`.
+- Agents (`petey-agent`, `candidate-*`, `reviewer-*`, `comment-sicko`, `test-butcher`, `council-sol`) live in `ppstack/agents/`.

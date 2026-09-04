@@ -1,6 +1,6 @@
 ---
 name: reflect
-description: Spawn three parallel review subagents over the active transcript, surface learnings, and route each to a concrete edit on an existing skill. Use when the user says reflect.
+description: Spawn model-diverse judgment, tooling, and divergent reviewers over the active transcript, surface learnings, and route each to a concrete edit on an existing skill. Use when the user says reflect.
 disable-model-invocation: true
 ---
 
@@ -26,15 +26,15 @@ The parent finds its own Pi session file before fanning out. Use `PI_SESSION_FIL
 
 ### 2. Spawn three reviewers in parallel
 
-Use one async `workflowScript` with `runs.all` of three fresh `reviewer` children. Do not select models per run. The prompt forbids file writes; the parent applies edits.
+Use one async `workflowScript` with `runs.all` of the three fresh read-only roles below. Their model families and thinking levels live in `pi/settings.json`; do not select models per run.
 
-| Lens | Prompt template |
-|---|---|
-| Judgment | `references/judgment-reviewer.md` |
-| Tooling | `references/tooling-reviewer.md` |
-| Divergent | `references/divergent-reviewer.md` |
+| Workflow key | Agent | Prompt template |
+|---|---|---|
+| `judgment-reviewer` | `reviewer-sol` | `references/judgment-reviewer.md` |
+| `tooling-reviewer` | `reviewer-grok` | `references/tooling-reviewer.md` |
+| `divergent-reviewer` | `reviewer-fable` | `references/divergent-reviewer.md` |
 
-Pass each template verbatim, substituting the transcript path or digest where marked. Reviewers return findings in their child outputs.
+Pass each template verbatim, substituting the transcript path or digest where marked. Return all three child outputs. If a role is unavailable, report that lane as unavailable; never substitute `scout`, `council-sol`, a generic `reviewer`, or an external adapter.
 
 ### 3. Synthesize
 

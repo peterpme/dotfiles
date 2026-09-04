@@ -1,5 +1,5 @@
 {
-  "lastChangelogVersion": "0.84.4",
+  "lastChangelogVersion": "0.85.0",
   "theme": "dark",
   "packages": [
     "npm:@hypabolic/pi-hypa",
@@ -12,7 +12,7 @@
     "npm:pi-codex-multi@2.0.1"
   ],
   "defaultProvider": "xai",
-  "defaultModel": "grok-4.6-fast",
+  "defaultModel": "grok-4.6",
   "defaultThinkingLevel": "high",
   "subagents": {
     "agentOverrides": {
@@ -36,13 +36,13 @@
         "output": false
       },
       "worker": {
-        "model": "xai/grok-4.6-fast",
+        "model": "xai/grok-4.6",
         "thinking": "high",
         "defaultContext": "fresh",
         "fallbackModels": []
       },
       "petey-agent": {
-        "model": "xai/grok-4.6-fast",
+        "model": "xai/grok-4.6",
         "thinking": "high",
         "defaultContext": "fresh",
         "fallbackModels": []
@@ -85,9 +85,7 @@
     "openai-codex-2/gpt-5.6-sol",
     "openai-codex-2/gpt-5.6-terra",
     "xai/grok-4.5",
-    "xai/grok-4.5-fast",
     "xai/grok-4.6",
-    "xai/grok-4.6-fast",
     "opencode/deepseek-v4-pro",
     "opencode/deepseek-v4-flash",
     "opencode/kimi-k3"

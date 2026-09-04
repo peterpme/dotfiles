@@ -7,7 +7,8 @@
     "npm:pi-subagents",
     "npm:pi-btw",
     "npm:@juicesharp/rpiv-ask-user-question",
-    "npm:@plannotator/pi-extension"
+    "npm:@plannotator/pi-extension",
+    "npm:pi-cursor-sdk"
   ],
   "defaultProvider": "xai",
   "defaultModel": "grok-4.6-fast",

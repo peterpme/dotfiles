@@ -26,7 +26,7 @@ Format a round like this.
 
 ## Three kinds of question
 
-Sort every candidate question before you ask it.
+Sort every candidate question before you ask it. Permission to implement supplies an outcome, not answers to product or preference branches. Any such branch the user did not answer remains on the frontier.
 
 - **A fact about the environment.** What the code does today, what the API returns, what the file contains, what the library supports. Yours to find. Use this session's `grep`, `find`, and `read`, or a fresh `scout` for cross-cutting retrieval. Never put a fact to the user. A running lookup is an unsettled prerequisite, so only the questions downstream of it wait.
 - **An empirical question.** Does this layout work, is this fast enough, does the library behave that way, does the eval separate. Not the user's either. Route it to the Prototype playbook (`petey/playbooks/prototype.md`) and let the result decide.

@@ -30,7 +30,7 @@ The N candidates will receive the same prompt, so the prompt is the contract. Ge
 
 ## Phase B: Fan out
 
-Spawn all N candidates in one async `workflowScript` with `await runs.all`. Use `agent: "petey-agent"` and `worktree: true` for writable candidates, then return the outputs. Read-only design candidates may use the configured council and reviewer roles. Do not select models per run. Each gets the task, the shared grounding path, its own output path, and must produce the artifact plus a short rationale.
+Spawn all N candidates in one async `workflowScript` with `await runs.all`. Use `agent: "worker"` and `worktree: true` for writable candidates, then return the outputs. Read-only design candidates may use the configured council and reviewer roles. Do not select models per run. Each gets the task, the shared grounding path, its own output path, and must produce the artifact plus a short rationale.
 
 The rationale is mandatory. Without it, the parent cannot tell whether a candidate's structure is principled or accidental, which makes Phase E grafting unreliable. Each rationale names the alternatives the candidate considered and what it rejected.
 

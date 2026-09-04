@@ -13,13 +13,13 @@ disable-model-invocation: true
 Remaining triggers:
 - Nontrivial change, architecture decision, or "are we sure?" after this session has not already traced the subsystem → the **how** skill.
 - About to ask the user a structured question on a "which approach", "how should I", or "what should this do" fork → classify it before you ask. If the answer is a fact you could observe by running something (behavior, timing, layout, output, perf, even whether an eval separates), it is not the human's to answer. Sketch it via the Prototype playbook (`playbooks/prototype.md`) and let the result decide. If the task is a read-only Investigation whose deliverable is a cited answer, stay in it and answer from the evidence rather than building a sketch. Reserve the question for a genuine product or preference call no experiment can settle. The ask is the slow path. A throwaway probe usually answers faster, and it hands the human a result to react to instead of a decision to make.
-- New project, feature, or idea the user has not fully specified, or "grill me" / "think this through with me" → the **grill** skill before any design or code. It ends in a brief with a done predicate.
+- New project, feature, or idea the user has not fully specified, or "grill me" / "think this through with me" → the **grill** skill before any design or code. Permission to implement does not settle unsupplied product or preference decisions. It ends in a brief with a done predicate.
 - A brief or Feature with no written `## Proof` → the **proof-plan** skill before implementation (Feature step 4). The proof is written before the code, not after. Bug fix, Refactoring, and Perf issue carry their own proof-first step (the repro, the pin, the baseline); those steps are never skipped either.
 - Leaving the agent unattended ("going to bed", "run this overnight", "set this up while I'm away") → the **night-watch** skill pre-flight, then the matched long-run playbook.
 - A second opinion from another model family ("ask claude", "spawn claude -p", "what does codex think", "get grok's read") → the **peer-review** skill. Its `references/agents.tsv` lists the lanes; one lane is enough for a routine second look.
 - Local code lookup (a symbol, a rule, a file, “where is X”) → parent `grep` / `find` / `read`. Do not spawn a child for a narrow lookup. Use fresh `scout` only for cross-cutting retrieval or a handoff that benefits from isolation.
 - Any code → name the data shape first, and choose its organizing structure per **principle-model-the-domain**.
-- Design still contested after this session traces the code → the **architect** skill. Crossing a function boundary is not enough. A named invariant and data shape is enough to implement.
+- Persistence schema, queue contract, or public identity changes → the **architect** skill. For other work, use it only when design remains contested after this session traces the code. Crossing a function boundary is not enough. A named invariant and data shape is otherwise enough to implement.
 - Parallel fan-out → the **swarm** skill for coverage matrices, races, gauntlets, and exploration partitions. Use **arena** for design or code bakeoffs with base selection and grafting.
 - Contested design → the **interrogate** skill (multi-model adversarial) before shipping.
 - Nontrivial multi-step → write the throughput checkpoint (Feature step 3).
@@ -35,7 +35,12 @@ Remaining triggers:
 - Long, autonomous, or multi-phase work, or any task the user steps away from to review later ("going to bed", "trust it when i'm back", "keep going until X") → a decision trail via the **show-me-your-work** skill. Commit it when stakes need an auditable record; keep it local otherwise.
 
 ## Principles
-Read the leaf skill in full for any principle you apply. Each entry names when it applies.
+
+Read this entire section up front. It is the index of every principle, not an instruction to load every leaf file.
+
+Load a leaf skill in full only when its trigger changes a decision in the current task. Resolve the leaf from its exact `available_skills` location. Principle skills are installed as siblings of `petey`; never infer a child path such as `petey/principles/`. Before batching leaf reads, open one declared location successfully.
+
+Each entry names when it applies.
 
 **Core**
 
@@ -94,11 +99,23 @@ Done has one meaning. The verification step ran in this session against the real
 - Every reply for work that changed code carries a **Verification.** paragraph. What ran, on which surface, what it showed. `UNVERIFIED: <reason>` is the only alternative, and it is not done.
 
 ## Subagents
-`/petey` is this session, the parent. It does not spawn `petey-agent` to “be Petey.” Same chat: keep following this skill. New chat: invoke `/petey` again.
+`/petey` is this session, the parent. There is no Petey subagent. Same chat: keep following this skill. New chat: invoke `/petey` again.
 
-The installed `pi-subagents` package owns execution, workflows, contexts, worktrees, missions, councils, waiting, recovery, and result delivery. Read its installed skill before delegating. Playbook helpers use `petey-agent`. Routed skills (`how`, `why`, `interrogate`, `reflect`, `swarm`, `arena`) choose the configured role that fits their job. Do not override those to `petey-agent`.
+The installed `pi-subagents` package owns execution, workflows, contexts, worktrees, missions, councils, waiting, recovery, and result delivery. Read its installed skill before delegating. Use its builtin roles: `worker` for writes, `scout` for local exploration, `researcher` for web research, `reviewer` for independent review, and `oracle` for inherited-context judgment. Routed skills (`how`, `why`, `interrogate`, `reflect`, `swarm`, `arena`) choose the role that fits their job.
 
-Defaults. Fresh context unless the role explicitly requires inherited context. File pointers, not inlined dumps. No per-run model selectors. `pi/settings.json` owns routing. Local search is this session's `grep`, `find`, and `read`; web research uses the configured `researcher` role.
+Defaults. Fresh context unless the role explicitly requires inherited context. File pointers, not inlined dumps. No per-run model selectors. `pi/settings.json` owns routing. A builtin role does not need the full Petey skill. When a child needs one principle leaf, pass that exact skill on the run.
+
+Every writer packet names five fields.
+
+- `TRACE`: the paths, symbols, runtime path, and decisions already established.
+- `FIRST UNIT`: the smallest behavior to implement first.
+- `WRITE SEAM`: the files or module boundary the child owns.
+- `FIRST CHECK`: the exact command or surface that proves the first unit.
+- `EXPAND ONLY WHEN`: the concrete failed check or missing fact that permits broader reading or edits.
+
+The child starts at `FIRST UNIT`. It does not repeat broad repository discovery, reread every parent source, or redesign settled decisions. It may inspect adjacent code needed to write the named seam. It expands only when `EXPAND ONLY WHEN` fires, and reports that evidence before widening.
+
+Before spawning a writer in a new worktree, the parent verifies that dependencies are present and `FIRST CHECK` starts there. Checkout setup is a blocking first step, not worker discovery.
 
 You own every child's work. Review the artifact and diff. Do not pass through the summary. Fresh children receive standalone briefs. A second opinion gets the same neutral brief. Agreement is high-signal.
 

@@ -46,8 +46,10 @@ The right decomposition depends on the question. Use your judgment. Narrow quest
 
 Spawn every exploration angle in one call with `runs.all` of fresh read-only `scout` children. Give each a distinct source seam, entry points, evidence requirement, and bounded report shape.
 
+Initial exploration excludes vendored, dependency, and generated trees such as `repos/`, `vendor/`, `node_modules/`, and `dist/`. Include one only when the question names it, repository instructions designate it as the source of truth, or first-party code leaves a specific external API fact unresolved.
+
 Each explorer gets the same base prompt from `references/explorer-prompt.md` plus a specific exploration angle naming its slice. Each explorer should:
-- Start broad: Glob for relevant directories, Grep for key types/interfaces/class names
+- Start broad within the allowed first-party seam: Glob for relevant directories, Grep for key types/interfaces/class names
 - Follow the thread: from an entry point, trace the call chain (callers, callees, data flow, type definitions)
 - Read the actual code, don't guess from file names
 - Stop when it can describe the full path from input to output (or trigger to effect) without hand-waving any step

@@ -36,7 +36,6 @@ Do not eject a builtin unless its persona must change. Keep deployment choices i
 
 | Name | Parent skill | Job | Mutation boundary |
 |---|---|---|---|
-| `petey-agent` | playbooks | Fresh writer that loads Petey policy | Normal writer tools |
 | `comment-sicko` | **no-comments** | Scoped comment deletion with `how` and `why` available | Comments and resulting whitespace only |
 | `test-butcher` | **no-stupid-tests** | Keeps one cut per function, trims tests not worth keeping, flags `MUST KILL` and `NO PROOF` | Test files only, deletions only |
 | `council-sol` | councils | Fresh read-only Sol council judgment | No writes |
@@ -52,8 +51,7 @@ Do not eject a builtin unless its persona must change. Keep deployment choices i
 | Narrow local lookup | Parent `grep`, `find`, and `read` |
 | Cross-cutting local retrieval | `scout` |
 | Web research | `researcher` |
-| Standard implementation | `worker` |
-| Petey-aware implementation or prose | `petey-agent` |
+| Implementation or file-writing prose | `worker` |
 | Evidence review | `reviewer` |
 | Comment pass | `comment-sicko` |
 | Test pass | `test-butcher` |
@@ -62,6 +60,24 @@ Do not eject a builtin unless its persona must change. Keep deployment choices i
 | Second opinion from another model family | **peer-review**: bash `claude` on Fable 5.1, bash `codex` on Sol, `reviewer` on Grok 4.6 |
 
 Use one async `workflowScript` for composed work. Do not select models per run. Fresh children receive standalone briefs. Give each writer its own checkout or managed worktree.
+
+A writer brief has this packet.
+
+```text
+TRACE: paths, symbols, runtime path, and settled decisions
+FIRST UNIT: smallest behavior to implement
+WRITE SEAM: owned files or module boundary
+FIRST CHECK: exact command or surface for that unit
+EXPAND ONLY WHEN: failed check or missing fact that permits widening
+```
+
+The writer starts at `FIRST UNIT`. It does not repeat broad discovery or redesign settled decisions. Adjacent reads must serve the named write seam. Before a writer starts in a new worktree, the parent verifies dependencies and proves `FIRST CHECK` starts there.
+
+## Skill locations
+
+Petey's inline Principles section is the parent's upfront index. It does not require every principle leaf at startup. When a principle applies to the parent's decision, the parent reads its exact `available_skills` location. Installed principle skills are siblings of `petey`, not children under `petey/principles/`. Never infer a skill path from its name.
+
+Children do not independently select principles or load the full Petey skill. The parent encodes settled decisions in the writer packet. When a child needs one principle leaf, pass that exact skill on the run. Explicit run skills work even when a builtin role sets `inheritSkills: false`.
 
 ## Evidence boundary
 

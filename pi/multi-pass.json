@@ -1,0 +1,17 @@
+{
+  "subscriptions": [
+    { "provider": "openai-codex", "index": 2, "label": "services+openai@peterp.me" }
+  ],
+  "pools": [
+    {
+      "name": "codex",
+      "baseProvider": "openai-codex",
+      "members": ["openai-codex", "openai-codex-2"],
+      "enabled": true,
+      "strategy": "quota-first"
+    }
+  ],
+  "chains": [],
+  "presets": [],
+  "maxRetries": 3
+}

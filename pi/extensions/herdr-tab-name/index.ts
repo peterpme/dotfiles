@@ -31,9 +31,8 @@ const MODEL_MAX_TOKENS = 32;
 
 const MODEL_CANDIDATES = [
 	{ provider: "opencode", id: "deepseek-v4-flash" },
-	{ provider: "peter@backpack.app", id: "gpt-5.6-luna" },
-	{ provider: "services+openai@peterp.me", id: "gpt-5.6-luna" },
 	{ provider: "openai-codex", id: "gpt-5.6-luna" },
+	{ provider: "openai-codex-2", id: "gpt-5.6-luna" },
 ] as const;
 
 function herdrBin(env: NodeJS.ProcessEnv): string {

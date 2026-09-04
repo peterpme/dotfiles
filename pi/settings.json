@@ -1,5 +1,5 @@
 {
-  "lastChangelogVersion": "0.84.4",
+  "lastChangelogVersion": "0.85.0",
   "theme": "dark",
   "packages": [
     "npm:@hypabolic/pi-hypa",
@@ -7,10 +7,12 @@
     "npm:pi-subagents",
     "npm:pi-btw",
     "npm:@juicesharp/rpiv-ask-user-question",
-    "npm:@plannotator/pi-extension"
+    "npm:@plannotator/pi-extension",
+    "npm:pi-cursor-sdk",
+    "npm:pi-codex-multi@2.0.1"
   ],
   "defaultProvider": "xai",
-  "defaultModel": "grok-4.6-fast",
+  "defaultModel": "grok-4.6",
   "defaultThinkingLevel": "high",
   "subagents": {
     "agentOverrides": {
@@ -22,25 +24,25 @@
           "ls"
         ],
         "acceptanceRole": "read-only",
-        "model": "peter@backpack.app/gpt-5.6-luna",
+        "model": "openai-codex/gpt-5.6-luna",
         "thinking": "low",
         "defaultContext": "fresh",
         "output": false
       },
       "researcher": {
-        "model": "peter@backpack.app/gpt-5.6-luna",
+        "model": "openai-codex/gpt-5.6-luna",
         "thinking": "medium",
         "defaultContext": "fresh",
         "output": false
       },
       "worker": {
-        "model": "xai/grok-4.6-fast",
+        "model": "xai/grok-4.6",
         "thinking": "high",
         "defaultContext": "fresh",
         "fallbackModels": []
       },
       "petey-agent": {
-        "model": "xai/grok-4.6-fast",
+        "model": "xai/grok-4.6",
         "thinking": "high",
         "defaultContext": "fresh",
         "fallbackModels": []
@@ -53,39 +55,37 @@
         "fallbackModels": []
       },
       "comment-sicko": {
-        "model": "peter@backpack.app/gpt-5.6-luna",
+        "model": "openai-codex/gpt-5.6-luna",
         "thinking": "medium",
         "defaultContext": "fresh"
       },
       "test-butcher": {
-        "model": "peter@backpack.app/gpt-5.6-luna",
+        "model": "openai-codex/gpt-5.6-luna",
         "thinking": "high",
         "defaultContext": "fresh"
       },
       "oracle": {
         "description": "Forked decision-consistency oracle; inspect Git only when repository state or history is evidence",
-        "model": "peter@backpack.app/gpt-5.6-sol",
+        "model": "openai-codex/gpt-5.6-sol",
         "thinking": "xhigh",
         "defaultContext": "fork"
       },
       "council-sol": {
-        "model": "peter@backpack.app/gpt-5.6-sol",
+        "model": "openai-codex/gpt-5.6-sol",
         "thinking": "xhigh",
         "defaultContext": "fresh"
       }
     }
   },
   "enabledModels": [
-    "peter@backpack.app/gpt-5.6-luna",
-    "peter@backpack.app/gpt-5.6-sol",
-    "peter@backpack.app/gpt-5.6-terra",
-    "services+openai@peterp.me/gpt-5.6-luna",
-    "services+openai@peterp.me/gpt-5.6-sol",
-    "services+openai@peterp.me/gpt-5.6-terra",
+    "openai-codex/gpt-5.6-luna",
+    "openai-codex/gpt-5.6-sol",
+    "openai-codex/gpt-5.6-terra",
+    "openai-codex-2/gpt-5.6-luna",
+    "openai-codex-2/gpt-5.6-sol",
+    "openai-codex-2/gpt-5.6-terra",
     "xai/grok-4.5",
-    "xai/grok-4.5-fast",
     "xai/grok-4.6",
-    "xai/grok-4.6-fast",
     "opencode/deepseek-v4-pro",
     "opencode/deepseek-v4-flash",
     "opencode/kimi-k3"

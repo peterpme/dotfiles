@@ -23,20 +23,14 @@
 
 import type { ExtensionAPI, ExtensionContext } from "@earendil-works/pi-coding-agent";
 import type { AutocompleteItem } from "@earendil-works/pi-tui";
+import { isCodexProvider } from "./lib/codex-provider.ts";
 
-const STATUS_ID = "grok-fast";
-const ENTRY_TYPE = "grok-fast-mode";
+const STATUS_ID = "fast-mode";
+const ENTRY_TYPE = "fast-mode";
+const LEGACY_ENTRY_TYPES = new Set(["fast-mode", "grok-fast-mode"]);
 const COST_MULTIPLIER = 2;
 
 const XAI_HOST_RE = /(?:^|[./])(?:api\.x\.ai|cli-chat-proxy\.grok\.com)(?:$|[/:])/i;
-const OPENAI_FAST_PROVIDERS = new Set([
-	"openai",
-	"openai-codex",
-	"codex-peterpme-work",
-	"peter@backpack.app",
-	"services+openai@peterp.me",
-	"peter@backpack.exchange",
-]);
 const OPENAI_FAST_MODEL_RE = /gpt-5(?:\.5|\.6)|o3|o4/i;
 
 type FastEntry = {
@@ -78,14 +72,15 @@ function fastTarget(model: ExtensionContext["model"] | undefined): FastTarget | 
 		return { tier: "priority", label: "xAI Priority Processing" };
 	}
 
-	if (OPENAI_FAST_PROVIDERS.has(model.provider) && OPENAI_FAST_MODEL_RE.test(model.id)) {
+	const openaiProvider = model.provider === "openai" || isCodexProvider(model.provider);
+	if (openaiProvider && OPENAI_FAST_MODEL_RE.test(model.id)) {
 		return { tier: "fast", label: "OpenAI Fast mode" };
 	}
 
 	return undefined;
 }
 
-export default function grokFastModeExtension(pi: ExtensionAPI) {
+export default function fastModeExtension(pi: ExtensionAPI) {
 	let enabled = false;
 	let injectedThisTurn = false;
 
@@ -209,7 +204,7 @@ export default function grokFastModeExtension(pi: ExtensionAPI) {
 
 		const entries = ctx.sessionManager.getEntries();
 		const saved = entries
-			.filter((entry) => entry.type === "custom" && entry.customType === ENTRY_TYPE)
+			.filter((entry) => entry.type === "custom" && LEGACY_ENTRY_TYPES.has(entry.customType))
 			.at(-1) as { data?: FastEntry } | undefined;
 		if (saved?.data?.enabled === true) {
 			enabled = true;

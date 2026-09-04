@@ -40,20 +40,6 @@
             "xhigh": "xhigh",
             "max": null
           }
-        },
-        "grok-4.6-fast": {
-          "compat": {
-            "supportsReasoningEffort": true
-          },
-          "thinkingLevelMap": {
-            "off": null,
-            "minimal": null,
-            "low": "low",
-            "medium": "medium",
-            "high": "high",
-            "xhigh": "xhigh",
-            "max": null
-          }
         }
       }
     }

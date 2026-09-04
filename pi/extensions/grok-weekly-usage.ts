@@ -25,7 +25,6 @@ import {
 
 const BILLING_URL = "https://cli-chat-proxy.grok.com/v1/billing?format=credits";
 const TOKEN_AUTH = "xai-grok-cli";
-const PROVIDERS = ["xai", "grok-cli"] as const;
 const POLL_MS = 5 * 60 * 1000;
 const FETCH_TIMEOUT_MS = 15_000;
 const WEEKLY_PERIOD = "USAGE_PERIOD_TYPE_WEEKLY";
@@ -57,7 +56,7 @@ function ordinal(day: number): string {
 }
 
 function isGrokModel(model: ExtensionContext["model"] | undefined): boolean {
-	return model?.provider === "xai" || model?.provider === "grok-cli";
+	return model?.provider === "xai";
 }
 
 function formatResetDay(date: Date): string {
@@ -162,15 +161,13 @@ export default function grokWeeklyUsageExtension(pi: ExtensionAPI) {
 	});
 
 	async function resolveToken(ctx: ExtensionContext): Promise<string> {
-		let lastErrorMessage = "no xAI or Grok CLI login";
-		for (const provider of PROVIDERS) {
-			try {
-				const auth = await ctx.modelRegistry.getProviderAuth(provider);
-				const token = auth?.auth.apiKey;
-				if (token) return token;
-			} catch (error) {
-				lastErrorMessage = error instanceof Error ? error.message : String(error);
-			}
+		let lastErrorMessage = "no xAI login";
+		try {
+			const auth = await ctx.modelRegistry.getProviderAuth("xai");
+			const token = auth?.auth.apiKey;
+			if (token) return token;
+		} catch (error) {
+			lastErrorMessage = error instanceof Error ? error.message : String(error);
 		}
 		throw new Error(`not signed in to Grok (${lastErrorMessage}). Run /login and choose xAI.`);
 	}
@@ -279,7 +276,7 @@ export default function grokWeeklyUsageExtension(pi: ExtensionAPI) {
 
 	pi.on("agent_settled", async (_event, ctx) => {
 		const provider = ctx.model?.provider;
-		if (provider !== "xai" && provider !== "grok-cli") return;
+		if (provider !== "xai") return;
 		void fetchWeeklyUsage(ctx).catch(() => {
 			// Keep the last good snapshot.
 		});

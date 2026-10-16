@@ -40,7 +40,9 @@ spoon.ShiftIt:bindHotkeys(
 		upright = {{"ctrl", "alt", "cmd"}, "i"},
 		botleft = {{"ctrl", "alt", "cmd"}, "n"},
 		botright = {{"ctrl", "alt", "cmd"}, "m"},
-		maximum = {{"ctrl", "alt", "cmd"}, "o"}
+		maximum = {{"ctrl", "alt", "cmd"}, "o"},
+		-- ShiftIt's default nextScreen binding also uses N, overriding bottom-left.
+		nextScreen = {{"ctrl", "alt", "cmd"}, "]"}
 	}
 )
 
@@ -63,6 +65,7 @@ for screenIndex = 1, 3 do
 		function()
 			local win = hs.window.focusedWindow()
 			local screen = hs.screen.allScreens()[screenIndex]
+			if not win or not screen then return end
 
 			win:moveToScreen(screen)
 			win:setFrame(screen:frame())

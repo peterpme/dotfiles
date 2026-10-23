@@ -94,3 +94,12 @@ export PATH="/Users/peter/.vite-plus/js_runtime/node/24.18.0/bin:$PATH"
 # >>> railway initialize >>>
 source "$HOME/.railway/env"
 # <<< railway initialize <<<
+
+# Agent shells get plain-shell behavior; your interactive terminal keeps prezto's.
+# Claude Code (CLAUDECODE=1) and Grok (GROK_AGENT=1) snapshot this rc once per session, so this must stay last.
+if [[ -n $CLAUDECODE || -n $GROK_AGENT || ! -o interactive ]]; then
+  unalias rm cp mv ln mkdir ls cat cd du df run-help 2>/dev/null
+  unfunction diff dut make 2>/dev/null  # prezto wrappers; their autoload files don't survive the snapshot
+  setopt clobber no_nomatch case_glob no_correct no_equals sh_word_split no_extended_glob
+  # Note: pipefail stays off; with it `cmd | head` reports failure.
+fi
